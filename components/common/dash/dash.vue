@@ -1,0 +1,32 @@
+<template>
+	<view class="dash">
+
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+
+			}
+		},
+		props: {
+
+
+		},
+		onLoad() {
+
+		},
+		methods: {
+
+		}
+	}
+</script>
+
+<style>
+	.dash {
+		margin: calc(750rpx * 17/ 375) calc(750rpx * 24/ 375);
+		border-top: calc(100vh * 1/812) dashed #8F8F94;
+	}
+</style>

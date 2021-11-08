@@ -1,0 +1,22 @@
+<template>
+	<view class="divView">
+
+	</view>
+</template>
+
+<script>
+</script>
+
+<style>
+	.divView {
+		overflow: hidden;
+		width: calc(750rpx * 343/ 375);
+		height: calc(100vh * 329/812);
+		border-radius: calc(750rpx * 30/ 375);
+		margin-left: calc(750rpx * 16/ 375);
+		margin-right: calc(750rpx * 16/ 375);
+		margin-top: calc(100vh *32/812);
+		background-color: rgba(255, 255, 255, 1);
+		font-size: calc(750rpx * 15/ 375);
+	}
+</style>

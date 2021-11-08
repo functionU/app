@@ -1,0 +1,60 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	
+		{
+			"path": "pages/login/login"
+
+		},
+
+		{
+			"path": "pages/login-success/login-success"
+	
+		},
+		{
+			"path": "pages/revisePassword/revisePassword"
+		
+		},
+		{
+			"path": "pages/revisePassword/revisePassword"
+	
+		},
+		
+	    {
+			"path": "pages/repair/repair"
+		},
+		{
+			"path": "pages/environmentInformation/environmentInformation"
+		},
+		{
+			"path": "pages/sumUse/sumUse"
+		},
+		{
+			"path": "pages/reserve/reserve"
+		},
+		{
+			"path": "pages/reserve/reservePosition"
+		},
+		{
+			"path": "pages/forgetPass/forgetPass"
+		},
+		{
+			"path": "pages/forgetPass/next"
+		},
+		{
+			"path": "pages/newsWarn/newsWarn"
+		},
+		{
+			"path": "pages/charts/charts"
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle":"custom",
+		"style":{
+			 "app-plus": {"titleNView": false} 
+		}
+	}
+}
