@@ -1,8 +1,8 @@
 <template>
 	<view class="bgc">
 		<view class="tarbar">
-			<image src="../../static/app/btn-yangchang@2X.png" style="	width: calc(750rpx * 44/ 375);
-		height: calc(100vh * 44/812);" @click="back"></image>
+			<image src="../../static/app/back.svg" style="	width: calc(750rpx *36/ 375);
+		height: calc(100vh * 36/812);" @click="back"></image>
 			<text>消息提醒</text>
 		</view>
 		<view class="content">
@@ -14,7 +14,7 @@
 					<view class="bottom-box-top">
 						<view class="left">
 							<image src="../../static/app/icon-xiaoxi@2X.png" style="	width: calc(750rpx * 40/ 375);
-		height: calc(100vh * 40/812)"></image>
+		height:calc(750rpx * 40/ 375)"></image>
 						</view>
 						<view class="right">
 							<text>工位签到提醒</text>
@@ -120,19 +120,22 @@
 	}
 
 	.bgc .tarbar {
-		height: calc(100vh * 44/812);
+		height: calc(100vh * 33/812);
+		line-height: calc(100vh * 44/812);
 		margin-top: calc(100vh * 44/812);
+		padding-bottom: calc(100vh * 11/812);
 		display: flex;
 		align-items: center;
+
 	
 	}
 
 	.bgc .tarbar image {
-		margin-left: calc(750rpx * 33/ 375);
+		
 	}
 
 	.bgc .tarbar text {
-		margin-left: calc(750rpx * 96/ 375);
+		margin-left: 30%;
 		font-size: calc(750rpx * 17/ 375);
 		color: rgba(255, 255, 255, 1);
 	}

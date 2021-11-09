@@ -3,9 +3,10 @@
 		<view class="content">
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47/ 375);"
-					src="../../static/app/icon-jiankang@2X.png" @click="backClick"></image>
-				<text slot='center' ></text>
-				<text slot='right' style="font-size:calc(750rpx * 17/ 375) ; color: white;margin-left: calc(-750rpx * 220/ 375);">选择工位</text>
+					src="../../static/app/back.svg" @click="backClick"></image>
+				<text slot='center'></text>
+				<text slot='right'
+					style="font-size:calc(750rpx * 17/ 375) ; color: white;margin-left: calc(-750rpx * 220/ 375);">选择工位</text>
 			</tarbarHeader>
 			<view class="top">
 				<view class="top-item">
@@ -44,8 +45,8 @@
 				</view>
 			</view>
 			<view class="center">
-				<view class="center-head" >
-					<view class="list" @click="listClick"  :class="{'click':show}">
+				<view class="center-head">
+					<view class="list" @click="listClick" :class="{'click':show}">
 						<image
 							style="width:calc(750rpx * 13.98/ 375);height:calc(750rpx * 11.65/ 375);margin-right:calc(750rpx * 8.02/ 375) ;margin-left: calc(750rpx * 26/ 375) ;"
 							src="../../static/app/icon-zhishu@2X.png"></image>
@@ -61,8 +62,8 @@
 				<view class="center-boxOne" v-show="show">
 					<view class="center-boxOne-top">
 						<view class="center-boxOne-top-content">
-							<view @click="itemClick(item,index)"
-						          :class="{'click':index==itemIndex}"  class="center-boxOne-top-content-item" v-for="(item,index) in positionArray">
+							<view @click="itemClick(item,index)" :class="{'click':index==itemIndex}"
+								class="center-boxOne-top-content-item" v-for="(item,index) in positionArray">
 								{{item}}
 							</view>
 						</view>
@@ -72,8 +73,8 @@
 							<text slot="right" style="margin-left:calc(-750rpx * 200/ 375);">(推荐)</text>
 						</tip>
 						<view class="center-boxOne-bottom-centent">
-							<view @click="usuallyItemClick(item,index)"
-							:class="{'click':index==usuallyItemIndex}" class="center-boxOne-bottom-centent-item" v-for="(item,index) in UsuallyArray" >
+							<view @click="usuallyItemClick(item,index)" :class="{'click':index==usuallyItemIndex}"
+								class="center-boxOne-bottom-centent-item" v-for="(item,index) in UsuallyArray">
 								{{item}}
 							</view>
 
@@ -85,8 +86,8 @@
 				</view>
 			</view>
 			<view class="bottom">
-               <view  @click="reseverFinshed">
-						立即预订（{{itemName}}）
+				<view @click="reseverFinshed">
+					立即预订（{{itemName}}）
 				</view>
 			</view>
 		</view>
@@ -188,7 +189,7 @@
 					obj.place = this.place;
 					obj.floor = this.floor;
 					obj.position = this.itemName;
-                    
+
 					uni.navigateTo({
 						url: `../login-success/login-success?resever=true&index=1&buttonIndex=1`
 					});
@@ -308,11 +309,48 @@
 		align-items: center;
 		background-color: rgba(248, 253, 253, 1);
 
+
 	}
-		.content .center .center-head .click{
-			color: #13C2C2;
-			font-weight: bold;
-		}
+
+	.content .center .center-head .map {
+		position: relative;
+
+	}
+
+	.content .center .center-head .list {
+
+		position: relative;
+
+	}
+
+	.content .center .center-head .click {
+		color: #13C2C2;
+		font-weight: bold;
+	}
+
+	.content .center .center-head .list.click::before {
+		content: '';
+		display: block;
+		width: calc(750rpx * 6/ 375);
+		height: calc(750rpx * 6/ 375);
+		border-radius: 50%;
+		background-color: #1ABFC2;
+		position: absolute;
+		left: 50%;
+		top: 120%;
+	}
+
+	.content .center .center-head .map.click::before {
+		content: '';
+		display: block;
+		width: calc(750rpx * 6/ 375);
+		height: calc(750rpx * 6/ 375);
+		border-radius: 50%;
+		background-color: #1ABFC2;
+		position: absolute;
+		left: 35%;
+		top: 120%;
+	}
 
 	.content .center .center-boxOne {}
 
@@ -340,16 +378,18 @@
 		line-height: calc(100vh * 40/812);
 		text-align: center;
 		border-radius: calc(750rpx * 10/ 375);
-box-sizing: border-box;
-border: rgba(17, 30, 54, 0.15)  calc(750rpx * 1/ 375) solid;
+		box-sizing: border-box;
+		border: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;
 		margin-top: calc(100vh * 24/812);
 		margin-left: calc(750rpx * 8/ 375);
 	}
-.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item.click {
+
+	.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item.click {
 		border-color: rgba(251, 178, 88, 1);
 
 		color: rgba(251, 178, 88, 1);
 	}
+
 	.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item:nth-child(3n-2) {
 		margin-left: 0;
 
@@ -364,22 +404,38 @@ border: rgba(17, 30, 54, 0.15)  calc(750rpx * 1/ 375) solid;
 
 	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent {
 		display: flex;
-	
+
 	}
-.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item{
-	width: calc(750rpx * 93/ 375);
-	height: calc(100vh * 40/812);
-	line-height: calc(100vh * 40/812);
-	text-align: center;
-	border-radius: calc(750rpx * 10/ 375);
-border: rgba(17, 30, 54, 0.15)  calc(750rpx * 1/ 375) solid;
-	margin-top: calc(100vh * 24/812);
-	margin-left: calc(750rpx * 8/ 375);
-} 
-.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item.click {
+
+	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item {
+		width: calc(750rpx * 93/ 375);
+		height: calc(100vh * 40/812);
+		line-height: calc(100vh * 40/812);
+		text-align: center;
+		border-radius: calc(750rpx * 10/ 375);
+		border: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;
+		margin-top: calc(100vh * 24/812);
+		margin-left: calc(750rpx * 8/ 375);
+		position: relative;
+	}
+
+	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item:first-child::before {
+		content: '';
+		display: block;
+		width: calc(750rpx * 8/ 375);
+		height: calc(750rpx * 8/ 375);
+		border-radius: 50%;
+		background-color: #1ABFC2;
+		position: absolute;
+		left: 80%;
+		top: 40%;
+	}
+
+	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item.click {
 		border-color: rgba(251, 178, 88, 1);
 		color: rgba(251, 178, 88, 1);
 	}
+
 	.content .center .center-boxTwo {
 		width: calc(750rpx * 343/ 375);
 		height: calc(100vh * 423/812);
@@ -387,26 +443,29 @@ border: rgba(17, 30, 54, 0.15)  calc(750rpx * 1/ 375) solid;
 		border-bottom-left-radius: calc(750rpx * 30/ 375);
 		background-color: #007AFF;
 	}
+
 	.content .bottom {
 		width: calc(750rpx * 375/ 375);
 		height: calc(100vh * 90/812);
 		margin-top: calc(100vh * 16/812);
 		background-color: white;
-		
-overflow: hidden;
+
+		overflow: hidden;
 	}
-	.content .bottom view{
-	           
-				margin-top: calc(100vh * 11/812);
-				margin-left: calc(750rpx * 16/ 375);
-				margin-right: calc(750rpx * 16/ 375);
-				width: calc(750rpx * 343/ 375);
-				height: calc(100vh * 44/812);
-				background-image: linear-gradient(135deg, #70CFBA 0%, #19BDC0 100%);
-				border-radius: calc(750rpx * 12/ 375);
-				font-size: calc(750rpx * 15/ 375);
-				line-height: calc(100vh * 44/812);
-				text-align: center;margin-bottom: ;
-				color: white;
+
+	.content .bottom view {
+
+		margin-top: calc(100vh * 11/812);
+		margin-left: calc(750rpx * 16/ 375);
+		margin-right: calc(750rpx * 16/ 375);
+		width: calc(750rpx * 343/ 375);
+		height: calc(100vh * 44/812);
+		background-image: linear-gradient(135deg, #70CFBA 0%, #19BDC0 100%);
+		border-radius: calc(750rpx * 12/ 375);
+		font-size: calc(750rpx * 15/ 375);
+		line-height: calc(100vh * 44/812);
+		text-align: center;
+		margin-bottom: ;
+		color: white;
 	}
 </style>

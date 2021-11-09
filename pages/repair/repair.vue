@@ -3,7 +3,7 @@
 		<view class="content">
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47	/ 375);"
-					src="../../static/app/icon-jiankang@2X.png" @click="backClick"></image>
+					src="../../static/app/back.svg" @click="backClick"></image>
 				<text slot='center'>设备报修</text>
 				<text slot='right'></text>
 			</tarbarHeader>

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="tarbar">
-			<text @click="back">取消</text>
+			<text @click="back" >取消</text>
 		</view>
 		<view class="top">
 			<view class="text">
@@ -77,6 +77,8 @@
 	}
 	.tarbar text{
 		margin-left: calc(750rpx * 32/ 375);
+			font-size: calc(750rpx * 14/ 375);
+		color: rgba(10, 32, 57, 0.7);
 	}
 	.top {
 		margin-top: calc(100vh * 114 /812);

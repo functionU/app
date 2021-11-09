@@ -3,8 +3,8 @@
 		<view class="content">
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47/ 375);"
-					src="../../static/app/icon-jiankang@2X.png" @click="backClick"></image>
-				<text slot='center' >筛选</text>
+					src="../../static/app/back.svg" @click="backClick"></image>
+				<text slot='center'>筛选</text>
 				<text slot='right'></text>
 			</tarbarHeader>
 			<view class="main">
@@ -16,50 +16,47 @@
 				<view class="main-center">
 
 
-					<view class="main-center-item">
+					<view class="main-center-item" @click="dateClick">
 						<view class="main-center-item-left">
 							选择日期：
 						</view>
 						<view class="main-center-item-right">
-							<picker style='display: inline-block;' mode="date" start="startDate" end="endDate"
-								@change="bindDatePickerChange">
-								<view>
-									{{date}}
-								</view>
-							</picker>
-							<image src="../../static/app/icon-xiaoxi@2X.png"
+
+							<view style="display: inline;">
+								{{year}}-{{month}}-{{day}}
+							</view>
+
+							<image src="../../static/app/next.svg"
 								style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);"></image>
 						</view>
 
 					</view>
-					<view class="main-center-item">
+					<view class="main-center-item" @click="startTimeClick">
 						<view class="main-center-item-left">
 							开始时间：
 						</view>
 						<view class="main-center-item-right">
-							<picker style='display: inline-block;' mode="time" start="startTime" end="23:59"
-								:value="startTime" @change="bindStartTimePickerChange">
-								<view>
-									{{startTime}}
-								</view>
-							</picker>
-							<image src="../../static/app/icon-xiaoxi@2X.png"
+
+							<view style="display: inline;">
+								{{startHour}}:{{startMin}}
+							</view>
+
+							<image src="../../static/app/next.svg"
 								style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);"></image>
 						</view>
 
 					</view>
-					<view class="main-center-item">
+					<view class="main-center-item" @click="endTimeClick">
 						<view class="main-center-item-left">
 							结束时间：
 						</view>
 						<view class="main-center-item-right">
-							<picker style='display: inline-block;' mode="time" start="00:00" end="23:59"
-								:value="startTime" @change="bindEndTimePickerChange">
-								<view>
-									{{endTime}}
-								</view>
-							</picker>
-							<image src="../../static/app/icon-xiaoxi@2X.png"
+
+							<view style="display: inline;">
+								{{endHour}}:{{endMin}}
+							</view>
+
+							<image src="../../static/app/next.svg"
 								style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);"></image>
 						</view>
 
@@ -73,34 +70,32 @@
 				<view class="main-center">
 
 
-					<view class="main-center-item">
+					<view class="main-center-item" @click="placeClick">
 						<view class="main-center-item-left">
 							楼宇：
 						</view>
 						<view class="main-center-item-right">
-							<picker style='display: inline-block;' mode="selector" :range='placeArray'
-								:index="placeIndex" @change="bindPlacePickerChange">
-								<view>
-									{{placeArray[placeIndex]}}
-								</view>
-							</picker>
-							<image src="../../static/app/icon-xiaoxi@2X.png"
+
+							<view style="display: inline;">
+								{{placeArray[placeIndex]}}
+							</view>
+
+							<image src="../../static/app/next.svg"
 								style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);"></image>
 						</view>
 
 					</view>
-					<view class="main-center-item">
+					<view class="main-center-item" @click="floorClick">
 						<view class="main-center-item-left">
 							楼层：
 						</view>
 						<view class="main-center-item-right">
-							<picker style='display: inline-block;' mode="selector" :range='floorArray'
-								:index="floorIndex" @change="bindFloorPickerChange">
-								<view>
-									{{floorArray[floorIndex]}}
-								</view>
-							</picker>
-							<image src="../../static/app/icon-xiaoxi@2X.png"
+
+							<view style="display: inline;">
+								{{floorArray[floorIndex]}}
+							</view>
+
+							<image src="../../static/app/next.svg"
 								style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);"></image>
 						</view>
 
@@ -113,6 +108,75 @@
 
 			</view>
 		</view>
+		<view class="pickerDate" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="dateindex">
+			<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick">
+				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<text
+					style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);">确定</text>
+			</view>
+			<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
+		
+				@change="bindDatePickerChange" :value="valueDate">
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in years">{{item}}年</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in months">{{item}}月</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in days">{{item}}日</view>
+				</picker-view-column>
+			</picker-view>
+		</view>
+		<view class="pickerStartTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="startindex">
+			<view style="display:flex;justify-content: space-between;background-color: white; " @click="startTimeClick">
+				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<text
+					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+			</view>
+			<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
+				@change="bindStartTimePickerChange" :value="valueStartTime">
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in hours">{{item}}点</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in mins">{{item}}分</view>
+				</picker-view-column>
+
+			</picker-view>
+		</view>
+		<view class="pickerStartTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="endindex">
+			<view style="display:flex;justify-content: space-between;background-color: white; " @click="endTimeClick">
+				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<text
+					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+			</view>
+			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+				@change="bindEndTimePickerChange" :value="valueStartTime">
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in hours">{{item}}点</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in mins">{{item}}分</view>
+				</picker-view-column>
+
+			</picker-view>
+		</view>
+		<view class="pickerEndTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="placeindex">
+			<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick">
+				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<text
+					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+			</view>
+			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+				@change="bindPlacePickerChange" :value="valuePlace">
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in placeArray">{{item}}</view>
+				</picker-view-column>
+
+			</picker-view>
+		</view>
+
 
 	</view>
 
@@ -125,76 +189,155 @@
 
 	export default {
 		data() {
-			const currentDate = this.getDate();
-			const hours = this.getDate('time')
+			const date = new Date();
+			const years = [];
+			const months = [];
+			const days = [];
+			const hours = [];
+			const mins = [];
+			let year = date.getFullYear();
+			let month = date.getMonth() + 1;
+			let day = date.getDate();
+			let hour = 	function(){
+				let hour=date.getHours();
+				 if(hour<10)
+				 {
+					 return '0'+hour;
+				 }
+				 return hour
+			}();
+			let min = function(){
+				let min=date.getMinutes();
+				 if(min<10)
+				 {
+					 return '0'+min;
+				 }
+				 return min
+			}();
+		
+
+			for (let i = 1990; i <= date.getFullYear(); i++) {
+				years.push(i)
+			}
+			for (let i = 1; i <= 12; i++) {
+				months.push(i)
+			}
+			for (let i = 1; i <= 31; i++) {
+				days.push(i)
+			}
+			for (let i = 0; i <= 23; i++) {
+
+				if (i < 10) {
+					hours.push("0" + i);
+				} else
+					hours.push(i);
+			}
+			for (let i = 0; i <= 59; i++) {
+
+				if (i < 10) {
+					mins.push("0" + i);
+				} else
+					mins.push(i)
+			}
+
 			return {
 				placeArray: ['中国', '美国', '俄罗斯'],
 				placeIndex: 0,
 				floorArray: ['1', '2', '3', '4', '5'],
 				floorIndex: 0,
-				date: currentDate,
-				startTime: hours,
-				endTime: hours,
+				years,
+				months,
+				days,
+				year,
+				month,
+				day,
+				hours,
+				mins,
+				startHour: hour,
+				startMin: min,
+				endHour: hour,
+				endMin: min,
+				valueDate: [9999, month - 1, day - 1],
+				valuePlace:[0],
+				valueFloor:[0],
+				valueStartTime: [hour, min],
+				dateindex: false,
+				startindex: false,
+				endindex: false,
+				placeindex: false,
+				floorindex: false,
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			getDate(type) {
-				const date = new Date();
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1;
-				let day = date.getDate();
-				let hours = date.getHours();
-				let mins = date.getMinutes()
-				if (type === 'start') {
-					year = year - 60;
-				} else if (type === 'end') {
-					year = year + 2;
-				}
-				hours = hours > 9 ? hours : '0' + hours;
-				mins = mins > 9 ? mins : '0' + mins;
-				month = month > 9 ? month : '0' + month;
-				day = day > 9 ? day : '0' + day;
-				if (type == 'time') {
-					return `${hours}:${mins}`;
-				}
-				return `${year}-${month}-${day}`;
-			},
+
 			backClick() {
 				uni.navigateBack();
 			},
 			bindDatePickerChange(e) {
-				this.date = e.target.value
+				let val = e.target.value;
+				this.year = this.years[val[0]];
+				this.month = this.months[val[1]];
+				this.day = this.days[val[2]];
 			},
 			bindStartTimePickerChange(e) {
-				this.startTime = e.target.value
+				let val = e.target.value;
+				this.startHour = this.hours[val[0]];
+				this.startMin = this.mins[val[1]];
 			},
 			bindEndTimePickerChange(e) {
-				this.endTime = e.target.value
+				let val = e.target.value;
+				this.endHour = this.hours[val[0]];
+				this.endMin = this.mins[val[1]];
 			},
 			bindPlacePickerChange(e) {
-				this.placeIndex = e.target.value
+				let val = e.target.value;
+				this.placeIndex = val[0]
 			},
 			bindFloorPickerChange(e) {
-				this.floorIndex = e.target.value
+				let val = e.target.value;
+				this.floorIndex = val[0]
 			},
 			reservePosition() {
-				let end = this.endTime.split(":");
-				let start = this.startTime.split(":");
-
-				if ((end[0] - start[0]) < 0 || ((end[0] - start[0]) == 0 && (end[1] <= start[1]))) {
+   
+		
+				console.log(	)
+				
+				if ((this.endHour - this.startHour) < 0 || ((this.endHour == this.startHour) && (parseInt(this.endMin)<=parseInt(this.startMin)))) {
 					uni.showModal({
 						title: '提示',
 						content: '结束时间需大于开始时间',
 						showCancel: false,
 					});
-				} else
+				} else {
+					let date = `${this.year}-${this.month}-${this.day}`;
+					let startTime = `${this.startHour}:${this.startMin}`;
+					let endTime = `${this.endHour}:${this.endMin}`
+
 					uni.navigateTo({
-						url: `./reservePosition?date=${this.date}&startTime=${this.startTime}&endTime=${this.endTime}&place=${this.placeArray[this.placeIndex]}&floor=${this.floorArray[this.floorIndex]}`
+						url: `./reservePosition?date=${date}&startTime=${startTime}&endTime=${endTime}&place=${this.placeArray[this.placeIndex]}&floor=${this.floorArray[this.floorIndex]}`
 					})
+				}
+			},
+
+			dateClick() {
+				this.dateindex = !this.dateindex;
+			},
+			startTimeClick() {
+				this.startindex = !this.startindex;
+			},
+			endTimeClick() {
+				this.endindex = !this.endindex;
+			},
+			placeClick() {
+				this.placeindex = !this.placeindex;
+			},
+			floorClick() {
+				this.floorindex = !this.floorindex;
 			}
+
 		},
 		components: {
 			tarbarHeader,
@@ -202,12 +345,7 @@
 
 		},
 		computed: {
-			startDate() {
-				return this.getDate('start');
-			},
-			endDate() {
-				return this.getDate('end');
-			}
+
 		}
 	}
 </script>

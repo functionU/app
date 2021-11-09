@@ -4,8 +4,8 @@
 			<text @click="back">取消</text>
 		</view>
 		<view class="top">
-			<image src="../../static/app/icon-zhengque.png" style="		width: calc(750rpx * 80/ 375);
-		height: calc(100vh *  80/812);"></image>
+			<image src="../../static/app/Sign.png" style="width: calc(750rpx * 80/ 375);
+		height: calc(750rpx * 80/ 375;"></image>
 		<text>发送成功</text>
 		<text>请登录您的邮箱，查看重置密码链接。</text>
 		</view>
