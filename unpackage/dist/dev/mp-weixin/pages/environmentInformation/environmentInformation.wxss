@@ -1,0 +1,60 @@
+
+.bgc {
+
+	height: 100vh;
+	background-color: rgba(241, 242, 246, 1);
+}
+.head {
+	height: calc(100vh *44/812);
+}
+.content {
+
+	padding-top: calc(100vh * 44/812);
+	height: calc(100vh * 358/812);
+	background-image: url(/static/app/bg@2X.png);
+	background-size: cover;
+	border-bottom-right-radius: 25%;
+	border-bottom-left-radius: 25%;
+}
+.content .head text:nth-child(1) {
+	margin-left: calc(-750rpx * 55/ 375);
+}
+.content .top {
+	overflow: hidden;
+	width: calc(750rpx * 343/ 375);
+	height: calc(100vh * 92/812);
+	border-radius: calc(750rpx * 30/ 375);
+	margin-left: calc(750rpx * 16/ 375);
+	margin-right: calc(750rpx * 16/ 375);
+	margin-top: calc(100vh * 16/812);
+	background-color: rgba(10, 32, 57, 0.1);
+}
+.top {
+	margin-top: calc(100vh * 20/812);
+	background-color: rgba(10, 32, 57, 0.1);
+	display: flex;
+
+	align-items: center;
+}
+.top .left image {
+	width: calc(750rpx * 60/ 375);
+	height: calc(100vh * 60/812);
+	margin-left: calc(750rpx * 24/ 375);
+}
+.top .right text {
+	color: rgba(255, 255, 255, 1);
+	font-size: calc(750rpx * 14/ 375);
+	
+	margin-left: calc(750rpx * 20/ 375);
+}
+.bottom {
+	overflow: hidden;
+	width: calc(750rpx * 343/ 375);
+	height: calc(100vh * 538/812);
+	border-radius: calc(750rpx * 30/ 375);
+	margin-left: calc(750rpx * 16/ 375);
+	margin-right: calc(750rpx * 16/ 375);
+	margin-top: calc(100vh * 20/812);
+	background-color: rgba(255, 255, 255, 1);
+}
+

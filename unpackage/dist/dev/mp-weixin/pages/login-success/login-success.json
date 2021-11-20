@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "qiun-data-charts": "/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts",
+    "tarbar": "/components/common/tarbar/tarbar",
+    "tarbar-header": "/components/common/header/header",
+    "environment-item": "/components/common/environment/environmentItem",
+    "tip": "/components/common/tip/tip",
+    "dash": "/components/common/dash/dash",
+    "double-button": "/components/common/doubleButton/doubleButton",
+    "div-view": "/components/common/divView/divView",
+    "warn": "/components/common/warn/warn"
+  }
+}

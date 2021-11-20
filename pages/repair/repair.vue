@@ -17,10 +17,10 @@
 
 					<view class="main-center-item">
 						<view class="main-center-item-left">
-							故障原因：
+							故障编号：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入" />
+							<input placeholder="请输入"  @input="numberListen" />
 						</view>
 
 					</view>
@@ -29,26 +29,29 @@
 							故障说明：
 						</view>
 						<view class="main-center-item-right">
-							<picker style='display: inline-block;'mode="selector" :range='array' :index="0" @change="bindPickerChange">
+							<picker style='display: inline-block;' mode="selector" :range='array' :index="0"
+								@change="bindPickerChange">
 								<view style="margin-left: calc(750rpx * 150/ 375);margin-right:calc(750rpx * 8/ 375) ;">
 									{{array[index]}}
 								</view>
 							</picker>
-							<image src="../../static/app/icon-xiaoxi@2X.png" style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);" ></image>
+							<image src="../../static/app/next.svg"
+								style="width: calc(750rpx * 7.51/ 375);height: calc(100vh *13.52/812);"></image>
 						</view>
 
 					</view>
 					<view class="main-center-item">
 						<view class="main-center-item-left">
-							故障原因：
+							故障说明：
 						</view>
-						<view class="main-center-item-right" >
-							<textarea placeholder="请输入故障说明..." maxlength="300" confirm-type="0/300" style="font-size:calc(750rpx * 15/ 375); width: 100%;"/>
+						<view class="main-center-item-right">
+							<textarea placeholder="请输入故障说明..." maxlength="300" confirm-type="0/300"
+								style="font-size:calc(750rpx * 15/ 375); width: 100%;" @input="descriptionListen" />
 						</view>
 					</view>
 				</view>
 				<view class="main-bottom">
-					<button type="default">报修</button>
+					<button type="default" @click="repairClick">报修</button>
 				</view>
 
 			</view>
@@ -67,7 +70,9 @@
 		data() {
 			return {
 				array: ['插座没电', '插做损坏', '插座漏电'],
-				index:0,
+				index: 0,
+				description:"",
+				number:''
 			}
 		},
 		onLoad() {
@@ -75,13 +80,46 @@
 		},
 		methods: {
 			backClick() {
-			uni.navigateBack();
+				uni.navigateBack();
 			},
-			   bindPickerChange: function(e) {
-				        console.log(e.target.value)
-			            console.log('picker发送选择改变，携带值为', e.target.value)
-			            this.index = e.target.value
-			        },
+			bindPickerChange(e) {
+			
+				this.index = e.target.value
+			},
+			descriptionListen(e){
+			
+				this.description=e.target.value;
+				
+			},
+			numberListen(e){
+				this.number=e.target.value;
+			},
+			repairClick(){
+			    let description=this.description;
+				let number=this.number;
+				let reason=this.array[this.index]
+				
+			  console.log()
+				uni.request({
+					// url: 'http://192.168.1.238:9900/app/user/device/repair',
+					url: 'http://82.157.34.130:9901/app/user/device/repair',
+					method: 'POST',
+					data: {
+				device_number:number,
+				description,
+				reason,
+				
+				
+					},
+					header: {
+						'Content-Type': 'application/json',
+						'Authorization':getApp().globalData.token
+					},
+					success: (res) => {
+	uni.navigateBack();
+					}
+				})
+			}
 		},
 		components: {
 			tarbarHeader,
@@ -103,7 +141,7 @@
 	}
 
 	.content {
-	
+
 		padding-top: calc(100vh * 44/812);
 		height: calc(100vh * 358/812);
 		background-image: url(../../static/app/bg@2X.png);
@@ -202,7 +240,7 @@
 	}
 
 	.content .main .main-bottom button {
-		font-size:calc(750rpx * 15/ 375);
+		font-size: calc(750rpx * 15/ 375);
 		width: calc(750rpx * 311/ 375);
 		height: calc(100vh *44/812);
 		border-radius: calc(750rpx * 8/ 375);

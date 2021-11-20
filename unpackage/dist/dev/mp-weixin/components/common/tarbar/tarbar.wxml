@@ -1,0 +1,1 @@
+<view class="tarbar"><block wx:for="{{tarbarNames}}" wx:for-item="item" wx:for-index="index"><view data-event-opts="{{[['tap',[['tarbarItemClick',[index]]]]]}}" class="{{['tarbar-item',(index==clickIndex)?'click':'']}}" bindtap="__e">{{item}}</view></block></view>

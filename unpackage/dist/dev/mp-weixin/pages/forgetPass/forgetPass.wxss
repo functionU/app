@@ -1,0 +1,88 @@
+
+.content {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		font-size: calc(750rpx * 15 / 375);
+}
+.tarbar{
+		margin-top: calc(100vh * 44/812);
+		width: calc(750rpx * 375 / 375);
+		height: calc(100vh * 44/812);
+}
+.tarbar text{
+		margin-left: calc(750rpx * 32/ 375);
+			font-size: calc(750rpx * 14/ 375);
+		color: rgba(10, 32, 57, 0.7);
+}
+.top {
+		margin-top: calc(100vh * 114 /812);
+		margin-left: calc(750rpx * 24/ 375);
+}
+.top .text {
+		font-size: calc(750rpx * 24 / 375);
+		font-weight: bold;
+		line-height: calc(100vh * 21/812);
+		color: rgba(10, 32, 57, 0.7);
+		margin-top: calc(100vh * 13/812);
+}
+.center {
+		margin-top: calc(100vh * 72/812);
+}
+.login {
+		color: rgba(10, 32, 57, 0.5);
+}
+.login .userName {
+		margin-left: calc(750rpx * 24/ 375);
+		margin-right: calc(750rpx * 23/ 375);
+}
+.login .userName .account {
+		width: calc(750rpx * 24 / 375);
+		height: calc(100vh * 23/812);
+}
+.login .userName input {
+		display: inline-block;
+		width: calc(750rpx * 313/ 375);
+		margin-bottom: calc(100vh * 13/812);
+		margin-top: calc(100vh * 13/812);
+}
+.login .userPassword {
+
+		width: calc(750rpx * 328 / 375);
+		height: calc(100vh * 103/812);
+		margin-left: calc(750rpx * 24/ 375);
+		margin-right: calc(750rpx * 23/ 375);
+		margin-top: calc(100vh * 23/812);
+}
+.login .userPassword input {
+		display: inline-block;
+		width: calc(750rpx * 313/ 375);
+		margin-top: calc(100vh * 13/812);
+		margin-bottom: calc(100vh * 13/812);
+}
+.login .userPassword .userPass {}
+.login .loginForget {
+		display: block;
+
+		width: calc(750rpx * 75 / 375);
+		height: calc(100vh * 21/812);
+		margin-top: calc(100vh * 13/812);
+		margin-left: calc(750rpx * 252/ 375);
+}
+.login .loginButton {
+
+		color: rgba(255, 255, 255, 1);
+		width: calc(750rpx * 327 / 375);
+		height: calc(100vh * 56/812);
+		line-height: calc(100vh * 56/812);
+		margin-top: calc(100vh * 50/812);
+		background-image: linear-gradient(to right, rgba(112, 207, 186, 1), rgba(25, 189, 192, 1));
+		border-radius: calc(750rpx * 8/ 375);
+}
+.show-true {
+		border-bottom: calc(750rpx * 1/ 375) solid #13C2C2;
+}
+.show-false {
+		border-bottom: calc(750rpx * 1/ 375) solid #FB696C;
+}
+

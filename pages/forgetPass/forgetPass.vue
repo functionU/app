@@ -32,7 +32,7 @@
 				show: true,
 				reg: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
 				showNameImg: "",
-               email:"",
+                email:"",
 			}
 		},
 
@@ -48,9 +48,26 @@
 
 			},
 			next(){
-				uni.navigateTo({
-					url: '../forgetPass/next'
+				let email=this.email;
+			
+				uni.request({
+					// url: 'http://192.168.1.238:9900/app/user/forget/password',
+					url: 'http://82.157.34.130:9901/app/user/forget/password',
+					method: 'POST',
+					data: {
+					email:email
+					},
+					header: {
+						'Content-Type': 'application/json'
+					},
+					success: (res) => {
+						
+						uni.navigateTo({
+							url: '../forgetPass/next'
+						})
+					}
 				})
+			
 			},
 			back(){
 				uni.navigateBack({

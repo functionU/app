@@ -8,6 +8,11 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		globalData:{
+			token:"",
+			positionArray:[],
+			usuallyArray:[],
 		}
 	}
 </script>

@@ -76,8 +76,8 @@
 						</view>
 						<view class="main-center-item-right">
 
-							<view style="display: inline;">
-								{{placeArray[placeIndex]}}
+							<view style="display: inline;" v-if="placeArray[placeIndex].name">
+								{{placeArray[placeIndex].name}}
 							</view>
 
 							<image src="../../static/app/next.svg"
@@ -91,8 +91,8 @@
 						</view>
 						<view class="main-center-item-right">
 
-							<view style="display: inline;">
-								{{floorArray[floorIndex]}}
+							<view style="display: inline;" v-if="floorArray[floorIndex].name">
+								{{floorArray[floorIndex].name}}
 							</view>
 
 							<image src="../../static/app/next.svg"
@@ -115,7 +115,6 @@
 					style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);">确定</text>
 			</view>
 			<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
-		
 				@change="bindDatePickerChange" :value="valueDate">
 				<picker-view-column>
 					<view class="item" v-for="(item,index) in years">{{item}}年</view>
@@ -162,7 +161,7 @@
 
 			</picker-view>
 		</view>
-		<view class="pickerEndTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="placeindex">
+		<view class="pickerEndTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-if="placeindex">
 			<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick">
 				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
 				<text
@@ -171,12 +170,25 @@
 			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
 				@change="bindPlacePickerChange" :value="valuePlace">
 				<picker-view-column>
-					<view class="item" v-for="(item,index) in placeArray">{{item}}</view>
+					<view class="item" v-for="(item,index) in placeArray">{{item.name}}</view>
 				</picker-view-column>
 
 			</picker-view>
 		</view>
+		<view class="pickerEndTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-if="floorindex">
+			<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick">
+				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<text
+					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+			</view>
+			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+				@change="bindFloorPickerChange" :value="valueFloor">
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in floorArray">{{item.name}}</view>
+				</picker-view-column>
 
+			</picker-view>
+		</view>
 
 	</view>
 
@@ -198,23 +210,21 @@
 			let year = date.getFullYear();
 			let month = date.getMonth() + 1;
 			let day = date.getDate();
-			let hour = 	function(){
-				let hour=date.getHours();
-				 if(hour<10)
-				 {
-					 return '0'+hour;
-				 }
-				 return hour
+			let hour = function() {
+				let hour = date.getHours();
+				if (hour < 10) {
+					return '0' + hour;
+				}
+				return hour
 			}();
-			let min = function(){
-				let min=date.getMinutes();
-				 if(min<10)
-				 {
-					 return '0'+min;
-				 }
-				 return min
+			let min = function() {
+				let min = date.getMinutes();
+				if (min < 10) {
+					return '0' + min;
+				}
+				return min
 			}();
-		
+
 
 			for (let i = 1990; i <= date.getFullYear(); i++) {
 				years.push(i)
@@ -241,9 +251,13 @@
 			}
 
 			return {
-				placeArray: ['中国', '美国', '俄罗斯'],
+				placeArray: [{
+					name: ''
+				}],
 				placeIndex: 0,
-				floorArray: ['1', '2', '3', '4', '5'],
+				floorArray: [{
+					name: ""
+				}],
 				floorIndex: 0,
 				years,
 				months,
@@ -258,8 +272,8 @@
 				endHour: hour,
 				endMin: min,
 				valueDate: [9999, month - 1, day - 1],
-				valuePlace:[0],
-				valueFloor:[0],
+				valuePlace: [0],
+				valueFloor: [0],
 				valueStartTime: [hour, min],
 				dateindex: false,
 				startindex: false,
@@ -269,6 +283,55 @@
 			}
 		},
 		onLoad() {
+			let that = this;
+			uni.request({
+				// url: 'http://192.168.1.238:9900/app/office/building/list',
+				url: 'http://82.157.34.130:9901/app/office/building/list',
+
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token
+				},
+				success: (res) => {
+
+					if (Array.isArray(res.data.value)) {
+						let newArray = [];
+						res.data.value.map((item) => {
+
+							newArray.push(item);
+						})
+						that.placeArray = newArray;
+						let id = this.placeArray[this.placeIndex].id;
+						uni.request({
+							// url: `http://192.168.1.238:9900/app/office/building/floor/list/${id}`,
+							url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
+						
+							header: {
+								'Content-Type': 'application/json',
+								'Authorization': getApp().globalData.token
+							},
+							success: (res) => {
+						
+								let newArray = [];
+								if (Array.isArray(res.data.value)) {
+									res.data.value.map((item) => {
+						
+										newArray.push(item);
+									})
+									that.floorArray = res.data.value;
+								}
+						
+						
+							}
+						})
+					}
+
+	
+
+
+
+				}
+			})
 
 		},
 		methods: {
@@ -294,18 +357,43 @@
 			},
 			bindPlacePickerChange(e) {
 				let val = e.target.value;
-				this.placeIndex = val[0]
+				this.placeIndex = val[0];
+				this.valuePlace = [val[0]]
+
+				let id = this.placeArray[this.placeIndex].id;
+				let that = this;
+				uni.request({
+					// url: `http://192.168.1.238:9900/app/office/building/floor/list/${id}`,
+					url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
+
+					header: {
+						'Content-Type': 'application/json',
+						'Authorization': getApp().globalData.token
+					},
+					success: (res) => {
+
+						let newArray = [];
+						res.data.value.map((item) => {
+
+							newArray.push(item);
+						})
+						that.floorArray = res.data.value;
+					}
+				})
 			},
 			bindFloorPickerChange(e) {
 				let val = e.target.value;
-				this.floorIndex = val[0]
+				this.floorIndex = val[0];
+				this.valueFloor = [val[0]]
+
 			},
 			reservePosition() {
-   
-		
-				console.log(	)
-				
-				if ((this.endHour - this.startHour) < 0 || ((this.endHour == this.startHour) && (parseInt(this.endMin)<=parseInt(this.startMin)))) {
+
+
+
+
+				if ((this.endHour - this.startHour) < 0 || ((this.endHour == this.startHour) && (parseInt(this.endMin) <=
+						parseInt(this.startMin)))) {
 					uni.showModal({
 						title: '提示',
 						content: '结束时间需大于开始时间',
@@ -315,10 +403,52 @@
 					let date = `${this.year}-${this.month}-${this.day}`;
 					let startTime = `${this.startHour}:${this.startMin}`;
 					let endTime = `${this.endHour}:${this.endMin}`
+					let that = this;
+					uni.request({
+						// url: `http://192.168.1.238:9900/app/office/empty/station/list`,
+						url: `http://82.157.34.130:9901/app/office/empty/station/list`,
+						method: 'POST',
+						data: {
+							'end_time': endTime + ":00",
+							'start_time': startTime + ":00",
+							'reserve_date': date,
+							'floor_id': that.floorArray[that.floorIndex].id,
+						},
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token
+						},
+						success: (res) => {
 
-					uni.navigateTo({
-						url: `./reservePosition?date=${date}&startTime=${startTime}&endTime=${endTime}&place=${this.placeArray[this.placeIndex]}&floor=${this.floorArray[this.floorIndex]}`
+							getApp().globalData.positionArray = res.data.value;
+							uni.request({
+								// url: `http://192.168.1.238:9900/app/office/often/empty/station/list`,
+								url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
+								method: 'POST',
+								data: {
+									'end_time': endTime + ":00",
+									'start_time': startTime + ":00",
+									'reserve_date': date,
+									'floor_id': that.floorArray[that.floorIndex].id,
+								},
+								header: {
+									'Content-Type': 'application/json',
+									'Authorization': getApp().globalData.token
+								},
+								success: (res) => {
+
+									getApp().globalData.usuallyArray = res.data.value;
+
+
+									uni.navigateTo({
+										url: `./reservePosition?date=${date}&startTime=${startTime}&endTime=${endTime}&place=${that.placeArray[that.placeIndex].name}&floor=${that.floorArray[that.floorIndex].name}&floorId=${that.floorArray[that.floorIndex].id}`
+									})
+								}
+							})
+
+						}
 					})
+
 				}
 			},
 

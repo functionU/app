@@ -192,22 +192,46 @@
 										<text>选择工位和时间进行使用～</text>
 									</view>
 									<view class="right" @click="reserveClick">
-										<image src="../../static/app/yuyue@2X.png" mode=""></image>
+										<image src="../../static/app/yuyue@2X.png"></image>
 									</view>
 								</view>
-								<view class="reserveSecond">
+								<view class="reserveSecond" style="height:auto">
 
 									<tip :item="{name:'我的预约'}">
-										<text slot='right'></text>
+										<text slot='right'
+											style="font-size:calc(750rpx * 24/ 375);font-weight: bold;color: black;"></text>
 									</tip>
-									<view class="reserveSecond-img"
-										style="display: flex;flex-direction:column;align-items: center;">
+									<view class="reserveSecond-img" style="height:auto;">
 
-										<image src="../../static/app/nodata@2X.png"
-											style="width: calc(750rpx * 120/ 375);height: calc(100vh * 120/812); border:calc(750rpx * 1/ 375)  dashed rgba(230, 231, 232, 1);">
-											<text style="color: rgba(10, 32, 57, 0.5);">还没有预订工位～</text>
-											<text style="color: rgba(26, 191, 194, 1);"
-												@click="reserveClick">点击预定</text>
+										<view style="display: flex;flex-direction:column;align-items: center;"
+										 v-show="!infoTag"
+											>
+											<image src="../../static/app/nodata@2X.png"
+												style="width: calc(750rpx * 120/ 375);height: calc(100vh * 120/812); border:calc(750rpx * 1/ 375)  dashed rgba(230, 231, 232, 1);">
+												<text style="color: rgba(10, 32, 57, 0.5);">还没有预订工位～</text>
+												<text style="color: rgba(26, 191, 194, 1);"
+													@click="reserveClick">点击预定</text>
+										</view>
+										<view  v-show="infoTag"
+											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;">
+											<view>
+												<image src="../../static/app/info@2X.png"
+													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+												</image>
+												<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+											</view>
+											<view style="margin-top: calc(750rpx * 12/ 375);">
+												<image src="../../static/app/info@2X.png"
+													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
+												</image>
+												<text>{{listObj.reserve_date}}{{listObj.start_time}}-{{listObj.end_time}}</text>
+											</view>
+											<view @click="stopInfo(listObj.id)"
+												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+												取消预约
+											</view>
+										</view>
+
 									</view>
 
 								</view>
@@ -215,25 +239,25 @@
 							<view v-show="resever">
 								<view class="reserveFirst" style="height: calc(100vh * 83/812);">
 									<view class="right">
-										<image src="../../static/app/chazuo@2X.png" mode=""></image>
+										<image src="../../static/app/chazuo@2X.png"></image>
 									</view>
 									<view class="left">
-										<text>YJ052</text>
-										<text>09:30～17:30</text>
+										<text>{{infoObj.station_number}}</text>
+										<text>{{infoObj.start_time}}～{{infoObj.end_time}}</text>
 									</view>
 
 								</view>
 								<view class="beforeSign" v-show="!sign">
 									<view
 										style="	width: calc(750rpx * 343/ 375);height: calc(100vh * 148/812);display: flex; margin-top: calc(100vh * 20/812);">
-										<view @click="signIn"
+										<view @click="signIn(infoObj.id,infoObj.device_number)"
 											style="	width: calc(750rpx * 164/ 375);height: calc(100vh * 148/812); margin-left:calc(750rpx * 25/ 375);border-radius:calc(750rpx * 30/ 375); display: flex;flex-direction: column;	justify-content: space-around;align-items: center;background-color: rgba(253, 254, 255, 1);">
 											<image src="../../static/app/btn-qiandao@2X.png"
 												style="width: calc(750rpx * 76/ 375);height: calc(100vh * 76/812);">
 											</image>
 											<text>扫码签到</text>
 										</view>
-										<view @click="reserveStop"
+										<view @click="reserveStop(infoObj.id)"
 											style="	width: calc(750rpx * 164/ 375);height: calc(100vh * 148/812); margin-left:calc(750rpx * 15/ 375);border-radius:calc(750rpx * 30/ 375); display: flex;flex-direction: column;justify-content: space-around;align-items: center;background-color: rgba(253, 254, 255, 1);">
 											<image src="../../static/app/btn-quxiao@2X.png"
 												style="width: calc(750rpx * 76/ 375);height: calc(100vh * 76/812);">
@@ -245,17 +269,35 @@
 									<view class="reserveSecond" style="height: calc(100vh * 267/812);">
 										<tip :item="{name:'我的预约'}">
 											<text slot='right'
-												style="font-size:calc(750rpx * 24/ 375) ;color: black;">YJO52</text>
+												style="font-size:calc(750rpx * 24/ 375) ;color: black;"></text>
 										</tip>
 										<view class="reserveSecond-box">
-
+<!-- 										<view  v-show="infoTag"
+											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;margin-left: calc(750rpx * 24/ 375);margin-top: calc(100vh * 14/ 812);">
+											<view>
+												<image src="../../static/app/info@2X.png"
+													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+												</image>
+												<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+											</view>
+											<view style="margin-top: calc(750rpx * 12/ 375);">
+												<image src="../../static/app/info@2X.png"
+													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
+												</image>
+												<text>{{listObj.reserve_date}}{{listObj.start_time}}-{{listObj.end_time}}</text>
+											</view>
+											<view @click="stopInfo(listObj.id)"
+												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+												取消预约
+											</view>
+										</view> -->
 										</view>
 
 
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
-									<view class="reserveFirst" style="background-color: white;">
+									<view class="reserveFirst" style="background-color: white;" >
 										<view class="reserveFirst-left"
 											:style="{backgroundImage:'url(' + item.src + ')'}">
 
@@ -275,30 +317,70 @@
 											<text :class="{'open':powerButton}">开</text>
 										</view>
 									</view>
-									<view
+									<view 
 										style="display: flex; margin-left: calc(-750rpx * 8/ 375);margin-top:calc(100vh * 20/812) ;">
-										<view @click="signIn"
+										<view @click="addUseTime"
 											style="	width: calc(750rpx * 164/ 375);height: calc(100vh * 148/812); margin-left:calc(750rpx * 25/ 375);border-radius:calc(750rpx * 30/ 375); display: flex;flex-direction: column;	justify-content: space-around;align-items: center;background-color: rgba(253, 254, 255, 1);">
 											<image src="../../static/app/btn-qiandao@2X.png"
 												style="width: calc(750rpx * 76/ 375);height: calc(100vh * 76/812);">
 											</image>
 											<text>延长使用</text>
 										</view>
-										<view @click="reserveStop"
+										<view @click="useStop(infoObj.id)"
 											style="	width: calc(750rpx * 164/ 375);height: calc(100vh * 148/812); margin-left:calc(750rpx * 15/ 375);border-radius:calc(750rpx * 30/ 375); display: flex;flex-direction: column;justify-content: space-around;align-items: center;background-color: rgba(253, 254, 255, 1);">
 											<image src="../../static/app/btn-quxiao@2X.png"
 												style="width: calc(750rpx * 76/ 375);height: calc(100vh * 76/812);">
 											</image>
 											<text>结束使用 </text>
 										</view>
+
+										<view class="picker" v-show="addUse"
+											style="position: fixed;bottom: 0;left: 0;right: 0;">
+											<view
+												style="display:flex;justify-content: space-between;background-color: white; ">
+												<text @click="addCancal"
+													style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+												<text>延长使用</text>
+												<text @click="addSubmit"
+													style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+											</view>
+											<picker-view
+												style="width: calc(750rpx * 375/ 375);height: calc(100vh * 270/812);"
+												class="picker-item" @change="addUseTimeChose" :value="addIndex">
+												<picker-view-column>
+													<view class="item" v-for="(item,index) in timeArray">{{item}}分钟
+													</view>
+												</picker-view-column>
+											</picker-view>
+
+										</view>
 									</view>
 									<view class="reserveSecond" style="height: calc(100vh * 166/812);">
 										<tip :item="{name:'我的预约'}">
 											<text slot='right'
-												style="font-size:calc(750rpx * 24/ 375) ;color: black;">YJO52</text>
+												style="font-size:calc(750rpx * 24/ 375) ;color: black;">{{listObj.position}}</text>
 										</tip>
 										<view class="reserveSecond-box">
-
+<!-- 										<view  v-show="infoTag"
+											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;margin-left: calc(750rpx * 24/ 375);margin-top: calc(100vh * 14/ 812);">
+											<view>
+												<image src="../../static/app/info@2X.png"
+													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+												</image>
+												<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+											</view>
+											<view style="margin-top: calc(750rpx * 12/ 375);">
+												<image src="../../static/app/info@2X.png"
+													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
+												</image>
+												<text>{{listObj.reserve_date}}{{listObj.start_time}}-{{listObj.end_time}}</text>
+											</view>
+											<view @click="stopInfo(listObj.id)"
+												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+												取消预约
+											</view>
+										</view> -->
+									
 										</view>
 
 
@@ -324,13 +406,14 @@
 						<view class="secondOffice">
 							<tip :item="{name:'天气预报',place:'上海市 静安区'}"></tip>
 							<dash></dash>
-							<view  >
+							<view>
 								<view class="secondOffice-item" style="margin-left:  calc(750rpx * 24/ 375);">
-									<view >
-										<image  style="width: calc(750rpx * 12/ 375);height: calc(100vh * 12/812);" src="../../static/app/map-xianzhong@2X.png" mode=""></image>
+									<view>
+										<image style="width: calc(750rpx * 12/ 375);height: calc(100vh * 12/812);"
+											src="../../static/app/map-xianzhong@2X.png" mode=""></image>
 										<text style="margin-left:  calc(750rpx * 13/ 375);">今天-阵雨</text>
 									</view>
-									 <text style="margin-right:  calc(750rpx * 24/ 375);">12°/8°</text>
+									<text style="margin-right:  calc(750rpx * 24/ 375);">12°/8°</text>
 								</view>
 							</view>
 						</view>
@@ -428,6 +511,7 @@
 					}]
 				},
 				reserveChartData: {
+
 					categories: ['周一', '周二', '周三', '周四', '周五'],
 					series: [{
 						name: '',
@@ -440,15 +524,65 @@
 				color: '#007AFF',
 				reserve: false,
 				sign: false,
+				timeArray: [15, 30, 45, 60, 90, 120],
+				addUse: false,
+				addIndex: [0],
+				e: [0],
+				infoObj: {},
+				listObj: {},
+				infoTag: false,
+				signTag:false,
+
+
 			}
 		},
 		onLoad(option) {
-
+			let that = this;
 			if (option.index) {
 				this.resever = option.resever;
 				this.buttonIndex = parseInt(option.buttonIndex);
 				this.index = parseInt(option.index);
+				this.startTime = option.startTime;
+				this.endTime = option.endTime;
+				this.position = option.position;
 			}
+			uni.request({
+				// url: 'http://192.168.1.238:9900/app/office/reserve/station/info',
+				url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
+				header: {
+			
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+					console.log(res)
+					if (Array.isArray(res.data.value) && res.data.value.length != 0) {
+						that.listObj = res.data.value[0];
+						that.infoTag = true;
+						// that.resever = true;
+						console.log(that.listObj);
+					}
+			
+				}
+			})
+			uni.request({
+				// url: 'http://192.168.1.238:9900/app/office/reserve/station/info',
+				url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
+				header: {
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+					console.log(res)
+					if (res.data.value) {
+						that.resever = true;
+						that.sign = false;
+						that.infoObj = res.data.value;
+						that.sign=res.data.value.sign_status;
+						console.log(that.infoObj)
+					}
+
+				}
+			})
+
 
 
 
@@ -569,24 +703,127 @@
 				this.warnShow = true;
 
 			},
-			reserveStop() {
+			stopInfo(id) {
+				let that = this;
+				uni.request({
+					// url: `http://192.168.1.238:9900/app/office/advance/end/${id}`,
+					url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
+					method: 'DELETE',
+					header: {
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+						
+						console.log(res);
+						that.infoTag = false;
+						that.listObj = {};
+					}
+				})
+			},
+			reserveStop(id) {
+				let that = this;
+				console.log(id)
 				uni.showModal({
 					title: '提示',
 					content: '您确定要取消预约吗？',
 					success: (res) => {
-						this.resever = !this.resever;
+						if (res.confirm) {
+							this.resever = !this.resever;
+							uni.request({
+								// url: 'http://192.168.1.238:9900//app/office/advance/end/{id}',
+								url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
+								method: 'DELETE',
+								// header: {
+
+								// 	'Authorization': getApp().globalData.token,
+								// },
+								success: (res) => {
+									console.log(res)
+									that.infoObj = {};
+
+
+
+								}
+							})
+						}
+
 					},
 				});
 
 
 			},
-			signIn() {
-				uni.scanCode({
-					success: function(res) {
-						console.log('条码类型：' + res.scanType);
-						console.log('条码内容：' + res.result);
+			signIn(id, devNumber) {
+				// uni.scanCode({
+				// 	success: function(res) {
+				// 		console.log('条码类型：' + res.scanType);
+				// 		console.log('条码内容：' + res.result);
+				// 	}
+				// });
+				uni.request({
+					// url: `http://192.168.1.238:9900/app/office/delete/reserve/${id}`,
+					url: `http://82.157.34.130:9901/app/office/sign/reserve?id=${id}&deviceNumber=${devNumber}`,
+					header: {
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+					
+						if (res.data.code == 0) {
+							this.sign = true;
+						}
+
 					}
+				})
+
+			},
+			addUseTime() {
+				this.addUse = true;
+
+			},
+			useStop(id) {
+				uni.showModal({
+					title: '提示',
+					content: '您确定要提前结束吗？',
+					success: (res) => {
+						console.log(res);
+						this.sign = !this.sign;
+						this.resever = !this.resever;
+						uni.request({
+							// url: `http://192.168.1.238:9900/app/office/delete/reserve/${id}`,
+							url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
+							header: {
+								'Authorization': getApp().globalData.token,
+							},
+							success: (res) => {
+								console.log(res);
+							}
+						})
+					},
 				});
+			},
+			addCancal() {
+				this.addUse = false;
+
+			},
+			addUseTimeChose(e) {
+				this.e = e.target.value;
+			},
+
+			addSubmit() {
+				this.addIndex = this.e;
+				this.addUse = false;
+				let minute = this.timeArray[this.addIndex];
+				let id = this.infoObj.id;
+				uni.request({
+					// url: `http://192.168.1.238:9900/app/office/extend/use?id=1&minute=${minute}`,
+					url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
+					header: {
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+						console.log(res);
+					}
+				})
+
 			}
 		},
 		components: {
@@ -1047,7 +1284,7 @@
 		display: flex;
 		justify-content: space-between;
 		color: rgba(10, 32, 57, 0.7);
-		font-size: calc(750rpx * 12/ 375) ;
+		font-size: calc(750rpx * 12/ 375);
 	}
 
 	.content-main .reserveFirst {
@@ -1230,5 +1467,17 @@
 	.content-main .show-second .reserveFirst .right image {
 		width: calc(750rpx * 60/ 375);
 		height: calc(100vh * 60/812);
+	}
+
+	.content-main .show-second .afterSign .picker {
+		z-index: 1;
+		left: 0;
+		bottom: 0;
+	}
+
+	.content-main .show-second .afterSign .picker .picker-item {
+
+		background-color: white;
+		text-align: center;
 	}
 </style>

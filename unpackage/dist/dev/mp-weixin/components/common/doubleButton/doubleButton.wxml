@@ -1,0 +1,1 @@
+<view class="doubleButton"><block wx:for="{{name}}" wx:for-item="item" wx:for-index="index"><view data-event-opts="{{[['tap',[['buttonListen',[index]]]]]}}" class="{{['button',(number==index)?'click':'']}}" bindtap="__e">{{''+item+''}}</view></block></view>

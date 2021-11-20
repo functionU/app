@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/login-success/login-success",
+    "pages/revisePassword/revisePassword",
+    "pages/repair/repair",
+    "pages/environmentInformation/environmentInformation",
+    "pages/sumUse/sumUse",
+    "pages/reserve/reserve",
+    "pages/reserve/reservePosition",
+    "pages/forgetPass/forgetPass",
+    "pages/forgetPass/next",
+    "pages/newsWarn/newsWarn",
+    "pages/charts/charts",
+    "pages/reserve/codeReserve"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom",
+    "style": {
+      "app-plus": {
+        "titleNView": false
+      }
+    }
+  },
+  "usingComponents": {}
+}

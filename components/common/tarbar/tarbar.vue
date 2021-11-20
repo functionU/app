@@ -30,7 +30,7 @@
 		},
 		methods: {
 			tarbarItemClick(index) {
-			
+
 				this.$emit('tarbarClick', index)
 			}
 		}

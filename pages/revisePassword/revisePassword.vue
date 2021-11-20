@@ -21,7 +21,7 @@
 							旧密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入旧密码" />
+							<input placeholder="请输入旧密码" @input="oldPassListen" />
 						</view>
 
 					</view>
@@ -30,7 +30,7 @@
 							新密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" />
+							<input placeholder="请输入新密码" @input=" PassLitenOne" />
 						</view>
 
 					</view>
@@ -39,13 +39,13 @@
 							新密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" />
+							<input placeholder="请输入新密码" @input="PassLitenTwo" />
 						</view>
 
 					</view>
 				</view>
 				<view class="main-bottom">
-					<button type="default">修改</button>
+					<button type="default" @click="reviseSubmit">修改</button>
 				</view>
 
 
@@ -63,16 +63,63 @@
 	export default {
 		data() {
 			return {
-
+				oldPass: "",
+				newPassOne: "",
+				newPassTwo: ""
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-backClick(){
-	uni.navigateBack();
-}
+			backClick() {
+				uni.navigateBack();
+			},
+			PassLitenTwo(e) {
+				this.newPassTwo = e.target.value;
+			},
+			PassLitenOne(e) {
+				this.newPassOne = e.target.value;
+			},
+			oldPassListen(e) {
+				this.oldPass = e.target.value;
+			},
+			reviseSubmit(){
+				if(this.newPassOne!=this.newPassTwo)
+				{
+					console.log(1)
+					uni.showToast({
+					    title: '两次新密码输入不相同',
+					    duration: 2000,
+						icon:'none'
+					});
+				}
+				else {
+					let new_password=this.newPassOne;
+					let old_password=this.oldPass;
+					uni.request({
+						
+									url: 'http://82.157.34.130:9900/app/user/reset/password',
+									method: 'POST',
+									data: {
+										new_password,
+										old_password
+
+									},
+									header: {
+										'Content-Type': 'application/json',
+										'Authorization':getApp().globalData.token
+									},
+									success: (res) => {
+					                     if(res.data.code==0)
+										 {
+											 uni.navigateBack();
+										 }
+									}
+								})
+					
+				}
+			}
 		},
 		components: {
 			tarbarHeader,

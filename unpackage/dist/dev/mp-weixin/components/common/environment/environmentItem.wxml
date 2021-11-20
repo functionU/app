@@ -1,0 +1,1 @@
+<view class="environment-item"><text class="text">{{item.name}}</text><image style="width:calc(750rpx * 22.33/ 375);height:calc(100vh * 24.23/812);" src="{{item.src}}"></image><text>{{item.number}}</text><view class="{{[(item)?'item':'',(item.quality=='优')?'good':'',(item.quality=='差')?'bad':'']}}">{{''+item.quality+''}}</view></view>

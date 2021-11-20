@@ -1,0 +1,48 @@
+
+.content {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		font-size: calc(750rpx * 15 / 375);
+}
+.tarbar {
+		margin-top: calc(100vh * 44/812);
+		width: calc(750rpx * 375 / 375);
+		height: calc(100vh * 44/812);
+}
+.tarbar text {
+		margin-left: calc(750rpx * 32/ 375);
+}
+.top {
+		margin-top: calc(100vh * 38 /812);
+	
+       display: flex;
+	   flex-direction: column;
+	   align-items: center;
+}
+.top text{
+	text-align: center;
+}
+.center {
+		margin-top: calc(100vh * 50/812);
+}
+.login {
+		color: rgba(10, 32, 57, 0.5);
+}
+.login .loginButton {
+
+		color: rgba(255, 255, 255, 1);
+		width: calc(750rpx * 327 / 375);
+		height: calc(100vh * 56/812);
+		line-height: calc(100vh * 56/812);
+		margin-top: calc(100vh * 50/812);
+		background-image: linear-gradient(to right, rgba(112, 207, 186, 1), rgba(25, 189, 192, 1));
+		border-radius: calc(750rpx * 8/ 375);
+}
+.show-true {
+		border-bottom: calc(750rpx * 1/ 375) solid #13C2C2;
+}
+.show-false {
+		border-bottom: calc(750rpx * 1/ 375) solid #FB696C;
+}
+

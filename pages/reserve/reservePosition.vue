@@ -64,7 +64,7 @@
 						<view class="center-boxOne-top-content">
 							<view @click="itemClick(item,index)" :class="{'click':index==itemIndex}"
 								class="center-boxOne-top-content-item" v-for="(item,index) in positionArray">
-								{{item}}
+								{{item.station_number}}
 							</view>
 						</view>
 					</view>
@@ -75,7 +75,7 @@
 						<view class="center-boxOne-bottom-centent">
 							<view @click="usuallyItemClick(item,index)" :class="{'click':index==usuallyItemIndex}"
 								class="center-boxOne-bottom-centent-item" v-for="(item,index) in UsuallyArray">
-								{{item}}
+								{{item.station_number}}
 							</view>
 
 						</view>
@@ -117,8 +117,10 @@
 				endTime: "",
 				plcae: "",
 				floor: "",
+				floorId: "",
 				name: "",
 				show: true,
+				id:0,
 			}
 
 		},
@@ -126,17 +128,13 @@
 			positionArray: {
 				type: Array,
 				default: () => {
-					return ['YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051',
-						'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ052',
-						'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051',
-						'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ051', 'YJ052'
-					]
+					return getApp().globalData.positionArray;
 				}
 			},
 			UsuallyArray: {
 				type: Array,
 				default: () => {
-					return ['YJ051', 'YJ051']
+					return getApp().globalData.usuallyArray;
 				}
 			}
 		},
@@ -147,6 +145,7 @@
 			this.date = option.date;
 			this.place = option.place;
 			this.floor = option.floor;
+			this.floorId = option.floorId;
 
 		},
 
@@ -158,13 +157,16 @@
 				})
 			},
 			itemClick(item, index) {
-				this.itemName = item
+				this.usuallyItemIndex = -1;
+				this.itemName = item.station_number
 				this.itemIndex = index;
+				this.id=item.id;
 			},
 			usuallyItemClick(item, index) {
-
-				this.itemName = item
+				this.itemIndex = -1;
+				this.itemName = item.station_number
 				this.usuallyItemIndex = index;
+				this.id=item.id;
 			},
 			mapClick() {
 				this.show = false;
@@ -182,17 +184,58 @@
 					});
 				} else {
 					let obj = {};
-
-					obj.startTime = this.startTime;
-					obj.endTime = this.endTime;
+            
+					obj.startTime = this.startTime + ":00";
+					obj.endTime = this.endTime + ":00";
 					obj.date = this.date;
 					obj.place = this.place;
-					obj.floor = this.floor;
-					obj.position = this.itemName;
+					obj.floor = parseInt(this.floorId);
+					obj.position=this.itemName;
+					obj.id = parseInt(this.id);
+                    
+					uni.request({
+						
+						// url: 'http://192.168.1.238:9900/app/office/reserve',
+						url: 'http://82.157.34.130:9901/app/office/reserve',
+						method: 'POST',
+						data: {
+							'start_time': obj.startTime,
+							'end_time': obj.endTime,
+							'floor_id':obj.floor ,
+							'reserve_date': obj.date,
+							'station_id':obj.id,
 
-					uni.navigateTo({
-						url: `../login-success/login-success?resever=true&index=1&buttonIndex=1`
-					});
+						},
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+							     console.log(res);
+								 if(res.data.code==-300)
+								 {
+									 uni.showModal({
+									 	title: '提示',
+									 	content: '您在该时段区间内已预约了其他工位',
+									 	showCancel: false,
+									 });
+								 }
+								 else if(res.data.code==0)
+								 {
+									 
+									 uni.navigateTo({
+									 	// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
+									 	url: `../login-success/login-success?index=1&buttonIndex=1`
+									 });
+									 
+								 }
+
+						
+
+
+						}
+					})
+		
 				}
 
 			}
@@ -427,7 +470,7 @@
 		border-radius: 50%;
 		background-color: #1ABFC2;
 		position: absolute;
-		left: 80%;
+		left: 75%;
 		top: 40%;
 	}
 

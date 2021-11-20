@@ -1,0 +1,4 @@
+<view class="warn-bg"><view class="warn"><text class="title">计数规则</text><text class="content">符合以下任意条件都可以算做久坐:
+			A. 一周清醒状态下坐姿超过5天
+			B. 每天坐姿超过8小时
+			C. 经常连续1.5小时没有起身活动</text><text data-event-opts="{{[['tap',[['confirmClick',['$event']]]]]}}" class="confirm" bindtap="__e">知道了</text></view></view>

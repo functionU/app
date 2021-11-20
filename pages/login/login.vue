@@ -21,9 +21,12 @@
 					</image>
 				</view>
 				<view class=" userPassword">
-					<view class="userPass show-true">
+					<view class="userPass show-true" :class="{'show-false':tag}">
 						<text calss='password'>密码：</text>
-						<input password   @input="passwordListen"/>
+						<input password @input="passwordListen" />
+						<image src="../../static/app/icon-cuowu@2X.png" v-show="tag"
+							style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375); margin-bottom: calc(750rpx * 17/ 375);">
+						</image>
 						<!-- <image  style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-bottom: calc(750rpx * 17/ 375)"></image> -->
 					</view>
 
@@ -46,26 +49,26 @@
 				show: true,
 				reg: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
 				showNameImg: "",
-				user:"",
-				pass:"",
+				user: "",
+				pass: "",
+				tag: false
 
 			}
 		},
 
 		methods: {
 			inputListen(e) {
-                
-				this.show = this.reg.test(e.target.value)
-				this.user=e.target.value;
 
+				this.show = this.reg.test(e.target.value)
+				this.user = e.target.value;
 				if (this.show) {
 					this.showNameImg = '../../static/app/icon-zhengque.png'
 				} else
 					this.showNameImg = '../../static/app/icon-cuowu@2X.png'
-
 			},
-			passwordListen(e){
-				this.pass=e.target.value;
+			passwordListen(e) {
+				this.tag = false;
+				this.pass = e.target.value;
 			},
 			forgetPass() {
 				uni.navigateTo({
@@ -73,10 +76,41 @@
 				})
 			},
 			login() {
+				let name = this.user;
+				let pass = this.pass;
 
-				uni.navigateTo({
-					url: '../login-success/login-success'
+				uni.request({
+					// url: 'http://192.168.1.238:9900/platform/app/login',
+					url: 'http://82.157.34.130:9901/platform/app/login',
+					method: 'POST',
+					data: {
+						password: pass,
+						username: name
+					},
+					header: {
+						'Content-Type': 'application/json'
+					},
+					success: (res) => {
+						console.log(res)
+						if (res.data.code == 0) {
+							getApp().globalData.token = res.data.value.token;
+
+							uni.navigateTo({
+								url: '../login-success/login-success'
+							})
+						} else if (res.data.code == -100) {
+
+							this.tag = true;
+							this.show = false;
+							this.showNameImg = '../../static/app/icon-cuowu@2X.png'
+						}
+
+
+
+					}
 				})
+
+
 			}
 		}
 	}
