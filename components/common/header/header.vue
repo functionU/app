@@ -89,7 +89,7 @@
 						console.log('条码内容：' + res.result);
 
 						uni.request({
-							url: `http://192.168.1.239:9900/app/office/station/info/${res.result}`,
+							url: `http://${getApp().globalData.http}/app/office/station/info/${res.result}`,
 							// url: `http://82.157.34.130:9901/app/office/station/info/${res.result}`,
 							header: {
 								'Authorization': getApp().globalData.token,

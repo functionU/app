@@ -20,7 +20,7 @@
 							故障编号：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入"  @input="numberListen" />
+							<input placeholder="请输入" @input="numberListen" />
 						</view>
 
 					</view>
@@ -71,8 +71,8 @@
 			return {
 				array: ['插座没电', '插做损坏', '插座漏电'],
 				index: 0,
-				description:"",
-				number:''
+				description: "",
+				number: ''
 			}
 		},
 		onLoad() {
@@ -83,40 +83,40 @@
 				uni.navigateBack();
 			},
 			bindPickerChange(e) {
-			
+
 				this.index = e.target.value
 			},
-			descriptionListen(e){
-			
-				this.description=e.target.value;
-				
+			descriptionListen(e) {
+
+				this.description = e.target.value;
+
 			},
-			numberListen(e){
-				this.number=e.target.value;
+			numberListen(e) {
+				this.number = e.target.value;
 			},
-			repairClick(){
-			    let description=this.description;
-				let number=this.number;
-				let reason=this.array[this.index]
-				
-			  console.log()
+			repairClick() {
+				let description = this.description;
+				let number = this.number;
+				let reason = this.array[this.index]
+
+				console.log()
 				uni.request({
-					url: `http://192.168.1.239:9900/app/user/device/repair`,
+					url: `http://${getApp().globalData.http}/app/user/device/repair`,
 					// url: 'http://82.157.34.130:9901/app/user/device/repair',
 					method: 'POST',
 					data: {
-				device_number:number,
-				description,
-				reason,
-				
-				
+						device_number: number,
+						description,
+						reason,
+
+
 					},
 					header: {
 						'Content-Type': 'application/json',
-						'Authorization':getApp().globalData.token
+						'Authorization': getApp().globalData.token
 					},
 					success: (res) => {
-	uni.navigateBack();
+						uni.navigateBack();
 					}
 				})
 			}

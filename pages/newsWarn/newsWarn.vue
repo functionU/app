@@ -53,7 +53,7 @@
 		onLoad() {
 			let that = this;
 			uni.request({
-				url: `http://192.168.1.239:9900/app/message/list?number=1&size=10`,
+				url: `http://${getApp().globalData.http}/app/message/list?number=1&size=10`,
 				// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
 				header: {
 					'Authorization': getApp().globalData.token,

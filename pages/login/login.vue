@@ -80,7 +80,7 @@
 				let pass = this.pass;
 
 				uni.request({
-						url: `http://192.168.1.239:9900/platform/app/login`,
+						url: `http://${getApp().globalData.http}/platform/app/login`,
 					// url: 'http://82.157.34.130:9901/platform/app/login',
 					method: 'POST',
 					data: {

@@ -73,7 +73,7 @@
 		},
 		methods: {
 			backClick() {
-			uni.navigateBack();
+				uni.navigateBack();
 			}
 		},
 		components: {

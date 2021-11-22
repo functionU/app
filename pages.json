@@ -3,9 +3,7 @@
 		// {
 		// 	"path": "pages/charts/chart"
 		// },
-		// {
-		// 	"path": "pages/charts/charts"
-		// },
+	
 	
 		{
 			"path": "pages/login/login"

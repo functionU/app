@@ -233,7 +233,7 @@
 
 					uni.request({
 
-						url: `http://192.168.1.239:9900/app/office/reserve`,
+						url: `http://${getApp().globalData.http}/app/office/reserve`,
 						// url: 'http://82.157.34.130:9901/app/office/reserve',
 						method: 'POST',
 						data: {

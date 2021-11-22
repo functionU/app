@@ -575,7 +575,7 @@
 			}
 
 			uni.request({
-				url: 'http://192.168.1.239:9900/app/office/reserve/station/list',
+				url: `http://${getApp().globalData.http}/app/office/reserve/station/list`,
 				// url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
 				header: {
 
@@ -598,7 +598,7 @@
 				}
 			})
 			uni.request({
-				url: 'http://192.168.1.239:9900/app/office/reserve/station/info',
+				url: `http://${getApp().globalData.http}/app/office/reserve/station/info`,
 				// url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
 				header: {
 					'Authorization': getApp().globalData.token,
@@ -618,7 +618,7 @@
 			})
 
 			uni.request({
-				url: 'http://192.168.1.239:9900/app/office/fixed/station/info',
+				url: `http://${getApp().globalData.http}/app/office/fixed/station/info`,
 				// url: 'http://82.157.34.130:9901/app/office/fixed/station/info',
 				header: {
 					'Authorization': getApp().globalData.token,
@@ -636,7 +636,7 @@
 				}
 			})
 			uni.request({
-				url: 'http://192.168.1.239:9900/app/message/not/read/count',
+				url: `http://${getApp().globalData.http}/app/message/not/read/count`,
 				// url: 'http://82.157.34.130:9901/app/message/not/read/count',
 				header: {
 					'Authorization': getApp().globalData.token,
@@ -673,7 +673,7 @@
 				let that = this;
 				this.powerButton = !this.powerButton;
 				uni.request({
-				url: `http://192.168.1.239:9900/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
+				url: `http://${getApp().globalData.http}/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
 					// url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
 
 					header: {
@@ -704,7 +704,7 @@
 				let that = this;
 				this.powerFixedButton = !this.powerFixedButton;
 				uni.request({
-					url: `http://192.168.1.239:9900/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
+					url: `http://1${getApp().globalData.http}/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
 					// url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
 
 					header: {
@@ -820,7 +820,7 @@
 				let that = this;
 				this.list.splice(index, 1);
 				uni.request({
-						url: `http://192.168.1.239:9900/app/office/delete/reserve/${id}`,
+						url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
 					// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 					method: 'DELETE',
 					header: {
@@ -846,7 +846,7 @@
 						if (res.confirm) {
 							this.resever = !this.resever;
 							uni.request({
-							url: `http://192.168.1.239:9900/app/office/delete/reserve/${id}`,
+							url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
 								// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 								method: 'DELETE',
 								// header: {
@@ -872,7 +872,7 @@
 				uni.scanCode({
 					success: function(res) {
 						uni.request({
-							url: `http://192.168.1.239:9900/app/office/sign/reserve?id=${id}&deviceNumber=${res.result}`,
+							url: `http://${getApp().globalData.http}/app/office/sign/reserve?id=${id}&deviceNumber=${res.result}`,
 							// url: `http://82.157.34.130:9901/app/office/sign/reserve?id=${id}&deviceNumber=${'ass1119'}`,
 							header: {
 								'Authorization': getApp().globalData.token,
@@ -913,7 +913,7 @@
 						this.sign = !this.sign;
 						this.resever = !this.resever;
 						uni.request({
-							url: `http://192.168.1.239:9900/app/office/advance/end/${id}`,
+							url: `http://${getApp().globalData.http}/app/office/advance/end/${id}`,
 							// url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
 							header: {
 								'Authorization': getApp().globalData.token,
@@ -939,7 +939,7 @@
 				let minute = this.timeArray[this.addIndex];
 				let id = this.infoObj.id;
 				uni.request({
-						url: `http://192.168.1.239:9900/app/office/extend/use?id=${id}&minute=${minute}`,
+						url: `http://${getApp().globalData.http}/app/office/extend/use?id=${id}&minute=${minute}`,
 					// url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
 					header: {
 						'Authorization': getApp().globalData.token,
