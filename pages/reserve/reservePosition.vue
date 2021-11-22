@@ -120,7 +120,7 @@
 				floorId: "",
 				name: "",
 				show: true,
-				id:0,
+				id: 0,
 			}
 
 		},
@@ -160,13 +160,13 @@
 				this.usuallyItemIndex = -1;
 				this.itemName = item.station_number
 				this.itemIndex = index;
-				this.id=item.id;
+				this.id = item.id;
 			},
 			usuallyItemClick(item, index) {
 				this.itemIndex = -1;
 				this.itemName = item.station_number
 				this.usuallyItemIndex = index;
-				this.id=item.id;
+				this.id = item.id;
 			},
 			mapClick() {
 				this.show = false;
@@ -184,26 +184,64 @@
 					});
 				} else {
 					let obj = {};
-            
-					obj.startTime = this.startTime + ":00";
-					obj.endTime = this.endTime + ":00";
+
+					// obj.startTime = this.startTime + ":00";
+					// obj.endTime = this.endTime + ":00";
 					obj.date = this.date;
 					obj.place = this.place;
 					obj.floor = parseInt(this.floorId);
-					obj.position=this.itemName;
+					obj.position = this.itemName;
 					obj.id = parseInt(this.id);
-                    
+					let sTime = this.startTime.split(":");
+					let eTime = this.endTime.split(":");
+					let xH = eTime[0] - sTime[0];
+					let xM = eTime[1] - sTime[1];
+					const date = new Date();
+					let hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+					let mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+					let year = date.getFullYear();
+					let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+					let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+					let startTime;
+					if(sTime[0]-hour<0||((sTime[0]-hour==0)&&(sTime[1]-mins<0)))
+					{
+							 startTime = hour + ":" + mins;
+					}
+					else{
+						 startTime = this.startTime;
+					}
+					
+					let timeString = startTime.split(":");
+					let eHour = parseInt(timeString[0]);
+					let eMin = parseInt(timeString[1]);
+					let endTime = 0;
+					eHour = eHour + xH;
+					eMin = eMin + xM;
+					if (eMin >= 60) {
+						eMin = eMin - 60;
+						eHour += 1;
+					}
+					if (eHour >= 24) {
+						eHour = eHour - 24;
+					}
+
+					eHour = eHour < 10 ? '0' + eHour : eHour;
+					eMin = eMin < 10 ? '0' + eMin : eMin;
+					endTime = `${eHour}:${eMin}:00`
+					startTime += ":00"
+
+
 					uni.request({
-						
-						// url: 'http://192.168.1.238:9900/app/office/reserve',
-						url: 'http://82.157.34.130:9901/app/office/reserve',
+
+						url: `http://192.168.1.239:9900/app/office/reserve`,
+						// url: 'http://82.157.34.130:9901/app/office/reserve',
 						method: 'POST',
 						data: {
-							'start_time': obj.startTime,
-							'end_time': obj.endTime,
-							'floor_id':obj.floor ,
+							'start_time': startTime,
+							'end_time': endTime,
+							'floor_id': obj.floor,
 							'reserve_date': obj.date,
-							'station_id':obj.id,
+							'station_id': obj.id,
 
 						},
 						header: {
@@ -211,31 +249,28 @@
 							'Authorization': getApp().globalData.token,
 						},
 						success: (res) => {
-							     console.log(res);
-								 if(res.data.code==-300)
-								 {
-									 uni.showModal({
-									 	title: '提示',
-									 	content: '您在该时段区间内已预约了其他工位',
-									 	showCancel: false,
-									 });
-								 }
-								 else if(res.data.code==0)
-								 {
-									 
-									 uni.navigateTo({
-									 	// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
-									 	url: `../login-success/login-success?index=1&buttonIndex=1`
-									 });
-									 
-								 }
+							console.log(res);
+							if (res.data.code == -300) {
+								uni.showModal({
+									title: '提示',
+									content: '您在该时段区间内已预约了其他工位',
+									showCancel: false,
+								});
+							} else if (res.data.code == 0) {
 
-						
+								uni.navigateTo({
+									// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
+									url: `../login-success/login-success?index=1&buttonIndex=1`
+								});
+
+							}
+
+
 
 
 						}
 					})
-		
+
 				}
 
 			}
@@ -407,12 +442,12 @@
 		overflow: scroll;
 		width: calc(750rpx * 295/ 375);
 		height: calc(100vh * 312/812);
-
 		margin-left: calc(750rpx * 26/ 375);
 		border-top: dashed calc(100vh * 1/812) gray;
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
+		align-content: flex-start;
+
 	}
 
 	.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item {
@@ -425,6 +460,7 @@
 		border: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;
 		margin-top: calc(100vh * 24/812);
 		margin-left: calc(750rpx * 8/ 375);
+		flex-shrink: 0;
 	}
 
 	.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item.click {

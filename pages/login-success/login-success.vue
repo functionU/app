@@ -3,7 +3,7 @@
 		<view class="bgc">
 			<view class="content">
 				<view class="content-top">
-					<tarbarHeader class="head" @newsClick="newsClickListen">
+					<tarbarHeader class="head" @newsClick="newsClickListen" :showObj="showMessage" v-if="headerShow">
 						<text slot="center"></text>
 					</tarbarHeader>
 					<tarbar :clickIndex="index" @tarbarClick='tarbarListen'></tarbar>
@@ -144,29 +144,29 @@
 					<view class="content-main" v-show="index==1">
 						<doubleButton :number='getButtonIndex' @doubleButtonClick='doubleButtonListen'></doubleButton>
 						<view class="show-first" v-show="buttonIndex==0">
-							<view class="reserveText">
-								{{station}}
+							<view class="reserveText" v-show="fixedTag">
+								{{fixedObj.device_number}}
 							</view>
-							<view class="reserveFirst">
+							<view class="reserveFirst" v-show="fixedTag">
 								<view class="reserveFirst-left" :style="{backgroundImage:'url(' + item.src + ')'}">
 
 								</view>
 								<view class="reserveFirst-center">
-									<text>{{item.english}}</text>
-									<text>{{item.chinese}}</text>
+									<text>{{fixedItem.english}}</text>
+									<text>{{fixedItem.chinese}}</text>
 								</view>
 
-								<view class="reserveFirst-right" @click="powerButtonClick"
-									:class="{'reserveFirst-right-click':powerButton}">
+								<view class="reserveFirst-right" @click="powerFixedButtonClick(fixedObj.device_id)"
+									:class="{'reserveFirst-right-click':powerFixedButton}">
 									<view
-										:class="{'reserveFirst-right-radius':true,'reserveFirst-right-radius-click':powerButton}">
+										:class="{'reserveFirst-right-radius':true,'reserveFirst-right-radius-click':powerFixedButton}">
 									</view>
-									<text :class="{'close':!powerButton}">关</text>
+									<text :class="{'close':!powerFixedButton}">关</text>
 									<text style="visibility: hidden;">1</text>
-									<text :class="{'open':powerButton}">开</text>
+									<text :class="{'open':powerFixedButton}">开</text>
 								</view>
 							</view>
-							<view class="reserveSecond">
+							<view class="reserveSecond" v-show="fixedTag">
 								<tip :item="{name:'今日用电量（kwh）'}">
 									<view slot="right" class="right" @click="sumUseClick">
 										<text>用电统计</text>
@@ -182,6 +182,10 @@
 
 								</view>
 							</view>
+							<view v-show="!fixedTag"
+								style="text-align: center;margin-top: 20%;color: white;font-weight: bold;">
+								您还没有固定工位呢！
+							</view>
 						</view>
 						<view class="show-second" v-show="buttonIndex==1">
 							<view v-show="!resever">
@@ -195,25 +199,24 @@
 										<image src="../../static/app/yuyue@2X.png"></image>
 									</view>
 								</view>
-								<view class="reserveSecond" style="height:auto">
+								<view class="reserveSecond" style="height:calc(100vh * 450/812);">
 
 									<tip :item="{name:'我的预约'}">
 										<text slot='right'
 											style="font-size:calc(750rpx * 24/ 375);font-weight: bold;color: black;"></text>
 									</tip>
-									<view class="reserveSecond-img" style="height:auto;">
+									<view class="reserveSecond-img"
+										style="height:calc(100vh * 380/812);overflow-y:auto;">
 
 										<view style="display: flex;flex-direction:column;align-items: center;"
-										 v-show="!infoTag"
-											>
+											v-show="!infoTag">
 											<image src="../../static/app/nodata@2X.png"
 												style="width: calc(750rpx * 120/ 375);height: calc(100vh * 120/812); border:calc(750rpx * 1/ 375)  dashed rgba(230, 231, 232, 1);">
 												<text style="color: rgba(10, 32, 57, 0.5);">还没有预订工位～</text>
-												<text style="color: rgba(26, 191, 194, 1);"
-													@click="reserveClick">点击预定</text>
+
 										</view>
-										<view  v-show="infoTag"
-											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;">
+										<view v-for="(listObj,index) in list"
+											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;border-top: 1px dashed #808080;padding-top: calc(100vh * 15/812);padding-bottom:calc(100vh * 15/812);">
 											<view>
 												<image src="../../static/app/info@2X.png"
 													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
@@ -224,14 +227,14 @@
 												<image src="../../static/app/info@2X.png"
 													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 												</image>
-												<text>{{listObj.reserve_date}}{{listObj.start_time}}-{{listObj.end_time}}</text>
+												<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
 											</view>
-											<view @click="stopInfo(listObj.id)"
+											<view @click="stopInfo(listObj.id,index)"
 												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
 												取消预约
 											</view>
 										</view>
-
+										<text style="color: rgba(26, 191, 194, 1);" @click="reserveClick">点击预定</text>
 									</view>
 
 								</view>
@@ -250,7 +253,7 @@
 								<view class="beforeSign" v-show="!sign">
 									<view
 										style="	width: calc(750rpx * 343/ 375);height: calc(100vh * 148/812);display: flex; margin-top: calc(100vh * 20/812);">
-										<view @click="signIn(infoObj.id,infoObj.device_number)"
+										<view @click="signIn(infoObj.id)"
 											style="	width: calc(750rpx * 164/ 375);height: calc(100vh * 148/812); margin-left:calc(750rpx * 25/ 375);border-radius:calc(750rpx * 30/ 375); display: flex;flex-direction: column;	justify-content: space-around;align-items: center;background-color: rgba(253, 254, 255, 1);">
 											<image src="../../static/app/btn-qiandao@2X.png"
 												style="width: calc(750rpx * 76/ 375);height: calc(100vh * 76/812);">
@@ -271,33 +274,37 @@
 											<text slot='right'
 												style="font-size:calc(750rpx * 24/ 375) ;color: black;"></text>
 										</tip>
-										<view class="reserveSecond-box">
-<!-- 										<view  v-show="infoTag"
-											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;margin-left: calc(750rpx * 24/ 375);margin-top: calc(100vh * 14/ 812);">
-											<view>
-												<image src="../../static/app/info@2X.png"
-													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
-												</image>
-												<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+										<view class="reserveSecond-box"
+											style="overflow-y: scroll;display: flex;flex-direction: column;position: relative;">
+
+											<view v-show="infoTag" v-for="(listObj,index) in list"
+												style="margin-left: calc(750rpx *24/ 375);margin-right: calc(750rpx * 24/ 375);display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;border-top: 1px dashed #808080;padding-top: calc(100vh * 15/812);padding-bottom:calc(100vh * 15/812);">
+												<view>
+													<image src="../../static/app/info@2X.png"
+														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+													</image>
+													<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+												</view>
+												<view style="margin-top: calc(750rpx * 12/ 375);">
+													<image src="../../static/app/info@2X.png"
+														style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
+													</image>
+													<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
+												</view>
+												<view @click="stopInfo(listObj.id,index)"
+													style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+													取消预约
+												</view>
 											</view>
-											<view style="margin-top: calc(750rpx * 12/ 375);">
-												<image src="../../static/app/info@2X.png"
-													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
-												</image>
-												<text>{{listObj.reserve_date}}{{listObj.start_time}}-{{listObj.end_time}}</text>
-											</view>
-											<view @click="stopInfo(listObj.id)"
-												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
-												取消预约
-											</view>
-										</view> -->
+											<text style="color: rgba(26, 191, 194, 1);margin-left: 40%;"
+												@click="reserveClick">点击预定</text>
 										</view>
 
 
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
-									<view class="reserveFirst" style="background-color: white;" >
+									<view class="reserveFirst" style="background-color: white;">
 										<view class="reserveFirst-left"
 											:style="{backgroundImage:'url(' + item.src + ')'}">
 
@@ -307,7 +314,7 @@
 											<text>{{item.chinese}}</text>
 										</view>
 
-										<view class="reserveFirst-right" @click="powerButtonClick"
+										<view class="reserveFirst-right" @click="powerButtonClick(infoObj.device_id)"
 											:class="{'reserveFirst-right-click':powerButton}">
 											<view
 												:class="{'reserveFirst-right-radius':true,'reserveFirst-right-radius-click':powerButton}">
@@ -317,7 +324,7 @@
 											<text :class="{'open':powerButton}">开</text>
 										</view>
 									</view>
-									<view 
+									<view
 										style="display: flex; margin-left: calc(-750rpx * 8/ 375);margin-top:calc(100vh * 20/812) ;">
 										<view @click="addUseTime"
 											style="	width: calc(750rpx * 164/ 375);height: calc(100vh * 148/812); margin-left:calc(750rpx * 25/ 375);border-radius:calc(750rpx * 30/ 375); display: flex;flex-direction: column;	justify-content: space-around;align-items: center;background-color: rgba(253, 254, 255, 1);">
@@ -357,30 +364,34 @@
 									</view>
 									<view class="reserveSecond" style="height: calc(100vh * 166/812);">
 										<tip :item="{name:'我的预约'}">
-											<text slot='right'
-												style="font-size:calc(750rpx * 24/ 375) ;color: black;">{{listObj.position}}</text>
+											<text slot='right' style="font-size:calc(750rpx * 24/ 375) ;color: black;">
+												<!-- {{listObj.position}} -->
+											</text>
 										</tip>
-										<view class="reserveSecond-box">
-<!-- 										<view  v-show="infoTag"
-											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;margin-left: calc(750rpx * 24/ 375);margin-top: calc(100vh * 14/ 812);">
-											<view>
-												<image src="../../static/app/info@2X.png"
-													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
-												</image>
-												<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+										<view class="reserveSecond-box"
+											style="height:calc(100vh * 100/812) ;overflow: scroll;position: relative;">
+											<view v-show="infoTag" v-for="(listObj,index) in list"
+												style="margin-left: calc(750rpx *24/ 375);margin-right: calc(750rpx * 24/ 375);display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;border-top: 1px dashed #808080;padding-top: calc(100vh * 15/812);padding-bottom:calc(100vh * 15/812);">
+												<view>
+													<image src="../../static/app/info@2X.png"
+														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+													</image>
+													<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+												</view>
+												<view style="margin-top: calc(750rpx * 12/ 375);">
+													<image src="../../static/app/info@2X.png"
+														style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
+													</image>
+													<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
+												</view>
+												<view @click="stopInfo(listObj.id,index)"
+													style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+													取消预约
+												</view>
 											</view>
-											<view style="margin-top: calc(750rpx * 12/ 375);">
-												<image src="../../static/app/info@2X.png"
-													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
-												</image>
-												<text>{{listObj.reserve_date}}{{listObj.start_time}}-{{listObj.end_time}}</text>
-											</view>
-											<view @click="stopInfo(listObj.id)"
-												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
-												取消预约
-											</view>
-										</view> -->
-									
+
+											<text style="color: rgba(26, 191, 194, 1);margin-left: 40%;"
+												@click="reserveClick">点击预定</text>
 										</view>
 
 
@@ -444,17 +455,13 @@
 			return {
 				index: 0,
 				buttonIndex: 0,
-				powerButton: false,
+
 				warnShow: false,
 				secondShowButtonIndex: 'week',
 				secondShowSafeButtonIndex: 'week',
-				station: 'YJ051',
+
 				resever: false,
-				item: {
-					english: 'On',
-					chinese: '电源开启',
-					src: '../../static/app/chazuo@2X.png'
-				},
+
 				environmentes: [{
 					name: '温度',
 					src: '../../static/app/icon-zhengque.png',
@@ -529,12 +536,32 @@
 				addIndex: [0],
 				e: [0],
 				infoObj: {},
-				listObj: {},
+				list: [],
 				infoTag: false,
-				signTag:false,
+				signTag: false,
+				item: {
+					english: 'On',
+					chinese: '电源开启',
+					src: '../../static/app/chazuo@2X.png'
+				},
+				fixedItem: {
+					english: 'On',
+					chinese: '电源开启',
+					src: '../../static/app/chazuo@2X.png'
+				},
+				listArr: [],
+				fixedTag: true,
+				powerButton: false,
+				powerFixedButton: false,
+				fixedObj: {},
 
+				showMessage: {},
+				headerShow: false,
 
 			}
+		},
+		onInit() {
+
 		},
 		onLoad(option) {
 			let that = this;
@@ -546,44 +573,85 @@
 				this.endTime = option.endTime;
 				this.position = option.position;
 			}
+
 			uni.request({
-				// url: 'http://192.168.1.238:9900/app/office/reserve/station/info',
-				url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
+				url: 'http://192.168.1.239:9900/app/office/reserve/station/list',
+				// url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
 				header: {
-			
+
 					'Authorization': getApp().globalData.token,
 				},
 				success: (res) => {
-					console.log(res)
+					console.log(res);
 					if (Array.isArray(res.data.value) && res.data.value.length != 0) {
-						that.listObj = res.data.value[0];
+
+						that.list = res.data.value;
 						that.infoTag = true;
+						let arr = new Array([res.data.value.length]);
+						arr.fill(true);
+						that.listArr = arr;
+						console.log(that.listArr)
 						// that.resever = true;
-						console.log(that.listObj);
+
 					}
-			
+
 				}
 			})
 			uni.request({
-				// url: 'http://192.168.1.238:9900/app/office/reserve/station/info',
-				url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
+				url: 'http://192.168.1.239:9900/app/office/reserve/station/info',
+				// url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
 				header: {
 					'Authorization': getApp().globalData.token,
 				},
 				success: (res) => {
-					console.log(res)
+					console.log(res);
 					if (res.data.value) {
 						that.resever = true;
 						that.sign = false;
 						that.infoObj = res.data.value;
-						that.sign=res.data.value.sign_status;
-						console.log(that.infoObj)
+						that.sign = res.data.value.sign_status;
+						that.powerButton = !res.data.value.power_status;
+
 					}
 
 				}
 			})
 
+			uni.request({
+				url: 'http://192.168.1.239:9900/app/office/fixed/station/info',
+				// url: 'http://82.157.34.130:9901/app/office/fixed/station/info',
+				header: {
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+					console.log(res);
+					if (!res.data.value) {
 
+						that.fixedTag = false;
+					} else {
+
+						that.fixedObj = res.data.value;
+						that.powerFixedButton = !res.data.value.power_status;
+					}
+				}
+			})
+			uni.request({
+				url: 'http://192.168.1.239:9900/app/message/not/read/count',
+				// url: 'http://82.157.34.130:9901/app/message/not/read/count',
+				header: {
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+					if (res.data.value > 0) {
+
+						that.showMessage.showMessage = res.data.value;
+						that.showMessage.show = true;
+						console.log(that.showMessage)
+
+					}
+					that.headerShow = true;
+				}
+			})
 
 
 
@@ -601,16 +669,61 @@
 				this.buttonIndex = index;
 
 			},
-			powerButtonClick() {
+			powerButtonClick(id) {
+				let that = this;
 				this.powerButton = !this.powerButton;
+				uni.request({
+				url: `http://192.168.1.239:9900/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
+					// url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
+
+					header: {
+						'Authorization': getApp().globalData.token,
+
+					},
+					success: (res) => {
+						console.log(res);
+
+					}
+				})
 				if (!this.powerButton) {
 					this.item = {
 						english: 'On',
 						chinese: '电源开启',
-						src: '../../static/app/chazuo@2X.png'
+						src: '/static/static/app/chazuo@2X.png'
 					}
 				} else if (this.powerButton) {
 					this.item = {
+						english: 'Off',
+						chinese: '电源关闭',
+						src: '/static/static/app/chazuo@2X.png'
+					}
+				}
+
+			},
+			powerFixedButtonClick(id) {
+				let that = this;
+				this.powerFixedButton = !this.powerFixedButton;
+				uni.request({
+					url: `http://192.168.1.239:9900/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
+					// url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
+
+					header: {
+						'Authorization': getApp().globalData.token,
+
+					},
+					success: (res) => {
+						console.log(res);
+
+					}
+				})
+				if (!this.powerFixedButton) {
+					this.fixedItem = {
+						english: 'On',
+						chinese: '电源开启',
+						src: '../../static/app/chazuo@2X.png'
+					}
+				} else if (this.powerFixedButton) {
+					this.fixedItem = {
 						english: 'Off',
 						chinese: '电源关闭',
 						src: '../../static/app/chazuo@2X.png'
@@ -703,26 +816,29 @@
 				this.warnShow = true;
 
 			},
-			stopInfo(id) {
+			stopInfo(id, index) {
 				let that = this;
+				this.list.splice(index, 1);
 				uni.request({
-					// url: `http://192.168.1.238:9900/app/office/advance/end/${id}`,
-					url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
+						url: `http://192.168.1.239:9900/app/office/delete/reserve/${id}`,
+					// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 					method: 'DELETE',
 					header: {
 						'Authorization': getApp().globalData.token,
 					},
 					success: (res) => {
-						
-						console.log(res);
-						that.infoTag = false;
-						that.listObj = {};
+
+
 					}
-				})
+				});
+				if (this.list.length == 0) {
+					this.infoTag = false;
+				}
+
 			},
 			reserveStop(id) {
 				let that = this;
-				console.log(id)
+
 				uni.showModal({
 					title: '提示',
 					content: '您确定要取消预约吗？',
@@ -730,15 +846,15 @@
 						if (res.confirm) {
 							this.resever = !this.resever;
 							uni.request({
-								// url: 'http://192.168.1.238:9900//app/office/advance/end/{id}',
-								url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
+							url: `http://192.168.1.239:9900/app/office/delete/reserve/${id}`,
+								// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 								method: 'DELETE',
 								// header: {
 
 								// 	'Authorization': getApp().globalData.token,
 								// },
 								success: (res) => {
-									console.log(res)
+
 									that.infoObj = {};
 
 
@@ -752,27 +868,36 @@
 
 
 			},
-			signIn(id, devNumber) {
-				// uni.scanCode({
-				// 	success: function(res) {
-				// 		console.log('条码类型：' + res.scanType);
-				// 		console.log('条码内容：' + res.result);
-				// 	}
-				// });
-				uni.request({
-					// url: `http://192.168.1.238:9900/app/office/delete/reserve/${id}`,
-					url: `http://82.157.34.130:9901/app/office/sign/reserve?id=${id}&deviceNumber=${devNumber}`,
-					header: {
-						'Authorization': getApp().globalData.token,
-					},
-					success: (res) => {
-					
-						if (res.data.code == 0) {
-							this.sign = true;
-						}
+			signIn(id) {
+				uni.scanCode({
+					success: function(res) {
+						uni.request({
+							url: `http://192.168.1.239:9900/app/office/sign/reserve?id=${id}&deviceNumber=${res.result}`,
+							// url: `http://82.157.34.130:9901/app/office/sign/reserve?id=${id}&deviceNumber=${'ass1119'}`,
+							header: {
+								'Authorization': getApp().globalData.token,
+							},
+							success: (res) => {
+								console.log(res.data.code);
+								if (res.data.code == 0) {
+									this.sign = true;
+								}
 
+							}
+						})
+						uni.showLoading({
+							title: '加载中'
+						})
+						setTimeout(function() {
+							uni.hideLoading();
+							uni.navigateTo({
+								// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
+								url: `../login-success/login-success?index=1&buttonIndex=1`
+							});
+						}, 2000);
 					}
-				})
+				});
+
 
 			},
 			addUseTime() {
@@ -788,8 +913,8 @@
 						this.sign = !this.sign;
 						this.resever = !this.resever;
 						uni.request({
-							// url: `http://192.168.1.238:9900/app/office/delete/reserve/${id}`,
-							url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
+							url: `http://192.168.1.239:9900/app/office/advance/end/${id}`,
+							// url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
 							header: {
 								'Authorization': getApp().globalData.token,
 							},
@@ -814,8 +939,8 @@
 				let minute = this.timeArray[this.addIndex];
 				let id = this.infoObj.id;
 				uni.request({
-					// url: `http://192.168.1.238:9900/app/office/extend/use?id=1&minute=${minute}`,
-					url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
+						url: `http://192.168.1.239:9900/app/office/extend/use?id=${id}&minute=${minute}`,
+					// url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
 					header: {
 						'Authorization': getApp().globalData.token,
 					},
@@ -1358,7 +1483,7 @@
 
 	.content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius {
 		position: absolute;
-		top: 10%;
+		top: 8%;
 		left: 5%;
 		width: calc(750rpx * 20/ 375);
 		height: calc(100vh * 20/812);
@@ -1368,7 +1493,7 @@
 
 	.content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius-click {
 		position: absolute;
-		top: 10%;
+		top: 8%;
 		left: 55%;
 		bottom: 0;
 		background-color: #F8F8F8;
@@ -1426,9 +1551,9 @@
 		width: calc(750rpx * 295/ 375);
 		height: calc(100vh * 160/812);
 
-		margin: calc(100vh * 15/812) calc(750rpx * 26/ 375) calc(750rpx * 22/ 375);
+		margin: 0 calc(750rpx * 26/ 375) calc(750rpx * 22/ 375);
 		padding-top: calc(100vh * 15/812);
-		border-top: 1px dashed #808080;
+
 		text-align: center;
 
 	}

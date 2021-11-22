@@ -32,82 +32,39 @@
 
 		</view>
 
+
 	</view>
 </template>
 
 <script>
 	export default {
-		data(){
+		data() {
 			return {
-				warnArray:[{
-					year:'2021',
-					month:'10',
-					day:'11',
-					hours:'14',
-					mins:'20',
-					plcae:'金光线广场',
-					floor:15,
-					position:"YJ510"
-				},
-				{
-					year:'2021',
-					month:'10',
-					day:'11',
-					hours:'14',
-					mins:'20',
-					plcae:'金光线广场',
-					floor:15,
-					position:"YJ510"
-				},
-				{
-					year:'2021',
-					month:'10',
-					day:'11',
-					hours:'14',
-					mins:'20',
-					plcae:'金光线广场',
-					floor:15,
-					position:"YJ510"
-				},
-				{
-					year:'2021',
-					month:'10',
-					day:'11',
-					hours:'14',
-					mins:'20',
-					plcae:'金光线广场',
-					floor:15,
-					position:"YJ510"
-				},
-				{
-					year:'2021',
-					month:'10',
-					day:'11',
-					hours:'14',
-					mins:'20',
-					plcae:'金光线广场',
-					floor:15,
-					position:"YJ510"
-				},
-				{
-					year:'2021',
-					month:'10',
-					day:'11',
-					hours:'14',
-					mins:'20',
-					plcae:'金光线广场',
-					floor:15,
-					position:"YJ510"
-				}]
+				warnArray: []
 			}
 		},
-		methods:{
-			back(){
+		methods: {
+			back() {
 				uni.navigateBack({
-					
+
 				})
 			}
-		}
+		},
+		onLoad() {
+			let that = this;
+			uni.request({
+				url: `http://192.168.1.239:9900/app/message/list?number=1&size=10`,
+				// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
+				header: {
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+
+					that.warnArray = res.data.value
+				}
+			})
+
+		},
 	}
 </script>
 
@@ -120,19 +77,17 @@
 	}
 
 	.bgc .tarbar {
-		height: calc(100vh * 33/812);
+		=height: calc(100vh * 33/812);
 		line-height: calc(100vh * 44/812);
 		margin-top: calc(100vh * 44/812);
 		padding-bottom: calc(100vh * 11/812);
 		display: flex;
 		align-items: center;
 
-	
+
 	}
 
-	.bgc .tarbar image {
-		
-	}
+	.bgc .tarbar image {}
 
 	.bgc .tarbar text {
 		margin-left: 30%;
@@ -144,7 +99,7 @@
 		overflow-y: scroll;
 		width: calc(750rpx * 375/ 375);
 		height: calc(100vh * 724/812);
-	
+
 		background-color: rgba(241, 242, 246, 1);
 	}
 
@@ -154,7 +109,7 @@
 		margin-left: calc(750rpx * 16/ 375);
 		width: calc(750rpx * 343/ 375);
 		height: calc(100vh * 245/812);
-	
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -179,50 +134,53 @@
 
 	.bgc .content .content-item .bottom-box .bottom-box-top {
 		display: flex;
-		
+
 	}
 
 	.bgc .content .content-item .bottom-box .bottom-box-top .left {
 		margin-top: calc(100vh * 27/812);
-		
+
 		margin-left: calc(750rpx * 32/ 375);
-	
+
 	}
-	
+
 
 	.bgc .content .content-item .bottom-box .bottom-box-top .right {
 		margin-left: calc(750rpx * 16/ 375);
 		display: flex;
 		flex-direction: column;
-		
-		
-		
+
+
+
 	}
-.bgc .content .content-item .bottom-box .bottom-box-top .right text:nth-child(1)
-{margin-top: calc(100vh * 24/812);
-	font-size: calc(750rpx * 18/ 375);
-	font-weight: bold;
-}
-.bgc .content .content-item .bottom-box .bottom-box-top .right text:nth-child(2)
-{margin-top: calc(100vh * 12/812);
-	font-size: calc(750rpx * 14/ 375);
-	margin-bottom: calc(100vh * 12/812);
-	
-	
-}
+
+	.bgc .content .content-item .bottom-box .bottom-box-top .right text:nth-child(1) {
+		margin-top: calc(100vh * 24/812);
+		font-size: calc(750rpx * 18/ 375);
+		font-weight: bold;
+	}
+
+	.bgc .content .content-item .bottom-box .bottom-box-top .right text:nth-child(2) {
+		margin-top: calc(100vh * 12/812);
+		font-size: calc(750rpx * 14/ 375);
+		margin-bottom: calc(100vh * 12/812);
+
+
+	}
 
 	.bgc .content .content-item .bottom-box .bottom-box-bottom {
-		width:calc(750rpx * 295/ 375) ;
-		
+		width: calc(750rpx * 295/ 375);
+
 		display: flex;
 		flex-direction: column;
 		margin-left: calc(750rpx * 27/ 375);
-		border-top: dashed calc(750rpx * 1/ 375) rgba(230, 231, 232, 1) ;
-		padding-top:calc(100vh *16/812) ;
+		border-top: dashed calc(750rpx * 1/ 375) rgba(230, 231, 232, 1);
+		padding-top: calc(100vh *16/812);
 		font-size: calc(750rpx * 12/ 375);
 		color: rgba(10, 32, 57, 0.5);
 	}
-	.bgc .content .content-item .bottom-box .bottom-box-bottom text:first-child{
+
+	.bgc .content .content-item .bottom-box .bottom-box-bottom text:first-child {
 		margin-bottom: calc(100vh * 12/812);
 	}
 </style>

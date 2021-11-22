@@ -1,7 +1,7 @@
 <template>
 	<view class="tip">
          <view class="left">
-         	<view class="tip-item-first">
+         	<view class="tip-item-first" >
 				<image src="../../../static/app/icon-title@2X.png" style="width: calc(750rpx * 14/ 375);height: calc(750rpx * 14/ 375);"></image>
          		{{item.name}}
          	</view>

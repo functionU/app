@@ -101,8 +101,8 @@
 				
 			  console.log()
 				uni.request({
-					// url: 'http://192.168.1.238:9900/app/user/device/repair',
-					url: 'http://82.157.34.130:9901/app/user/device/repair',
+					url: `http://192.168.1.239:9900/app/user/device/repair`,
+					// url: 'http://82.157.34.130:9901/app/user/device/repair',
 					method: 'POST',
 					data: {
 				device_number:number,

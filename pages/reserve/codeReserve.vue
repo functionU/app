@@ -17,7 +17,8 @@
 					</view>
 					<view>
 						<image src="../../static/app/yuyue@2X.png"
-							style="width:calc(750rpx * 60/375);height:calc(750rpx * 60/375); transform: translateY(5%);" ></image>
+							style="width:calc(750rpx * 60/375);height:calc(750rpx * 60/375); transform: translateY(5%);">
+						</image>
 					</view>
 
 				</view>
@@ -83,13 +84,13 @@
 
 		data() {
 			const date = new Date();
-			let hour = date.getHours() < 10 ? '0'+ date.getHours():date.getHours();
-			let mins = date.getMinutes() < 10 ? '0'+ date.getMinutes():date.getMinutes();
-			let year=date.getFullYear();
-			let month=(date.getMonth()+1) <10 ? '0'+(date.getMonth()+1) :(date.getMonth()+1);
-			let day=date.getDate()< 10 ? '0'+date.getDate():date.getDate();
-		
-		
+			let hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+			let mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+			let year = date.getFullYear();
+			let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+			let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+			let that = this;
+
 
 			return {
 				startTime: hour + ":" + mins,
@@ -97,10 +98,10 @@
 				itemIndex: -1,
 				show: true,
 				position: 'YJ630',
-				tag:false,
-				now:year+"-"+month+"-"+day,
-				id:-1,
-				
+				tag: false,
+				now: year + "-" + month + "-" + day,
+				id: -1,
+
 			}
 
 		},
@@ -114,12 +115,11 @@
 
 		},
 		onLoad(option) {
-       if(option)
-	   {
-		   this.position=option.station_number;
-		   this.id=option.id;
-		   
-	   }
+			if (option) {
+				this.position = option.station_number;
+				this.id = option.id;
+
+			}
 
 
 		},
@@ -134,57 +134,75 @@
 			itemClick(item, index) {
 				this.itemIndex = index;
 				let timeString = this.startTime.split(":");
-				let hour=parseInt(timeString[0]);
-				let min=parseInt(timeString[1]);
-                if(item<30)
-				{
-					hour+=item;
-					if(hour>=24)
-					{
-						hour-=24;
-						this.tag=true;
-						
- 					}
-				}
-				else
-				{
-					min=min+30;
-					if(min>=60)
-					{
-						hour+=1;
-						min=min-60;
-						
+				let hour = parseInt(timeString[0]);
+				let min = parseInt(timeString[1]);
+				if (item < 30) {
+					hour += item;
+					if (hour >= 24) {
+						hour -= 24;
+						this.tag = true;
+
+					}
+				} else {
+					min = min + 30;
+					if (min >= 60) {
+						hour += 1;
+						min = min - 60;
+
 					}
 				}
-				hour=hour<10 ? '0'+hour:hour;
-				min=min< 10 ? '0'+min:min;
-				this.endTime=`${hour}:${min}`
+				hour = hour < 10 ? '0' + hour : hour;
+				min = min < 10 ? '0' + min : min;
+				this.endTime = `${hour}:${min}`
 
 			},
-			reseverFinshed(){
-				let start= this.startTime.split(":");
-				let sHour=parseInt(start[0]);
-				let sMin=parseInt(start[1]);
-				let end=this.endTime.split(":");
-				let eHour=parseInt(end[0]);
-				let eMin=parseInt(end[1]);
-				let startTime=start[0]+":"+start[1]+":00";
-				let endTime=end[0]+":"+end[1]+":00";
-				let now=this.now;
-				let that=this;
+			reseverFinshed() {
 
-				if(((sHour>eHour)||((sHour==eHour)&&(sMin<=eMin)))&&!this.tag)
-				{
+
+				if (this.itemIndex < 0) {
 					uni.showModal({
 						title: '提示',
-						content: '结束时间需大于开始时间',
+						content: '请选择使用时长',
 						showCancel: false,
 					});
-				}
-				else{
+				} else {
+                    let that=this;
+					let date = new Date();
+					let hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+					let mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+					let year = date.getFullYear();
+					let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+			     	let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+					let startTime = `${hour}:${mins}:00`;
+					let now = year + "-" + month + "-" + day;
+					let timeString = startTime.split(":");
+					let eHour = parseInt(timeString[0]);
+					let eMin = parseInt(timeString[1]);
+					let item=this.positionArray[this.itemIndex]
+					if (item < 30) {
+						eHour += item;
+						if (eHour >= 24) {
+							eHour -= 24;
+					
+					
+						}
+					} else {
+						eMin = eMin + 30;
+						if (eMin >= 60) {
+							eHour += 1;
+							eMin = eMin- 60;
+					
+						}
+					}
+					eHour = eHour < 10 ? '0' + eHour : eHour;
+					eMin =eMin < 10 ? '0' + eMin : eMin;
+					let endTime = `${eHour}:${eMin}:00`
+					
+					console.log(startTime);
+					console.log(endTime);
 					uni.request({
-							// url: 'http://192.168.1.238:9900/app/office/now/use',
-						url: 'http://82.157.34.130:9901/app/office/now/use',
+							url: `http://192.168.1.239:9900/app/office/now/use`,
+						// url: 'http://82.157.34.130:9901/app/office/now/use',
 						method:'POST',
 						header:{
 							'Content-Type': 'application/json',
@@ -199,10 +217,15 @@
 						},
 						success: (res) => {
 							console.log(res)
-							uni.navigateTo({
-								url: `../login-success/login-success?index=1&buttonIndex=1`
-							})
-							
+                                     setTimeout(()=>{
+										 uni.navigateTo({
+										 	url: `../login-success/login-success?index=1&buttonIndex=1`
+										 })
+									 },500)
+					
+
+
+
 						}
 					})
 				}

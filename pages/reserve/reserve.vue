@@ -303,8 +303,8 @@
 						that.placeArray = newArray;
 						let id = this.placeArray[this.placeIndex].id;
 						uni.request({
-							// url: `http://192.168.1.238:9900/app/office/building/floor/list/${id}`,
-							url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
+							url: `http://192.168.1.239:9900/app/office/building/floor/list/${id}`,
+							// url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
 						
 							header: {
 								'Content-Type': 'application/json',
@@ -363,8 +363,8 @@
 				let id = this.placeArray[this.placeIndex].id;
 				let that = this;
 				uni.request({
-					// url: `http://192.168.1.238:9900/app/office/building/floor/list/${id}`,
-					url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
+					url: `http://192.168.1.239:9900/app/office/building/floor/list/${id}`,
+					// url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
 
 					header: {
 						'Content-Type': 'application/json',
@@ -405,8 +405,8 @@
 					let endTime = `${this.endHour}:${this.endMin}`
 					let that = this;
 					uni.request({
-						// url: `http://192.168.1.238:9900/app/office/empty/station/list`,
-						url: `http://82.157.34.130:9901/app/office/empty/station/list`,
+							url: `http://192.168.1.239:9900/app/office/empty/station/list`,
+						// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
 						method: 'POST',
 						data: {
 							'end_time': endTime + ":00",
@@ -422,8 +422,8 @@
 
 							getApp().globalData.positionArray = res.data.value;
 							uni.request({
-								// url: `http://192.168.1.238:9900/app/office/often/empty/station/list`,
-								url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
+								url: `http://192.168.1.239:9900/app/office/often/empty/station/list`,
+								// url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
 								method: 'POST',
 								data: {
 									'end_time': endTime + ":00",

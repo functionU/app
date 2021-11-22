@@ -80,8 +80,8 @@
 				let pass = this.pass;
 
 				uni.request({
-					// url: 'http://192.168.1.238:9900/platform/app/login',
-					url: 'http://82.157.34.130:9901/platform/app/login',
+						url: `http://192.168.1.239:9900/platform/app/login`,
+					// url: 'http://82.157.34.130:9901/platform/app/login',
 					method: 'POST',
 					data: {
 						password: pass,
@@ -91,7 +91,7 @@
 						'Content-Type': 'application/json'
 					},
 					success: (res) => {
-						console.log(res)
+						
 						if (res.data.code == 0) {
 							getApp().globalData.token = res.data.value.token;
 

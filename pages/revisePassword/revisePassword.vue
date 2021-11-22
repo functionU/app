@@ -98,8 +98,8 @@
 					let new_password=this.newPassOne;
 					let old_password=this.oldPass;
 					uni.request({
-						
-									url: 'http://82.157.34.130:9900/app/user/reset/password',
+							url: `http://192.168.1.239:9900/app/user/reset/password`,
+									// url: 'http://82.157.34.130:9900/app/user/reset/password',
 									method: 'POST',
 									data: {
 										new_password,
