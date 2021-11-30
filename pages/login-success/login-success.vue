@@ -557,6 +557,7 @@
 
 				showMessage: {},
 				headerShow: false,
+				count: 0,
 
 			}
 		},
@@ -646,13 +647,19 @@
 
 						that.showMessage.showMessage = res.data.value;
 						that.showMessage.show = true;
-						console.log(that.showMessage)
+
 
 					}
+					that.count = res.data.value;
 					that.headerShow = true;
 				}
 			})
-
+			uni.getStorage({
+				key: 'login',
+				success(res) {
+					console.log(res.data)
+				}
+			})
 
 
 		},
@@ -673,7 +680,7 @@
 				let that = this;
 				this.powerButton = !this.powerButton;
 				uni.request({
-				url: `http://${getApp().globalData.http}/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
+					url: `http://${getApp().globalData.http}/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
 					// url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
 
 					header: {
@@ -737,69 +744,99 @@
 			newsClickListen() {
 
 				uni.navigateTo({
-					url: '../newsWarn/newsWarn'
+					url: `../newsWarn/newsWarn?size=${this.count}`
 				})
 			},
 			monthClick() {
 				this.secondShowButtonIndex = 'month';
-				this.chartData = {
-					categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-						'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五',
-					],
-					series: [{
-						name: '指数',
-						data: [55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22,
-							18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18,
+				uni.showLoading({
+					title:'加载中'
+				})
+				setTimeout(()=>{
+					this.chartData = {
+						categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
+							'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五',
 						],
-						color: '#13C2C2',
-					}]
-				};
+						series: [{
+							name: '指数',
+							data: [55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22,
+								18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18,
+							],
+							color: '#13C2C2',
+						}]
+					};
+					uni.hideLoading()
+				},500)
+		
 			},
 			weekClick() {
 				this.secondShowButtonIndex = 'week';
-				this.chartData = {
-					categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-						'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'
-					],
-					series: [{
-						name: '指数',
-						data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
-							33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52
+				uni.showLoading({
+					title:'加载中'
+				})
+				setTimeout(()=>{
+					this.chartData = {
+						categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
+							'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'
 						],
-						color: '#13C2C2',
-					}]
-				}
+						series: [{
+							name: '指数',
+							data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
+								33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52
+							],
+							color: '#13C2C2',
+						}]
+					}
+					uni.hideLoading()
+				},500)
+		
 			},
 			safeMonthClick() {
 				this.secondShowSafeButtonIndex = 'month';
-				this.SafeChartData = {
-					categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-						'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五',
-					],
-					series: [{
-						name: '指数',
-						data: [55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22,
-							18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18,
+				uni.showLoading({
+					title:'加载中'
+				})
+				setTimeout(()=>{
+					this.SafeChartData = {
+						categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '',
+							'', '', '',
+							'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五',
 						],
-						color: '#13C2C2',
-					}]
-				};
+						series: [{
+							name: '指数',
+							data: [55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33,
+								44, 61, 22,
+								18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18,
+							],
+							color: '#13C2C2',
+						}]
+					};
+					uni.hideLoading()
+				}, 500)
+
 
 			},
 			safeWeekClick() {
 				this.secondShowSafeButtonIndex = 'week';
-				this.SafeChartData = {
-					categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-						'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'
-					],
-					series: [{
-						name: '指数',
-						data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
-							33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52
+				uni.showLoading({
+					title:'加载中'
+				})
+				setTimeout(()=>{
+					this.SafeChartData = {
+						categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
+							'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'
 						],
-						color: '#13C2C2',
-					}]
-				};
+						series: [{
+							name: '指数',
+							data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
+								33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52
+							],
+							color: '#13C2C2',
+						}]
+					};
+					uni.hideLoading()
+				},500)
+		
 			},
 			reserveClick() {
 
@@ -820,7 +857,7 @@
 				let that = this;
 				this.list.splice(index, 1);
 				uni.request({
-						url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
+					url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
 					// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 					method: 'DELETE',
 					header: {
@@ -846,7 +883,7 @@
 						if (res.confirm) {
 							this.resever = !this.resever;
 							uni.request({
-							url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
+								url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
 								// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 								method: 'DELETE',
 								// header: {
@@ -939,7 +976,7 @@
 				let minute = this.timeArray[this.addIndex];
 				let id = this.infoObj.id;
 				uni.request({
-						url: `http://${getApp().globalData.http}/app/office/extend/use?id=${id}&minute=${minute}`,
+					url: `http://${getApp().globalData.http}/app/office/extend/use?id=${id}&minute=${minute}`,
 					// url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
 					header: {
 						'Authorization': getApp().globalData.token,

@@ -20,6 +20,7 @@
 		</view>
 		<view class="center">
 			<slot name='center'>
+			
 			</slot>
 		</view>
 		<view>
@@ -130,6 +131,10 @@
 
 		margin-left: calc(750rpx * 16/ 375);
 
+	}
+
+	.header .center {
+		height: 100%;
 
 	}
 
@@ -142,15 +147,10 @@
 	.header view:nth-child(3) image:nth-child(2) {
 		margin-right: calc(750rpx * 14.67/ 375);
 
-	}-
-
-	.bgi {
-		background-image: url(../../../static/app/message.svg);
-		background-size: cover;
 	}
 
-	.center {
-		color: rgba(255, 255, 255, 1);
+	- .bgi {
+		background-image: url(/static/app/message.svg);
 		font-size: calc(750rpx * 17/ 375);
 		text-align: center;
 	}

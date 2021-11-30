@@ -4,7 +4,8 @@
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47/ 375);"
 					src="../../static/app/back.svg" @click="backClick"></image>
-				<text slot='center'>筛选</text>
+				<text slot='center'
+					style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">筛选</text>
 				<text slot='right'></text>
 			</tarbarHeader>
 			<view class="main">
@@ -108,86 +109,103 @@
 
 			</view>
 		</view>
-		<view class="pickerDate" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="dateindex">
-			<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick">
-				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
-				<text
-					style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);">确定</text>
+		<view class="pickerDate">
+			<view :class="{'show':dateindex,'hidden':!dateindex}">
+				<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);">确定</text>
+				</view>
+				<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
+					@change="bindDatePickerChange" :value="valueDate">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in years">{{item}}年</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in months">{{item}}月</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in days">{{item}}日</view>
+					</picker-view-column>
+				</picker-view>
 			</view>
-			<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
-				@change="bindDatePickerChange" :value="valueDate">
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in years">{{item}}年</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in months">{{item}}月</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in days">{{item}}日</view>
-				</picker-view-column>
-			</picker-view>
-		</view>
-		<view class="pickerStartTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="startindex">
-			<view style="display:flex;justify-content: space-between;background-color: white; " @click="startTimeClick">
-				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
-				<text
-					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
-			</view>
-			<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
-				@change="bindStartTimePickerChange" :value="valueStartTime">
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in hours">{{item}}点</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in mins">{{item}}分</view>
-				</picker-view-column>
 
-			</picker-view>
 		</view>
-		<view class="pickerStartTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-show="endindex">
-			<view style="display:flex;justify-content: space-between;background-color: white; " @click="endTimeClick">
-				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
-				<text
-					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
-			</view>
-			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
-				@change="bindEndTimePickerChange" :value="valueStartTime">
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in hours">{{item}}点</view>
-				</picker-view-column>
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in mins">{{item}}分</view>
-				</picker-view-column>
+		<view class="pickerStartTime ">
+			<view :class="{'show':startindex,'hidden':!startindex}">
+				<view style="display:flex;justify-content: space-between;background-color: white; "
+					@click="startTimeClick">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+				</view>
+				<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
+					@change="bindStartTimePickerChange" :value="valueStartTime">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in hours">{{item}}点</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in mins">{{item}}分</view>
+					</picker-view-column>
 
-			</picker-view>
+				</picker-view>
+			</view>
+
 		</view>
-		<view class="pickerEndTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-if="placeindex">
-			<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick">
-				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
-				<text
-					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
-			</view>
-			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
-				@change="bindPlacePickerChange" :value="valuePlace">
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in placeArray">{{item.name}}</view>
-				</picker-view-column>
+		<view class="pickerEndTime ">
+			<view :class="{'show':endindex,'hidden':!endindex}">
+				<view style="display:flex;justify-content: space-between;background-color: white; "
+					@click="endTimeClick">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+				</view>
+				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+					@change="bindEndTimePickerChange" :value="valueStartTime">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in hours">{{item}}点</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in mins">{{item}}分</view>
+					</picker-view-column>
 
-			</picker-view>
+				</picker-view>
+			</view>
+
 		</view>
-		<view class="pickerEndTime" style="position: fixed;bottom: 0;left: 0;right: 0;" v-if="floorindex">
-			<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick">
-				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
-				<text
-					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
-			</view>
-			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
-				@change="bindFloorPickerChange" :value="valueFloor">
-				<picker-view-column>
-					<view class="item" v-for="(item,index) in floorArray">{{item.name}}</view>
-				</picker-view-column>
+		<view class="pickerPlace ">
+			<view :class="{'show':placeindex,'hidden':!placeindex}">
+				<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+				</view>
+				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+					@change="bindPlacePickerChange" :value="valuePlace">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in placeArray">{{item.name}}</view>
+					</picker-view-column>
 
-			</picker-view>
+				</picker-view>
+			</view>
+
+		</view>
+		<view class="pickerFloor">
+			<view :class="{'show':floorindex,'hidden':!floorindex}">
+				<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+				</view>
+				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+					@change="bindFloorPickerChange" :value="valueFloor">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in floorArray">{{item.name}}</view>
+					</picker-view-column>
+
+				</picker-view>
+			</view>
+
 		</view>
 
 	</view>
@@ -290,8 +308,9 @@
 
 				header: {
 					'Content-Type': 'application/json',
-					},
-					
+					'Authorization': getApp().globalData.token,
+				},
+
 				success: (res) => {
 
 					if (Array.isArray(res.data.value)) {
@@ -305,28 +324,28 @@
 						uni.request({
 							url: `http://${getApp().globalData.http}/app/office/building/floor/list/${id}`,
 							// url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
-						
+
 							header: {
 								'Content-Type': 'application/json',
-								'Authorization': getApp().globalData.token
+								'Authorization': getApp().globalData.token,
 							},
 							success: (res) => {
-						
+
 								let newArray = [];
 								if (Array.isArray(res.data.value)) {
 									res.data.value.map((item) => {
-						
+
 										newArray.push(item);
 									})
 									that.floorArray = res.data.value;
 								}
-						
-						
+
+
 							}
 						})
 					}
 
-	
+
 
 
 
@@ -405,7 +424,7 @@
 					let endTime = `${this.endHour}:${this.endMin}`
 					let that = this;
 					uni.request({
-							url: `http://${getApp().globalData.http}/app/office/empty/station/list`,
+						url: `http://${getApp().globalData.http}/app/office/empty/station/list`,
 						// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
 						method: 'POST',
 						data: {
@@ -454,18 +473,53 @@
 
 			dateClick() {
 				this.dateindex = !this.dateindex;
+				if (this.dateindex === true) {
+					this.startindex = false;
+					this.endindex = false;
+					this.placeindex = false;
+					this.floorindex = false;
+
+				}
 			},
 			startTimeClick() {
 				this.startindex = !this.startindex;
+				if (this.startindex === true) {
+					this.dateindex = false;
+					this.endindex = false;
+					this.placeindex = false;
+					this.floorindex = false;
+
+				}
 			},
 			endTimeClick() {
 				this.endindex = !this.endindex;
+				if (this.endindex === true) {
+					this.startindex = false;
+					this.dateindex = false;
+					this.placeindex = false;
+					this.floorindex = false;
+
+				}
 			},
 			placeClick() {
 				this.placeindex = !this.placeindex;
+				if (this.placeindex === true) {
+					this.startindex = false;
+					this.endindex = false;
+					this.dateindex = false;
+					this.floorindex = false;
+
+				}
 			},
 			floorClick() {
 				this.floorindex = !this.floorindex;
+				if (this.floorindex === true) {
+					this.startindex = false;
+					this.endindex = false;
+					this.placeindex = false;
+					this.dateindex = false;
+
+				}
 			}
 
 		},
@@ -583,5 +637,30 @@
 		background-image: linear-gradient(135deg, rgba(112, 207, 186, 1), rgba(25, 189, 192, 1));
 		color: rgba(255, 255, 255, 1);
 		line-height: calc(100vh *44/812);
+	}
+
+
+
+	.bgc .pickerDate,
+	.pickerDate,
+	.pickerEndTime,
+	.pickerStartTime,
+	.pickerFloor,
+	.pickerPlace {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+	}
+
+	.bgc .show {
+		height: calc(100vh * 300/812);
+		transition: height 1.5s;
+	}
+
+	.bgc .hidden {
+		height: 0;
+		transition: height 1.5s
 	}
 </style>

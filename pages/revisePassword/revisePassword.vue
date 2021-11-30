@@ -4,7 +4,7 @@
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47	/ 375);"
 					src="../../static/app/back.svg" @click="backClick"></image>
-				<text slot='center'>修改密码</text>
+				<text slot='center' style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">修改密码</text>
 				<text slot='right'></text>
 			</tarbarHeader>
 			<view class="main">

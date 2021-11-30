@@ -13,7 +13,9 @@
 			token:"",
 			positionArray:[],
 			usuallyArray:[],
-			http:'192.168.1.239:9900',
+			// http:'192.168.1.239:9900',
+			http:'82.157.34.130:9901',
+			
 		}
 	}
 </script>

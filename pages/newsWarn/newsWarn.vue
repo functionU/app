@@ -8,7 +8,7 @@
 		<view class="content">
 			<view class="content-item" v-for="item in warnArray">
 				<view class="top-box">
-					<text>{{item.month}}月{{item.day}}日 {{item.hours <12 ? '上午':'下午'}}{{item.hours}}:{{item.mins}}</text>
+					<text>{{item.reserve_station.reserve_date.split("-")[1]}}月{{item.reserve_station.reserve_date.split("-")[2]}}日 {{item.reserve_station.start_time.split(":")[0] <12 ? '上午':'下午'}}{{item.reserve_station.start_time.split(":")[0]}}:{{item.reserve_station.start_time.split(":")[1]}}</text>
 				</view>
 				<view class="bottom-box">
 					<view class="bottom-box-top">
@@ -16,16 +16,15 @@
 							<image src="../../static/app/icon-xiaoxi@2X.png" style="	width: calc(750rpx * 40/ 375);
 		height:calc(750rpx * 40/ 375)"></image>
 						</view>
-						<view class="right">
+						<view class="right" style="padding-right:calc(750rpx * 5/ 375) ;">
 							<text>工位签到提醒</text>
-							<text>您好，您预订的工位{{item.position}}即将开始
-								使用，请尽快进行签到。</text>
+							<text>{{item.content}}</text>
 						</view>
 
 					</view>
 					<view class="bottom-box-bottom">
-						<text>签到时间：{{item.year}}-{{item.month}}-{{item.day}} {{item.hours}}:{{item.mins}}</text>
-						<text>签到地点：{{item.plcae}}—{{item.floor}}F</text>
+						<text>签到时间：{{item.reserve_station.sign_time === null ?  ((item.reserve_station.reserve_date)+" "+(item.reserve_station.start_time )): item.reserve_station.sign_time}}</text>
+						<text>签到地点：{{item.reserve_station.office_building_name}}—{{item.reserve_station.floor_name}}F</text>
 					</view>
 				</view>
 			</view>
@@ -50,19 +49,23 @@
 				})
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			let that = this;
-			uni.request({
-				url: `http://${getApp().globalData.http}/app/message/list?number=1&size=10`,
-				// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
-				header: {
-					'Authorization': getApp().globalData.token,
-				},
-				success: (res) => {
-
-					that.warnArray = res.data.value
-				}
-			})
+			// if(option.count>0)
+			// {
+				uni.request({
+					url: `http://${getApp().globalData.http}/app/message/list?number=1&size=10`,
+					// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
+					header: {
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+				
+						that.warnArray = res.data.value
+					}
+				})
+			// }
+		
 
 		},
 	}

@@ -1,9 +1,9 @@
-<!-- <template>
+<template>
 	<view>
-		
-		<text>{{getText}}</text>
-		<button @click="addClick">add 1</button>
-		<button type="default" @click="get">jump</button>
+		<view class="map" :class="{'transition':show}">
+
+		</view>
+		<button type="default" @click="btn">click</button>
 	</view>
 
 </template>
@@ -15,39 +15,42 @@
 
 
 			return {
-				text:"1",
+				show: false
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			addClick() {
-				// getApp().globalData.text = getApp().globalData.text + 1;
-				// console.log(getApp().globalData.text)
-				getApp().globalData.text=	getApp().globalData.text+"abc";
-				this.text=getApp().globalData.text;
-			},
-			get(){
-				uni.navigateTo({
-					url:"./charts"
-				})
+			btn() {
+				this.show = !this.show;
 			}
+
+
 		},
 		components: {
 
 
-		},
+		}, 
 		computed: {
-     getText(){
-		 // return getApp().globalData.text;
-		 return this.text;
-	 }
+
 		}
 	}
 </script>
 
 <style>
+	.map {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 500px;
+		height: 800px;
+		background-color: #007AFF;
+			transition: all 1s;
+	}
 
+	.transition {
+	
+		height: 0;
+	}
 </style>
- -->
