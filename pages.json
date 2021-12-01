@@ -44,6 +44,9 @@
 		},
 		{
 			"path": "pages/reserve/codeReserve"
+		},
+		{
+				"path": "pages/charts/chart"
 		}
 
 	],

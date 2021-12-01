@@ -45,30 +45,60 @@ get(){
 <template>
 	<view>
 		<view class="page-body">
-			<view class="page-section page-section-gap">
-				<map style="width: 100%; height: 300px;" :latitude="latitude" :longitude="longitude" :markers="covers">
-				</map>
+			<view class="map">
+				<image src="../../static/app/map.jpg" mode=""></image>
+				<view class="">
+
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 <script>
-export default {
-data() {
-return {
-title: 'map',
-latitude: 39.909,
-longitude: 116.39742,
-markers: [{
-width : 40,
-height: 40,
-latitude: 39.909,
-longitude: 116.39742,
-iconPath: '../../../static/p.png'
-}]
-}
-},
-methods: {
-}
-}
-</script>```
+	export default {
+		data() {
+			return {
+
+			}
+		},
+
+		methods: {
+
+		},
+		onload() {
+	
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/office/station/map/{floorId}`,
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token,
+				},
+			})
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/office/map/empty/station/list`,
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token,
+				},
+			})
+		}
+	}
+</script>
+<style>
+	.page-body {
+
+		overflow: scroll;
+	}
+
+	.map {
+		position: relative;
+		height: 500px;
+		width: 600px;
+	}
+
+	image {
+
+		height: 1000px;
+		width: 2000px;
+	}
+</style>

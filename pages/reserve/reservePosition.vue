@@ -82,7 +82,14 @@
 					</view>
 				</view>
 				<view class="center-boxTwo" v-show="!show">
+					<!-- 		<view class="map">
+						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
 
+						<view class="block" v-for="item in positionMapArray"
+							:style="{position:'absolute',left:item.x_axis+'px',top:item.y_axis+'px'}">
+
+						</view>
+					</view> -->
 				</view>
 			</view>
 			<view class="bottom">
@@ -121,6 +128,7 @@
 				name: "",
 				show: true,
 				id: 0,
+				positionMapArray: [],
 			}
 
 		},
@@ -139,13 +147,46 @@
 			}
 		},
 		onLoad(option) {
-
+			let that = this;
 			this.startTime = option.startTime;
 			this.endTime = option.endTime;
 			this.date = option.date;
 			this.place = option.place;
 			this.floor = option.floor;
 			this.floorId = option.floorId;
+			// uni.request({
+			// 	url: `http://${getApp().globalData.http}/app/office/station/map/${this.floorId}`,
+			// 	header: {
+			// 		'Content-Type': 'application/json',
+			// 		'Authorization': getApp().globalData.token,
+			// 	},
+			// 	success:(res)=>{
+			// 		console.log(res)
+			// 	}
+			// })
+
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/office/map/empty/station/list`,
+				method: 'POST',
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token,
+				},
+
+				data: {
+					'start_time': that.startTime + ":00",
+					'end_time': that.endTime + ":00",
+					'floor_id': parseInt(that.floorId),
+					'reserve_date': that.date,
+
+
+				},
+				success: (res) => {
+					console.log(res.data.value)
+					that.positionMapArray = res.data.value
+				}
+
+			})
 
 		},
 
@@ -203,14 +244,12 @@
 					let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
 					let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 					let startTime;
-					if(sTime[0]-hour<0||((sTime[0]-hour==0)&&(sTime[1]-mins<0)))
-					{
-							 startTime = hour + ":" + mins;
+					if (sTime[0] - hour < 0 || ((sTime[0] - hour == 0) && (sTime[1] - mins < 0))) {
+						startTime = hour + ":" + mins;
+					} else {
+						startTime = this.startTime;
 					}
-					else{
-						 startTime = this.startTime;
-					}
-					
+
 					let timeString = startTime.split(":");
 					let eHour = parseInt(timeString[0]);
 					let eMin = parseInt(timeString[1]);
@@ -516,13 +555,24 @@
 	}
 
 	.content .center .center-boxTwo {
+		overflow: scroll;
 		width: calc(750rpx * 343/ 375);
 		height: calc(100vh * 423/812);
 		border-bottom-right-radius: calc(750rpx * 30/375);
 		border-bottom-left-radius: calc(750rpx * 30/ 375);
-		background-color: #007AFF;
+		background-color: #13C2C2;
+
 	}
 
+	/* 	.content .center .center-boxTwo .map {
+		position: relative;
+	}
+.content .center .center-boxTwo .map .block{
+	display: block;
+	width: 10px;
+	height: 10px;
+	background-color: #007AFF;
+} */
 	.content .bottom {
 		width: calc(750rpx * 375/ 375);
 		height: calc(100vh * 90/812);
