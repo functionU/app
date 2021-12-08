@@ -1,61 +1,66 @@
 
 .header {
-		display: flex;
-	
-		justify-content: space-between;
+	display: flex;
+
+	justify-content: space-between;
 }
 .header view:nth-child(1) {
-		
-		margin-left: calc(750rpx * 16/ 375);
+
+	margin-left: calc(750rpx * 16/ 375);
+}
+.header .center {
+	height: 100%;
 }
 .header view:nth-child(3) image:nth-child(1) {
 
-		margin-right: calc(750rpx * 16/ 375);
+	margin-right: calc(750rpx * 16/ 375);
 }
 .header view:nth-child(3) image:nth-child(2) {
-		margin-right: calc(750rpx * 14.67/ 375);
+	margin-right: calc(750rpx * 14.67/ 375);
 }
-.center {
-		color: rgba(255, 255, 255, 1);
-		font-size: calc(750rpx * 17/ 375);
-		text-align: center;
+- .bgi {
+	background-image: url(../../static/img/message.0904a961.svg);
+	font-size: calc(750rpx * 17/ 375);
+	text-align: center;
 }
 .personal {
-		box-sizing: border-box;
-		width: calc(750rpx *128/ 375);
-		height: calc(100vh *138/812);
-		margin-left: calc(-750rpx * 10/ 375);
-		border-radius: calc(750rpx * 5/ 375);
-		position: absolute;
-		top: 10%;
-		z-index: 1;
-		background-color: rgba(255, 255, 255, 1);
-		font-size: calc(750rpx * 15/ 375);
-		display: flex;
-text-align: center;
-		flex-direction: column;
-		padding:  calc(100vh *14.98/812)   calc(750rpx *16/ 375) calc(100vh *13/812);
+	box-sizing: border-box;
+	width: calc(750rpx *128/ 375);
+	height: calc(100vh *138/812);
+	margin-left: calc(-750rpx * 10/ 375);
+	border-radius: calc(750rpx * 5/ 375);
+	position: absolute;
+	top: 10%;
+	z-index: 1;
+	background-color: rgba(255, 255, 255, 1);
+	font-size: calc(750rpx * 15/ 375);
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	padding: calc(100vh *14.98/812) calc(750rpx *16/ 375) calc(100vh *13/812);
 }
-.personal text{
-   width: calc(750rpx *96/ 375);
+.personal text {
+	width: calc(750rpx *96/ 375);
 	height: calc(100vh *35/812);
 	line-height: calc(100vh *35/812);
 	color: rgba(17, 30, 54, 1);
 }
-.personal text:nth-child(2),text:nth-child(3){
-		border-top: calc(750rpx *0.5/ 375) solid rgba(237, 239, 242, 1);
+.personal text:nth-child(2),
+text:nth-child(3) {
+	border-top: calc(750rpx *0.5/ 375) solid rgba(237, 239, 242, 1);
 }
+.personal text:nth-child(2) {}
 .personal::before {
-		content: '';
-		position: absolute;
-		top: -11%;
-		left: 11%;
-		width: 0;
-		height: 0;
-	    border: calc(100vh *8/812) solid transparent;
-	    border-bottom-color: white ;
+	content: '';
+	position: absolute;
+	top: -11%;
+	left: 11%;
+	width: 0;
+	height: 0;
+	border: calc(100vh *8/812) solid transparent;
+	border-bottom-color: white;
 }
-.show{
-		display: none;
+.show {
+	display: none;
 }
 

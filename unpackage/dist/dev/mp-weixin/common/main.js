@@ -101,7 +101,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   globalData: {
     token: "",
     positionArray: [],
-    usuallyArray: [] } };exports.default = _default;
+    usuallyArray: [],
+    // http:'192.168.1.239:9900',
+    http: '82.157.34.130:9901' } };exports.default = _default;
 
 /***/ }),
 /* 9 */

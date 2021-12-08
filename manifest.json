@@ -21,7 +21,7 @@
         },
         /* 模块配置 */
         "modules" : {
-            "Maps" : {}
+            "Geolocation" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -32,6 +32,7 @@
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CAMERA\"/>",
@@ -54,7 +55,19 @@
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {},
-                "maps" : {}
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "93459a10a46422f3edc0ba312aeb2c21",
+                        "appkey_android" : "1b13b0a96632187682f9c3ca4347b457"
+                    }
+                },
+                "geolocation" : {
+                    "amap" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appkey_ios" : "93459a10a46422f3edc0ba312aeb2c21",
+                        "appkey_android" : "1b13b0a96632187682f9c3ca4347b457"
+                    }
+                }
             },
             "icons" : {
                 "android" : {
@@ -115,5 +128,14 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "2"
+    "vueVersion" : "2",
+    "h5" : {
+        "sdkConfigs" : {
+            "maps" : {}
+        },
+        "devServer" : {
+            "https" : false,
+            "port" : ""
+        }
+    }
 }

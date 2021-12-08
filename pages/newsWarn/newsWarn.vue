@@ -8,7 +8,8 @@
 		<view class="content">
 			<view class="content-item" v-for="item in warnArray">
 				<view class="top-box">
-					<text>{{item.reserve_station.reserve_date.split("-")[1]}}月{{item.reserve_station.reserve_date.split("-")[2]}}日 {{item.reserve_station.start_time.split(":")[0] <12 ? '上午':'下午'}}{{item.reserve_station.start_time.split(":")[0]}}:{{item.reserve_station.start_time.split(":")[1]}}</text>
+					<text>{{item.reserve_station.reserve_date.split("-")[1]}}月{{item.reserve_station.reserve_date.split("-")[2]}}日
+						{{item.reserve_station.start_time.split(":")[0] <12 ? '上午':'下午'}}{{item.reserve_station.start_time.split(":")[0]}}:{{item.reserve_station.start_time.split(":")[1]}}</text>
 				</view>
 				<view class="bottom-box">
 					<view class="bottom-box-top">
@@ -53,19 +54,27 @@
 			let that = this;
 			// if(option.count>0)
 			// {
-				uni.request({
-					url: `http://${getApp().globalData.http}/app/message/list?number=1&size=10`,
-					// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
-					header: {
-						'Authorization': getApp().globalData.token,
-					},
-					success: (res) => {
-				
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/message/list?number=1&size=10`,
+				// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
+				header: {
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+
+					if (res.data.code == 0) {
 						that.warnArray = res.data.value
+					} else if (res.data.code == -100) {
+						uni.showToast({
+							title: '请求失败',
+							duration: 2000
+						});
 					}
-				})
+
+				}
+			})
 			// }
-		
+
 
 		},
 	}
@@ -80,7 +89,7 @@
 	}
 
 	.bgc .tarbar {
-		=height: calc(100vh * 33/812);
+		height: calc(100vh * 33/812);
 		line-height: calc(100vh * 44/812);
 		margin-top: calc(100vh * 44/812);
 		padding-bottom: calc(100vh * 11/812);

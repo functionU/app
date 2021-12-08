@@ -12,7 +12,8 @@
     "pages/forgetPass/next",
     "pages/newsWarn/newsWarn",
     "pages/charts/charts",
-    "pages/reserve/codeReserve"
+    "pages/reserve/codeReserve",
+    "pages/charts/chart"
   ],
   "subPackages": [],
   "window": {
@@ -27,5 +28,6 @@
       }
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

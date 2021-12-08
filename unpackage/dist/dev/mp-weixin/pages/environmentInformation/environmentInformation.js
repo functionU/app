@@ -96,7 +96,7 @@ var components
 try {
   components = {
     qiunDataCharts: function() {
-      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 112))
+      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 122))
     }
   }
 } catch (e) {
@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 147));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
 
 
 

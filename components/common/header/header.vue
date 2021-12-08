@@ -1,9 +1,10 @@
 <template>
 	<view class="header">
 		<view class="left" @click="personalClick">
-			<view class="bgi" v-show="showObj.show"
+			<view src v-show="showObj.show"
 				style="color: white;position: absolute;width:calc(750rpx * 20/ 375);height:calc(750rpx * 20	/ 375); text-align: center;font-size:calc(750rpx * 10/ 375) ;line-height:calc(750rpx * 20	/ 375) ;">
-				{{showObj.showMessage}}
+				<image src="../../../static/app/message.svg" style="width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/ 375);position: relative;"></image>
+				<text style="position: absolute;margin-left: -70%;margin-top: -5%;">{{showObj.showMessage}} </text>
 			</view>
 			<slot name='left'>
 				<image src="../../../static/app/mine_nol.svg"
@@ -20,7 +21,7 @@
 		</view>
 		<view class="center">
 			<slot name='center'>
-			
+
 			</slot>
 		</view>
 		<view>
@@ -88,21 +89,33 @@
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
+						if (res.result.indexOf('device') != -1) {
+                             let start=res.result.indexOf('device')+'device'.length;
+							 res.result=res.result.substring(start);
+							 console.log(res.result)
 
-						uni.request({
-							url: `http://${getApp().globalData.http}/app/office/station/info/${res.result}`,
-							// url: `http://82.157.34.130:9901/app/office/station/info/${res.result}`,
-							header: {
-								'Authorization': getApp().globalData.token,
-							},
-							success: (res) => {
-								console.log(res)
-								uni.navigateTo({
-									url: `../../pages/reserve/codeReserve?id=${res.data.value.id}&station_number=${res.data.value.station_number}`
-								})
+							uni.request({
+								url: `http://${getApp().globalData.http}/app/office/station/info/${res.result}`,
+								// url: `http://82.157.34.130:9901/app/office/station/info/${res.result}`,
+								header: {
+									'Authorization': getApp().globalData.token,
+								},
+								success: (res) => {
+									console.log(res)
+									uni.navigateTo({
+										url: `../../pages/reserve/codeReserve?id=${res.data.value.id}&station_number=${res.data.value.station_number}`
+									})
 
-							}
-						})
+								}
+							})
+						} else {
+							uni.showToast({
+								title: '二维码无效',
+								icon:'none',
+								duration: 2000
+							});
+						}
+
 					}
 				});
 
@@ -110,6 +123,10 @@
 
 			},
 			newsClick() {
+				if(this.showObj.show)
+				{
+					this.showObj.show=!this.showObj.show
+				}
 				this.$emit('newsClick')
 			}
 		},
@@ -149,11 +166,7 @@
 
 	}
 
-	- .bgi {
-		background-image: url(/static/app/message.svg);
-		font-size: calc(750rpx * 17/ 375);
-		text-align: center;
-	}
+	
 
 	.personal {
 		box-sizing: border-box;

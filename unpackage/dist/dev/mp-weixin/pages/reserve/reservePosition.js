@@ -130,7 +130,14 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 147));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+
+
+
+
+
+
+
 
 
 
@@ -252,7 +259,8 @@ __webpack_require__.r(__webpack_exports__);
       floorId: "",
       name: "",
       show: true,
-      id: 0 };
+      id: 0,
+      positionMapArray: [] };
 
 
   },
@@ -271,13 +279,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
   onLoad: function onLoad(option) {
-
+    var that = this;
     this.startTime = option.startTime;
     this.endTime = option.endTime;
     this.date = option.date;
     this.place = option.place;
     this.floor = option.floor;
     this.floorId = option.floorId;
+    // uni.request({
+    // 	url: `http://${getApp().globalData.http}/app/office/station/map/${this.floorId}`,
+    // 	header: {
+    // 		'Content-Type': 'application/json',
+    // 		'Authorization': getApp().globalData.token,
+    // 	},
+    // 	success:(res)=>{
+    // 		console.log(res)
+    // 	}
+    // })
+
+    uni.request({
+      url: "http://".concat(getApp().globalData.http, "/app/office/map/empty/station/list"),
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': getApp().globalData.token },
+
+
+      data: {
+        'start_time': that.startTime + ":00",
+        'end_time': that.endTime + ":00",
+        'floor_id': parseInt(that.floorId),
+        'reserve_date': that.date },
+
+
+
+      success: function success(res) {
+        console.log(res.data.value);
+        that.positionMapArray = res.data.value;
+      } });
+
+
 
   },
 
@@ -317,22 +358,58 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         var obj = {};
 
-        obj.startTime = this.startTime + ":00";
-        obj.endTime = this.endTime + ":00";
+        // obj.startTime = this.startTime + ":00";
+        // obj.endTime = this.endTime + ":00";
         obj.date = this.date;
         obj.place = this.place;
         obj.floor = parseInt(this.floorId);
         obj.position = this.itemName;
         obj.id = parseInt(this.id);
+        var sTime = this.startTime.split(":");
+        var eTime = this.endTime.split(":");
+        var xH = eTime[0] - sTime[0];
+        var xM = eTime[1] - sTime[1];
+        var date = new Date();
+        var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+        var mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+        var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+        var startTime;
+        if (sTime[0] - hour < 0 || sTime[0] - hour == 0 && sTime[1] - mins < 0) {
+          startTime = hour + ":" + mins;
+        } else {
+          startTime = this.startTime;
+        }
+
+        var timeString = startTime.split(":");
+        var eHour = parseInt(timeString[0]);
+        var eMin = parseInt(timeString[1]);
+        var endTime = 0;
+        eHour = eHour + xH;
+        eMin = eMin + xM;
+        if (eMin >= 60) {
+          eMin = eMin - 60;
+          eHour += 1;
+        }
+        if (eHour >= 24) {
+          eHour = eHour - 24;
+        }
+
+        eHour = eHour < 10 ? '0' + eHour : eHour;
+        eMin = eMin < 10 ? '0' + eMin : eMin;
+        endTime = "".concat(eHour, ":").concat(eMin, ":00");
+        startTime += ":00";
+
 
         uni.request({
 
-          // url: 'http://192.168.1.238:9900/app/office/reserve',
-          url: 'http://82.157.34.130:9901/app/office/reserve',
+          url: "http://".concat(getApp().globalData.http, "/app/office/reserve"),
+          // url: 'http://82.157.34.130:9901/app/office/reserve',
           method: 'POST',
           data: {
-            'start_time': obj.startTime,
-            'end_time': obj.endTime,
+            'start_time': startTime,
+            'end_time': endTime,
             'floor_id': obj.floor,
             'reserve_date': obj.date,
             'station_id': obj.id },
@@ -344,16 +421,13 @@ __webpack_require__.r(__webpack_exports__);
 
           success: function success(res) {
             console.log(res);
-            if (res.data.code == -300)
-            {
+            if (res.data.code == -300) {
               uni.showModal({
                 title: '提示',
                 content: '您在该时段区间内已预约了其他工位',
                 showCancel: false });
 
-            } else
-            if (res.data.code == 0)
-            {
+            } else if (res.data.code == 0) {
 
               uni.navigateTo({
                 // url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`

@@ -97,6 +97,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.warnArray, function(item, __i0__) {
+    var $orig = _vm.__get_orig(item)
+
+    var g0 = item.reserve_station.reserve_date.split("-")
+    var g1 = item.reserve_station.reserve_date.split("-")
+    var g2 = item.reserve_station.start_time.split(":")
+    var g3 = item.reserve_station.start_time.split(":")
+    var g4 = item.reserve_station.start_time.split(":")
+    return {
+      $orig: $orig,
+      g0: g0,
+      g1: g1,
+      g2: g2,
+      g3: g3,
+      g4: g4
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -171,66 +197,7 @@ var _default =
 {
   data: function data() {
     return {
-      warnArray: [{
-        year: '2021',
-        month: '10',
-        day: '11',
-        hours: '14',
-        mins: '20',
-        plcae: '金光线广场',
-        floor: 15,
-        position: "YJ510" },
-
-      {
-        year: '2021',
-        month: '10',
-        day: '11',
-        hours: '14',
-        mins: '20',
-        plcae: '金光线广场',
-        floor: 15,
-        position: "YJ510" },
-
-      {
-        year: '2021',
-        month: '10',
-        day: '11',
-        hours: '14',
-        mins: '20',
-        plcae: '金光线广场',
-        floor: 15,
-        position: "YJ510" },
-
-      {
-        year: '2021',
-        month: '10',
-        day: '11',
-        hours: '14',
-        mins: '20',
-        plcae: '金光线广场',
-        floor: 15,
-        position: "YJ510" },
-
-      {
-        year: '2021',
-        month: '10',
-        day: '11',
-        hours: '14',
-        mins: '20',
-        plcae: '金光线广场',
-        floor: 15,
-        position: "YJ510" },
-
-      {
-        year: '2021',
-        month: '10',
-        day: '11',
-        hours: '14',
-        mins: '20',
-        plcae: '金光线广场',
-        floor: 15,
-        position: "YJ510" }] };
-
+      warnArray: [] };
 
   },
   methods: {
@@ -238,7 +205,27 @@ var _default =
       uni.navigateBack({});
 
 
-    } } };exports.default = _default;
+    } },
+
+  onLoad: function onLoad(option) {
+    var that = this;
+    // if(option.count>0)
+    // {
+    uni.request({
+      url: "http://".concat(getApp().globalData.http, "/app/message/list?number=1&size=10"),
+      // url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
+      header: {
+        'Authorization': getApp().globalData.token },
+
+      success: function success(res) {
+
+        that.warnArray = res.data.value;
+      } });
+
+    // }
+
+
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

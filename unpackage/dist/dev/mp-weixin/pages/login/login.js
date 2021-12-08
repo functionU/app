@@ -193,7 +193,52 @@ var _default =
 
 
   },
+  onLoad: function onLoad() {
+    uni.getStorage({
+      key: 'login',
+      success: function success(res) {var _this = this;
+        if (res.data)
+        {
+          uni.showLoading({
+            title: '加载中' });
 
+          uni.request({
+            url: "http://".concat(getApp().globalData.http, "/platform/app/login"),
+            // url: 'http://82.157.34.130:9901/platform/app/login',
+            method: 'POST',
+            data: {
+              password: res.data.password,
+              username: res.data.user },
+
+            header: {
+              'Content-Type': 'application/json' },
+
+            success: function success(res) {
+              uni.hideLoading();
+              if (res.data.code == 0) {
+                getApp().globalData.token = res.data.value.token;
+                uni.navigateTo({
+                  url: '../login-success/login-success' });
+
+              } else if (res.data.code == -100) {
+                uni.showToast({
+                  title: '用户名或密码错误',
+                  duration: 2000 });
+
+                _this.tag = true;
+                _this.show = false;
+                _this.showNameImg = '../../static/app/icon-cuowu@2X.png';
+              }
+
+
+
+            } });
+
+        }
+
+      } });
+
+  },
   methods: {
     inputListen: function inputListen(e) {
 
@@ -213,13 +258,15 @@ var _default =
         url: '../forgetPass/forgetPass' });
 
     },
-    login: function login() {var _this = this;
+    login: function login() {var _this2 = this;
       var name = this.user;
       var pass = this.pass;
+      uni.showLoading({
+        title: '加载中' });
 
       uni.request({
-        // url: 'http://192.168.1.238:9900/platform/app/login',
-        url: 'http://82.157.34.130:9901/platform/app/login',
+        url: "http://".concat(getApp().globalData.http, "/platform/app/login"),
+        // url: 'http://82.157.34.130:9901/platform/app/login',
         method: 'POST',
         data: {
           password: pass,
@@ -229,18 +276,31 @@ var _default =
           'Content-Type': 'application/json' },
 
         success: function success(res) {
-          console.log(res);
+
           if (res.data.code == 0) {
             getApp().globalData.token = res.data.value.token;
+            uni.setStorage({
+              key: "login",
+              data: {
+                user: name,
+                password: pass },
 
+              success: function success() {
+                console.log('success');
+              } });
+
+            uni.hideLoading();
             uni.navigateTo({
               url: '../login-success/login-success' });
 
           } else if (res.data.code == -100) {
+            uni.showToast({
+              title: '用户名或密码错误',
+              duration: 2000 });
 
-            _this.tag = true;
-            _this.show = false;
-            _this.showNameImg = '../../static/app/icon-cuowu@2X.png';
+            _this2.tag = true;
+            _this2.show = false;
+            _this2.showNameImg = '../../static/app/icon-cuowu@2X.png';
           }
 
 

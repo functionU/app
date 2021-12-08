@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 147));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -233,8 +233,8 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log();
       uni.request({
-        // url: 'http://192.168.1.238:9900/app/user/device/repair',
-        url: 'http://82.157.34.130:9901/app/user/device/repair',
+        url: "http://".concat(getApp().globalData.http, "/app/user/device/repair"),
+        // url: 'http://82.157.34.130:9901/app/user/device/repair',
         method: 'POST',
         data: {
           device_number: number,

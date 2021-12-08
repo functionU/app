@@ -62,9 +62,17 @@
 					},
 					success: (res) => {
 						
-						uni.navigateTo({
+						if (res.data.code == 0) {
+					   uni.navigateTo({
 							url: '../forgetPass/next'
 						})
+						} else if (res.data.code == -100) {
+							uni.showToast({
+								title: '请求失败',
+								duration: 2000
+							});
+						}
+						
 					}
 				})
 			

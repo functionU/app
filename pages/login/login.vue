@@ -56,11 +56,13 @@
 			}
 		},
 		onLoad() {
+
+
 			uni.getStorage({
 				key: 'login',
 				success(res) {
-					if(res.data)
-					{
+
+					if (res.data) {
 						uni.showLoading({
 							title: '加载中'
 						})
@@ -76,7 +78,8 @@
 								'Content-Type': 'application/json'
 							},
 							success: (res) => {
-						            uni.hideLoading();
+								uni.hideLoading();
+								console.log(res.data.code)
 								if (res.data.code == 0) {
 									getApp().globalData.token = res.data.value.token;
 									uni.navigateTo({
@@ -91,15 +94,21 @@
 									this.show = false;
 									this.showNameImg = '../../static/app/icon-cuowu@2X.png'
 								}
-						
-						
-						
+
+
+
 							}
 						})
 					}
-				
+
 				}
 			})
+
+		},
+		onShow() {
+
+
+
 		},
 		methods: {
 			inputListen(e) {
@@ -149,12 +158,14 @@
 								},
 								success: function() {
 									console.log('success');
+
 								}
 							})
 							uni.hideLoading();
 							uni.navigateTo({
 								url: '../login-success/login-success'
 							})
+
 						} else if (res.data.code == -100) {
 							uni.showToast({
 								title: '用户名或密码错误',

@@ -1,5 +1,5 @@
 <template>
-	<view class="environment-item">
+	<view class="environment-item" >
 		<text class="text">{{item.name}}</text>
 		<image :src=item.src style="width: calc(750rpx * 22.33/ 375) ; height: calc(100vh * 24.23/812);"></image>
 		<text>{{item.number}}</text>

@@ -77,4 +77,23 @@
 	color: rgba(255, 255, 255, 1);
 	line-height: calc(100vh *44/812);
 }
+.bgc .pickerDate,
+.pickerDate,
+.pickerEndTime,
+.pickerStartTime,
+.pickerFloor,
+.pickerPlace {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.bgc .show {
+	height: calc(100vh * 300/812);
+	transition: height 1.5s;
+}
+.bgc .hidden {
+	height: 0;
+	transition: height 1.5s
+}
 

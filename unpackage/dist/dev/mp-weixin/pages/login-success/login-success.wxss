@@ -394,7 +394,7 @@
 }
 .content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius {
 	position: absolute;
-	top: 10%;
+	top: 8%;
 	left: 5%;
 	width: calc(750rpx * 20/ 375);
 	height: calc(100vh * 20/812);
@@ -403,7 +403,7 @@
 }
 .content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius-click {
 	position: absolute;
-	top: 10%;
+	top: 8%;
 	left: 55%;
 	bottom: 0;
 	background-color: #F8F8F8;
@@ -452,9 +452,9 @@
 	width: calc(750rpx * 295/ 375);
 	height: calc(100vh * 160/812);
 
-	margin: calc(100vh * 15/812) calc(750rpx * 26/ 375) calc(750rpx * 22/ 375);
+	margin: 0 calc(750rpx * 26/ 375) calc(750rpx * 22/ 375);
 	padding-top: calc(100vh * 15/812);
-	border-top: 1px dashed #808080;
+
 	text-align: center;
 }
 .content-main .reserveSecond .right {

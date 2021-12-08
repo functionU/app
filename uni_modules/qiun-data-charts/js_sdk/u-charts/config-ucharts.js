@@ -394,9 +394,9 @@ const cfu = {
                 "titleOffsetY": 0,
                 "titleOffsetX": 0,
                 "titleFontColor": "#666666",
-                "min": null,
-                "max": null,
-                "tofix": null,
+                "min": 0,
+                
+                "tofix": 1,
                 "unit": "",
                 "format": ""
             }
@@ -866,7 +866,7 @@ const cfu = {
 	        "scrollColor": "#A6A6A6",
 	        "scrollBackgroundColor": "#EFEBEF",
 	        "min": 0,
-	        "max": 100,
+	        "max": 0,
 	        "format": ""
 	    },
 	    "yAxis": {
@@ -895,7 +895,7 @@ const cfu = {
 	                "titleOffsetX": 0,
 	                "titleFontColor": "#666666",
 	                "min": 0,
-	                "max": 100,
+	                // "max": 100,
 	                "tofix": null,
 	                "unit": "",
 	                "format": ""	

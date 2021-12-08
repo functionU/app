@@ -96,7 +96,7 @@ var components
 try {
   components = {
     qiunDataCharts: function() {
-      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 112))
+      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 122))
     }
   }
 } catch (e) {
@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 147));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -189,41 +189,90 @@ __webpack_require__.r(__webpack_exports__);
 
 {
   data: function data() {
-    return {};
+    return {
+      item: {
+
+        text: "15.6" },
+
+
+      envirChartData: {
+
+
+        categories: ['周一', '周二',
+        '周三', '周四', '周五'],
+
+        series: [{
+          name: '指数',
+          data: [1, 27, 21, 24, 8],
+          color: '#70CFBA' }] } };
+
 
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
+    uni.showLoading({
+      title: '加载中' });
 
+    new Promise(function (resolve, reject) {
+
+      uni.request({
+        url: "http://".concat(getApp().globalData.http, "/app/data/today/power"),
+        header: {
+          'Authorization': getApp().globalData.token },
+
+        success: function success(res) {
+
+
+          resolve(res.data.value);
+
+
+        } });
+
+
+
+
+    }).then(function (res) {
+      _this.item.text = res;
+      return new Promise(function (resolve, reject) {
+
+        uni.request({
+          url: "http://".concat(getApp().globalData.http, "/app/data/fix/power/today/statistics"),
+          header: {
+            'Authorization': getApp().globalData.token },
+
+          success: function success(res) {
+
+            console.log(res);
+            resolve(res.data.value);
+
+
+
+          } });
+
+      });
+    }).then(function (res) {
+      console.log(res);
+      var x = [];
+      var y = [];
+      res.map(function (item) {
+        x.push(item.x_value);
+        y.push(item.y_value);
+      });
+      console.log(x);
+      console.log(y);
+      _this.envirChartData = {
+        categories: [].concat(x),
+        series: [{
+          name: '指数',
+          data: [].concat(y),
+          color: '#70CFBA' }] };
+
+
+      uni.hideLoading();
+    });
 
   },
-  props: {
-    item: {
-      type: Object,
-      default: function _default() {
-        return {
-          text: "15.6" };
-
-      } },
-
-    envirChartData: {
-      type: Object,
-      default: function _default() {
-        return {
-          categories: ['周一', '周二',
-          '周三', '周四', '周五'],
-
-          series: [{
-            name: '指数',
-            data: [1, 27, 21, 24, 8],
-            color: '#70CFBA' },
-          {
-            name: '指数',
-            data: [1, 27, 21, 24, 8],
-            color: '#FFA936' }] };
-
-
-      } } },
+  props: {},
 
 
   methods: {
@@ -233,7 +282,7 @@ __webpack_require__.r(__webpack_exports__);
 
   components: {
     tarbarHeader: tarbarHeader,
-    tip: tip } };exports.default = _default2;
+    tip: tip } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

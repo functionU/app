@@ -4,7 +4,8 @@
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47	/ 375);"
 					src="../../static/app/back.svg" @click="backClick"></image>
-				<text slot='center' style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">修改密码</text>
+				<text slot='center'
+					style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">修改密码</text>
 				<text slot='right'></text>
 			</tarbarHeader>
 			<view class="main">
@@ -84,40 +85,42 @@
 			oldPassListen(e) {
 				this.oldPass = e.target.value;
 			},
-			reviseSubmit(){
-				if(this.newPassOne!=this.newPassTwo)
-				{
+			reviseSubmit() {
+				if (this.newPassOne != this.newPassTwo) {
 					console.log(1)
 					uni.showToast({
-					    title: '两次新密码输入不相同',
-					    duration: 2000,
-						icon:'none'
+						title: '两次新密码输入不相同',
+						duration: 2000,
+						icon: 'none'
 					});
-				}
-				else {
-					let new_password=this.newPassOne;
-					let old_password=this.oldPass;
+				} else {
+					let new_password = this.newPassOne;
+					let old_password = this.oldPass;
 					uni.request({
-							url: `http://${getApp().globalData.http}/app/user/reset/password`,
-									// url: 'http://82.157.34.130:9900/app/user/reset/password',
-									method: 'POST',
-									data: {
-										new_password,
-										old_password
+						url: `http://${getApp().globalData.http}/app/user/reset/password`,
+						// url: 'http://82.157.34.130:9900/app/user/reset/password',
+						method: 'POST',
+						data: {
+							new_password,
+							old_password
 
-									},
-									header: {
-										'Content-Type': 'application/json',
-										'Authorization':getApp().globalData.token
-									},
-									success: (res) => {
-					                     if(res.data.code==0)
-										 {
-											 uni.navigateBack();
-										 }
-									}
-								})
-					
+						},
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token
+						},
+						success: (res) => {
+							if (res.data.code == 0) {
+								uni.navigateBack();
+							} else if (res.data.code == -100) {
+								uni.showToast({
+									title: '请求失败',
+									duration: 2000
+								});
+							}
+						}
+					})
+
 				}
 			}
 		},

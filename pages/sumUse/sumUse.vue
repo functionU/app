@@ -4,7 +4,8 @@
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47	/ 375);"
 					src="../../static/app/back.svg" @click="backClick"></image>
-				<text slot='center'>用电统计</text>
+				<text slot='center'
+					style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">用电统计</text>
 				<text slot='right'></text>
 			</tarbarHeader>
 			<view class="top">
@@ -17,7 +18,6 @@
 				</view>
 			</view>
 			<view class="bottom">
-
 				<qiun-data-charts type="bar" :chartData="envirChartData" background="none" />
 			</view>
 		</view>
@@ -35,41 +35,85 @@
 	export default {
 		data() {
 			return {
+				item: {
 
+					text: "15.6"
+
+				},
+				envirChartData: {
+
+
+					categories: ['周一', '周二',
+						'周三', '周四', '周五'
+					],
+					series: [{
+						name: '指数',
+						data: [1, 27, 21, 24, 8, ],
+						color: '#70CFBA'
+					}]
+				}
 			}
 		},
 		onLoad() {
 
+			new Promise(function(resolve, reject) {
+				uni.request({
+					url: `http://${getApp().globalData.http}/app/data/today/power`,
+					header: {
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+						// uni.showLoading({
+						// 	title: '加载中'
+						// })
+
+						resolve(res.data.value);
+					}
+				})
+			}).then(res => {
+				this.item.text = res;
+				return new Promise(function(resolve, reject) {
+
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/data/fix/power/today/statistics`,
+						header: {
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+
+							console.log(res)
+							// uni.hideLoading();
+							resolve(res.data.value);
+
+
+
+						}
+					})
+				})
+			}).then(res => {
+				console.log(res);
+				let x = [];
+				let y = [];
+				res.map((item) => {
+					x.push(item.x_value);
+					y.push(item.y_value);
+				})
+				console.log(x);
+				console.log(y);
+				this.envirChartData = {
+					categories: [...x],
+					series: [{
+						name: '指数',
+						data: [...y],
+						color: '#70CFBA'
+					}, ]
+				};
+
+			})
 
 		},
 		props: {
-			item: {
-				type: Object,
-				default: () => {
-					return {
-						text: "15.6"
-					}
-				}
-			},
-			envirChartData: {
-				type: Object,
-				default: () => {
-					return {
-						categories: ['周一', '周二',
-							'周三', '周四', '周五'
-						],
-						series: [{
-							name: '指数',
-							data: [1, 27, 21, 24, 8, ],
-							color: '#70CFBA'
-						}, {
-							name: '指数',
-							data: [1, 27, 21, 24, 8, ],
-							color: '#FFA936'
-						}]
-					}
-				}
-			}
+
 		},
 		methods: {
 			backClick() {

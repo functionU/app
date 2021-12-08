@@ -116,7 +116,16 @@
 						'Authorization': getApp().globalData.token
 					},
 					success: (res) => {
+						
+						if (res.data.code == 0) {
 						uni.navigateBack();
+						} else if (res.data.code == -100) {
+							uni.showToast({
+								title: '请求失败',
+								duration: 2000
+							});
+						}
+						
 					}
 				})
 			}

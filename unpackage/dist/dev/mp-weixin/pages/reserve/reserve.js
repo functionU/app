@@ -130,7 +130,25 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 147));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -417,12 +435,13 @@ __webpack_require__.r(__webpack_exports__);
   onLoad: function onLoad() {var _this = this;
     var that = this;
     uni.request({
-      // url: 'http://192.168.1.238:9900/app/office/building/list',
-      url: 'http://82.157.34.130:9901/app/office/building/list',
+      url: "http://".concat(getApp().globalData.http, "/app/office/building/list"),
+      // url: 'http://82.157.34.130:9901/app/office/building/list',
 
       header: {
         'Content-Type': 'application/json',
         'Authorization': getApp().globalData.token },
+
 
       success: function success(res) {
 
@@ -435,8 +454,8 @@ __webpack_require__.r(__webpack_exports__);
           that.placeArray = newArray;
           var id = _this.placeArray[_this.placeIndex].id;
           uni.request({
-            // url: `http://192.168.1.238:9900/app/office/building/floor/list/${id}`,
-            url: "http://82.157.34.130:9901/app/office/building/floor/list/".concat(id),
+            url: "http://".concat(getApp().globalData.http, "/app/office/building/floor/list/").concat(id),
+            // url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
 
             header: {
               'Content-Type': 'application/json',
@@ -495,8 +514,8 @@ __webpack_require__.r(__webpack_exports__);
       var id = this.placeArray[this.placeIndex].id;
       var that = this;
       uni.request({
-        // url: `http://192.168.1.238:9900/app/office/building/floor/list/${id}`,
-        url: "http://82.157.34.130:9901/app/office/building/floor/list/".concat(id),
+        url: "http://".concat(getApp().globalData.http, "/app/office/building/floor/list/").concat(id),
+        // url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
 
         header: {
           'Content-Type': 'application/json',
@@ -537,8 +556,8 @@ __webpack_require__.r(__webpack_exports__);
         var endTime = "".concat(this.endHour, ":").concat(this.endMin);
         var that = this;
         uni.request({
-          // url: `http://192.168.1.238:9900/app/office/empty/station/list`,
-          url: "http://82.157.34.130:9901/app/office/empty/station/list",
+          url: "http://".concat(getApp().globalData.http, "/app/office/empty/station/list"),
+          // url: `http://82.157.34.130:9901/app/office/empty/station/list`,
           method: 'POST',
           data: {
             'end_time': endTime + ":00",
@@ -554,8 +573,8 @@ __webpack_require__.r(__webpack_exports__);
 
             getApp().globalData.positionArray = res.data.value;
             uni.request({
-              // url: `http://192.168.1.238:9900/app/office/often/empty/station/list`,
-              url: "http://82.157.34.130:9901/app/office/often/empty/station/list",
+              url: "http://".concat(getApp().globalData.http, "/app/office/often/empty/station/list"),
+              // url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
               method: 'POST',
               data: {
                 'end_time': endTime + ":00",
@@ -586,18 +605,53 @@ __webpack_require__.r(__webpack_exports__);
 
     dateClick: function dateClick() {
       this.dateindex = !this.dateindex;
+      if (this.dateindex === true) {
+        this.startindex = false;
+        this.endindex = false;
+        this.placeindex = false;
+        this.floorindex = false;
+
+      }
     },
     startTimeClick: function startTimeClick() {
       this.startindex = !this.startindex;
+      if (this.startindex === true) {
+        this.dateindex = false;
+        this.endindex = false;
+        this.placeindex = false;
+        this.floorindex = false;
+
+      }
     },
     endTimeClick: function endTimeClick() {
       this.endindex = !this.endindex;
+      if (this.endindex === true) {
+        this.startindex = false;
+        this.dateindex = false;
+        this.placeindex = false;
+        this.floorindex = false;
+
+      }
     },
     placeClick: function placeClick() {
       this.placeindex = !this.placeindex;
+      if (this.placeindex === true) {
+        this.startindex = false;
+        this.endindex = false;
+        this.dateindex = false;
+        this.floorindex = false;
+
+      }
     },
     floorClick: function floorClick() {
       this.floorindex = !this.floorindex;
+      if (this.floorindex === true) {
+        this.startindex = false;
+        this.endindex = false;
+        this.placeindex = false;
+        this.dateindex = false;
+
+      }
     } },
 
 

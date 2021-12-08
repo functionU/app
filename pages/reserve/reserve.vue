@@ -331,14 +331,23 @@
 							},
 							success: (res) => {
 
-								let newArray = [];
-								if (Array.isArray(res.data.value)) {
-									res.data.value.map((item) => {
 
-										newArray.push(item);
-									})
-									that.floorArray = res.data.value;
+								if (res.data.code == 0) {
+									let newArray = [];
+									if (Array.isArray(res.data.value)) {
+										res.data.value.map((item) => {
+
+											newArray.push(item);
+										})
+										that.floorArray = res.data.value;
+									}
+								} else if (res.data.code == -100) {
+									uni.showToast({
+										title: '请求失败',
+										duration: 2000
+									});
 								}
+
 
 
 							}

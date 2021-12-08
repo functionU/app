@@ -166,63 +166,72 @@
 						showCancel: false,
 					});
 				} else {
-                    let that=this;
+					let that = this;
 					let date = new Date();
 					let hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
 					let mins = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
 					let year = date.getFullYear();
 					let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-			     	let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+					let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 					let startTime = `${hour}:${mins}:00`;
 					let now = year + "-" + month + "-" + day;
 					let timeString = startTime.split(":");
 					let eHour = parseInt(timeString[0]);
 					let eMin = parseInt(timeString[1]);
-					let item=this.positionArray[this.itemIndex]
+					let item = this.positionArray[this.itemIndex]
 					if (item < 30) {
 						eHour += item;
 						if (eHour >= 24) {
 							eHour -= 24;
-					
-					
+
+
 						}
 					} else {
 						eMin = eMin + 30;
 						if (eMin >= 60) {
 							eHour += 1;
-							eMin = eMin- 60;
-					
+							eMin = eMin - 60;
+
 						}
 					}
 					eHour = eHour < 10 ? '0' + eHour : eHour;
-					eMin =eMin < 10 ? '0' + eMin : eMin;
+					eMin = eMin < 10 ? '0' + eMin : eMin;
 					let endTime = `${eHour}:${eMin}:00`
-					
+
 					console.log(startTime);
 					console.log(endTime);
 					uni.request({
-							url: `http://${getApp().globalData.http}/app/office/now/use`,
+						url: `http://${getApp().globalData.http}/app/office/now/use`,
 						// url: 'http://82.157.34.130:9901/app/office/now/use',
-						method:'POST',
-						header:{
+						method: 'POST',
+						header: {
 							'Content-Type': 'application/json',
 							'Authorization': getApp().globalData.token
 						},
 						data: {
-							'end_time':endTime,
-							'start_time':startTime,
-							'station_id':parseInt(that.id),
-							'floor_id':1,
-							'reserve_date':now,
+							'end_time': endTime,
+							'start_time': startTime,
+							'station_id': parseInt(that.id),
+							'floor_id': 1,
+							'reserve_date': now,
 						},
 						success: (res) => {
-							console.log(res)
-                                     setTimeout(()=>{
-										 uni.navigateTo({
-										 	url: `../login-success/login-success?index=1&buttonIndex=1`
-										 })
-									 },500)
-					
+
+
+							if (res.data.code == 0) {
+								setTimeout(() => {
+									uni.navigateTo({
+										url: `../login-success/login-success?index=1&buttonIndex=1`
+									})
+								}, 500)
+							} else if (res.data.code == -100) {
+								uni.showToast({
+									title: '请求失败',
+									duration: 2000
+								});
+							}
+
+
 
 
 

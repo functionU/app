@@ -96,7 +96,7 @@ var components
 try {
   components = {
     qiunDataCharts: function() {
-      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 112))
+      return Promise.all(/*! import() | uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts")]).then(__webpack_require__.bind(null, /*! @/uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts.vue */ 122))
     }
   }
 } catch (e) {
@@ -153,7 +153,57 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbar = function tarbar() {__webpack_require__.e(/*! require.ensure | components/common/tarbar/tarbar */ "components/common/tarbar/tarbar").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tarbar/tarbar.vue */ 126));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 133));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var environmentItem = function environmentItem() {__webpack_require__.e(/*! require.ensure | components/common/environment/environmentItem */ "components/common/environment/environmentItem").then((function () {return resolve(__webpack_require__(/*! ../../components/common/environment/environmentItem.vue */ 140));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 147));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var dash = function dash() {__webpack_require__.e(/*! require.ensure | components/common/dash/dash */ "components/common/dash/dash").then((function () {return resolve(__webpack_require__(/*! ../../components/common/dash/dash.vue */ 154));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var doubleButton = function doubleButton() {__webpack_require__.e(/*! require.ensure | components/common/doubleButton/doubleButton */ "components/common/doubleButton/doubleButton").then((function () {return resolve(__webpack_require__(/*! ../../components/common/doubleButton/doubleButton.vue */ 161));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var divView = function divView() {__webpack_require__.e(/*! require.ensure | components/common/divView/divView */ "components/common/divView/divView").then((function () {return resolve(__webpack_require__(/*! ../../components/common/divView/divView.vue */ 168));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var warn = function warn() {__webpack_require__.e(/*! require.ensure | components/common/warn/warn */ "components/common/warn/warn").then((function () {return resolve(__webpack_require__(/*! ../../components/common/warn/warn.vue */ 175));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tarbar = function tarbar() {__webpack_require__.e(/*! require.ensure | components/common/tarbar/tarbar */ "components/common/tarbar/tarbar").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tarbar/tarbar.vue */ 136));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tarbarHeader = function tarbarHeader() {__webpack_require__.e(/*! require.ensure | components/common/header/header */ "components/common/header/header").then((function () {return resolve(__webpack_require__(/*! ../../components/common/header/header.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var environmentItem = function environmentItem() {__webpack_require__.e(/*! require.ensure | components/common/environment/environmentItem */ "components/common/environment/environmentItem").then((function () {return resolve(__webpack_require__(/*! ../../components/common/environment/environmentItem.vue */ 150));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var tip = function tip() {__webpack_require__.e(/*! require.ensure | components/common/tip/tip */ "components/common/tip/tip").then((function () {return resolve(__webpack_require__(/*! ../../components/common/tip/tip.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var dash = function dash() {__webpack_require__.e(/*! require.ensure | components/common/dash/dash */ "components/common/dash/dash").then((function () {return resolve(__webpack_require__(/*! ../../components/common/dash/dash.vue */ 164));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var doubleButton = function doubleButton() {__webpack_require__.e(/*! require.ensure | components/common/doubleButton/doubleButton */ "components/common/doubleButton/doubleButton").then((function () {return resolve(__webpack_require__(/*! ../../components/common/doubleButton/doubleButton.vue */ 171));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var divView = function divView() {__webpack_require__.e(/*! require.ensure | components/common/divView/divView */ "components/common/divView/divView").then((function () {return resolve(__webpack_require__(/*! ../../components/common/divView/divView.vue */ 178));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var warn = function warn() {__webpack_require__.e(/*! require.ensure | components/common/warn/warn */ "components/common/warn/warn").then((function () {return resolve(__webpack_require__(/*! ../../components/common/warn/warn.vue */ 185));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -561,16 +611,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       index: 0,
       buttonIndex: 0,
-      powerButton: false,
       warnShow: false,
       secondShowButtonIndex: 'week',
       secondShowSafeButtonIndex: 'week',
-      station: 'YJ051',
+
       resever: false,
-      item: {
-        english: 'On',
-        chinese: '电源开启',
-        src: '../../static/app/chazuo@2X.png' },
 
       environmentes: [{
         name: '温度',
@@ -627,6 +672,18 @@ __webpack_require__.r(__webpack_exports__);
           color: '#13C2C2' }] },
 
 
+      SafeTodayChartData: {
+        categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '', '周三',
+        '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'],
+
+        series: [{
+          name: '',
+          data: [1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1,
+          1, 4, 5, 6, 7, 8],
+
+          color: '#13C2C2' }] },
+
+
       reserveChartData: {
 
         categories: ['周一', '周二', '周三', '周四', '周五'],
@@ -637,7 +694,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
       boxArray: [0, 1, 2, 0, 2, 1, 0, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 2],
-      grade: 73,
+
       color: '#007AFF',
       reserve: false,
       sign: false,
@@ -646,13 +703,38 @@ __webpack_require__.r(__webpack_exports__);
       addIndex: [0],
       e: [0],
       infoObj: {},
-      listObj: {},
-      infoTag: true };
+      list: [],
+      infoTag: false,
+      signTag: false,
+      item: {
+        english: 'On',
+        chinese: '电源开启',
+        src: '../../static/app/chazuo@2X.png' },
 
+      fixedItem: {
+        english: 'On',
+        chinese: '电源开启',
+        src: '../../static/app/chazuo@2X.png' },
 
+      listArr: [],
+      fixedTag: true,
+      powerButton: false,
+      powerFixedButton: false,
+      fixedObj: {},
+      showMessage: {},
+      headerShow: false,
+      count: 0,
+      workTimeHour: 0,
+      workTimeMins: 0,
+      continueWorkTimeHour: 0,
+      continueWorkTimeMins: 0,
+      grade: 73 };
 
   },
-  onLoad: function onLoad(option) {
+  onInit: function onInit() {
+
+  },
+  onLoad: function onLoad(option) {var _this = this;
     var that = this;
     if (option.index) {
       this.resever = option.resever;
@@ -662,9 +744,33 @@ __webpack_require__.r(__webpack_exports__);
       this.endTime = option.endTime;
       this.position = option.position;
     }
+
     uni.request({
-      // url: 'http://192.168.1.238:9900/app/office/reserve/station/info',
-      url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
+      url: "http://".concat(getApp().globalData.http, "/app/office/reserve/station/list"),
+      // url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
+      header: {
+
+        'Authorization': getApp().globalData.token },
+
+      success: function success(res) {
+        console.log(res);
+        if (Array.isArray(res.data.value) && res.data.value.length != 0) {
+
+          that.list = res.data.value;
+          that.infoTag = true;
+          var arr = new Array([res.data.value.length]);
+          arr.fill(true);
+          that.listArr = arr;
+          console.log(that.listArr);
+          // that.resever = true;
+
+        }
+
+      } });
+
+    uni.request({
+      url: "http://".concat(getApp().globalData.http, "/app/office/reserve/station/info"),
+      // url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
       header: {
         'Authorization': getApp().globalData.token },
 
@@ -674,30 +780,107 @@ __webpack_require__.r(__webpack_exports__);
           that.resever = true;
           that.sign = false;
           that.infoObj = res.data.value;
-          console.log(that.infoObj);
+          that.sign = res.data.value.sign_status;
+          that.powerButton = !res.data.value.power_status;
+
         }
 
       } });
 
 
     uni.request({
-      // url: 'http://192.168.1.238:9900/app/office/reserve/station/info',
-      url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
+      url: "http://".concat(getApp().globalData.http, "/app/office/fixed/station/info"),
+      // url: 'http://82.157.34.130:9901/app/office/fixed/station/info',
       header: {
-
         'Authorization': getApp().globalData.token },
 
       success: function success(res) {
         console.log(res);
-        if (Array.isArray(res.data.value) && res.data.value.length != 0) {
-          that.listObj = res.data.value[0];
-          that.infoTag = false;
-          console.log(that.listObj);
-        }
+        if (!res.data.value) {
 
+          that.fixedTag = false;
+        } else {
+
+          that.fixedObj = res.data.value;
+          that.powerFixedButton = !res.data.value.power_status;
+        }
       } });
 
+    uni.request({
+      url: "http://".concat(getApp().globalData.http, "/app/message/not/read/count"),
+      // url: 'http://82.157.34.130:9901/app/message/not/read/count',
+      header: {
+        'Authorization': getApp().globalData.token },
 
+      success: function success(res) {
+        if (res.data.value > 0) {
+
+          that.showMessage.showMessage = res.data.value;
+          that.showMessage.show = true;
+
+
+        }
+        that.count = res.data.value;
+        that.headerShow = true;
+      } }),
+
+    new Promise(function (resolve, reject) {
+      uni.request({
+        url: "http://".concat(getApp().globalData.http, "/app/data/sit/statistics?type=", 1),
+
+        header: {
+          'Authorization': getApp().globalData.token },
+
+        success: function success(res) {
+
+
+          resolve(res.data.value);
+
+
+        } });
+
+
+
+    }).then(function (res) {
+      var x = [];
+      var y = [];
+      res.map(function (item) {
+        x.push(item.x_value);
+        y.push(item.y_value);
+      });
+      _this.secondShowButtonIndex = 'week';
+      _this.chartData = {
+        categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+        series: [{
+          name: '指数',
+          data: y,
+          color: '#13C2C2' }] };
+
+
+      return new Promise(function (resolve, reject) {
+        uni.request({
+          url: "http://".concat(getApp().globalData.http, "/app/data/today/work/time"),
+
+          header: {
+            'Authorization': getApp().globalData.token },
+
+          success: function success(res) {
+
+
+            resolve(res.data.value);
+
+
+          } });
+
+      });
+    }).then(function (res) {
+      _this.grade = res.health_number;
+      _this.workTimeHour = parseInt(res.work_time / 3600);
+      _this.workTimeMins = parseInt(res.work_time % 3600 / 60);
+      _this.continueWorkTimeHour = res.continuous_work_time.split(':')[0];
+      _this.continueWorkTimeMins = res.continuous_work_time.split(':')[1];
+
+    });
 
 
   },
@@ -705,8 +888,144 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   methods: {
-    tarbarListen: function tarbarListen(index) {
+    tarbarListen: function tarbarListen(index) {var _this2 = this;
       this.index = index;
+      if (index == 1) {
+        new Promise(function (resolve, reject) {
+
+          uni.request({
+            url: "http://".concat(getApp().globalData.http, "/app/data/fix/power/today/statistics"),
+
+            header: {
+              'Authorization': getApp().globalData.token },
+
+            success: function success(res) {
+              resolve(res.data.value);
+            } });
+
+        }).then(function (res) {
+          console.log(res);
+          var x = [];
+          var y = [];
+          res.map(function (item) {
+            x.push(item.x_value);
+            y.push(item.y_value);
+          });
+
+          _this2.reserveChartData = {
+            categories: [].concat(x),
+            series: [{
+              name: '指数',
+              data: y,
+              color: '#FFF' }] };
+
+
+        });
+      } else if (index == 2) {
+        new Promise(function (resolve, reject) {
+
+          uni.request({
+            url: "http://".concat(getApp().globalData.http, "/app/data/today/hour/power"),
+
+            header: {
+              'Authorization': getApp().globalData.token },
+
+            success: function success(res) {
+
+              console.log(res);
+              resolve(res.data.value);
+
+
+            } });
+
+
+
+
+        }).then(function (res) {
+
+          var x = [];
+          var y = [];
+          res.map(function (item) {
+            x.push(item.x_value);
+            y.push(item.y_value);
+          });
+
+          _this2.SafeTodayChartData = {
+            categories: [].concat(x),
+            series: [{
+              name: '',
+              data: [].concat(y),
+              color: '#13C2C2' }] };
+
+
+          return new Promise(function (resolve, reject) {
+
+            uni.request({
+              url: "http://".concat(getApp().globalData.http, "/app/data/power/statistics?type=", 1),
+
+              header: {
+                'Authorization': getApp().globalData.token },
+
+              success: function success(res) {
+
+                console.log(res);
+                resolve(res.data.value);
+
+
+              } });
+
+
+
+
+          });
+        }).then(function (res) {
+          var x = [];
+          var y = [];
+          res.map(function (item) {
+            x.push(item.x_value);
+            y.push(item.y_value);
+          });
+
+          _this2.SafeChartData = {
+            categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+            series: [{
+              name: '',
+              data: [].concat(y),
+              color: '#13C2C2' }] };
+
+
+        });
+      } else if (index == 3) {
+        uni.getLocation({
+          type: 'wgs84',
+          geocode: true,
+          success: function success(res) {
+            console.log(res);
+
+          } });
+
+        // new Promise(function(resolve, reject) {
+
+        // 	uni.request({
+        // 		url: `http://${getApp().globalData.http}/app/data/city/${1}`,
+
+        // 		header: {
+        // 			'Authorization': getApp().globalData.token,
+        // 		},
+        // 		success: (res) => {
+
+        // 			console.log(res)
+        // 			resolve(res.data.value);
+
+
+        // 		}
+        // 	})
+
+
+
+        // })
+      }
+
 
     },
     doubleButtonListen: function doubleButtonListen(index) {
@@ -714,16 +1033,61 @@ __webpack_require__.r(__webpack_exports__);
       this.buttonIndex = index;
 
     },
-    powerButtonClick: function powerButtonClick() {
+    powerButtonClick: function powerButtonClick(id) {
+      var that = this;
       this.powerButton = !this.powerButton;
+      uni.request({
+        url: "http://".concat(getApp().globalData.http, "/app/office/config/power/status?device_id=").concat(id, "&power_status=").concat(!that.powerButton),
+        // url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerButton}`,
+
+        header: {
+          'Authorization': getApp().globalData.token },
+
+
+        success: function success(res) {
+          console.log(res);
+
+        } });
+
       if (!this.powerButton) {
         this.item = {
           english: 'On',
           chinese: '电源开启',
-          src: '../../static/app/chazuo@2X.png' };
+          src: '/static/static/app/chazuo@2X.png' };
 
       } else if (this.powerButton) {
         this.item = {
+          english: 'Off',
+          chinese: '电源关闭',
+          src: '/static/static/app/chazuo@2X.png' };
+
+      }
+
+    },
+    powerFixedButtonClick: function powerFixedButtonClick(id) {
+      var that = this;
+      this.powerFixedButton = !this.powerFixedButton;
+      uni.request({
+        url: "http://1".concat(getApp().globalData.http, "/app/office/config/power/status?device_id=").concat(id, "&power_status=").concat(!that.powerFixedButton),
+        // url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
+
+        header: {
+          'Authorization': getApp().globalData.token },
+
+
+        success: function success(res) {
+          console.log(res);
+
+        } });
+
+      if (!this.powerFixedButton) {
+        this.fixedItem = {
+          english: 'On',
+          chinese: '电源开启',
+          src: '../../static/app/chazuo@2X.png' };
+
+      } else if (this.powerFixedButton) {
+        this.fixedItem = {
           english: 'Off',
           chinese: '电源关闭',
           src: '../../static/app/chazuo@2X.png' };
@@ -737,68 +1101,176 @@ __webpack_require__.r(__webpack_exports__);
     newsClickListen: function newsClickListen() {
 
       uni.navigateTo({
-        url: '../newsWarn/newsWarn' });
+        url: "../newsWarn/newsWarn?size=".concat(this.count) });
 
     },
-    monthClick: function monthClick() {
+    monthClick: function monthClick() {var _this3 = this;
       this.secondShowButtonIndex = 'month';
-      this.chartData = {
-        categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-        '周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'],
+      uni.showLoading({
+        title: '加载中' });
 
-        series: [{
-          name: '指数',
-          data: [55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22,
-          18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18],
+      new Promise(function (resolve, reject) {
+        uni.request({
+          url: "http://".concat(getApp().globalData.http, "/app/data/sit/statistics?type=", 2),
 
-          color: '#13C2C2' }] };
+          header: {
+            'Authorization': getApp().globalData.token },
+
+          success: function success(res) {
+
+            console.log(res);
+            resolve(res.data.value);
+
+
+          } });
+
+
+
+      }).then(function (res) {
+        var x = [];
+        var y = [];
+        var xx = [];
+
+        res.map(function (item) {
+          x.push(item.x_value);
+          y.push(item.y_value);
+        });
+        for (var i = 1; i <= x.length; i++) {
+          xx.push(i);
+        }
+
+        _this3.chartData = {
+          categories: [].concat(xx),
+          series: [{
+            name: '指数',
+            data: y,
+            color: '#13C2C2' }] };
+
+
+        uni.hideLoading();
+      });
 
 
     },
-    weekClick: function weekClick() {
+    weekClick: function weekClick() {var _this4 = this;
       this.secondShowButtonIndex = 'week';
-      this.chartData = {
-        categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-        '周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'],
+      uni.showLoading({
+        title: '加载中' });
 
-        series: [{
-          name: '指数',
-          data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
-          33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52],
 
-          color: '#13C2C2' }] };
+      new Promise(function (resolve, reject) {
+        uni.request({
+          url: "http://".concat(getApp().globalData.http, "/app/data/sit/statistics?type=", 1),
+
+          header: {
+            'Authorization': getApp().globalData.token },
+
+          success: function success(res) {
+
+            console.log(res);
+            resolve(res.data.value);
+
+
+          } });
+
+
+
+      }).then(function (res) {
+        var x = [];
+        var y = [];
+
+        res.map(function (item) {
+          x.push(item.x_value);
+          y.push(item.y_value);
+        });
+
+
+        _this4.chartData = {
+          categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+          series: [{
+            name: '指数',
+            data: y,
+            color: '#13C2C2' }] };
+
+
+        uni.hideLoading();
+      });
 
 
     },
-    safeMonthClick: function safeMonthClick() {
+    safeMonthClick: function safeMonthClick() {var _this5 = this;
       this.secondShowSafeButtonIndex = 'month';
-      this.SafeChartData = {
-        categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-        '周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'],
-
-        series: [{
-          name: '指数',
-          data: [55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22,
-          18, 55, 88, 33, 44, 61, 22, 18, 55, 88, 33, 44, 61, 22, 18],
-
-          color: '#13C2C2' }] };
+      uni.showLoading({
+        title: '加载中' });
 
 
+      new Promise(function (resolve, reject) {
+        uni.request({
+          url: "http://".concat(getApp().globalData.http, "/app/data/power/statistics?type=", 2),
+          header: {
+            'Authorization': getApp().globalData.token },
+
+          success: function success(res) {
+            console.log(res);
+            resolve(res.data.value);
+          } });
+
+
+      }).then(function (res) {
+        var x = [];
+        var y = [];
+        res.map(function (item) {
+          x.push(item.x_value);
+          y.push(item.y_value);
+        });
+
+        _this5.SafeChartData = {
+          categories: [].concat(x),
+          series: [{
+            name: '',
+            data: [].concat(y),
+            color: '#13C2C2' }] };
+
+
+        uni.hideLoading();
+      });
 
     },
-    safeWeekClick: function safeWeekClick() {
+    safeWeekClick: function safeWeekClick() {var _this6 = this;
       this.secondShowSafeButtonIndex = 'week';
-      this.SafeChartData = {
-        categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
-        '周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'],
+      uni.showLoading({
+        title: '加载中' });
 
-        series: [{
-          name: '指数',
-          data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
-          33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52],
+      new Promise(function (resolve, reject) {
+        uni.request({
+          url: "http://".concat(getApp().globalData.http, "/app/data/power/statistics?type=", 1),
+          header: {
+            'Authorization': getApp().globalData.token },
 
-          color: '#13C2C2' }] };
+          success: function success(res) {
+            console.log(res);
+            resolve(res.data.value);
+          } });
 
+
+      }).then(function (res) {
+        var x = [];
+        var y = [];
+        res.map(function (item) {
+          x.push(item.x_value);
+          y.push(item.y_value);
+        });
+
+        _this6.SafeChartData = {
+          categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+          series: [{
+            name: '',
+            data: [].concat(y),
+            color: '#13C2C2' }] };
+
+
+        uni.hideLoading();
+      });
 
     },
     reserveClick: function reserveClick() {
@@ -816,41 +1288,45 @@ __webpack_require__.r(__webpack_exports__);
       this.warnShow = true;
 
     },
-    stopInfo: function stopInfo(id) {
+    stopInfo: function stopInfo(id, index) {
       var that = this;
+      this.list.splice(index, 1);
       uni.request({
-        // url: `http://192.168.1.238:9900/app/office/advance/end/${id}`,
-        url: "http://82.157.34.130:9901/app/office/delete/reserve/".concat(id),
+        url: "http://".concat(getApp().globalData.http, "/app/office/delete/reserve/").concat(id),
+        // url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
         method: 'DELETE',
         header: {
           'Authorization': getApp().globalData.token },
 
         success: function success(res) {
-          console.log(res);
-          that.infoTag = true;
-          that.listObj = {};
+
+
         } });
 
+      if (this.list.length == 0) {
+        this.infoTag = false;
+      }
+
     },
-    reserveStop: function reserveStop(id) {var _this = this;
+    reserveStop: function reserveStop(id) {var _this7 = this;
       var that = this;
-      console.log(id);
+
       uni.showModal({
         title: '提示',
         content: '您确定要取消预约吗？',
         success: function success(res) {
           if (res.confirm) {
-            _this.resever = !_this.resever;
+            _this7.resever = !_this7.resever;
             uni.request({
-              // url: 'http://192.168.1.238:9900//app/office/advance/end/{id}',
-              url: "http://82.157.34.130:9901/app/office/delete/reserve/".concat(id),
+              url: "http://".concat(getApp().globalData.http, "/app/office/delete/reserve/").concat(id),
+              // url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
               method: 'DELETE',
               // header: {
 
               // 	'Authorization': getApp().globalData.token,
               // },
               success: function success(res) {
-                console.log(res);
+
                 that.infoObj = {};
 
 
@@ -864,26 +1340,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
     },
-    signIn: function signIn(id, devNumber) {var _this2 = this;
-      // uni.scanCode({
-      // 	success: function(res) {
-      // 		console.log('条码类型：' + res.scanType);
-      // 		console.log('条码内容：' + res.result);
-      // 	}
-      // });
-      uni.request({
-        // url: `http://192.168.1.238:9900/app/office/delete/reserve/${id}`,
-        url: "http://82.157.34.130:9901/app/office/sign/reserve?id=".concat(id, "&deviceNumber=").concat(devNumber),
-        header: {
-          'Authorization': getApp().globalData.token },
+    signIn: function signIn(id) {
+      uni.scanCode({
+        success: function success(res) {var _this8 = this;
+          uni.request({
+            url: "http://".concat(getApp().globalData.http, "/app/office/sign/reserve?id=").concat(id, "&deviceNumber=").concat(res.result),
+            // url: `http://82.157.34.130:9901/app/office/sign/reserve?id=${id}&deviceNumber=${'ass1119'}`,
+            header: {
+              'Authorization': getApp().globalData.token },
 
-        success: function success(res) {
+            success: function success(res) {
+              console.log(res.data.code);
+              if (res.data.code == 0) {
+                _this8.sign = true;
+              }
 
-          if (res.data.code == 0) {
-            _this2.sign = true;
-          }
+            } });
 
+          uni.showLoading({
+            title: '加载中' });
+
+          setTimeout(function () {
+            uni.hideLoading();
+            uni.navigateTo({
+              // url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
+              url: "../login-success/login-success?index=1&buttonIndex=1" });
+
+          }, 2000);
         } });
+
 
 
     },
@@ -891,17 +1376,17 @@ __webpack_require__.r(__webpack_exports__);
       this.addUse = true;
 
     },
-    useStop: function useStop(id) {var _this3 = this;
+    useStop: function useStop(id) {var _this9 = this;
       uni.showModal({
         title: '提示',
         content: '您确定要提前结束吗？',
         success: function success(res) {
           console.log(res);
-          _this3.sign = !_this3.sign;
-          _this3.resever = !_this3.resever;
+          _this9.sign = !_this9.sign;
+          _this9.resever = !_this9.resever;
           uni.request({
-            // url: `http://192.168.1.238:9900/app/office/delete/reserve/${id}`,
-            url: "http://82.157.34.130:9901/app/office/advance/end/".concat(id),
+            url: "http://".concat(getApp().globalData.http, "/app/office/advance/end/").concat(id),
+            // url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
             header: {
               'Authorization': getApp().globalData.token },
 
@@ -926,8 +1411,8 @@ __webpack_require__.r(__webpack_exports__);
       var minute = this.timeArray[this.addIndex];
       var id = this.infoObj.id;
       uni.request({
-        // url: `http://192.168.1.238:9900/app/office/extend/use?id=1&minute=${minute}`,
-        url: "http://82.157.34.130:9901/app/office/extend/use?id=".concat(id, "&minute=").concat(minute),
+        url: "http://".concat(getApp().globalData.http, "/app/office/extend/use?id=").concat(id, "&minute=").concat(minute),
+        // url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
         header: {
           'Authorization': getApp().globalData.token },
 
@@ -969,10 +1454,6 @@ __webpack_require__.r(__webpack_exports__);
         return '	../../static/app/chazuo@2X.png';
       } else if (this.grade > 66)
       return '	../../static/app/btn-yangchang@2X.png';
-
-
-
-
     },
 
     getButtonIndex: function getButtonIndex() {
