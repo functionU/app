@@ -4,7 +4,8 @@
 			<tarbarHeader class="head">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47	/ 375);"
 					src="../../static/app/back.svg" @click="backClick"></image>
-				<text slot='center' style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">设备报修</text>
+				<text slot='center'
+					style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">设备报修</text>
 				<text slot='right'></text>
 			</tarbarHeader>
 			<view class="main">
@@ -19,8 +20,11 @@
 						<view class="main-center-item-left">
 							故障编号：
 						</view>
-						<view class="main-center-item-right">
-							<input placeholder="请输入" @input="numberListen" />
+						<view class="main-center-item-right" style="display: flex;">
+							<input type="text" :value="scanValue" disabled style="font-size:calc(750rpx * 15/ 375);color: rgb(0,0,0,0.5);" />
+							<image @click="scan" src="../../static/app/scanning.svg"
+								style="background-color: gray;width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/ 375);margin-left: 10%;">
+							</image>
 						</view>
 
 					</view>
@@ -30,8 +34,8 @@
 						</view>
 						<view class="main-center-item-right">
 							<picker style='display: inline-block;' mode="selector" :range='array' :index="0"
-								@change="bindPickerChange">
-								<view style="margin-left: calc(750rpx * 150/ 375);margin-right:calc(750rpx * 8/ 375) ;">
+								class="picker" @change="bindPickerChange">
+								<view style="margin-left: calc(750rpx * 150/ 375);margin-right:calc(750rpx * 8/ 375);">
 									{{array[index]}}
 								</view>
 							</picker>
@@ -72,7 +76,8 @@
 				array: ['插座没电', '插做损坏', '插座漏电'],
 				index: 0,
 				description: "",
-				number: ''
+				number: '',
+				scanValue: '扫码确认故障设备编号'
 			}
 		},
 		onLoad() {
@@ -116,18 +121,26 @@
 						'Authorization': getApp().globalData.token
 					},
 					success: (res) => {
-						
+
 						if (res.data.code == 0) {
-						uni.navigateBack();
+							uni.navigateBack();
 						} else if (res.data.code == -100) {
 							uni.showToast({
 								title: '请求失败',
 								duration: 2000
 							});
 						}
-						
+
 					}
 				})
+			},
+			scan() {
+				uni.scanCode({
+					success: function(res) {
+						console.log('条码类型：' + res.scanType);
+						console.log('条码内容：' + res.result);
+					}
+				});
 			}
 		},
 		components: {

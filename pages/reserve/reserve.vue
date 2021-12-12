@@ -111,10 +111,12 @@
 		</view>
 		<view class="pickerDate">
 			<view :class="{'show':dateindex,'hidden':!dateindex}">
-				<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick" class="viewText">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel('date')">取消</text>
 					<text
-						style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);">确定</text>
+						style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);"
+						@click="confirm('data')">确定</text>
 				</view>
 				<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
 					@change="bindDatePickerChange" :value="valueDate">
@@ -134,10 +136,12 @@
 		<view class="pickerStartTime ">
 			<view :class="{'show':startindex,'hidden':!startindex}">
 				<view style="display:flex;justify-content: space-between;background-color: white; "
-					@click="startTimeClick">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					@click="startTimeClick" class="viewText">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel('start')">取消</text>
 					<text
-						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+						@click="confirm('start')">确定</text>
 				</view>
 				<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
 					@change="bindStartTimePickerChange" :value="valueStartTime">
@@ -155,13 +159,15 @@
 		<view class="pickerEndTime ">
 			<view :class="{'show':endindex,'hidden':!endindex}">
 				<view style="display:flex;justify-content: space-between;background-color: white; "
-					@click="endTimeClick">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+					@click="endTimeClick" class="viewText">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel('end')">取消</text>
 					<text
-						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+						@click="confirm('end')">确定</text>
 				</view>
 				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
-					@change="bindEndTimePickerChange" :value="valueStartTime">
+					@change="bindEndTimePickerChange" :value="valueEndTime">
 					<picker-view-column>
 						<view class="item" v-for="(item,index) in hours">{{item}}点</view>
 					</picker-view-column>
@@ -175,10 +181,12 @@
 		</view>
 		<view class="pickerPlace ">
 			<view :class="{'show':placeindex,'hidden':!placeindex}">
-				<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick" class="viewText">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel('place')">取消</text>
 					<text
-						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+						@click="confirm('place')">确定</text>
 				</view>
 				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
 					@change="bindPlacePickerChange" :value="valuePlace">
@@ -192,10 +200,12 @@
 		</view>
 		<view class="pickerFloor">
 			<view :class="{'show':floorindex,'hidden':!floorindex}">
-				<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
+				<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick" class="viewText">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel('floor')">取消</text>
 					<text
-						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+						@click="confirm('floor')">确定</text>
 				</view>
 				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
 					@change="bindFloorPickerChange" :value="valueFloor">
@@ -205,7 +215,6 @@
 
 				</picker-view>
 			</view>
-
 		</view>
 
 	</view>
@@ -244,7 +253,7 @@
 			}();
 
 
-			for (let i = 1990; i <= date.getFullYear(); i++) {
+			for (let i = date.getFullYear(); i <= date.getFullYear() + 10; i++) {
 				years.push(i)
 			}
 			for (let i = 1; i <= 12; i++) {
@@ -289,15 +298,22 @@
 				startMin: min,
 				endHour: hour,
 				endMin: min,
-				valueDate: [9999, month - 1, day - 1],
+				valueDate: [0, month - 1, day - 1],
 				valuePlace: [0],
 				valueFloor: [0],
 				valueStartTime: [hour, min],
+				valueEndTime: [hour, min],
 				dateindex: false,
 				startindex: false,
 				endindex: false,
 				placeindex: false,
 				floorindex: false,
+				endMiddel: [hour, min],
+				startMiddel: [hour, min],
+				dateMiddel: [0, month - 1, day - 1],
+				placeMiddel: [0],
+				floorMiddel: [0],
+
 			}
 		},
 		onLoad() {
@@ -367,54 +383,7 @@
 			backClick() {
 				uni.navigateBack();
 			},
-			bindDatePickerChange(e) {
-				let val = e.target.value;
-				this.year = this.years[val[0]];
-				this.month = this.months[val[1]];
-				this.day = this.days[val[2]];
-			},
-			bindStartTimePickerChange(e) {
-				let val = e.target.value;
-				this.startHour = this.hours[val[0]];
-				this.startMin = this.mins[val[1]];
-			},
-			bindEndTimePickerChange(e) {
-				let val = e.target.value;
-				this.endHour = this.hours[val[0]];
-				this.endMin = this.mins[val[1]];
-			},
-			bindPlacePickerChange(e) {
-				let val = e.target.value;
-				this.placeIndex = val[0];
-				this.valuePlace = [val[0]]
 
-				let id = this.placeArray[this.placeIndex].id;
-				let that = this;
-				uni.request({
-					url: `http://${getApp().globalData.http}/app/office/building/floor/list/${id}`,
-					// url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
-
-					header: {
-						'Content-Type': 'application/json',
-						'Authorization': getApp().globalData.token
-					},
-					success: (res) => {
-
-						let newArray = [];
-						res.data.value.map((item) => {
-
-							newArray.push(item);
-						})
-						that.floorArray = res.data.value;
-					}
-				})
-			},
-			bindFloorPickerChange(e) {
-				let val = e.target.value;
-				this.floorIndex = val[0];
-				this.valueFloor = [val[0]]
-
-			},
 			reservePosition() {
 
 
@@ -529,6 +498,129 @@
 					this.dateindex = false;
 
 				}
+			},
+
+			bindPlacePickerChange(e) {
+				let val = e.target.value;
+				this.valuePlace = val;
+				// this.placeIndex = val[0];
+				// this.valuePlace = [val[0]]
+
+				// let id = this.placeArray[this.placeIndex].id;
+				// let that = this;
+				// uni.request({
+				// 	url: `http://${getApp().globalData.http}/app/office/building/floor/list/${id}`,
+				// 	// url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
+
+				// 	header: {
+				// 		'Content-Type': 'application/json',
+				// 		'Authorization': getApp().globalData.token
+				// 	},
+				// 	success: (res) => {
+
+				// 		let newArray = [];
+				// 		res.data.value.map((item) => {
+
+				// 			newArray.push(item);
+				// 		})
+				// 		that.floorArray = res.data.value;
+				// 	}
+				// })
+			},
+			bindDatePickerChange(e) {
+				let val = e.target.value;
+				this.valueDate = val;
+				// this.year = this.years[val[0]];
+				// this.month = this.months[val[1]];
+				// this.day = this.days[val[2]];
+			},
+			bindStartTimePickerChange(e) {
+				let val = e.target.value;
+				this.valueStartTime = val;
+				// this.startHour = this.hours[val[0]];
+				// this.startMin = this.mins[val[1]];
+			},
+			bindEndTimePickerChange(e) {
+				let val = e.target.value;
+				this.valueEndTime = val;
+				// this.endHour = this.hours[val[0]];
+				// this.endMin = this.mins[val[1]];
+			},
+			bindFloorPickerChange(e) {
+				let val = e.target.value;
+				this.valueFloor = val;
+				// this.floorIndex = val[0];
+				// this.valueFloor = [val[0]]
+
+			},
+			confirm(name) {
+				let val;
+				if (name == 'start') {
+					val = this.valueStartTime;
+					this.startHour = this.hours[val[0]];
+					this.startMin = this.mins[val[1]];
+					this.startMiddel=val;
+				} else if (name == 'end') {
+					val = this.valueEndTime;
+					this.endHour = this.hours[val[0]];
+					this.endMin = this.mins[val[1]];
+					this.endMiddel=val;
+
+				} else if (name == 'date') {
+					val = this.valueDate;
+					this.year = this.years[val[0]];
+					this.month = this.months[val[1]];
+					this.day = this.days[val[2]];
+					this.dateMiddel=val;
+
+				} else if (name == 'floor') {
+					val = this.valueFloor;
+					this.floorIndex = val[0];
+					this.valueFloor = [val[0]]
+					this.floorMiddel=val;
+				} else if (name == 'place') {
+					val = this.valuePlace;
+					this.placeIndex = val[0];
+					this.valuePlace = [val[0]]
+                    this.placeMiddel=val;
+ 
+					let id = this.placeArray[this.placeIndex].id;
+					let that = this;
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/building/floor/list/${id}`,
+						// url: `http://82.157.34.130:9901/app/office/building/floor/list/${id}`,
+
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token
+						},
+						success: (res) => {
+
+							let newArray = [];
+							res.data.value.map((item) => {
+
+								newArray.push(item);
+							})
+							that.floorArray = res.data.value;
+						}
+					})
+
+				}
+
+			},
+			cancel(name) {
+				console.log(name);
+				if (name == 'start') {
+					this.valueStartTime = this.startMiddel;
+				} else if (name == 'end') {
+					this.valueEndTime = this.endMiddel;
+				} else if (name == 'date') {
+					this.valueDate = this.dateMiddel;
+				} else if (name == 'floor') {
+					this.valueFloor = this.floorMiddel;
+				} else if (name == 'place') {
+					this.valuePlace = this.placeMiddel;
+				}
 			}
 
 		},
@@ -549,7 +641,12 @@
 		height: 100vh;
 		background-color: rgba(241, 242, 246, 1);
 	}
-
+   .bgc .viewText{
+	   font-weight: bold;
+	   padding: calc(100vh * 14/812) calc(750rpx * 16/ 375);
+	   border-top-left-radius: 30%;
+	   border-top-right-radius: 30%;
+   }
 	.head {
 		height: calc(100vh *44/812);
 	}
@@ -665,11 +762,11 @@
 
 	.bgc .show {
 		height: calc(100vh * 300/812);
-		transition: height 1.5s;
+		transition: height 0.5s;
 	}
 
 	.bgc .hidden {
 		height: 0;
-		transition: height 1.5s
+		transition: height 0.5s
 	}
 </style>

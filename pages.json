@@ -1,15 +1,15 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-	
+		{
+			"path": "pages/login-success/login-success"
+
+		},
 		{
 			"path": "pages/login/login"
 
 		},
 
-		{
-			"path": "pages/login-success/login-success"
 
-		},
 		{
 			"path": "pages/revisePassword/revisePassword"
 
@@ -46,7 +46,7 @@
 			"path": "pages/reserve/codeReserve"
 		},
 		{
-				"path": "pages/charts/chart"
+			"path": "pages/charts/chart"
 		}
 
 	],

@@ -73,6 +73,12 @@
 				})
 			},
 			leaveClick() {
+				uni.removeStorage({
+				    key: 'login',
+				    success: function (res) {
+				        console.log('success');
+				    }
+				});
 				uni.navigateTo({
 					url: '../login/login'
 				})

@@ -9,7 +9,7 @@
 					style="font-size:calc(750rpx * 17/ 375) ; color: white;margin-left: calc(-750rpx * 220/ 375);">选择工位</text>
 			</tarbarHeader>
 			<view class="top">
-				<view class="top-item">
+				<view class="top-item" @click="reChose">
 					<view style="color: rgba(17, 30, 54, 1);">
 						{{date}}
 					</view>
@@ -98,7 +98,31 @@
 				</view>
 			</view>
 		</view>
-
+		<view class="reChose" :class="{'show':showIndex,'hidden':!showIndex}">
+			<view>
+				<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);" @click="cancel">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+						@click="confirm">确定</text>
+				</view>
+				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+					@change="PickerChange" :value="choseIndex">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in monthDay">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in startHourMin">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in sign">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in endHourMin">{{item}}</view>
+					</picker-view-column>
+				</picker-view>
+			</view>
+		</view>
 
 	</view>
 
@@ -129,6 +153,13 @@
 				show: true,
 				id: 0,
 				positionMapArray: [],
+				choseIndex: [0, 0, 0, 0],
+				startHourMin: [],
+				endHourMin: [],
+				monthDay: [],
+				sign: ['至'],
+				showIndex: false,
+				middleIndex: [],
 			}
 
 		},
@@ -147,6 +178,7 @@
 			}
 		},
 		onLoad(option) {
+			console.log(option);
 			let that = this;
 			this.startTime = option.startTime;
 			this.endTime = option.endTime;
@@ -154,17 +186,46 @@
 			this.place = option.place;
 			this.floor = option.floor;
 			this.floorId = option.floorId;
-			// uni.request({
-			// 	url: `http://${getApp().globalData.http}/app/office/station/map/${this.floorId}`,
-			// 	header: {
-			// 		'Content-Type': 'application/json',
-			// 		'Authorization': getApp().globalData.token,
-			// 	},
-			// 	success:(res)=>{
-			// 		console.log(res)
-			// 	}
-			// })
 
+			let month = this.date.split('-')[1];
+			let day = this.date.split('-')[2];
+
+			let shour = this.startTime.split(':')[0];
+			let smin = this.startTime.split(':')[1];
+
+			let ehour = this.endTime.split(':')[0];
+			let emin = this.endTime.split(':')[1];
+			for (let i = 1; i <= 12; i++) {
+				for (let j = 1; j <= 30; j++) {
+					if (i == parseInt(month) && j == parseInt(day)) {
+						this.choseIndex[0] = this.monthDay.length;
+						console.log(this.choseIndex)
+					}
+					this.monthDay.push(i + "月" + j + '日')
+				}
+			}
+			for (let i = 0; i <= 23; i++) {
+				if (i < 10) {
+					i = '0' + i;
+				}
+				for (let j = 0; j <=59; j++) {
+					if (i == parseInt(shour) && j == parseInt(smin)) {
+						this.choseIndex[1] = this.startHourMin.length;
+
+					}
+					if (i == parseInt(ehour) && j == parseInt(emin)) {
+						this.choseIndex[3] = this.endHourMin.length;
+
+					}
+
+					if (j < 10) {
+						j = '0' + j
+					}
+					this.startHourMin.push(i + ":" + j)
+					this.endHourMin.push(i + ":" + j)
+				}
+			}
+			this.middleIndex = this.choseIndex;
 			uni.request({
 				url: `http://${getApp().globalData.http}/app/office/map/empty/station/list`,
 				method: 'POST',
@@ -312,7 +373,55 @@
 
 				}
 
-			}
+			},
+			reChose() {
+
+				this.showIndex = true;
+
+			},
+			PickerChange(e) {
+				this.choseIndex = e.target.value;
+				// uni.navigateTo({
+				// 	url: `./reservePosition?date=${1}&startTime=${1}&endTime=${1}&place=${1}&floor=${1}&floorId=${1}`
+				// })
+			},
+			cancel() {
+				this.choseIndex = this.middleIndex;
+				this.showIndex = false;
+			},
+			confirm() {
+				let start = this.startHourMin[this.choseIndex[1]];
+				let end = this.endHourMin[this.choseIndex[3]];
+				let sh = start.split(':')[0];
+				let sm = start.split(":")[1];
+				let eh = end.split(':')[0];
+				let em = end.split(":")[1];
+				let date = this.monthDay[this.choseIndex[0]]
+				let month = date.split("月")[0];
+				let x = date.split("月")[1];
+				let day = x.split('日')[0];
+
+				// let date=this.monthDay[this.choseIndex[0]].splice('月')[0]+this.monthDay[this.choseIndex[0]].splice('月')[1].split('日')[0]
+
+				if ((eh - sh) < 0 || ((eh - sh) == 0 && (em - sm) <= 0)) {
+					this.choseIndex = this.middleIndex;
+					uni.showToast({
+						title: '结束时间需大于开始时间',
+						icon: 'none',
+						duration: 2000
+					});
+				} else {
+					this.startTime = start;
+					this.endTime = end;
+					this.date = this.date.split('-')[0] + "-" + month + '-' + day;
+					this.showIndex = false;
+					let that = this;
+
+					uni.navigateTo({
+						url: `./reservePosition?date=${that.date}&startTime=${that.startTime}&endTime=${that.endTime}&place=${that.place}&floor=${that.floor}&floorId=${that.floorId}`
+					})
+				}
+			},
 		},
 		components: {
 			tarbarHeader,
@@ -326,10 +435,37 @@
 
 <style>
 	.bgc {
-
+		overflow: hidden;
+		position: relative;
 		height: 100vh;
 		background-color: rgba(241, 242, 246, 1);
 
+	}
+
+	.bgc .reChose {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	
+
+	}
+
+	.bgc .reChose .main {
+		font-weight: bold;
+		padding: calc(100vh * 14/812) calc(750rpx * 16/ 375);
+		border-top-left-radius: 30%;
+		border-top-right-radius: 30%;
+	}
+
+	.bgc .reChose.show {
+		height: calc(100vh * 300/812);
+		transition: height 0.5s;
+	}
+
+	.bgc .reChose.hidden {
+		height: 0;
+		transition: height 0.5s
 	}
 
 	.head {

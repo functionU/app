@@ -32,16 +32,16 @@
 										<image src="../../static/app/icon-zhengque.png"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-right: calc(750rpx * 4/ 375) ;">
 										</image>
-										8.20
+										{{timelist[0]}}
 									</view>
 									<view>
-										12:00
+										{{timelist[1]}}
 									</view>
 									<view>
-										15:00
+										{{timelist[2]}}
 									</view>
 									<view>
-										18:50
+										{{timelist[3]}}
 										<image src="../../static/app/icon-title@2X.png"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-left: calc(750rpx * 4/ 375)">
 										</image>
@@ -59,14 +59,12 @@
 										<image src="../../static/app/icon-title@2X.png"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-right: calc(750rpx * 4/ 375)">
 											<text>健康指数：<b> {{grade}}分</b></text>
-
 									</view>
 									<view class="right" @click="warnClick"
 										style="font-size: calc(750rpx * 12/ 375);color: rgba(10, 32, 57, 0.5);">
 										<image src="../../static/app/icon-title@2X.png"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-right: calc(750rpx * 4/ 375)">
 											计数规则
-
 									</view>
 								</view>
 								<view class="bottom-box">
@@ -100,7 +98,7 @@
 							</view>
 						</view>
 						<view class="secondShow">
-							<tip>
+							<tip :item="{'name':'久坐统计'}">
 								<view slot='right' class="button">
 									<text @click="weekClick" :class="{'click':secondShowButtonIndex=='week'}">每周</text>
 									<text @click="monthClick"
@@ -164,8 +162,13 @@
 									<text style="visibility: hidden;">1</text>
 									<text :class="{'open':powerFixedButton}">开</text>
 								</view>
+
 							</view>
-							<view class="reserveSecond" v-show="fixedTag">
+							<view v-show="!fixedTag"
+								style="text-align: center;margin-top: 20%;color: white;font-weight: bold;">
+								您还没有固定工位呢！
+							</view>
+							<view class="reserveSecond">
 								<tip :item="{name:'今日用电量（kwh）'}">
 									<view slot="right" class="right" @click="sumUseClick">
 										<text>用电统计</text>
@@ -181,10 +184,7 @@
 
 								</view>
 							</view>
-							<view v-show="!fixedTag"
-								style="text-align: center;margin-top: 20%;color: white;font-weight: bold;">
-								您还没有固定工位呢！
-							</view>
+
 						</view>
 						<view class="show-second" v-show="buttonIndex==1">
 							<view v-show="!resever">
@@ -462,7 +462,37 @@
 
 				resever: false,
 
-				environmentes: [],
+				environmentes: [{
+					name: '适度',
+					src: '../../static/app/icon-zhengque.png',
+					number: '0',
+					quality: '无'
+				}, {
+					name: 'PM2.5',
+					src: '../../static/app/icon-zhengque.png',
+					number: '0',
+					quality: '无'
+				}, {
+					name: 'PM10',
+					src: '../../static/app/icon-zhengque.png',
+					number: '0',
+					quality: '无'
+				}, {
+					name: '温度',
+					src: '../../static/app/icon-zhengque.png',
+					number: '0',
+					quality: '无'
+				}, {
+					name: '温度',
+					src: '../../static/app/icon-zhengque.png',
+					number: '0',
+					quality: '无'
+				}, {
+					name: '温度',
+					src: '../../static/app/icon-zhengque.png',
+					number: '0',
+					quality: '无'
+				}],
 				chartData: {
 					categories: ['', '', '', '', '', '', '周一', '', '', '', '', '', '', '周二', '', '', '', '', '', '',
 						'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'
@@ -493,18 +523,18 @@
 					],
 					series: [{
 						name: '',
-						data: [1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1,
-							1, 4, 5, 6, 7, 8,
+						data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+							0, 0, 0, 0, 0, 0,
 						],
 						color: '#13C2C2',
 					}]
 				},
 				reserveChartData: {
 
-					categories: ['周一', '周二', '周三', '周四', '周五'],
+					categories: ['00:00', '04:00', '09:00', '14:00', '19:00	'],
 					series: [{
 						name: '',
-						data: [33, 27, 21, 24, 8],
+						data: [0, 0, 0, 0, 0],
 						color: '#FFF',
 					}]
 				},
@@ -544,276 +574,334 @@
 				continueWorkTimeHour: 0,
 				continueWorkTimeMins: 0,
 				grade: 73,
-				weatherBox: []
+				weatherBox: [],
+				timelist: ["8:00", '12:00', '15:00', "19:00"],
+
 			}
 		},
 		onInit() {
 
 		},
 		onLoad(option) {
-
 			let that = this;
-			if (option.index) {
-				this.resever = option.resever;
-				this.buttonIndex = parseInt(option.buttonIndex);
-				this.index = parseInt(option.index);
-				this.startTime = option.startTime;
-				this.endTime = option.endTime;
-				this.position = option.position;
-			}
+			console.log(getApp().globalData.token)
+			uni.getStorage({
+				key: 'login',
+				success(res) {
 
-			uni.request({
-				url: `http://${getApp().globalData.http}/app/office/reserve/station/list`,
-				// url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
-				header: {
-
-					'Authorization': getApp().globalData.token,
-				},
-				success: (res) => {
 					console.log(res);
-					if (Array.isArray(res.data.value) && res.data.value.length != 0) {
-
-						that.list = res.data.value;
-						that.infoTag = true;
-						let arr = new Array([res.data.value.length]);
-						arr.fill(true);
-						that.listArr = arr;
-						console.log(that.listArr)
-						// that.resever = true;
-
-					}
-
-				}
-			})
-			uni.request({
-				url: `http://${getApp().globalData.http}/app/office/reserve/station/info`,
-				// url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
-				header: {
-					'Authorization': getApp().globalData.token,
-				},
-				success: (res) => {
-					console.log(res);
-					if (res.data.value) {
-						that.resever = true;
-						that.sign = false;
-						that.infoObj = res.data.value;
-						that.sign = res.data.value.sign_status;
-						that.powerButton = !res.data.value.power_status;
-
-					}
-
-				}
-			})
-
-			uni.request({
-				url: `http://${getApp().globalData.http}/app/office/fixed/station/info`,
-				// url: 'http://82.157.34.130:9901/app/office/fixed/station/info',
-				header: {
-					'Authorization': getApp().globalData.token,
-				},
-				success: (res) => {
-					console.log(res);
-					if (!res.data.value) {
-
-						that.fixedTag = false;
-					} else {
-
-						that.fixedObj = res.data.value;
-						that.powerFixedButton = !res.data.value.power_status;
-					}
-				}
-			})
-			uni.request({
-					url: `http://${getApp().globalData.http}/app/message/not/read/count`,
-					// url: 'http://82.157.34.130:9901/app/message/not/read/count',
-					header: {
-						'Authorization': getApp().globalData.token,
-					},
-					success: (res) => {
-						if (res.data.value > 0) {
-
-							that.showMessage.showMessage = res.data.value;
-							that.showMessage.show = true;
-
-
-						}
-						that.count = res.data.value;
-						that.headerShow = true;
-					}
-				}),
-				new Promise(function(resolve, reject) {
-					uni.request({
-						url: `http://${getApp().globalData.http}/app/data/sit/statistics?type=${1}`,
-
-						header: {
-							'Authorization': getApp().globalData.token,
-						},
-						success: (res) => {
-							if (res.data.code == 0) {
-								resolve(res.data.value);
-							} else if (res.data.code == -100) {
-								uni.showToast({
-									title: '请求失败',
-									duration: 2000
-								});
-							}
-
-						}
-					})
-				}).then(res => {
-					let x = [];
-					let y = [];
-					res.map((item) => {
-						x.push(item.x_value);
-						y.push(item.y_value);
-					})
-					this.secondShowButtonIndex = 'week';
-					this.chartData = {
-						categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
-						series: [{
-							name: '指数',
-							data: y,
-							color: '#13C2C2',
-						}]
-					};
-					return new Promise(function(resolve, reject) {
+					if (res.data) {
+						// uni.showLoading({
+						// 	title: '加载中'
+						// })
 						uni.request({
-							url: `http://${getApp().globalData.http}/app/data/today/work/time`,
+							url: `http://${getApp().globalData.http}/platform/app/login`,
+							// url: 'http://82.157.34.130:9901/platform/app/login',
+							method: 'POST',
+							data: {
+								password: res.data.password,
+								username: res.data.user
+							},
 							header: {
-								'Authorization': getApp().globalData.token,
+								'Content-Type': 'application/json'
 							},
 							success: (res) => {
-								if (res.data.code == 0) {
-									resolve(res.data.value);
-								} else if (res.data.code == -100) {
-									uni.showToast({
-										title: '请求失败',
-										icon: 'none',
-										duration: 2000
-									});
+								// uni.hideLoading();
+								console.log(res);
+								if (res.data.code != 0) {
+									uni.navigateTo({
+										url: '../login/login'
+									})
+
+								}
+								getApp().globalData.token = res.data.value.token;
+								if (option.index) {
+									that.resever = option.resever;
+									that.buttonIndex = parseInt(option.buttonIndex);
+									that.index = parseInt(option.index);
+									that.startTime = option.startTime;
+									that.endTime = option.endTime;
+									that.position = option.position;
 								}
 
+								uni.request({
+									url: `http://${getApp().globalData.http}/app/office/reserve/station/list`,
+									// url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
+									header: {
+
+										'Authorization': getApp().globalData.token,
+									},
+									success: (res) => {
+
+										if (Array.isArray(res.data.value) && res.data.value
+											.length != 0) {
+
+											that.list = res.data.value;
+											that.infoTag = true;
+											let arr = new Array([res.data.value.length]);
+											arr.fill(true);
+											that.listArr = arr;
+											console.log(that.listArr)
+											// that.resever = true;
+
+										}
+
+									}
+								})
+								uni.request({
+									url: `http://${getApp().globalData.http}/app/office/reserve/station/info`,
+									// url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
+									header: {
+										'Authorization': getApp().globalData.token,
+									},
+									success: (res) => {
+
+										if (res.data.value) {
+											that.resever = true;
+											that.sign = false;
+											that.infoObj = res.data.value;
+											that.sign = res.data.value.sign_status;
+											that.powerButton = !res.data.value
+												.power_status;
+
+										}
+
+									}
+								})
+
+								uni.request({
+									url: `http://${getApp().globalData.http}/app/office/fixed/station/info`,
+									// url: 'http://82.157.34.130:9901/app/office/fixed/station/info',
+									header: {
+										'Authorization': getApp().globalData.token,
+									},
+									success: (res) => {
+
+										if (!res.data.value) {
+
+											that.fixedTag = false;
+										} else {
+
+											that.fixedObj = res.data.value;
+											that.powerFixedButton = !res.data.value
+												.power_status;
+										}
+									}
+								})
+								uni.request({
+										url: `http://${getApp().globalData.http}/app/message/not/read/count`,
+										// url: 'http://82.157.34.130:9901/app/message/not/read/count',
+										header: {
+											'Authorization': getApp().globalData.token,
+										},
+										success: (res) => {
+											if (res.data.value > 0) {
+
+												that.showMessage.showMessage = res.data.value;
+												that.showMessage.show = true;
+
+
+											}
+											that.count = res.data.value;
+											that.headerShow = true;
+										}
+									}),
+									new Promise(function(resolve, reject) {
+										uni.request({
+											url: `http://${getApp().globalData.http}/app/data/sit/statistics?type=${1}`,
+
+											header: {
+												'Authorization': getApp().globalData.token,
+											},
+											success: (res) => {
+												if (res.data.code == 0) {
+													resolve(res.data.value);
+												} else if (res.data.code == -100) {
+													uni.showToast({
+														title: '请求失败',
+														duration: 2000
+													});
+												}
+
+											}
+										})
+									}).then(res => {
+										let x = [];
+										let y = [];
+										res.map((item) => {
+											x.push(item.x_value);
+											y.push(item.y_value);
+										})
+
+										that.secondShowButtonIndex = 'week';
+										that.chartData = {
+											categories: ['周一', '周二', '周三', '周四', '周五', '周六',
+												'周天'
+											],
+											series: [{
+												name: '指数',
+												data: y,
+												color: '#13C2C2',
+											}]
+										};
+										return new Promise(function(resolve, reject) {
+											uni.request({
+												url: `http://${getApp().globalData.http}/app/data/today/work/time`,
+												header: {
+													'Authorization': getApp()
+														.globalData.token,
+												},
+												success: (res) => {
+													if (res.data.code == 0) {
+														resolve(res.data
+															.value);
+													} else if (res.data.code ==
+														-100) {
+														uni.showToast({
+															title: '请求失败',
+															icon: 'none',
+															duration: 2000
+														});
+													}
+
+
+												}
+											})
+										})
+									}).then(res => {
+
+										that.grade = res.health_number;
+										that.workTimeHour = parseInt(res.work_time / 3600);
+										that.workTimeMins = parseInt(res.work_time % 3600 / 60);
+										that.continueWorkTimeHour = res.continuous_work_time.split(
+											':')[0];
+										that.continueWorkTimeMins = res.continuous_work_time.split(
+											':')[1];
+										let s, sH, sM, number;
+										let e;
+										if (res.work_time_list.length) {
+											s = res.work_time_list[0].start_time;
+											sH = s.split(":")[0];
+											sM = s.split(":")[1];
+										}
+										that.boxArray.fill(0)
+										if (res.work_time_list.length) {
+											res.work_time_list.map((item) => {
+												let start = item.start_time;
+												let startH = start.split(":")[0];
+												let startM = start.split(":")[1];
+												let end = item.end_time;
+												let endH = end.split(":")[0];
+												let endM = end.split(":")[1];
+												let H = startH - sH;
+												let M = startM - sM;
+												let int = 0;
+												let float = 0;
+												let q, w;
+												let startIndex, endIndex;
+												let indexOne, indexTwo;
+												let xx, xxx;
+
+												if (M < 0) {
+													M = M + 60;
+													H = H - 1;
+												}
+
+
+												int = (H * 60 + M) / 30;
+												float = (H * 60 + M) % 30;
+												startIndex = Math.ceil(int);
+
+
+												H = endH - sH;
+												M = endM - sM;
+												if (M < 0) {
+													M = M + 60;
+													H = H - 1;
+												}
+												int = (H * 60 + M) / 30;
+												float = (H * 60 + M) % 30;
+												endIndex = Math.ceil(int);
+
+												if (endIndex - startIndex > 3) {
+													number = 2;
+												} else {
+													number = 1;
+
+												}
+												if (endIndex > that.boxArray.length) {
+													that.boxArray.length = endIndex;
+												}
+												that.boxArray.fill(number, startIndex,
+													endIndex);
+
+											})
+
+											let space;
+											let spaceArray = [0, 1 / 3, 2 / 3, 3 / 3];
+
+
+											space = (that.boxArray.length * 0.5).toFixed(1)
+											console.log(space);
+											spaceArray.map((item, index) => {
+												if (index == 0) {
+													that.timelist[index] = s;
+												} else {
+													let x = (space * item).toFixed(1);
+													if (parseInt(x.split('.')[1] * 6) +
+														parseInt(sM) >= 60) {
+														that.timelist[index] = parseInt((
+																parseInt(x.split('.')[
+																	0]) + parseInt(sH)
+															) + 1) + ':' +
+															parseInt(parseInt(x.split('.')[
+																1] * 6) + parseInt(
+																sM) - 60);
+													} else {
+														that.timelist[index] = parseInt((
+															parseInt(x.split('.')[
+																0]) + parseInt(sH)
+														)) + ':' + parseInt(
+															parseInt(x.split('.')[1] *
+																6) + parseInt(sM));
+													}
+
+
+												}
+
+												console.log(that.timelist[index]);
+
+											})
+											console.log(that.timelist)
+
+
+
+
+
+
+
+
+											// that.timelistTwo = +':' + sM;
+											// that.timelistThree = +':' + sM;
+
+										}
+
+									})
 
 							}
-						})
-					})
-				}).then(res => {
-					console.log("111");
-					console.log(res);
-					this.grade = res.health_number;
-					this.workTimeHour = parseInt(res.work_time / 3600);
-					this.workTimeMins = parseInt(res.work_time % 3600 / 60);
-					this.continueWorkTimeHour = res.continuous_work_time.split(':')[0];
-					this.continueWorkTimeMins = res.continuous_work_time.split(':')[1];
-					let s = res.work_time_list[0].start_time;
-					let sH = s.split(":")[0];
-					let sM = s.split(":")[1];
-
-					this.boxArray.fill(0)
-					if (res.work_time_list.length) {
-						res.work_time_list.map((item) => {
-							let start = item.start_time;
-							let startH = start.split(":")[0];
-							let startM = start.split(":")[1];
-							let end = item.end_time;
-							let endH = end.split(":")[0];
-							let endM = end.split(":")[1];
-							let H = startH - sH;
-							let M = startM - sM;
-							let int = 0;
-							let float = 0;
-							let q, w;
-							let startIndex, endIndex;
-							let indexOne, indexTwo;
-							let xx, xxx;
-							if (M < 0) {
-								M = M + 60;
-								H = H - 1;
-							}
-
-
-							int = (H * 60 + M) / 30;
-							float = (H * 60 + M) % 30;
-							startIndex = Math.ceil(int);
-							int = parseInt((q - 0) * 30 / 60);
-							float = parseInt((q - 0) * 30 % 60);
-
-
-
-							xx = sH - 0 + int;
-							xxx = sM - 0 + float;
-							if (xxx >= 60) {
-								xxx = xxx - 60;
-								xx = xx + 1;
-							}
-							int = xx - startH;
-							float = xxx - startM;
-							float = parseInt(float);
-							if (float < 0) {
-								float = float + 60;
-								int = int - 1;
-							}
-
-							if (float < 15) {
-								indexOne = 2;
-							} else if (float > 15 && float < 30) {
-								indexOne = 1;
-							} else {
-								indexOne = 0;
-							}
-
-
-
-							H = endH - sH;
-							M = endM - M;
-							if (M < 0) {
-								M = M + 60;
-								H = H - 1;
-							}
-							int = (H * 60 + M) / 30;
-							float = (H * 60 + M) % 30;
-							endIndex = Math.ceil(int);
-							int = (H * 60 + M) / 30;
-							float = (H * 60 + M) % 30;
-							q = Math.ceil(int);
-							int = parseInt((q - 0) * 30 / 60);
-							float = parseInt((q - 0) * 30 % 60);
-
-
-							xx = sH - 0 + int;
-							xxx = sM - 0 + float;
-							if (xxx >= 60) {
-								xxx = xxx - 60;
-								xx = xx + 1;
-							}
-							int = xx - endH;
-
-							float = xxx - endM;
-							float = parseInt(float);
-							if (float < 0) {
-								float = float + 60;
-								int = int - 1;
-							}
-
-							if (float < 15) {
-								indexTwo = 2;
-							} else if (float > 15 && float < 30) {
-								indexTwo = 1;
-							} else {
-								indexTwo = 0;
-							}
-
-
-							this.boxArray.fill(2, startIndex, endIndex);
-							startIndex = parseInt(startIndex);
-							endIndex = parseInt(startIndex);
-							this.boxArray[startIndex] = indexOne;
-							this.boxArray[endIndex] = indexTwo;
-
-
 						})
 					}
-				})
+
+				},
+				fail() {
+					uni.navigateTo({
+						url: '../login/login'
+					})
+				}
+			})
+
+
+
 
 
 		},
@@ -829,6 +917,7 @@
 			tarbarListen(index) {
 				this.index = index;
 				if (index == 1) {
+				
 					new Promise(function(resolve, reject) {
 
 						uni.request({
@@ -851,16 +940,20 @@
 							}
 						})
 					}).then(res => {
-						console.log(res)
+
 						let x = [];
 						let y = [];
 						res.map((item, index) => {
-							if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length -
-									1)) {
-								x.push(index + 1);
-							} else {
+							
+							 if(index%2!=0)
+							 {
+									x.push(item.x_value); 
+							 }
+							else
+							{
 								x.push(" ");
 							}
+						
 
 							y.push(item.y_value);
 						})
@@ -902,18 +995,16 @@
 
 
 					}).then(res => {
-
 						let x = [];
 						let y = [];
 						res.map((item, index) => {
-							if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length -
+							if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res
+									.length -
 									1)) {
 								x.push(item.x_value);
 							} else {
 								x.push(" ");
 							}
-
-
 							y.push(item.y_value);
 						})
 
@@ -960,14 +1051,17 @@
 							y.push(item.y_value);
 						})
 
-						this.SafeChartData = {
-							categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
-							series: [{
-								name: '',
-								data: [...y],
-								color: '#13C2C2',
-							}]
+						if (this.secondShowSafeButtonIndex == 'week') {
+							this.SafeChartData = {
+								categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+								series: [{
+									name: '',
+									data: [...y],
+									color: '#13C2C2',
+								}]
+							}
 						}
+
 					})
 				} else if (index == 3) {
 					let that = this;
@@ -984,79 +1078,49 @@
 								},
 								success: (res) => {
 
-									console.log(res);
+
 									that.weatherBox = res.data.value.data.forecast;
 									console.log(res.data.value.data.forecast);
-									let environmentes = [{
-										name: '适度',
-										src: '../../static/app/icon-zhengque.png',
-										number: '11.11',
-										quality: '差'
-									}, {
-										name: 'PM2.5',
-										src: '../../static/app/icon-zhengque.png',
-										number: '11.11',
-										quality: '差'
-									}, {
-										name: 'PM10',
-										src: '../../static/app/icon-zhengque.png',
-										number: '11.11',
-										quality: '差'
-									}, {
-										name: '温度',
-										src: '../../static/app/icon-zhengque.png',
-										number: '11.11',
-										quality: '差'
-									}, {
-										name: '温度',
-										src: '../../static/app/icon-zhengque.png',
-										number: '11.11',
-										quality: '差'
-									}, {
-										name: '温度',
-										src: '../../static/app/icon-zhengque.png',
-										number: '11.11',
-										quality: '差'
-									}]
-									environmentes[0].number = res.data.value.data.shidu;
-									res.data.value.data.shidu = res.data.value.data.shidu.split(
-										"%")[0] / 100;
-									if (res.data.value.data.shidu > 0.5 && res.data.value.data
+
+									that.environmentes[0].number = res.data.value.data
+										.shidu;
+									res.data.value.data.shidu = res.data.value.data.shidu
+										.split(
+											"%")[0] / 100;
+									if (res.data.value.data.shidu > 0.5 && res.data.value
+										.data
 										.shidu < 0.8) {
-										environmentes[0].quality = '良'
-									} else if (res.data.value.data.shidu > 0.8) {
-										environmentes[0].quality = '优'
+										that.environmentes[0].quality = '优'
 									} else {
-										environmentes[0].quality = '差'
+										that.environmentes[0].quality = '差'
 									}
 									environmentes[1].number = res.data.value.data.pm25;
-									if (res.data.value.data.pm25 > 60 && res.data.value.data
+									if (res.data.value.data.pm25 > 60 && res.data.value
+										.data
 										.pm25 < 100) {
-										environmentes[1].quality = '良'
-									} else if (res.data.value.data.pm25 > 100) {
-										environmentes[1].quality = '差'
+										that.environmentes[1].quality = '差'
 									} else {
-										environmentes[1].quality = '优'
+										that.environmentes[1].quality = '优'
 									}
-									environmentes[2].number = res.data.value.data.pm10;
-									if (res.data.value.data.pm10 > 60 && res.data.value.data
+									that.environmentes[2].number = res.data.value.data
+										.pm10;
+									if (res.data.value.data.pm10 > 60 && res.data.value
+										.data
 										.pm10 < 100) {
-										environmentes[2].quality = '良'
-									} else if (res.data.value.data.pm10 > 100) {
-										environmentes[2].quality = '差'
+										that.environmentes[2].quality = '差'
 									} else {
-										environmentes[2].quality = '优'
+										that.environmentes[2].quality = '优'
 									}
-									environmentes[3].number = res.data.value.data.wendu;
-									if (res.data.value.data.wendu > 0 && res.data.value.data
+									that.environmentes[3].number = res.data.value.data
+										.wendu;
+									if (res.data.value.data.wendu > 0 && res.data.value
+										.data
 										.wendu < 20) {
-										environmentes[3].quality = '良'
-									} else if (res.data.value.data.wendu < 0) {
-										environmentes[3].quality = '差'
+										that.environmentes[3].quality = '差'
 									} else {
-										environmentes[3].quality = '优'
+										that.environmentes[3].quality = '优'
 									}
-									that.environmentes = environmentes;
+
 									console.log(that.environmentes)
 								},
 
@@ -1074,9 +1138,29 @@
 
 			},
 			doubleButtonListen(index) {
-
+				let that = this;
 				this.buttonIndex = index;
 
+				if (this.buttonIndex == 0) {
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/fixed/station/info`,
+						// url: 'http://82.157.34.130:9901/app/office/fixed/station/info',
+						header: {
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+
+							if (!res.data.value) {
+
+								that.fixedTag = false;
+							} else {
+
+								that.fixedObj = res.data.value;
+								that.powerFixedButton = !res.data.value.power_status;
+							}
+						}
+					})
+				}
 			},
 			powerButtonClick(id) {
 				let that = this;
@@ -1090,7 +1174,7 @@
 
 					},
 					success: (res) => {
-						console.log(res);
+
 
 					}
 				})
@@ -1193,7 +1277,8 @@
 
 
 					res.map((item, index) => {
-						if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length - 1)) {
+						if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length -
+								1)) {
 							x.push(index + 1);
 						} else {
 							x.push(" ");
@@ -1299,7 +1384,8 @@
 					let x = [];
 					let y = [];
 					res.map((item, index) => {
-						if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length - 1)) {
+						if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length -
+								1)) {
 							x.push(index + 1);
 						} else {
 							x.push(" ");
@@ -1503,7 +1589,7 @@
 					title: '提示',
 					content: '您确定要提前结束吗？',
 					success: (res) => {
-						console.log(res);
+
 						this.sign = !this.sign;
 						this.resever = !this.resever;
 						uni.request({
@@ -1513,7 +1599,7 @@
 								'Authorization': getApp().globalData.token,
 							},
 							success: (res) => {
-								console.log(res);
+
 							}
 						})
 					},
@@ -1539,7 +1625,7 @@
 						'Authorization': getApp().globalData.token,
 					},
 					success: (res) => {
-						console.log(res);
+
 					}
 				})
 
@@ -1664,23 +1750,25 @@
 	.content-main .firstShow .firstShow-top .right {
 		display: flex;
 		flex-direction: column;
+
 	}
 
 	.content-main .firstShow .firstShow-center #top-box {
 		display: flex;
-		margin-top: calc(100vh * 24/812);
-
+		margin: calc(100vh * 24/812) calc(750rpx * 19/ 375) 0;
+		justify-content: space-between;
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .item {
+		
 		width: calc(750rpx * 16/ 375);
 		height: calc(100vh * 16/812);
-		margin-left: calc(750rpx *1/ 375);
+		margin-right: calc(750rpx *1/ 375);
 
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .colorOne {
-		background-color: #D0F3F3;
+		background-color: #EDEFF2;
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .colorTwo {
@@ -1691,8 +1779,8 @@
 		background-color: #FB696C;
 	}
 
-	.content-main .firstShow .firstShow-center #top-box .item:nth-child(1) {
-		margin-left: calc(750rpx * 18/ 375);
+	.content-main .firstShow .firstShow-center #top-box .item:last-child {
+		margin-right: 0;
 	}
 
 
@@ -2109,6 +2197,7 @@
 	}
 
 	.content-main .show-first {
+
 		position: relative;
 	}
 

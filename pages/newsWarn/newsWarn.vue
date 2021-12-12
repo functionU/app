@@ -8,8 +8,7 @@
 		<view class="content">
 			<view class="content-item" v-for="item in warnArray">
 				<view class="top-box">
-					<text>{{item.reserve_station.reserve_date.split("-")[1]}}月{{item.reserve_station.reserve_date.split("-")[2]}}日
-						{{item.reserve_station.start_time.split(":")[0] <12 ? '上午':'下午'}}{{item.reserve_station.start_time.split(":")[0]}}:{{item.reserve_station.start_time.split(":")[1]}}</text>
+					<text>{{item.reserve_station.reserve_date.split("-")[1]}}月{{item.reserve_station.reserve_date.split("-")[2]}}日{{item.reserve_station.start_time.split(":")[0] <12 ? '上午':'下午'}}{{item.reserve_station.start_time.split(":")[0]}}:{{item.reserve_station.start_time.split(":")[1]}}</text>
 				</view>
 				<view class="bottom-box">
 					<view class="bottom-box-top">

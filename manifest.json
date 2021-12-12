@@ -21,7 +21,8 @@
         },
         /* 模块配置 */
         "modules" : {
-            "Geolocation" : {}
+            "Geolocation" : {},
+            "Maps" : {}
         },
         /* 应用发布信息 */
         "distribute" : {

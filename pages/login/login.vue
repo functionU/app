@@ -58,51 +58,7 @@
 		onLoad() {
 
 
-			uni.getStorage({
-				key: 'login',
-				success(res) {
-
-					if (res.data) {
-						uni.showLoading({
-							title: '加载中'
-						})
-						uni.request({
-							url: `http://${getApp().globalData.http}/platform/app/login`,
-							// url: 'http://82.157.34.130:9901/platform/app/login',
-							method: 'POST',
-							data: {
-								password: res.data.password,
-								username: res.data.user
-							},
-							header: {
-								'Content-Type': 'application/json'
-							},
-							success: (res) => {
-								uni.hideLoading();
-								console.log(res.data.code)
-								if (res.data.code == 0) {
-									getApp().globalData.token = res.data.value.token;
-									uni.navigateTo({
-										url: '../login-success/login-success'
-									})
-								} else if (res.data.code == -100) {
-									uni.showToast({
-										title: '用户名或密码错误',
-										duration: 2000
-									});
-									this.tag = true;
-									this.show = false;
-									this.showNameImg = '../../static/app/icon-cuowu@2X.png'
-								}
-
-
-
-							}
-						})
-					}
-
-				}
-			})
+			
 
 		},
 		onShow() {
@@ -147,7 +103,7 @@
 						'Content-Type': 'application/json'
 					},
 					success: (res) => {
-
+						uni.hideLoading();
 						if (res.data.code == 0) {
 							getApp().globalData.token = res.data.value.token;
 							uni.setStorage({
@@ -161,7 +117,7 @@
 
 								}
 							})
-							uni.hideLoading();
+
 							uni.navigateTo({
 								url: '../login-success/login-success'
 							})
@@ -169,6 +125,7 @@
 						} else if (res.data.code == -100) {
 							uni.showToast({
 								title: '用户名或密码错误',
+								icon: 'none',
 								duration: 2000
 							});
 							this.tag = true;

@@ -1867,19 +1867,32 @@ var render = function() {
                                   expression: "_$g(82,'v-show')"
                                 }
                               ],
-                              staticClass: _vm._$g(82, "sc"),
+                              staticStyle: {
+                                "text-align": "center",
+                                "margin-top": "20%",
+                                color: "white",
+                                "font-weight": "bold"
+                              },
                               attrs: { _i: 82 }
+                            },
+                            [_vm._v("您还没有固定工位呢！")]
+                          ),
+                          _c(
+                            "v-uni-view",
+                            {
+                              staticClass: _vm._$g(83, "sc"),
+                              attrs: { _i: 83 }
                             },
                             [
                               _c(
                                 "tip",
-                                { attrs: { _i: 83 } },
+                                { attrs: { _i: 84 } },
                                 [
                                   _c(
                                     "v-uni-view",
                                     {
-                                      staticClass: _vm._$g(84, "sc"),
-                                      attrs: { slot: "right", _i: 84 },
+                                      staticClass: _vm._$g(85, "sc"),
+                                      attrs: { slot: "right", _i: 85 },
                                       on: {
                                         click: function($event) {
                                           return _vm.$handleViewEvent($event)
@@ -1888,7 +1901,7 @@ var render = function() {
                                       slot: "right"
                                     },
                                     [
-                                      _c("v-uni-text", { attrs: { _i: 85 } }, [
+                                      _c("v-uni-text", { attrs: { _i: 86 } }, [
                                         _vm._v("用电统计")
                                       ]),
                                       _c("v-uni-image", {
@@ -1897,8 +1910,8 @@ var render = function() {
                                           height: "calc(750rpx * 28.47\t/ 375)"
                                         },
                                         attrs: {
-                                          src: _vm._$g(86, "a-src"),
-                                          _i: 86
+                                          src: _vm._$g(87, "a-src"),
+                                          _i: 87
                                         }
                                       })
                                     ],
@@ -1910,35 +1923,14 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g(87, "sc"),
-                                  attrs: { _i: 87 }
+                                  staticClass: _vm._$g(88, "sc"),
+                                  attrs: { _i: 88 }
                                 },
-                                [_c("qiun-data-charts", { attrs: { _i: 88 } })],
+                                [_c("qiun-data-charts", { attrs: { _i: 89 } })],
                                 1
                               )
                             ],
                             1
-                          ),
-                          _c(
-                            "v-uni-view",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm._$g(89, "v-show"),
-                                  expression: "_$g(89,'v-show')"
-                                }
-                              ],
-                              staticStyle: {
-                                "text-align": "center",
-                                "margin-top": "20%",
-                                color: "white",
-                                "font-weight": "bold"
-                              },
-                              attrs: { _i: 89 }
-                            },
-                            [_vm._v("您还没有固定工位呢！")]
                           )
                         ],
                         1
@@ -14495,7 +14487,16 @@ var render = function() {
         },
         attrs: { src: _vm._$g(2, "a-src"), _i: 2 }
       }),
-      _c("v-uni-text", { attrs: { _i: 3 } }, [_vm._v(_vm._$g(3, "t0-0"))]),
+      _c("v-uni-text", { attrs: { _i: 3 } }, [
+        _vm._v(
+          _vm._$g(3, "t0-0") +
+            " " +
+            _vm._$g(3, "t0-1") +
+            _vm._$g(3, "t0-2") +
+            _vm._$g(3, "t0-3") +
+            _vm._$g(3, "t0-4")
+        )
+      ]),
       _c("v-uni-view", { class: _vm._$g(4, "c"), attrs: { _i: 4 } }, [
         _vm._v(_vm._$g(4, "t0-0"))
       ])
@@ -14591,7 +14592,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.environment-item[data-v-3cc22921] {\n\tdisplay: flex;\n\tflex-direction: column;\n\tjustify-content: center;\n\talign-items: center;\n\tjustify-content: space-around;\n\twidth: calc(750rpx * 90/ 375);\n\theight: calc(100vh * 144/ 812);\n\tfont-size: calc(750rpx * 12/ 375);\n\tborder-radius: calc(750rpx * 10/ 375);\n\tborder: 1px solid rgba(10, 32, 57, 0.15);\n}\n.text[data-v-3cc22921] {\n\tfont-weight: bold;\n}\n.item[data-v-3cc22921] {\n\twidth: calc(750rpx * 58/ 375);\n\theight: calc(100vh * 22/ 812);\n\tline-height: calc(100vh * 22/ 812);\n\tborder-radius: calc(750rpx * 14/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n\ttext-align: center;\n\tbackground-color: rgba(255, 169, 54, 1);\n}\n.good[data-v-3cc22921] {\n\tbackground-color: rgba(26, 191, 194, 1);\n}\n.bad[data-v-3cc22921] {\n\tbackground-color: rgba(251, 105, 108, 1);\n}\n", ""]);
+exports.push([module.i, "\n.environment-item[data-v-3cc22921] {\n\tdisplay: flex;\n\tflex-direction: column;\n\tjustify-content: center;\n\talign-items: center;\n\tjustify-content: space-around;\n\twidth: calc(750rpx * 90/ 375);\n\theight: calc(100vh * 144/ 812);\n\tfont-size: calc(750rpx * 12/ 375);\n\tborder-radius: calc(750rpx * 10/ 375);\n\tborder: 1px solid rgba(10, 32, 57, 0.15);\n}\n.text[data-v-3cc22921] {\n\tfont-weight: bold;\n}\n.item[data-v-3cc22921] {\n\twidth: calc(750rpx * 58/ 375);\n\theight: calc(100vh * 22/ 812);\n\tline-height: calc(100vh * 22/ 812);\n\tborder-radius: calc(750rpx * 14/ 375);\n\tcolor: black;\n\ttext-align: center;\n\tbackground-color: rgba(255, 169, 54, 1);\n\tborder:  1px solid rgba(10,32,57,0.15);\n}\n.good[data-v-3cc22921] {\n\tbackground-color: rgba(26, 191, 194, 1);\n}\n.bad[data-v-3cc22921] {\n\tbackground-color: rgba(251, 105, 108, 1);\n}\n.none[data-v-3cc22921]{\n\tbackground-color: white;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -15518,10 +15519,17 @@ var render = function() {
           ),
           _c(
             "v-uni-text",
-            { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } },
+            {
+              staticClass: _vm._$g(3, "sc"),
+              staticStyle: {
+                "text-align": "left",
+                "margin-left": "calc(750rpx * 24/ 375)"
+              },
+              attrs: { _i: 3 }
+            },
             [
               _vm._v(
-                "符合以下任意条件都可以算做久坐:\n\t\t\tA. 一周清醒状态下坐姿超过5天\n\t\t\tB. 每天坐姿超过8小时\n\t\t\tC. 经常连续1.5小时没有起身活动"
+                "符合以下任意条件都可以算做久坐:\n\t\t\tA. 一周清醒状态下坐姿超过5天;\n\t\t\tB. 每天坐姿超过8小时;\n\t\t\tC. 经常连续1.5小时没有起身活动。"
               )
             ]
           ),
@@ -15633,7 +15641,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.warn-bg[data-v-37cdbd06] {\n        width: 100%;\n\t\theight: 100vh;\n\t\t\n\t\tbackground-color: rgba(0,0,0,0.5);\n\t\toverflow: hidden;\n\t    z-index: 3;\n}\n.warn[data-v-37cdbd06] {\n\n\t\n\t\toverflow: hidden;\n\t\theight: calc(100vh * 228/812);\n\t\twidth: calc(750rpx * 311/ 375);\n\t\tborder-radius: calc(750rpx * 30/ 375);\n\t\tmargin: 50% auto 0;\n\t\tbackground-color: rgba(255, 255, 255, 1);\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n}\n.warn uni-text[data-v-37cdbd06]{\n\t \tfont-size: calc(750rpx * 15/375);\n}\n.warn>uni-text[data-v-37cdbd06] {\n\n\t\ttext-align: center;\n}\n.warn uni-text[data-v-37cdbd06]:nth-child(1) {\n\t\theight: calc(100vh * 60/812);\n\t\tline-height: calc(100vh * 80/812);\n\t\tfont-weight: bold;\n}\n.warn uni-text[data-v-37cdbd06]:nth-child(2) {\n\t\twidth: 100%;\n\t\theight: calc(100vh * 120/812);\n\t\n\t\ttext-align: center;\n\t\tmargin: 0 auto;\n\t\ttext-align: center;\n}\n.warn uni-text[data-v-37cdbd06]:nth-child(3) {\n\t\theight: calc(100vh * 48/812);\n\t\tcolor: rgba(19, 194, 194, 1);\n\t\tline-height: calc(100vh * 48/812);\n\t\tborder-top: 1px solid rgba(237, 239, 242, 1);\n}\n\n", ""]);
+exports.push([module.i, "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n/* \t.warn-bg {\r\n\t\twidth: 100%;\r\n\t\theight: 100vh;\r\n\t\tbackground-color: rgba(0, 0, 0, 0.5);\r\n\t\toverflow: hidden;\r\n\t\tz-index: 3;\r\n\r\n\t}\r\n\r\n\t.warn {\r\n\r\n\t\toverflow: hidden;\r\n\t\theight: calc(100vh * 228/812);\r\n\t\twidth: calc(750rpx * 311/ 375);\r\n\t\tborder-radius: calc(750rpx * 30/ 375);\r\n\t\tmargin: 50% auto 0;\r\n\t\tmargin-top:calc(100vh * 293/812) ;\r\n\t\tbackground-color: white;\r\n\t\tdisplay: flex;\r\n\t\tflex-direction: column;\r\n\t\tbackground-color: #007AFF;\r\n\t\t\r\n\r\n\r\n\t}\r\n\r\n\t.warn text {\r\n\t\tfont-size: calc(750rpx * 15/375);\r\n\t}\r\n\r\n\t.warn>text {\r\n\r\n\t\ttext-align: center;\r\n\r\n\t}\r\n\r\n\t.warn text:nth-child(1) {\r\n\t\theight: calc(100vh * 60/812);\r\n\t\tline-height: calc(100vh * 80/812);\r\n\t\tfont-weight: bold;\r\n\r\n\r\n\t}\r\n\r\n\t.warn text:nth-child(2) {\r\n\t\twidth: 100%;\r\n\t\theight: calc(100vh * 120/812);\r\n\r\n\t\ttext-align: center;\r\n\t\tmargin: 0 auto;\r\n\t\ttext-align: center;\r\n\r\n\t}\r\n\r\n\t.warn text:nth-child(3) {\r\n\t\theight: calc(100vh * 48/812);\r\n\t\tcolor: rgba(19, 194, 194, 1);\r\n\t\tline-height: calc(100vh * 48/812);\r\n\t\tborder-top: 1px solid rgba(237, 239, 242, 1);\r\n\r\n\t} */\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -15692,7 +15700,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_1___);
 var ___CSS_LOADER_URL_REPLACEMENT_2___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_2___);
 // Module
-exports.push([module.i, "\n.warnning {\n\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tz-index: 22;\n}\n.warn-show {\n\tdisplay: block;\n}\n.warn-hidden {\n\tdisplay: none;\n}\n.bgc {\n\toverflow: hidden;\n\theight: 100vh;\n\tbackground-color: rgba(241, 242, 246, 1);\n}\n.head {\n\theight: calc(100vh *44/812);\n}\n.content {\n\tpadding-top: calc(100vh * 44/812);\n\theight: calc(100vh * 358/812);\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n\tbackground-size: cover;\n\tborder-bottom-right-radius: 25%;\n\tborder-bottom-left-radius: 25%;\n}\n.content-top {\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n\tbackground-repeat: no-repeat;\n\tbackground-position: center calc(100vh * 08/812);\n\tbackground-size: calc(750rpx * 48/ 375);\n}\n.content-main .firstShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 329/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 10/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .firstShow .firstShow-top {\n\tmargin-top: calc(100vh * 24/812);\n\theight: calc(100vh * 45/812);\n\n\tdisplay: flex;\n}\n.content-main .firstShow .firstShow-top .left {\n\tmargin-left: calc(750rpx * 24/ 375);\n\tmargin-right: calc(750rpx * 18/ 375);\n}\n.content-main .firstShow .firstShow-top .right {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n.content-main .firstShow .firstShow-center #top-box {\n\tdisplay: flex;\n\tmargin-top: calc(100vh * 24/812);\n}\n.content-main .firstShow .firstShow-center #top-box .item {\n\twidth: calc(750rpx * 16/ 375);\n\theight: calc(100vh * 16/812);\n\tmargin-left: calc(750rpx *1/ 375);\n}\n.content-main .firstShow .firstShow-center #top-box .colorOne {\n\tbackground-color: #D0F3F3;\n}\n.content-main .firstShow .firstShow-center #top-box .colorTwo {\n\tbackground-color: #71DADA;\n}\n.content-main .firstShow .firstShow-center #top-box .colorThree {\n\tbackground-color: #FB696C;\n}\n.content-main .firstShow .firstShow-center #top-box .item:nth-child(1) {\n\tmargin-left: calc(750rpx * 18/ 375);\n}\n.content-main .firstShow .firstShow-center .center-box {\n\tmargin-top: calc(100vh * 8/812);\n\tpadding-top: calc(100vh * 8/812);\n\tcolor: rgba(10, 32, 57, 0.5);\n\tmargin-left: calc(750rpx * 20/ 375);\n\tmargin-right: calc(750rpx * 19/ 375);\n\tfont-size: calc(750rpx * 10/ 375);\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tborder-top: calc(750rpx * 1 / 375) dashed rgba(10, 32, 57, 0.15);\n}\n.content-main .firstShow .firstShow-bottom {\n\twidth: calc(750rpx * 304/ 375);\n\theight: calc(100vh * 53/812);\n\tmargin-left: calc(750rpx * 24/ 375);\n\n\tborder-bottom: calc(750rpx * 1 / 375) dashed rgba(10, 32, 57, 0.15);\n\tdisplay: flex;\n\talign-items: center;\n}\n.content-main .firstShow .firstShow-bottom uni-text {\n\n\tposition: relative;\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(1) {\n\tmargin-left: calc(750rpx * 84.5/ 375);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(1)::before {\n\tcontent: '';\n\tdisplay: block;\n\twidth: calc(750rpx * 8/ 375);\n\theight: calc(750rpx * 8/ 375);\n\tborder-radius: 50%;\n\tbackground-color: rgba(19, 194, 194, 1);\n\tposition: absolute;\n\ttop: 50%;\n\tleft: -50%;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(2) {\n\tmargin-left: calc(750rpx * 34/ 375);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(2)::before {\n\tcontent: '';\n\tdisplay: block;\n\twidth: calc(750rpx * 8/ 375);\n\theight: calc(750rpx * 8/ 375);\n\tborder-radius: 50%;\n\tbackground-color: rgba(19, 194, 194, 0.4);\n\tposition: absolute;\n\ttop: 50%;\n\tleft: -50%;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(3) {\n\tmargin-left: calc(750rpx * 34/ 375);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(3)::before {\n\tcontent: '';\n\tdisplay: block;\n\twidth: calc(750rpx * 8/ 375);\n\theight: calc(750rpx * 8/ 375);\n\tborder-radius: 50%;\n\tbackground-color: rgba(251, 105, 108, 1);\n\tposition: absolute;\n\ttop: 50%;\n\tleft: -50%;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.content-main .firstShow .firstShow-bottom-bottom {\n\twidth: calc(750rpx * 295/ 375);\n\theight: calc(750rpx * 131/ 375);\n\n\tmargin-left: calc(750rpx * 24 / 375);\n}\n.content-main .firstShow .firstShow-bottom-bottom .top-box {\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tmargin-top: calc(750rpx * 12/ 375);\n\talign-items: center;\n}\n.content-main .firstShow .firstShow-bottom-bottom .bottom-box .top {\n\tmargin-top: calc(100vh * 47/812);\n\tdisplay: flex;\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long {\n\twidth: calc(750rpx * 98.92/ 375);\n\theight: calc(750rpx * 9.73/ 375);\n\tbackground-color: #007AFF;\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(2) {\n\n\tborder-top-left-radius: calc(750rpx * 100/ 375);\n\tborder-bottom-left-radius: calc(750rpx * 100/ 375);\n\tbackground-image: linear-gradient(270deg, #FBD66A 0%, #FEB97A 20%, rgba(251, 105, 108, 0.80) 100%);\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(3) {\n\tmargin-left: calc(750rpx * 1/ 375);\n\tbackground-image: linear-gradient(90deg, #B4EE6B 0%, #FFE862 100%);\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(4) {\n\tborder-top-right-radius: calc(750rpx * 100/ 375);\n\tborder-bottom-right-radius: calc(750rpx * 100/ 375);\n\tmargin-left: calc(750rpx * 1/ 375);\n\tbackground-image: linear-gradient(90deg, rgba(17, 174, 174, 0.80) 3%, #A8EF69 100%);\n}\n.content-main .secondShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 246/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .secondShow .secondShow-box {\n\twidth: 100%;\n\theight: calc(100vh * 194/812);\n\t/* margin:calc(100vh * 20/812) calc(750rpx * 18/ 375) 0 calc(750rpx * 18/ 375); */\n}\n.content-main .secondShow uni-text {\n\tcolor: rgba(10, 32, 57, 0.5);\n\twidth: calc(750rpx * 48/ 375);\n\theight: calc(100vh * 24/812);\n\tline-height: calc(100vh * 24/812);\n\tborder-radius: calc(750rpx * 16/ 375);\n\tdisplay: inline-block;\n\ttext-align: center;\n}\n.content-main .secondShow uni-text:nth-child(2) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-right: 0;\n}\n.content-main .secondShow .click {\n\tcolor: white;\n\tbackground-color: #13C2C2;\n}\n.content-main .safeFirstShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 281/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 10/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .safeSecondShow-box,\n.safeFirstShow-box {\n\twidth: 100%;\n\theight: calc(100vh * 194/812);\n}\n.content-main .safeSecondShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 281/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .safeSecondShow uni-text {\n\tcolor: rgba(10, 32, 57, 0.5);\n\twidth: calc(750rpx * 48/ 375);\n\theight: calc(100vh * 24/812);\n\tline-height: calc(100vh * 24/812);\n\tborder-radius: calc(750rpx * 16/ 375);\n\tdisplay: inline-block;\n\ttext-align: center;\n}\n.content-main .safeSecondShow uni-text:nth-child(2) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-right: 0;\n}\n.content-main .safeSecondShow .click {\n\tcolor: white;\n\tbackground-color: #13C2C2;\n}\n.content-main .firstOffice {\n\toverflow: hidden;\n\theight: calc(100vh * 416/812);\n\twidth: calc(750rpx * 343/ 375);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 10/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .firstOffice .environment {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n}\n.content-main .firstOffice .environment .environment-item:nth-child(1) {\n\tmargin-left: calc(750rpx *24/ 375);\n\tmargin-top: calc(100vh * 20/812);\n}\n.content-main .firstOffice .environment .environment-item:nth-child(2) {\n\tmargin-top: calc(100vh * 20/812);\n\tmargin-left: calc(750rpx * 12/ 375)\n}\n.content-main .firstOffice .environment .environment-item:nth-child(3) {\n\tmargin-top: calc(100vh * 20/812);\n\tmargin-left: calc(750rpx * 12/ 375)\n}\n.content-main .firstOffice .environment .environment-item:nth-child(4) {\n\tmargin-left: calc(750rpx *24/ 375);\n\tmargin-top: calc(100vh * 10/812);\n}\n.content-main .firstOffice .environment .environment-item:nth-child(5) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-top: calc(100vh * 10/812);\n}\n.content-main .firstOffice .environment .environment-item:nth-child(6) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-top: calc(100vh * 10/812);\n}\n.content-main .firstOffice .firstOffice-tip {\n\tfont-size: calc(750rpx * 12/ 375);\n\ttext-align: center;\n\tmargin-top: calc(750rpx * 12.5/ 375);\n\tcolor: rgba(10, 32, 57, 0.5);\n}\n.content-main .firstOffice .firstOffice-tip::before {\n\tcontent: '';\n\tdisplay: inline-block;\n\twidth: calc(750rpx * 11/ 375);\n\theight: calc(100vh* 12/ 812);\n\n\tmargin-right: calc(750rpx * 9.93/ 375);\n\tbackground-size: cover;\n}\n.content-main .secondOffice {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 168/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .secondOffice .box {\n\n\theight: calc(100vh * 91/812);\n\t;\n\toverflow-y: scroll;\n}\n.content-main .secondOffice .box .secondOffice-item {\n\tmargin-top: calc(100vh * 12/812);\n\theight: calc(100vh * 17/812);\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tcolor: rgba(10, 32, 57, 0.7);\n\tfont-size: calc(750rpx * 12/ 375);\n}\n.content-main .secondOffice .box .secondOffice-item:first-child {\n\tmargin-top: calc(100vh * 16/812);\n}\n.content-main .reserveFirst {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 100/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 16/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n\tdisplay: flex;\n\tjustify-content: space-around;\n\talign-items: center;\n}\n.content-main .reserveFirst .reserveFirst-left {\n\twidth: calc(750rpx * 68/ 375);\n\theight: calc(100vh * 70/812);\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tmargin-left: calc(-750rpx * 21/ 375);\n}\n.content-main .reserveFirst .reserveFirst-center {\n\tmargin-left: calc(-750rpx * 68/ 375);\n\tbackground-size: cover;\n}\n.content-main .reserveFirst .reserveFirst-center uni-text {\n\tfont-size: calc(750rpx * 14/ 375);\n\tdisplay: block;\n\twidth: auto;\n\theight: calc(100vh * 20/812);\n}\n.content-main .reserveFirst .reserveFirst-center uni-text:first-child {\n\tcolor: rgba(10, 32, 57, 0.5);\n}\n.content-main .reserveFirst .reserveFirst-center uni-text:last-child {\n\tcolor: rgba(10, 32, 57, 0.9);\n\tmargin-top: calc(100vh *8/812);\n}\n.content-main .reserveFirst .reserveFirst-right {\n\tfont-size: calc(750rpx * 14/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n\tbackground-color: #13C2C2;\n\twidth: calc(750rpx * 48/ 375);\n\theight: calc(100vh * 24/812);\n\tline-height: calc(100vh * 24/812);\n\tborder-radius: calc(750rpx * 15.5/ 375);\n\ttext-align: center;\n\tposition: relative;\n}\n.content-main .reserveFirst .reserveFirst-right .close {\n\tvisibility: hidden;\n}\n.content-main .reserveFirst .reserveFirst-right .open {\n\tvisibility: hidden;\n}\n.content-main .reserveFirst .reserveFirst-right-click {\n\tbackground-color: #636e72;\n}\n.content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius {\n\tposition: absolute;\n\ttop: 8%;\n\tleft: 5%;\n\twidth: calc(750rpx * 20/ 375);\n\theight: calc(100vh * 20/812);\n\tbackground-color: #F8F8F8;\n\tborder-radius: 50%;\n}\n.content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius-click {\n\tposition: absolute;\n\ttop: 8%;\n\tleft: 55%;\n\tbottom: 0;\n\tbackground-color: #F8F8F8;\n}\n.content-main .show-first {\n\tposition: relative;\n}\n.content-main .show-first .reserveText {\n\theight: calc(100vh * 45/812);\n\twidth: calc(750rpx * 91/ 375);\n\tline-height: calc(100vh * 45/812);\n\ttext-align: center;\n\tmargin: calc(100vh * 40/812) calc(750rpx * 142/ 375) 0;\n\tfont-size: calc(750rpx * 32/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n}\n.content-main .show-first .reserveText::before {\n\n\tcontent: '固定工位 :';\n\tdisplay: block;\n\tfont-size: calc(750rpx * 14/ 375);\n\theight: calc(100vh *20/812);\n\twidth: calc(750rpx *70/ 375);\n\tposition: absolute;\n\ttop: calc(-100vh *40/812);\n\tleft: 50%;\n\t-webkit-transform: translateX(-50%);\n\t        transform: translateX(-50%)\n}\n.content-main .reserveSecond {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 297/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .reserveSecond .reserveSecond-box {\n\twidth: 100%;\n\theight: calc(100vh * 216/812);\n}\n.content-main .reserveSecond .reserveSecond-img {\n\twidth: calc(750rpx * 295/ 375);\n\theight: calc(100vh * 160/812);\n\n\tmargin: 0 calc(750rpx * 26/ 375) calc(750rpx * 22/ 375);\n\tpadding-top: calc(100vh * 15/812);\n\n\ttext-align: center;\n}\n.content-main .reserveSecond .right {\n\tdisplay: flex;\n\tcolor: #FFA936;\n\tfont-size: calc(750rpx * 13/ 375);\n}\n.content-main .reserveSecond .reserveSecond-box {}\n.content-main .show-second .reserveFirst {\n\tmargin-top: calc(100vh * 20/812);\n\tbackground-color: rgba(10, 32, 57, 0.1);\n\tdisplay: flex;\n}\n.content-main .show-second .reserveFirst .left uni-text {\n\tdisplay: block;\n\tcolor: rgba(255, 255, 255, 0.65);\n}\n.content-main .show-second .reserveFirst .left uni-text:nth-child(1) {\n\tfont-size: calc(750rpx * 24/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n}\n.content-main .show-second .reserveFirst .left uni-text:nth-child(2) {\n\tmargin-top: calc(100vh * 8/812);\n}\n.content-main .show-second .reserveFirst .right uni-image {\n\twidth: calc(750rpx * 60/ 375);\n\theight: calc(100vh * 60/812);\n}\n.content-main .show-second .afterSign .picker {\n\tz-index: 1;\n\tleft: 0;\n\tbottom: 0;\n}\n.content-main .show-second .afterSign .picker .picker-item {\n\n\tbackground-color: white;\n\ttext-align: center;\n}\n.bgcOne {\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n.bgcTwo {\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n", ""]);
+exports.push([module.i, "\n.warnning {\n\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tz-index: 22;\n}\n.warn-show {\n\tdisplay: block;\n}\n.warn-hidden {\n\tdisplay: none;\n}\n.bgc {\n\toverflow: hidden;\n\theight: 100vh;\n\tbackground-color: rgba(241, 242, 246, 1);\n}\n.head {\n\theight: calc(100vh *44/812);\n}\n.content {\n\tpadding-top: calc(100vh * 44/812);\n\theight: calc(100vh * 358/812);\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n\tbackground-size: cover;\n\tborder-bottom-right-radius: 25%;\n\tborder-bottom-left-radius: 25%;\n}\n.content-top {\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n\tbackground-repeat: no-repeat;\n\tbackground-position: center calc(100vh * 08/812);\n\tbackground-size: calc(750rpx * 48/ 375);\n}\n.content-main .firstShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 329/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 10/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .firstShow .firstShow-top {\n\tmargin-top: calc(100vh * 24/812);\n\theight: calc(100vh * 45/812);\n\n\tdisplay: flex;\n}\n.content-main .firstShow .firstShow-top .left {\n\tmargin-left: calc(750rpx * 24/ 375);\n\tmargin-right: calc(750rpx * 18/ 375);\n}\n.content-main .firstShow .firstShow-top .right {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n.content-main .firstShow .firstShow-center #top-box {\n\tdisplay: flex;\n\tmargin-top: calc(100vh * 24/812);\n}\n.content-main .firstShow .firstShow-center #top-box .item {\n\twidth: calc(750rpx * 16/ 375);\n\theight: calc(100vh * 16/812);\n\tmargin-left: calc(750rpx *1/ 375);\n}\n.content-main .firstShow .firstShow-center #top-box .colorOne {\n\tbackground-color: #EDEFF2;\n}\n.content-main .firstShow .firstShow-center #top-box .colorTwo {\n\tbackground-color: #71DADA;\n}\n.content-main .firstShow .firstShow-center #top-box .colorThree {\n\tbackground-color: #FB696C;\n}\n.content-main .firstShow .firstShow-center #top-box .item:nth-child(1) {\n\tmargin-left: calc(750rpx * 18/ 375);\n}\n.content-main .firstShow .firstShow-center .center-box {\n\tmargin-top: calc(100vh * 8/812);\n\tpadding-top: calc(100vh * 8/812);\n\tcolor: rgba(10, 32, 57, 0.5);\n\tmargin-left: calc(750rpx * 20/ 375);\n\tmargin-right: calc(750rpx * 19/ 375);\n\tfont-size: calc(750rpx * 10/ 375);\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tborder-top: calc(750rpx * 1 / 375) dashed rgba(10, 32, 57, 0.15);\n}\n.content-main .firstShow .firstShow-bottom {\n\twidth: calc(750rpx * 304/ 375);\n\theight: calc(100vh * 53/812);\n\tmargin-left: calc(750rpx * 24/ 375);\n\n\tborder-bottom: calc(750rpx * 1 / 375) dashed rgba(10, 32, 57, 0.15);\n\tdisplay: flex;\n\talign-items: center;\n}\n.content-main .firstShow .firstShow-bottom uni-text {\n\n\tposition: relative;\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(1) {\n\tmargin-left: calc(750rpx * 84.5/ 375);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(1)::before {\n\tcontent: '';\n\tdisplay: block;\n\twidth: calc(750rpx * 8/ 375);\n\theight: calc(750rpx * 8/ 375);\n\tborder-radius: 50%;\n\tbackground-color: rgba(19, 194, 194, 1);\n\tposition: absolute;\n\ttop: 50%;\n\tleft: -50%;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(2) {\n\tmargin-left: calc(750rpx * 34/ 375);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(2)::before {\n\tcontent: '';\n\tdisplay: block;\n\twidth: calc(750rpx * 8/ 375);\n\theight: calc(750rpx * 8/ 375);\n\tborder-radius: 50%;\n\tbackground-color: rgba(19, 194, 194, 0.4);\n\tposition: absolute;\n\ttop: 50%;\n\tleft: -50%;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(3) {\n\tmargin-left: calc(750rpx * 34/ 375);\n}\n.content-main .firstShow .firstShow-bottom uni-text:nth-child(3)::before {\n\tcontent: '';\n\tdisplay: block;\n\twidth: calc(750rpx * 8/ 375);\n\theight: calc(750rpx * 8/ 375);\n\tborder-radius: 50%;\n\tbackground-color: rgba(251, 105, 108, 1);\n\tposition: absolute;\n\ttop: 50%;\n\tleft: -50%;\n\t-webkit-transform: translateY(-50%);\n\t        transform: translateY(-50%);\n}\n.content-main .firstShow .firstShow-bottom-bottom {\n\twidth: calc(750rpx * 295/ 375);\n\theight: calc(750rpx * 131/ 375);\n\n\tmargin-left: calc(750rpx * 24 / 375);\n}\n.content-main .firstShow .firstShow-bottom-bottom .top-box {\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tmargin-top: calc(750rpx * 12/ 375);\n\talign-items: center;\n}\n.content-main .firstShow .firstShow-bottom-bottom .bottom-box .top {\n\tmargin-top: calc(100vh * 47/812);\n\tdisplay: flex;\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long {\n\twidth: calc(750rpx * 98.92/ 375);\n\theight: calc(750rpx * 9.73/ 375);\n\tbackground-color: #007AFF;\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(2) {\n\n\tborder-top-left-radius: calc(750rpx * 100/ 375);\n\tborder-bottom-left-radius: calc(750rpx * 100/ 375);\n\tbackground-image: linear-gradient(270deg, #FBD66A 0%, #FEB97A 20%, rgba(251, 105, 108, 0.80) 100%);\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(3) {\n\tmargin-left: calc(750rpx * 1/ 375);\n\tbackground-image: linear-gradient(90deg, #B4EE6B 0%, #FFE862 100%);\n}\n.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(4) {\n\tborder-top-right-radius: calc(750rpx * 100/ 375);\n\tborder-bottom-right-radius: calc(750rpx * 100/ 375);\n\tmargin-left: calc(750rpx * 1/ 375);\n\tbackground-image: linear-gradient(90deg, rgba(17, 174, 174, 0.80) 3%, #A8EF69 100%);\n}\n.content-main .secondShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 246/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .secondShow .secondShow-box {\n\twidth: 100%;\n\theight: calc(100vh * 194/812);\n\t/* margin:calc(100vh * 20/812) calc(750rpx * 18/ 375) 0 calc(750rpx * 18/ 375); */\n}\n.content-main .secondShow uni-text {\n\tcolor: rgba(10, 32, 57, 0.5);\n\twidth: calc(750rpx * 48/ 375);\n\theight: calc(100vh * 24/812);\n\tline-height: calc(100vh * 24/812);\n\tborder-radius: calc(750rpx * 16/ 375);\n\tdisplay: inline-block;\n\ttext-align: center;\n}\n.content-main .secondShow uni-text:nth-child(2) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-right: 0;\n}\n.content-main .secondShow .click {\n\tcolor: white;\n\tbackground-color: #13C2C2;\n}\n.content-main .safeFirstShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 281/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 10/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .safeSecondShow-box,\n.safeFirstShow-box {\n\twidth: 100%;\n\theight: calc(100vh * 194/812);\n}\n.content-main .safeSecondShow {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 281/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .safeSecondShow uni-text {\n\tcolor: rgba(10, 32, 57, 0.5);\n\twidth: calc(750rpx * 48/ 375);\n\theight: calc(100vh * 24/812);\n\tline-height: calc(100vh * 24/812);\n\tborder-radius: calc(750rpx * 16/ 375);\n\tdisplay: inline-block;\n\ttext-align: center;\n}\n.content-main .safeSecondShow uni-text:nth-child(2) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-right: 0;\n}\n.content-main .safeSecondShow .click {\n\tcolor: white;\n\tbackground-color: #13C2C2;\n}\n.content-main .firstOffice {\n\toverflow: hidden;\n\theight: calc(100vh * 416/812);\n\twidth: calc(750rpx * 343/ 375);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 10/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .firstOffice .environment {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n}\n.content-main .firstOffice .environment .environment-item:nth-child(1) {\n\tmargin-left: calc(750rpx *24/ 375);\n\tmargin-top: calc(100vh * 20/812);\n}\n.content-main .firstOffice .environment .environment-item:nth-child(2) {\n\tmargin-top: calc(100vh * 20/812);\n\tmargin-left: calc(750rpx * 12/ 375)\n}\n.content-main .firstOffice .environment .environment-item:nth-child(3) {\n\tmargin-top: calc(100vh * 20/812);\n\tmargin-left: calc(750rpx * 12/ 375)\n}\n.content-main .firstOffice .environment .environment-item:nth-child(4) {\n\tmargin-left: calc(750rpx *24/ 375);\n\tmargin-top: calc(100vh * 10/812);\n}\n.content-main .firstOffice .environment .environment-item:nth-child(5) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-top: calc(100vh * 10/812);\n}\n.content-main .firstOffice .environment .environment-item:nth-child(6) {\n\tmargin-left: calc(750rpx * 12/ 375);\n\tmargin-top: calc(100vh * 10/812);\n}\n.content-main .firstOffice .firstOffice-tip {\n\tfont-size: calc(750rpx * 12/ 375);\n\ttext-align: center;\n\tmargin-top: calc(750rpx * 12.5/ 375);\n\tcolor: rgba(10, 32, 57, 0.5);\n}\n.content-main .firstOffice .firstOffice-tip::before {\n\tcontent: '';\n\tdisplay: inline-block;\n\twidth: calc(750rpx * 11/ 375);\n\theight: calc(100vh* 12/ 812);\n\n\tmargin-right: calc(750rpx * 9.93/ 375);\n\tbackground-size: cover;\n}\n.content-main .secondOffice {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 168/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .secondOffice .box {\n\n\theight: calc(100vh * 91/812);\n\t;\n\toverflow-y: scroll;\n}\n.content-main .secondOffice .box .secondOffice-item {\n\tmargin-top: calc(100vh * 12/812);\n\theight: calc(100vh * 17/812);\n\tdisplay: flex;\n\tjustify-content: space-between;\n\tcolor: rgba(10, 32, 57, 0.7);\n\tfont-size: calc(750rpx * 12/ 375);\n}\n.content-main .secondOffice .box .secondOffice-item:first-child {\n\tmargin-top: calc(100vh * 16/812);\n}\n.content-main .reserveFirst {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 100/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 16/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n\tdisplay: flex;\n\tjustify-content: space-around;\n\talign-items: center;\n}\n.content-main .reserveFirst .reserveFirst-left {\n\twidth: calc(750rpx * 68/ 375);\n\theight: calc(100vh * 70/812);\n\tbackground-size: contain;\n\tbackground-repeat: no-repeat;\n\tmargin-left: calc(-750rpx * 21/ 375);\n}\n.content-main .reserveFirst .reserveFirst-center {\n\tmargin-left: calc(-750rpx * 68/ 375);\n\tbackground-size: cover;\n}\n.content-main .reserveFirst .reserveFirst-center uni-text {\n\tfont-size: calc(750rpx * 14/ 375);\n\tdisplay: block;\n\twidth: auto;\n\theight: calc(100vh * 20/812);\n}\n.content-main .reserveFirst .reserveFirst-center uni-text:first-child {\n\tcolor: rgba(10, 32, 57, 0.5);\n}\n.content-main .reserveFirst .reserveFirst-center uni-text:last-child {\n\tcolor: rgba(10, 32, 57, 0.9);\n\tmargin-top: calc(100vh *8/812);\n}\n.content-main .reserveFirst .reserveFirst-right {\n\tfont-size: calc(750rpx * 14/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n\tbackground-color: #13C2C2;\n\twidth: calc(750rpx * 48/ 375);\n\theight: calc(100vh * 24/812);\n\tline-height: calc(100vh * 24/812);\n\tborder-radius: calc(750rpx * 15.5/ 375);\n\ttext-align: center;\n\tposition: relative;\n}\n.content-main .reserveFirst .reserveFirst-right .close {\n\tvisibility: hidden;\n}\n.content-main .reserveFirst .reserveFirst-right .open {\n\tvisibility: hidden;\n}\n.content-main .reserveFirst .reserveFirst-right-click {\n\tbackground-color: #636e72;\n}\n.content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius {\n\tposition: absolute;\n\ttop: 8%;\n\tleft: 5%;\n\twidth: calc(750rpx * 20/ 375);\n\theight: calc(100vh * 20/812);\n\tbackground-color: #F8F8F8;\n\tborder-radius: 50%;\n}\n.content-main .reserveFirst .reserveFirst-right .reserveFirst-right-radius-click {\n\tposition: absolute;\n\ttop: 8%;\n\tleft: 55%;\n\tbottom: 0;\n\tbackground-color: #F8F8F8;\n}\n.content-main .show-first {\n\n\tposition: relative;\n}\n.content-main .show-first .reserveText {\n\theight: calc(100vh * 45/812);\n\twidth: calc(750rpx * 91/ 375);\n\tline-height: calc(100vh * 45/812);\n\ttext-align: center;\n\tmargin: calc(100vh * 40/812) calc(750rpx * 142/ 375) 0;\n\tfont-size: calc(750rpx * 32/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n}\n.content-main .show-first .reserveText::before {\n\n\tcontent: '固定工位 :';\n\tdisplay: block;\n\tfont-size: calc(750rpx * 14/ 375);\n\theight: calc(100vh *20/812);\n\twidth: calc(750rpx *70/ 375);\n\tposition: absolute;\n\ttop: calc(-100vh *40/812);\n\tleft: 50%;\n\t-webkit-transform: translateX(-50%);\n\t        transform: translateX(-50%)\n}\n.content-main .reserveSecond {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 297/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh * 21/812);\n\tbox-shadow: 0 calc(750rpx * 2/ 375) calc(100vh * 10/812) 0 rgba(10, 32, 57, 0.08);\n\tbackground-color: rgba(255, 255, 255, 1);\n}\n.content-main .reserveSecond .reserveSecond-box {\n\twidth: 100%;\n\theight: calc(100vh * 216/812);\n}\n.content-main .reserveSecond .reserveSecond-img {\n\twidth: calc(750rpx * 295/ 375);\n\theight: calc(100vh * 160/812);\n\n\tmargin: 0 calc(750rpx * 26/ 375) calc(750rpx * 22/ 375);\n\tpadding-top: calc(100vh * 15/812);\n\n\ttext-align: center;\n}\n.content-main .reserveSecond .right {\n\tdisplay: flex;\n\tcolor: #FFA936;\n\tfont-size: calc(750rpx * 13/ 375);\n}\n.content-main .reserveSecond .reserveSecond-box {}\n.content-main .show-second .reserveFirst {\n\tmargin-top: calc(100vh * 20/812);\n\tbackground-color: rgba(10, 32, 57, 0.1);\n\tdisplay: flex;\n}\n.content-main .show-second .reserveFirst .left uni-text {\n\tdisplay: block;\n\tcolor: rgba(255, 255, 255, 0.65);\n}\n.content-main .show-second .reserveFirst .left uni-text:nth-child(1) {\n\tfont-size: calc(750rpx * 24/ 375);\n\tcolor: rgba(255, 255, 255, 1);\n}\n.content-main .show-second .reserveFirst .left uni-text:nth-child(2) {\n\tmargin-top: calc(100vh * 8/812);\n}\n.content-main .show-second .reserveFirst .right uni-image {\n\twidth: calc(750rpx * 60/ 375);\n\theight: calc(100vh * 60/812);\n}\n.content-main .show-second .afterSign .picker {\n\tz-index: 1;\n\tleft: 0;\n\tbottom: 0;\n}\n.content-main .show-second .afterSign .picker .picker-item {\n\n\tbackground-color: white;\n\ttext-align: center;\n}\n.bgcOne {\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n.bgcTwo {\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ");\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -16913,7 +16921,7 @@ var render = function() {
               _c("v-uni-image", {
                 staticStyle: {
                   width: "calc(750rpx * 26.42/ 375)",
-                  height: "calc(750rpx * 28.47\t/ 375)"
+                  height: "calc(750rpx * 28.47/375)"
                 },
                 attrs: { slot: "left", src: _vm._$g(3, "a-src"), _i: 3 },
                 on: {
@@ -18162,7 +18170,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(/*! ../../static/app/bg@
 exports = ___CSS_LOADER_API_IMPORT___(false);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-exports.push([module.i, "\n.bgc {\n\n\theight: 100vh;\n\tbackground-color: rgba(241, 242, 246, 1);\n}\n.head {\n\theight: calc(100vh *44/812);\n}\n.content {\n\n\tpadding-top: calc(100vh * 44/812);\n\theight: calc(100vh * 358/812);\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n\tbackground-size: cover;\n\tborder-bottom-right-radius: 25%;\n\tborder-bottom-left-radius: 25%;\n}\n.content uni-text:nth-child(1) {\n\tmargin-left: calc(-750rpx * 55/ 375);\n}\n.content .main {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 474/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh *32/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n\tfont-size: calc(750rpx * 15/ 375);\n}\n.content .main .main-top {\n\theight: calc(100vh *60/812);\n\tborder-bottom: 1px solid #EDEFF2;\n}\n.content .main .main-center {\n\n\tmargin: 0 calc(750rpx * 16/ 375);\n\twidth: calc(750rpx * 311/ 375);\n}\n.content .main .main-center .main-center-item {\n\n\theight: calc(100vh * 50/812);\n\tdisplay: flex;\n\talign-items: center;\n}\n.content .main .main-center .main-center-item:nth-child(1) {\n\n\tborder-bottom: 1px dashed #E6E7E8;\n}\n.content .main .main-center .main-center-item:nth-child(2) {\n\n\theight: calc(100vh * 48/812);\n\tborder-bottom: 1px dashed #E6E7E8;\n}\n.content .main .main-center .main-center-item:nth-child(3) {\n\theight: calc(100vh *48/812);\n}\n.content .main .main-center .main-center-item {\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n.content .main .main-center .main-center-item .main-center-item-right uni-image {\n\tmargin-left: calc(750rpx * 8 / 375);\n}\n.content .main .main-bottom {\n\theight: calc(100vh *105/812);\n}\n.content .main .main-bottom uni-button {\n\tfont-size: calc(750rpx * 15/ 375);\n\twidth: calc(750rpx * 311/ 375);\n\theight: calc(100vh *44/812);\n\tborder-radius: calc(750rpx * 8/ 375);\n\tmargin-top: calc(100vh *11/812);\n\tbackground-image: linear-gradient(135deg, rgba(112, 207, 186, 1), rgba(25, 189, 192, 1));\n\tcolor: rgba(255, 255, 255, 1);\n\tline-height: calc(100vh *44/812);\n}\n.bgc .pickerDate,\n.pickerDate,\n.pickerEndTime,\n.pickerStartTime,\n.pickerFloor,\n.pickerPlace {\n\tposition: fixed;\n\tbottom: 0;\n\tleft: 0;\n\tright: 0;\n}\n.bgc .show {\n\theight: calc(100vh * 300/812);\n\ttransition: height 1.5s;\n}\n.bgc .hidden {\n\theight: 0;\n\ttransition: height 1.5s\n}\n", ""]);
+exports.push([module.i, "\n.bgc {\n\n\theight: 100vh;\n\tbackground-color: rgba(241, 242, 246, 1);\n}\n.head {\n\theight: calc(100vh *44/812);\n}\n.content {\n\n\tpadding-top: calc(100vh * 44/812);\n\theight: calc(100vh * 358/812);\n\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n\tbackground-size: cover;\n\tborder-bottom-right-radius: 25%;\n\tborder-bottom-left-radius: 25%;\n}\n.content uni-text:nth-child(1) {\n\tmargin-left: calc(-750rpx * 55/ 375);\n}\n.content .main {\n\toverflow: hidden;\n\twidth: calc(750rpx * 343/ 375);\n\theight: calc(100vh * 474/812);\n\tborder-radius: calc(750rpx * 30/ 375);\n\tmargin-left: calc(750rpx * 16/ 375);\n\tmargin-right: calc(750rpx * 16/ 375);\n\tmargin-top: calc(100vh *32/812);\n\tbackground-color: rgba(255, 255, 255, 1);\n\tfont-size: calc(750rpx * 15/ 375);\n}\n.content .main .main-top {\n\theight: calc(100vh *60/812);\n\tborder-bottom: 1px solid #EDEFF2;\n}\n.content .main .main-center {\n\n\tmargin: 0 calc(750rpx * 16/ 375);\n\twidth: calc(750rpx * 311/ 375);\n}\n.content .main .main-center .main-center-item {\n\n\theight: calc(100vh * 50/812);\n\tdisplay: flex;\n\talign-items: center;\n}\n.content .main .main-center .main-center-item:nth-child(1) {\n\n\tborder-bottom: 1px dashed #E6E7E8;\n}\n.content .main .main-center .main-center-item:nth-child(2) {\n\n\theight: calc(100vh * 48/812);\n\tborder-bottom: 1px dashed #E6E7E8;\n}\n.content .main .main-center .main-center-item:nth-child(3) {\n\theight: calc(100vh *48/812);\n}\n.content .main .main-center .main-center-item {\n\tdisplay: flex;\n\tjustify-content: space-between;\n}\n.content .main .main-center .main-center-item .main-center-item-right uni-image {\n\tmargin-left: calc(750rpx * 8 / 375);\n}\n.content .main .main-bottom {\n\theight: calc(100vh *105/812);\n}\n.content .main .main-bottom uni-button {\n\tfont-size: calc(750rpx * 15/ 375);\n\twidth: calc(750rpx * 311/ 375);\n\theight: calc(100vh *44/812);\n\tborder-radius: calc(750rpx * 8/ 375);\n\tmargin-top: calc(100vh *11/812);\n\tbackground-image: linear-gradient(135deg, rgba(112, 207, 186, 1), rgba(25, 189, 192, 1));\n\tcolor: rgba(255, 255, 255, 1);\n\tline-height: calc(100vh *44/812);\n}\n.bgc .pickerDate,\n.pickerDate,\n.pickerEndTime,\n.pickerStartTime,\n.pickerFloor,\n.pickerPlace {\n\tposition: fixed;\n\tbottom: 0;\n\tleft: 0;\n\tright: 0;\n}\n.bgc .show {\n\theight: calc(100vh * 300/812);\n\ttransition: height 0.5s;\n}\n.bgc .hidden {\n\theight: 0;\n\ttransition: height 0.5s\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -18298,7 +18306,15 @@ var render = function() {
             [
               _c(
                 "v-uni-view",
-                { staticClass: _vm._$g(7, "sc"), attrs: { _i: 7 } },
+                {
+                  staticClass: _vm._$g(7, "sc"),
+                  attrs: { _i: 7 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
                 [
                   _c(
                     "v-uni-view",
@@ -18617,6 +18633,149 @@ var render = function() {
           )
         ],
         1
+      ),
+      _c(
+        "v-uni-view",
+        {
+          staticClass: _vm._$g(40, "sc"),
+          class: _vm._$g(40, "c"),
+          attrs: { _i: 40 }
+        },
+        [
+          _c(
+            "v-uni-view",
+            { attrs: { _i: 41 } },
+            [
+              _c(
+                "v-uni-view",
+                {
+                  staticStyle: {
+                    display: "flex",
+                    "justify-content": "space-between",
+                    "background-color": "white"
+                  },
+                  attrs: { _i: 42 },
+                  on: {
+                    click: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticStyle: {
+                        "font-size": "calc(750rpx * 14/ 375)",
+                        padding: "calc(750rpx * 9/ 375)"
+                      },
+                      attrs: { _i: 43 }
+                    },
+                    [_vm._v("取消")]
+                  ),
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticStyle: {
+                        "font-size": "calc(750rpx * 14/ 375)",
+                        padding: "calc(750rpx * 9 /375)",
+                        color: "rgba(19, 194, 194, 1)"
+                      },
+                      attrs: { _i: 44 }
+                    },
+                    [_vm._v("确定")]
+                  )
+                ],
+                1
+              ),
+              _c(
+                "v-uni-picker-view",
+                {
+                  staticStyle: {
+                    "background-color": "white",
+                    height: "calc(100vh *260/812)",
+                    "text-align": "center"
+                  },
+                  attrs: { value: _vm._$g(45, "a-value"), _i: 45 },
+                  on: {
+                    change: function($event) {
+                      return _vm.$handleViewEvent($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "v-uni-picker-view-column",
+                    { attrs: { _i: 46 } },
+                    _vm._l(_vm._$g(47, "f"), function(item, index, $22, $32) {
+                      return _c(
+                        "v-uni-view",
+                        {
+                          key: item,
+                          staticClass: _vm._$g("47-" + $32, "sc"),
+                          attrs: { _i: "47-" + $32 }
+                        },
+                        [_vm._v(_vm._$g("47-" + $32, "t0-0"))]
+                      )
+                    }),
+                    1
+                  ),
+                  _c(
+                    "v-uni-picker-view-column",
+                    { attrs: { _i: 48 } },
+                    _vm._l(_vm._$g(49, "f"), function(item, index, $23, $33) {
+                      return _c(
+                        "v-uni-view",
+                        {
+                          key: item,
+                          staticClass: _vm._$g("49-" + $33, "sc"),
+                          attrs: { _i: "49-" + $33 }
+                        },
+                        [_vm._v(_vm._$g("49-" + $33, "t0-0"))]
+                      )
+                    }),
+                    1
+                  ),
+                  _c(
+                    "v-uni-picker-view-column",
+                    { attrs: { _i: 50 } },
+                    _vm._l(_vm._$g(51, "f"), function(item, index, $24, $34) {
+                      return _c(
+                        "v-uni-view",
+                        {
+                          key: item,
+                          staticClass: _vm._$g("51-" + $34, "sc"),
+                          attrs: { _i: "51-" + $34 }
+                        },
+                        [_vm._v(_vm._$g("51-" + $34, "t0-0"))]
+                      )
+                    }),
+                    1
+                  ),
+                  _c(
+                    "v-uni-picker-view-column",
+                    { attrs: { _i: 52 } },
+                    _vm._l(_vm._$g(53, "f"), function(item, index, $25, $35) {
+                      return _c(
+                        "v-uni-view",
+                        {
+                          key: item,
+                          staticClass: _vm._$g("53-" + $35, "sc"),
+                          attrs: { _i: "53-" + $35 }
+                        },
+                        [_vm._v(_vm._$g("53-" + $35, "t0-0"))]
+                      )
+                    }),
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1
@@ -18716,7 +18875,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(/*! ../../static/app/bg@
 exports = ___CSS_LOADER_API_IMPORT___(false);
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-exports.push([module.i, "\n.bgc {\n\n\t\theight: 100vh;\n\t\tbackground-color: rgba(241, 242, 246, 1);\n}\n.head {\n\t\theight: calc(100vh *44/812);\n\t\tdisplay: flex;\n\t\tflex-direction: row;\n}\n.content {\n\n\t\tpadding-top: calc(100vh * 44/812);\n\t\theight: calc(100vh * 358/812);\n\t\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n\t\tbackground-size: cover;\n\t\tborder-bottom-right-radius: 25%;\n\t\tborder-bottom-left-radius: 25%;\n}\n.content .head uni-text:nth-child(1) {\n\t\tmargin-left: calc(-750rpx * 55/ 375);\n}\n.content .top {\n\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 108/812);\n\t\tcolor: rgba(255, 255, 255, 1);\n\t\tmargin-left: calc(750rpx * 16/ 375);\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\tjustify-content: space-between;\n\t\tfont-size: calc(750rpx * 14/ 375);\n}\n.content .top .top-item:nth-child(1) {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 50/812);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tbackground-color: rgba(255, 255, 255, 1);\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\talign-items: center;\n}\n.content .top .top-item:nth-child(2) {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 32/812);\n\n\t\tfont-size: calc(750rpx * 12/ 375);\n\t\tdisplay: flex;\n}\n.content .top .top-item:nth-child(2)>uni-view:nth-child(1) {\n\t\twidth: calc(750rpx * 134/ 375);\n\t\tline-height: calc(100vh * 32/812);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tbackground-color: rgba(10, 32, 57, 0.1);\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\talign-items: center;\n}\n.content .top .top-item:nth-child(2)>uni-view:nth-child(2) {\n\t\twidth: calc(750rpx * 92/ 375);\n\t\tline-height: calc(100vh * 32/812);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tbackground-color: rgba(10, 32, 57, 0.1);\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\talign-items: center;\n}\n.content .center {\n\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 484/812);\n\t\tmargin-top: calc(100vh * 32/812);\n\t\tmargin-left: calc(750rpx * 16/ 375);\n}\n.content .center .center-head {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 61/812);\n\t\tborder-top-right-radius: calc(750rpx * 30/375);\n\t\tborder-top-left-radius: calc(750rpx * 30/ 375);\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tbackground-color: rgba(248, 253, 253, 1);\n}\n.content .center .center-head .map {\n\t\tposition: relative;\n}\n.content .center .center-head .list {\n\n\t\tposition: relative;\n}\n.content .center .center-head .click {\n\t\tcolor: #13C2C2;\n\t\tfont-weight: bold;\n}\n.content .center .center-head .list.click::before {\n\t\tcontent: '';\n\t\tdisplay: block;\n\t\twidth: calc(750rpx * 6/ 375);\n\t\theight: calc(750rpx * 6/ 375);\n\t\tborder-radius: 50%;\n\t\tbackground-color: #1ABFC2;\n\t\tposition: absolute;\n\t\tleft: 50%;\n\t\ttop: 120%;\n}\n.content .center .center-head .map.click::before {\n\t\tcontent: '';\n\t\tdisplay: block;\n\t\twidth: calc(750rpx * 6/ 375);\n\t\theight: calc(750rpx * 6/ 375);\n\t\tborder-radius: 50%;\n\t\tbackground-color: #1ABFC2;\n\t\tposition: absolute;\n\t\tleft: 35%;\n\t\ttop: 120%;\n}\n.content .center .center-boxOne {}\n.content .center .center-boxOne .center-boxOne-top {\n\t\tbackground-color: rgba(248, 253, 253, 1);\n\t\tborder-bottom-right-radius: calc(750rpx * 30/375);\n\t\tborder-bottom-left-radius: calc(750rpx * 30/ 375);\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content {\n\t\toverflow: scroll;\n\t\twidth: calc(750rpx * 295/ 375);\n\t\theight: calc(100vh * 312/812);\n\t\tmargin-left: calc(750rpx * 26/ 375);\n\t\tborder-top: dashed calc(100vh * 1/812) gray;\n\t\tdisplay: flex;\n\t\tflex-wrap: wrap;\n\t\talign-content: flex-start;\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item {\n\t\twidth: calc(750rpx * 93/ 375);\n\t\theight: calc(100vh * 40/812);\n\t\tline-height: calc(100vh * 40/812);\n\t\ttext-align: center;\n\t\tborder-radius: calc(750rpx * 10/ 375);\n\t\tbox-sizing: border-box;\n\t\tborder: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;\n\t\tmargin-top: calc(100vh * 24/812);\n\t\tmargin-left: calc(750rpx * 8/ 375);\n\t\tflex-shrink: 0;\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item.click {\n\t\tborder-color: rgba(251, 178, 88, 1);\n\n\t\tcolor: rgba(251, 178, 88, 1);\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item:nth-child(3n-2) {\n\t\tmargin-left: 0;\n}\n.content .center .center-boxOne .center-boxOne-bottom {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 76/812);\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent {\n\t\tdisplay: flex;\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item {\n\t\twidth: calc(750rpx * 93/ 375);\n\t\theight: calc(100vh * 40/812);\n\t\tline-height: calc(100vh * 40/812);\n\t\ttext-align: center;\n\t\tborder-radius: calc(750rpx * 10/ 375);\n\t\tborder: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;\n\t\tmargin-top: calc(100vh * 24/812);\n\t\tmargin-left: calc(750rpx * 8/ 375);\n\t\tposition: relative;\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item:first-child::before {\n\t\tcontent: '';\n\t\tdisplay: block;\n\t\twidth: calc(750rpx * 8/ 375);\n\t\theight: calc(750rpx * 8/ 375);\n\t\tborder-radius: 50%;\n\t\tbackground-color: #1ABFC2;\n\t\tposition: absolute;\n\t\tleft: 75%;\n\t\ttop: 40%;\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item.click {\n\t\tborder-color: rgba(251, 178, 88, 1);\n\t\tcolor: rgba(251, 178, 88, 1);\n}\n.content .center .center-boxTwo {\n\t\toverflow: scroll;\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 423/812);\n\t\tborder-bottom-right-radius: calc(750rpx * 30/375);\n\t\tborder-bottom-left-radius: calc(750rpx * 30/ 375);\n\t\tbackground-color: #13C2C2;\n}\n\n\t/* \t.content .center .center-boxTwo .map {\n\t\tposition: relative;\n\t}\n.content .center .center-boxTwo .map .block{\n\tdisplay: block;\n\twidth: 10px;\n\theight: 10px;\n\tbackground-color: #007AFF;\n} */\n.content .bottom {\n\t\twidth: calc(750rpx * 375/ 375);\n\t\theight: calc(100vh * 90/812);\n\t\tmargin-top: calc(100vh * 16/812);\n\t\tbackground-color: white;\n\n\t\toverflow: hidden;\n}\n.content .bottom uni-view {\n\n\t\tmargin-top: calc(100vh * 11/812);\n\t\tmargin-left: calc(750rpx * 16/ 375);\n\t\tmargin-right: calc(750rpx * 16/ 375);\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 44/812);\n\t\tbackground-image: linear-gradient(135deg, #70CFBA 0%, #19BDC0 100%);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tfont-size: calc(750rpx * 15/ 375);\n\t\tline-height: calc(100vh * 44/812);\n\t\ttext-align: center;\n\t\tmargin-bottom: ;\n\t\tcolor: white;\n}\n", ""]);
+exports.push([module.i, "\n.bgc {\n\t\tposition: relative;\n\t\theight: 100vh;\n\t\tbackground-color: rgba(241, 242, 246, 1);\n}\n.bgc .reChose {\n\t\tposition: absolute;\n\t\tbottom: 0;\n\t\tleft: 0;\n\t\tright: 0;\n}\n.bgc .reChose.show {\n\t\theight: calc(100vh * 300/812);\n\t\ttransition: height 0.5s;\n}\n.bgc .reChose.hidden {\n\t\theight: 0;\n\t\ttransition: height 0.5s\n}\n.head {\n\t\theight: calc(100vh *44/812);\n\t\tdisplay: flex;\n\t\tflex-direction: row;\n}\n.content {\n\n\t\tpadding-top: calc(100vh * 44/812);\n\t\theight: calc(100vh * 358/812);\n\t\tbackground-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n\t\tbackground-size: cover;\n\t\tborder-bottom-right-radius: 25%;\n\t\tborder-bottom-left-radius: 25%;\n}\n.content .head uni-text:nth-child(1) {\n\t\tmargin-left: calc(-750rpx * 55/ 375);\n}\n.content .top {\n\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 108/812);\n\t\tcolor: rgba(255, 255, 255, 1);\n\t\tmargin-left: calc(750rpx * 16/ 375);\n\t\tdisplay: flex;\n\t\tflex-direction: column;\n\t\tjustify-content: space-between;\n\t\tfont-size: calc(750rpx * 14/ 375);\n}\n.content .top .top-item:nth-child(1) {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 50/812);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tbackground-color: rgba(255, 255, 255, 1);\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\talign-items: center;\n}\n.content .top .top-item:nth-child(2) {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 32/812);\n\n\t\tfont-size: calc(750rpx * 12/ 375);\n\t\tdisplay: flex;\n}\n.content .top .top-item:nth-child(2)>uni-view:nth-child(1) {\n\t\twidth: calc(750rpx * 134/ 375);\n\t\tline-height: calc(100vh * 32/812);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tbackground-color: rgba(10, 32, 57, 0.1);\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\talign-items: center;\n}\n.content .top .top-item:nth-child(2)>uni-view:nth-child(2) {\n\t\twidth: calc(750rpx * 92/ 375);\n\t\tline-height: calc(100vh * 32/812);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tbackground-color: rgba(10, 32, 57, 0.1);\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\talign-items: center;\n}\n.content .center {\n\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 484/812);\n\t\tmargin-top: calc(100vh * 32/812);\n\t\tmargin-left: calc(750rpx * 16/ 375);\n}\n.content .center .center-head {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 61/812);\n\t\tborder-top-right-radius: calc(750rpx * 30/375);\n\t\tborder-top-left-radius: calc(750rpx * 30/ 375);\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t\tbackground-color: rgba(248, 253, 253, 1);\n}\n.content .center .center-head .map {\n\t\tposition: relative;\n}\n.content .center .center-head .list {\n\n\t\tposition: relative;\n}\n.content .center .center-head .click {\n\t\tcolor: #13C2C2;\n\t\tfont-weight: bold;\n}\n.content .center .center-head .list.click::before {\n\t\tcontent: '';\n\t\tdisplay: block;\n\t\twidth: calc(750rpx * 6/ 375);\n\t\theight: calc(750rpx * 6/ 375);\n\t\tborder-radius: 50%;\n\t\tbackground-color: #1ABFC2;\n\t\tposition: absolute;\n\t\tleft: 50%;\n\t\ttop: 120%;\n}\n.content .center .center-head .map.click::before {\n\t\tcontent: '';\n\t\tdisplay: block;\n\t\twidth: calc(750rpx * 6/ 375);\n\t\theight: calc(750rpx * 6/ 375);\n\t\tborder-radius: 50%;\n\t\tbackground-color: #1ABFC2;\n\t\tposition: absolute;\n\t\tleft: 35%;\n\t\ttop: 120%;\n}\n.content .center .center-boxOne {}\n.content .center .center-boxOne .center-boxOne-top {\n\t\tbackground-color: rgba(248, 253, 253, 1);\n\t\tborder-bottom-right-radius: calc(750rpx * 30/375);\n\t\tborder-bottom-left-radius: calc(750rpx * 30/ 375);\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content {\n\t\toverflow: scroll;\n\t\twidth: calc(750rpx * 295/ 375);\n\t\theight: calc(100vh * 312/812);\n\t\tmargin-left: calc(750rpx * 26/ 375);\n\t\tborder-top: dashed calc(100vh * 1/812) gray;\n\t\tdisplay: flex;\n\t\tflex-wrap: wrap;\n\t\talign-content: flex-start;\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item {\n\t\twidth: calc(750rpx * 93/ 375);\n\t\theight: calc(100vh * 40/812);\n\t\tline-height: calc(100vh * 40/812);\n\t\ttext-align: center;\n\t\tborder-radius: calc(750rpx * 10/ 375);\n\t\tbox-sizing: border-box;\n\t\tborder: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;\n\t\tmargin-top: calc(100vh * 24/812);\n\t\tmargin-left: calc(750rpx * 8/ 375);\n\t\tflex-shrink: 0;\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item.click {\n\t\tborder-color: rgba(251, 178, 88, 1);\n\n\t\tcolor: rgba(251, 178, 88, 1);\n}\n.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item:nth-child(3n-2) {\n\t\tmargin-left: 0;\n}\n.content .center .center-boxOne .center-boxOne-bottom {\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 76/812);\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent {\n\t\tdisplay: flex;\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item {\n\t\twidth: calc(750rpx * 93/ 375);\n\t\theight: calc(100vh * 40/812);\n\t\tline-height: calc(100vh * 40/812);\n\t\ttext-align: center;\n\t\tborder-radius: calc(750rpx * 10/ 375);\n\t\tborder: rgba(17, 30, 54, 0.15) calc(750rpx * 1/ 375) solid;\n\t\tmargin-top: calc(100vh * 24/812);\n\t\tmargin-left: calc(750rpx * 8/ 375);\n\t\tposition: relative;\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item:first-child::before {\n\t\tcontent: '';\n\t\tdisplay: block;\n\t\twidth: calc(750rpx * 8/ 375);\n\t\theight: calc(750rpx * 8/ 375);\n\t\tborder-radius: 50%;\n\t\tbackground-color: #1ABFC2;\n\t\tposition: absolute;\n\t\tleft: 75%;\n\t\ttop: 40%;\n}\n.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item.click {\n\t\tborder-color: rgba(251, 178, 88, 1);\n\t\tcolor: rgba(251, 178, 88, 1);\n}\n.content .center .center-boxTwo {\n\t\toverflow: scroll;\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 423/812);\n\t\tborder-bottom-right-radius: calc(750rpx * 30/375);\n\t\tborder-bottom-left-radius: calc(750rpx * 30/ 375);\n\t\tbackground-color: #13C2C2;\n}\n\n\t/* \t.content .center .center-boxTwo .map {\n\t\tposition: relative;\n\t}\n.content .center .center-boxTwo .map .block{\n\tdisplay: block;\n\twidth: 10px;\n\theight: 10px;\n\tbackground-color: #007AFF;\n} */\n.content .bottom {\n\t\twidth: calc(750rpx * 375/ 375);\n\t\theight: calc(100vh * 90/812);\n\t\tmargin-top: calc(100vh * 16/812);\n\t\tbackground-color: white;\n\n\t\toverflow: hidden;\n}\n.content .bottom uni-view {\n\n\t\tmargin-top: calc(100vh * 11/812);\n\t\tmargin-left: calc(750rpx * 16/ 375);\n\t\tmargin-right: calc(750rpx * 16/ 375);\n\t\twidth: calc(750rpx * 343/ 375);\n\t\theight: calc(100vh * 44/812);\n\t\tbackground-image: linear-gradient(135deg, #70CFBA 0%, #19BDC0 100%);\n\t\tborder-radius: calc(750rpx * 12/ 375);\n\t\tfont-size: calc(750rpx * 15/ 375);\n\t\tline-height: calc(100vh * 44/812);\n\t\ttext-align: center;\n\t\tmargin-bottom: ;\n\t\tcolor: white;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -19370,7 +19529,7 @@ var render = function() {
                       _vm._$g("7-" + $30, "t0-0") +
                         "月" +
                         _vm._$g("7-" + $30, "t0-1") +
-                        "日\n\t\t\t\t\t" +
+                        "日" +
                         _vm._$g("7-" + $30, "t0-2") +
                         _vm._$g("7-" + $30, "t0-3") +
                         ":" +

@@ -2,8 +2,8 @@
 	<view class="environment-item" >
 		<text class="text">{{item.name}}</text>
 		<image :src=item.src style="width: calc(750rpx * 22.33/ 375) ; height: calc(100vh * 24.23/812);"></image>
-		<text>{{item.number}}</text>
-		<view :class="{item,'good':item.quality=='优','bad':item.quality=='差'}">
+		<text>{{item.number}} {{item.name=='温度' ? '°C' : '' }}{{item.name=='PM2.5' ? 'μg/mg' : '' }}{{item.name=='PM10' ? '°C' : '' }}{{item.name=='湿度' ? '%' : '' }}</text>
+		<view :class="{item,'good':item.quality=='优','bad':item.quality=='差','none':item.quality=='无'}">
 			{{item.quality}}
 		</view>
 
@@ -66,9 +66,10 @@
 		height: calc(100vh * 22/ 812);
 		line-height: calc(100vh * 22/ 812);
 		border-radius: calc(750rpx * 14/ 375);
-		color: rgba(255, 255, 255, 1);
+		color: black;
 		text-align: center;
 		background-color: rgba(255, 169, 54, 1);
+		border:  1px solid rgba(10,32,57,0.15);
 	}
 
 	.good {
@@ -77,5 +78,8 @@
 
 	.bad {
 		background-color: rgba(251, 105, 108, 1);
+	}
+	.none{
+		background-color: white;
 	}
 </style>
