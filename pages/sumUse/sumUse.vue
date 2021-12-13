@@ -47,7 +47,7 @@
 						'周三', '周四', '周五'
 					],
 					series: [{
-						name: '指数',
+						name: '使用量',
 						data: [0, 0, 0, 0, 0],
 						color: '#70CFBA'
 					}]
@@ -55,7 +55,9 @@
 			}
 		},
 		onLoad() {
-
+			uni.showLoading({
+				title: '加载中'
+			})
 			new Promise(function(resolve, reject) {
 				uni.request({
 					url: `http://${getApp().globalData.http}/app/data/today/power`,
@@ -103,12 +105,12 @@
 				this.envirChartData = {
 					categories: [...x],
 					series: [{
-						name: '指数',
+						name: '使用量(kwh)',
 						data: [...y],
 						color: '#70CFBA'
 					}, ]
 				};
-
+            uni.hideLoading();
 			})
 
 		},

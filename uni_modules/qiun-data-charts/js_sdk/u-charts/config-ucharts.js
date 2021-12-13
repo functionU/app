@@ -319,7 +319,7 @@ const cfu = {
     "background": "none",
     "animation": true,
     "timing": "easeOut",
-    "duration": 1000,
+    "duration": 2000,
     "color": [
         "#1890FF",
         "#91CB74",

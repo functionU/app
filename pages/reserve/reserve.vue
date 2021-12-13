@@ -111,7 +111,8 @@
 		</view>
 		<view class="pickerDate">
 			<view :class="{'show':dateindex,'hidden':!dateindex}">
-				<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick" class="viewText">
+				<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick"
+					class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
 						@click="cancel('date')">取消</text>
 					<text
@@ -181,7 +182,8 @@
 		</view>
 		<view class="pickerPlace ">
 			<view :class="{'show':placeindex,'hidden':!placeindex}">
-				<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick" class="viewText">
+				<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick"
+					class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
 						@click="cancel('place')">取消</text>
 					<text
@@ -200,7 +202,8 @@
 		</view>
 		<view class="pickerFloor">
 			<view :class="{'show':floorindex,'hidden':!floorindex}">
-				<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick" class="viewText">
+				<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick"
+					class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
 						@click="cancel('floor')">取消</text>
 					<text
@@ -317,6 +320,7 @@
 			}
 		},
 		onLoad() {
+
 			let that = this;
 			uni.request({
 				url: `http://${getApp().globalData.http}/app/office/building/list`,
@@ -416,8 +420,11 @@
 							'Authorization': getApp().globalData.token
 						},
 						success: (res) => {
-
+							console.log(getApp().globalData.positionArray);
 							getApp().globalData.positionArray = res.data.value;
+
+							console.log(res.data.value);
+							console.log(getApp().globalData.positionArray);
 							uni.request({
 								url: `http://${getApp().globalData.http}/app/office/often/empty/station/list`,
 								// url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
@@ -436,7 +443,9 @@
 
 									getApp().globalData.usuallyArray = res.data.value;
 
-
+									uni.showLoading({
+										title: '加载中'
+									})
 									uni.navigateTo({
 										url: `./reservePosition?date=${date}&startTime=${startTime}&endTime=${endTime}&place=${that.placeArray[that.placeIndex].name}&floor=${that.floorArray[that.floorIndex].name}&floorId=${that.floorArray[that.floorIndex].id}`
 									})
@@ -559,31 +568,31 @@
 					val = this.valueStartTime;
 					this.startHour = this.hours[val[0]];
 					this.startMin = this.mins[val[1]];
-					this.startMiddel=val;
+					this.startMiddel = val;
 				} else if (name == 'end') {
 					val = this.valueEndTime;
 					this.endHour = this.hours[val[0]];
 					this.endMin = this.mins[val[1]];
-					this.endMiddel=val;
+					this.endMiddel = val;
 
 				} else if (name == 'date') {
 					val = this.valueDate;
 					this.year = this.years[val[0]];
 					this.month = this.months[val[1]];
 					this.day = this.days[val[2]];
-					this.dateMiddel=val;
+					this.dateMiddel = val;
 
 				} else if (name == 'floor') {
 					val = this.valueFloor;
 					this.floorIndex = val[0];
 					this.valueFloor = [val[0]]
-					this.floorMiddel=val;
+					this.floorMiddel = val;
 				} else if (name == 'place') {
 					val = this.valuePlace;
 					this.placeIndex = val[0];
 					this.valuePlace = [val[0]]
-                    this.placeMiddel=val;
- 
+					this.placeMiddel = val;
+
 					let id = this.placeArray[this.placeIndex].id;
 					let that = this;
 					uni.request({
@@ -641,12 +650,14 @@
 		height: 100vh;
 		background-color: rgba(241, 242, 246, 1);
 	}
-   .bgc .viewText{
-	   font-weight: bold;
-	   padding: calc(100vh * 14/812) calc(750rpx * 16/ 375);
-	   border-top-left-radius: 30%;
-	   border-top-right-radius: 30%;
-   }
+
+	.bgc .viewText {
+		font-weight: bold;
+		padding: calc(100vh * 14/812) calc(750rpx * 16/ 375);
+		border-top-left-radius: 30%;
+		border-top-right-radius: 30%;
+	}
+
 	.head {
 		height: calc(100vh *44/812);
 	}

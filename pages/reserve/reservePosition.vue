@@ -178,6 +178,7 @@
 			}
 		},
 		onLoad(option) {
+			uni.hideLoading();
 			console.log(option);
 			let that = this;
 			this.startTime = option.startTime;
@@ -357,7 +358,7 @@
 									showCancel: false,
 								});
 							} else if (res.data.code == 0) {
-
+                                
 								uni.navigateTo({
 									// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
 									url: `../login-success/login-success?index=1&buttonIndex=1`
@@ -416,7 +417,9 @@
 					this.date = this.date.split('-')[0] + "-" + month + '-' + day;
 					this.showIndex = false;
 					let that = this;
-
+                    uni.showLoading({
+                    	title:'加载中'
+                    })
 					uni.navigateTo({
 						url: `./reservePosition?date=${that.date}&startTime=${that.startTime}&endTime=${that.endTime}&place=${that.place}&floor=${that.floor}&floorId=${that.floorId}`
 					})

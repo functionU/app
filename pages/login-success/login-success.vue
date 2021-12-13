@@ -29,7 +29,7 @@
 								</view>
 								<view class="center-box">
 									<view>
-										<image src="../../static/app/icon-zhengque.png"
+										<image src="../../static/app/toWork.svg"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-right: calc(750rpx * 4/ 375) ;">
 										</image>
 										{{timelist[0]}}
@@ -42,7 +42,7 @@
 									</view>
 									<view>
 										{{timelist[3]}}
-										<image src="../../static/app/icon-title@2X.png"
+										<image src="../../static/app/toRest.svg"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-left: calc(750rpx * 4/ 375)">
 										</image>
 									</view>
@@ -74,9 +74,13 @@
 											'translateX(-50%)'}" style="width: calc(750rpx * 18/ 375) ;height:calc(750rpx * 18/ 375);background-color: white;padding:calc(750rpx * 4/ 375) ;box-sizing: border-box;">
 											<view
 												style="width: 100%;height: 100%; border-radius: 50%;background-color:white;">
-												<image :src="getSrc"
-													style="width:calc(750rpx * 36/ 375);height:calc(750rpx * 31/375);position: absolute;top: -170%;left: -40%;">
-												</image>
+												<view
+													style="position: absolute;top: -130%;left: -10%;width:calc(750rpx * 36/ 375);height:calc(750rpx * 31/375);background: url(../../static/app/message%20(2).svg) cover;">
+													<image :src="getSrc"
+														style="width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/375);">
+													</image>
+												</view>
+
 											</view>
 
 										</view>
@@ -98,11 +102,11 @@
 							</view>
 						</view>
 						<view class="secondShow">
-							<tip :item="{'name':'久坐统计'}">
+							<tip :item="{'name':'久坐统计（分钟）'}">
 								<view slot='right' class="button">
-									<text @click="weekClick" :class="{'click':secondShowButtonIndex=='week'}">每周</text>
+									<text @click="weekClick" :class="{'click':secondShowButtonIndex=='week'}">按周</text>
 									<text @click="monthClick"
-										:class="{'click':secondShowButtonIndex=='month'}">每月</text>
+										:class="{'click':secondShowButtonIndex=='month'}">按月</text>
 								</view>
 							</tip>
 							<view class="secondShow-box">
@@ -114,7 +118,7 @@
 					</view>
 					<view class="content-main" v-show="index==2">
 						<view class="safeFirstShow">
-							<tip :item="{name:'今日用电'}">
+							<tip :item="{name:'今日用电（w）'}">
 								<text slot="right"></text>
 							</tip>
 							<view class="safeFirstShow-box">
@@ -123,12 +127,12 @@
 							</view>
 						</view>
 						<view class="safeSecondShow">
-							<tip :item="{name:'用电统计'}">
+							<tip :item="{name:'用电统计（kwh）'}">
 								<view slot='right' class="SafeButton">
 									<text @click="safeWeekClick"
-										:class="{'click':secondShowSafeButtonIndex=='week'}">每周</text>
+										:class="{'click':secondShowSafeButtonIndex=='week'}">按周</text>
 									<text @click="safeMonthClick"
-										:class="{'click':secondShowSafeButtonIndex=='month'}">每月</text>
+										:class="{'click':secondShowSafeButtonIndex=='month'}">按月</text>
 								</view>
 							</tip>
 							<view class="safeSecondShow-box">
@@ -195,7 +199,7 @@
 										<text>选择工位和时间进行使用～</text>
 									</view>
 									<view class="right" @click="reserveClick">
-										<image src="../../static/app/yuyue@2X.png"></image>
+										<image src="../../static/app/reserve.svg"></image>
 									</view>
 								</view>
 								<view class="reserveSecond" style="height:calc(100vh * 450/812);">
@@ -241,7 +245,7 @@
 							<view v-show="resever">
 								<view class="reserveFirst" style="height: calc(100vh * 83/812);">
 									<view class="right">
-										<image src="../../static/app/chazuo@2X.png"></image>
+										<image src="../../static/app/position.svg"></image>
 									</view>
 									<view class="left">
 										<text>{{infoObj.station_number}}</text>
@@ -303,7 +307,7 @@
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
-									<view class="reserveFirst" style="background-color: white;">
+									<view class="reserveFirst" style="width: ;">
 										<view class="reserveFirst-left" :class="{'bgcOne':item.src,'bgcTwo':item.src}">
 
 										</view>
@@ -402,7 +406,7 @@
 					</view>
 					<view class="content-main" v-show="index==3">
 						<view class="firstOffice">
-							<tip></tip>
+							<tip :item="{name:'环境指数',place:place}"></tip>
 							<view class="environment">
 								<environmentItem v-for="(item,index) in environmentes" :item='item'
 									class="environment-item">
@@ -414,7 +418,7 @@
 							</view>
 						</view>
 						<view class="secondOffice">
-							<tip :item="{name:'天气预报',place:'上海市 静安区'}"></tip>
+							<tip :item="{name:'天气预报',place:place}"></tip>
 							<dash style="margin-bottom: 0;"></dash>
 							<view class="box">
 								<view class="secondOffice-item" style="margin-left:  calc(750rpx * 24/ 375);"
@@ -498,7 +502,7 @@
 						'周三', '', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五'
 					],
 					series: [{
-						name: '指数',
+						name: '分钟',
 						data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
 							33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52
 						],
@@ -510,7 +514,7 @@
 						'', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五',
 					],
 					series: [{
-						name: '',
+						name: '分钟',
 						data: [1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1,
 							1, 4, 5, 6, 7, 8,
 						],
@@ -522,7 +526,7 @@
 						'', '', '', '', '', '', '周四', '', '', '', '', '', '', '周五',
 					],
 					series: [{
-						name: '',
+						name: '分钟',
 						data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 							0, 0, 0, 0, 0, 0,
 						],
@@ -533,7 +537,7 @@
 
 					categories: ['00:00', '04:00', '09:00', '14:00', '19:00	'],
 					series: [{
-						name: '',
+						name: '分钟',
 						data: [0, 0, 0, 0, 0],
 						color: '#FFF',
 					}]
@@ -576,6 +580,7 @@
 				grade: 73,
 				weatherBox: [],
 				timelist: ["8:00", '12:00', '15:00', "19:00"],
+				place: "---",
 
 			}
 		},
@@ -729,17 +734,15 @@
 										let x = [];
 										let y = [];
 										res.map((item) => {
-											x.push(item.x_value);
+											x.push(item.x_value.split('-')[2]);
 											y.push(item.y_value);
 										})
 
 										that.secondShowButtonIndex = 'week';
 										that.chartData = {
-											categories: ['周一', '周二', '周三', '周四', '周五', '周六',
-												'周天'
-											],
+											categories: [...x],
 											series: [{
-												name: '指数',
+												name: '使用时长',
 												data: y,
 												color: '#13C2C2',
 											}]
@@ -784,8 +787,10 @@
 											sH = s.split(":")[0];
 											sM = s.split(":")[1];
 										}
-										that.boxArray.fill(0)
+
 										if (res.work_time_list.length) {
+											let lastEndIndex;
+											that.boxArray.fill(0)
 											res.work_time_list.map((item) => {
 												let start = item.start_time;
 												let startH = start.split(":")[0];
@@ -832,10 +837,14 @@
 												if (endIndex > that.boxArray.length) {
 													that.boxArray.length = endIndex;
 												}
+
 												that.boxArray.fill(number, startIndex,
 													endIndex);
 
 											})
+
+											that.boxArray.fill(number, lastEndIndex);
+
 
 											let space;
 											let spaceArray = [0, 1 / 3, 2 / 3, 3 / 3];
@@ -848,6 +857,7 @@
 													that.timelist[index] = s;
 												} else {
 													let x = (space * item).toFixed(1);
+													console.log(x);
 													if (parseInt(x.split('.')[1] * 6) +
 														parseInt(sM) >= 60) {
 														that.timelist[index] = parseInt((
@@ -857,6 +867,7 @@
 															parseInt(parseInt(x.split('.')[
 																1] * 6) + parseInt(
 																sM) - 60);
+
 													} else {
 														that.timelist[index] = parseInt((
 															parseInt(x.split('.')[
@@ -865,11 +876,32 @@
 															parseInt(x.split('.')[1] *
 																6) + parseInt(sM));
 													}
+													console.log(that.timelist[index])
 
 
 												}
 
-												console.log(that.timelist[index]);
+
+
+											})
+											console.log(that.timelist)
+											that.timelist.map((item, index) => {
+
+												if (that.timelist[index].length < 5) {
+													let split = item.split(":");
+													let x = split[0];
+													let xx = split[1];
+													console.log(split);
+													if (split[0].length < 2) {
+														x = "0" + split[0];
+														console.log(x);
+													}
+													if (split[1].length < 2) {
+														xx = "0" + split[1];
+														console.log(xx);
+													}
+													that.timelist[index] = x + ':' + xx;
+												}
 
 											})
 											console.log(that.timelist)
@@ -880,10 +912,11 @@
 
 
 
-
 											// that.timelistTwo = +':' + sM;
 											// that.timelistThree = +':' + sM;
 
+										} else {
+											that.boxArray.fill(4)
 										}
 
 									})
@@ -917,7 +950,7 @@
 			tarbarListen(index) {
 				this.index = index;
 				if (index == 1) {
-				
+
 					new Promise(function(resolve, reject) {
 
 						uni.request({
@@ -944,16 +977,13 @@
 						let x = [];
 						let y = [];
 						res.map((item, index) => {
-							
-							 if(index%2!=0)
-							 {
-									x.push(item.x_value); 
-							 }
-							else
-							{
+
+							if (index % 2 != 0) {
+								x.push(item.x_value);
+							} else {
 								x.push(" ");
 							}
-						
+
 
 							y.push(item.y_value);
 						})
@@ -961,7 +991,7 @@
 						this.reserveChartData = {
 							categories: [...x],
 							series: [{
-								name: '指数',
+								name: '使用量',
 								data: y,
 								color: '#FFF',
 							}]
@@ -1011,7 +1041,7 @@
 						this.SafeTodayChartData = {
 							categories: [...x],
 							series: [{
-								name: '',
+								name: '使用量',
 								data: [...y],
 								color: '#13C2C2',
 							}]
@@ -1047,15 +1077,15 @@
 						let x = [];
 						let y = [];
 						res.map((item) => {
-							x.push(item.x_value);
+							x.push(item.x_value.split('-')[2]);
 							y.push(item.y_value);
 						})
 
 						if (this.secondShowSafeButtonIndex == 'week') {
 							this.SafeChartData = {
-								categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+								categories: [...x],
 								series: [{
-									name: '',
+									name: '使用量',
 									data: [...y],
 									color: '#13C2C2',
 								}]
@@ -1077,8 +1107,8 @@
 									'Authorization': getApp().globalData.token,
 								},
 								success: (res) => {
-
-
+                           
+									that.place=res.data.value.cityInfo.parent+'-'+res.data.value.cityInfo.city;
 									that.weatherBox = res.data.value.data.forecast;
 									console.log(res.data.value.data.forecast);
 
@@ -1279,7 +1309,7 @@
 					res.map((item, index) => {
 						if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length -
 								1)) {
-							x.push(index + 1);
+							x.push(item.x_value.split('-')[2]);
 						} else {
 							x.push(" ");
 						}
@@ -1290,7 +1320,7 @@
 					this.chartData = {
 						categories: [...x],
 						series: [{
-							name: '指数',
+							name: '使用时长',
 							data: y,
 							color: '#13C2C2',
 						}]
@@ -1336,15 +1366,15 @@
 					let y = [];
 
 					res.map((item) => {
-						x.push(item.x_value);
+						x.push(item.x_value.split('-')[2]);
 						y.push(item.y_value);
 					})
 
 
 					this.chartData = {
-						categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+						categories: [...x],
 						series: [{
-							name: '指数',
+							name: '使用时长',
 							data: y,
 							color: '#13C2C2',
 						}]
@@ -1386,7 +1416,7 @@
 					res.map((item, index) => {
 						if (((index + 1) == 1) || ((index + 1) % 5 == 0) || (index == res.length -
 								1)) {
-							x.push(index + 1);
+							x.push(item.x_value.split('-')[2]);
 						} else {
 							x.push(" ");
 						}
@@ -1396,7 +1426,7 @@
 					this.SafeChartData = {
 						categories: [...x],
 						series: [{
-							name: '',
+							name: '使用量',
 							data: [...y],
 							color: '#13C2C2',
 						}]
@@ -1434,14 +1464,14 @@
 					let x = [];
 					let y = [];
 					res.map((item) => {
-						x.push(item.x_value);
+						x.push(item.x_value.split('-')[2]);
 						y.push(item.y_value);
 					})
 
 					this.SafeChartData = {
-						categories: ['周一', '周二', '周三', '周四', '周五', '周六', '周天'],
+						categories: [...x],
 						series: [{
-							name: '',
+							name: '使用量',
 							data: [...y],
 							color: '#13C2C2',
 						}]
@@ -1658,11 +1688,11 @@
 			},
 			getSrc() {
 				if (this.grade <= 33) {
-					return '../../static/app/btn-quxiao@2X.png'
+					return '../../static/app/sad.svg'
 				} else if (this.grade > 33 && this.grade <= 66) {
-					return '	../../static/app/chazuo@2X.png'
+					return '	../../static/app/dull.svg'
 				} else if (this.grade > 66)
-					return '	../../static/app/btn-yangchang@2X.png'
+					return '	../../static/app/happy.svg'
 			},
 
 			getButtonIndex() {
@@ -1754,13 +1784,14 @@
 	}
 
 	.content-main .firstShow .firstShow-center #top-box {
+
 		display: flex;
-		margin: calc(100vh * 24/812) calc(750rpx * 19/ 375) 0;
+		margin: calc(100vh * 24/812) calc(750rpx * 18/ 375) 0;
 		justify-content: space-between;
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .item {
-		
+
 		width: calc(750rpx * 16/ 375);
 		height: calc(100vh * 16/812);
 		margin-right: calc(750rpx *1/ 375);
@@ -1768,7 +1799,7 @@
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .colorOne {
-		background-color: #EDEFF2;
+		background-color: #D0F3F3;
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .colorTwo {
@@ -1777,6 +1808,10 @@
 
 	.content-main .firstShow .firstShow-center #top-box .colorThree {
 		background-color: #FB696C;
+	}
+
+	.content-main .firstShow .firstShow-center #top-box .colorFour {
+		background-color: #EDEFF2;
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .item:last-child {

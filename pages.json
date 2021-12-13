@@ -8,13 +8,10 @@
 			"path": "pages/login/login"
 
 		},
-
-
 		{
 			"path": "pages/revisePassword/revisePassword"
 
 		},
-
 		{
 			"path": "pages/repair/repair"
 		},
@@ -47,7 +44,11 @@
 		},
 		{
 			"path": "pages/charts/chart"
+		},
+		{
+			"path": "pages/demo/demo"
 		}
+
 
 	],
 	"globalStyle": {
