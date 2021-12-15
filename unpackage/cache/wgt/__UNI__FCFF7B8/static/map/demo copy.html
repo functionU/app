@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>AMap JSAPI Loader</title>
+		<style>
+			.tip {
+				width: 312px;
+				height: 76px;
+				background: rgba(94, 125, 237, 0.10);
+				border: 1px solid #5E7DED;
+				border-radius: 8px;
+				line-height: 30px;
+				font-size: 14px;
+				padding: 10px 10px;
+				margin: 0 auto;
+			}
+
+			.m_t_10 {
+				margin: 10px 0px 10px 10px !important;
+			}
+
+			#myMap {
+				/* height: 700px; */
+				margin: 0px 0px 0;
+			}
+
+			.noData {
+				line-height: 150px;
+				text-align: center;
+			}
+
+			html,
+			body,
+			#container {
+				height: 100%;
+				width: 100%;
+			}
+
+			.amap-marker-label {
+				border: 0;
+				background-color: transparent;
+			}
+
+
+
+			.amap-icon img {
+				width: 80px;
+				height: 80px;
+			}
+
+			.myMapIcon {
+				width: 80px;
+				height: 80px;
+				overflow: hidden;
+			}
+
+			#container {
+				position: relative;
+			}
+
+			.useful {
+				height: 40px;
+				line-height: 40px;
+				width: 151px;
+				height: 40px;
+				background: #FFFFFF;
+				box-shadow: 0 0 6px -4px rgba(20, 32, 59, 0.08), 0 0 16px 0 rgba(20, 32, 59, 0.08);
+				border-radius: 8px;
+				position: absolute;
+				z-index: 99999;
+				top: 20px;
+				left: 40px;
+			}
+
+			.circle {
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				background: #AAAAAA;
+				border-radius: 100%;
+				margin: 0 10px;
+			}
+
+			.circle1 {
+				background: #1ABFC2;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="container" tabindex="0"></div>
+		<script type="text/javascript"
+			src="https://webapi.amap.com/maps?v=1.4.15&key=eb40edb4d646bc929f3620ac3b3e84c5&plugin=Map3D,ElasticMarker">
+		</script>
+		<script type="text/javascript" src="//webapi.amap.com/loca?v=1.3.0&key=eb40edb4d646bc929f3620ac3b3e84c5">
+		</script>
+		<script>
+			var that = this;
+			var maker = null
+			var imageLayer = new AMap.ImageLayer({
+				url: "../app/mapbg.jpg",
+				bounds: new AMap.Bounds(
+					[116.300000, 39.939229],
+					[116.382659, 39.996275]
+				),
+				zooms: 14
+			});
+			map = new AMap.Map('container', {
+				resizeEnable: true,
+				center: [116.34719, 39.962384],
+				//center: [108.819293, 34.353352],
+				zoom: 14,
+				features: [],
+				layers: [
+					new AMap.TileLayer(),
+					imageLayer
+				]
+			});
+			map.setFitView();
+			AMap.plugin([
+				'AMap.ToolBar',
+			], function() {
+				// 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+				that.map.addControl(new AMap.ToolBar({
+					// 简易缩放模式，默认为 false
+					liteStyle: true
+				}));
+			});
+
+			var list = [{
+					id: 8,
+					content: "1444666",
+					latitude: "116.354271",
+					longitude: "39.982996"
+				},
+				{
+					id: 9,
+					content: "1444444",
+					latitude: "116.352984",
+					longitude: "39.958197"
+				},
+				{
+					id: 17,
+					content: "141",
+					latitude: "116.336161",
+					longitude: "39.956421"
+				}
+			]
+			list.forEach(function(e, index) {
+				console.log(index)
+				addMarker(e,index);
+			})
+
+
+
+
+			function addMarker(item,index) {
+				console.log(index)
+				
+				var that = this;
+				var long = item.longitude ? item.longitude : 116.34719;
+				var lat = item.latitude ? item.latitude : 39.962384;
+console.log(lat)
+				 marker = new AMap.Marker({
+					icon: "../app/map-kongxian@2X.png",
+					position: [long, lat],
+					offset: new AMap.Pixel(-28, -45),
+					draggable: true,
+					cursor: 'move',
+				});
+				marker.content = item.content;
+				marker.station_id = item.id;
+				marker.on('click', markerClick);
+				marker.emit('click', {
+					target: marker
+				});
+				marker.setMap(map);
+
+			}
+
+			function markerClick(e) {
+				console.log(e)
+				var infoWindow = new AMap.InfoWindow({
+					offset: new AMap.Pixel(10, -30)
+				});
+				infoWindow.setContent(e.target.content);
+				infoWindow.open(map, e.target.getPosition());
+			}
+		</script>
+	</body>
+</html>

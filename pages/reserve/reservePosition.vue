@@ -82,6 +82,8 @@
 					</view>
 				</view>
 				<view class="center-boxTwo" v-show="!show">
+					<web-view :src="url" @message="getMessage" :style="{width:'100px', height:'100px'}" v-if="!show">
+					</web-view>
 					<!-- 		<view class="map">
 						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
 
@@ -101,7 +103,8 @@
 		<view class="reChose" :class="{'show':showIndex,'hidden':!showIndex}">
 			<view>
 				<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);" @click="cancel">取消</text>
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel">取消</text>
 					<text
 						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
 						@click="confirm">确定</text>
@@ -160,6 +163,8 @@
 				sign: ['至'],
 				showIndex: false,
 				middleIndex: [],
+				url: null,
+
 			}
 
 		},
@@ -177,7 +182,11 @@
 				}
 			}
 		},
+		mounted() {
+			this.changeHeight(0)
+		},
 		onLoad(option) {
+
 			uni.hideLoading();
 			console.log(option);
 			let that = this;
@@ -209,7 +218,7 @@
 				if (i < 10) {
 					i = '0' + i;
 				}
-				for (let j = 0; j <=59; j++) {
+				for (let j = 0; j <= 59; j++) {
 					if (i == parseInt(shour) && j == parseInt(smin)) {
 						this.choseIndex[1] = this.startHourMin.length;
 
@@ -246,6 +255,24 @@
 				success: (res) => {
 					console.log(res.data.value)
 					that.positionMapArray = res.data.value
+					this.fiag = true;
+
+					that.covers = [];
+					if (that.positionMapArray && that.positionMapArray.length > 0) {
+						that.positionMapArray.forEach(function(e, index) {
+							var mm = {
+								id: e.id,
+								content: e.station_number,
+								latitude: e.x_axis,
+								longitude: e.y_axis
+							}
+
+							that.covers.push(mm);
+						})
+
+					}
+					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers)
+					console.log(that.url)
 				}
 
 			})
@@ -253,7 +280,10 @@
 		},
 
 		methods: {
-
+			getMessage(e) {
+				this.itemName = e.detail.data[0].content;
+				this.id = e.detail.data[0].id;
+			},
 			backClick() {
 				uni.navigateBack({
 
@@ -273,9 +303,28 @@
 			},
 			mapClick() {
 				this.show = false;
+				this.changeHeight(400);
 			},
 			listClick() {
 				this.show = true;
+				this.changeHeight(1)
+			},
+			changeHeight(height) {
+				if (!this.show) {
+					let currentWebview = this.$scope.$getAppWebview();
+					
+					let wv = currentWebview.children()[0];
+
+					wv.setStyle({
+						top: 300,
+						height: height,
+						left: 25,
+						right: 25
+					})
+				}
+
+
+
 			},
 			reseverFinshed() {
 
@@ -358,7 +407,7 @@
 									showCancel: false,
 								});
 							} else if (res.data.code == 0) {
-                                
+
 								uni.navigateTo({
 									// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
 									url: `../login-success/login-success?index=1&buttonIndex=1`
@@ -417,9 +466,9 @@
 					this.date = this.date.split('-')[0] + "-" + month + '-' + day;
 					this.showIndex = false;
 					let that = this;
-                    uni.showLoading({
-                    	title:'加载中'
-                    })
+					uni.showLoading({
+						title: '加载中'
+					})
 					uni.navigateTo({
 						url: `./reservePosition?date=${that.date}&startTime=${that.startTime}&endTime=${that.endTime}&place=${that.place}&floor=${that.floor}&floorId=${that.floorId}`
 					})
@@ -431,6 +480,7 @@
 			tip,
 
 		},
+	
 
 
 	}
@@ -450,7 +500,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-	
+
 
 	}
 

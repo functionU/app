@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 3备份</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="98.2708698%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.3" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-3" cx="30" cy="30" r="21"></circle>
+        <filter x="-16.7%" y="-11.9%" width="133.3%" height="133.3%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="10-18" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="共享--未预约" transform="translate(-268.000000, -249.000000)">
+            <g id="快速预约" transform="translate(16.000000, 238.000000)">
+                <g id="编组-3" transform="translate(252.000000, 11.000000)">
+                    <circle id="椭圆形" stroke="url(#linearGradient-2)" fill-opacity="0.3" fill="url(#linearGradient-1)" cx="30" cy="30" r="29.5"></circle>
+                    <g id="椭圆形">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                    </g>
+                    <g id="编组" transform="translate(23.000000, 23.000000)" fill="#FBB258" fill-rule="nonzero">
+                        <path d="M6.70104819,1.75522257 C6.29963531,1.35380969 6.29963531,0.702620049 6.70104819,0.301207167 C7.10246107,-0.100402389 7.75345403,-0.100402389 8.15506359,0.301207167 L14.4683186,6.61426552 C14.6689267,6.81507029 14.7692308,7.07802425 14.7692308,7.34117488 C14.7692308,7.60432551 14.66873,7.86747614 14.4683186,8.06808424 L8.15506359,14.3811426 C7.75345403,14.7827521 7.10246107,14.7827521 6.70104819,14.3811426 C6.29963531,13.9797297 6.29963531,13.3287367 6.70104819,12.9271272 L12.2870005,7.34117488 L6.70104819,1.75522257 Z M5.88701197,7.34117488 L0.301059661,12.9271272 C-0.10035322,13.3287367 -0.10035322,13.9797297 0.301059661,14.3811426 C0.702472543,14.7827521 1.35346551,14.7827521 1.75507506,14.3811426 L8.06833009,8.06808424 C8.26893819,7.86727947 8.36924224,7.60432551 8.36924224,7.34117488 C8.36924224,7.07802425 8.26874152,6.81487362 8.06833009,6.61426552 L1.75507506,0.301207167 C1.35346551,-0.100402389 0.702472543,-0.100402389 0.301059661,0.301207167 C-0.10035322,0.702620049 -0.10035322,1.35380969 0.301059661,1.75522257 L5.88701197,7.34117488 Z" id="形状"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

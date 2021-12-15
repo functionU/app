@@ -79,6 +79,7 @@
 				        console.log('success');
 				    }
 				});
+
 				uni.navigateTo({
 					url: '../login/login'
 				})
