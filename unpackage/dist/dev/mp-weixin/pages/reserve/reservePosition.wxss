@@ -1,8 +1,29 @@
 
 .bgc {
-
+		overflow: hidden;
+		position: relative;
 		height: 100vh;
 		background-color: rgba(241, 242, 246, 1);
+}
+.bgc .reChose {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+}
+.bgc .reChose .main {
+		font-weight: bold;
+		padding: calc(100vh * 14/812) calc(750rpx * 16/ 375);
+		border-top-left-radius: 30%;
+		border-top-right-radius: 30%;
+}
+.bgc .reChose.show {
+		height: calc(100vh * 300/812);
+		transition: height 0.5s;
+}
+.bgc .reChose.hidden {
+		height: 0;
+		transition: height 0.5s
 }
 .head {
 		height: calc(100vh *44/812);
