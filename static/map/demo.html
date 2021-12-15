@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>AMap</title>
+		<style>
+			.tip {
+				width: 312px;
+				height: 76px;
+				background: rgba(94, 125, 237, 0.10);
+				border: 1px solid #5E7DED;
+				border-radius: 8px;
+				line-height: 30px;
+				font-size: 14px;
+				padding: 10px 10px;
+				margin: 0 auto;
+			}
+
+			.m_t_10 {
+				margin: 10px 0px 10px 10px !important;
+			}
+
+			#myMap {
+				/* height: 700px; */
+				margin: 0px 0px 0;
+			}
+
+			.noData {
+				line-height: 150px;
+				text-align: center;
+			}
+
+			html,
+			body,
+			#container {
+				height: 100%;
+				width: 100%;
+			}
+
+			.amap-marker-label {
+				border: 0;
+				background-color: transparent;
+			}
+
+
+
+			.amap-icon img {
+				width: 80px;
+				height: 80px;
+			}
+
+			.myMapIcon {
+				width: 80px;
+				height: 80px;
+				overflow: hidden;
+			}
+
+			#container {
+				position: relative;
+			}
+
+			.useful {
+				height: 40px;
+				line-height: 40px;
+				width: 151px;
+				height: 40px;
+				background: #FFFFFF;
+				box-shadow: 0 0 6px -4px rgba(20, 32, 59, 0.08), 0 0 16px 0 rgba(20, 32, 59, 0.08);
+				border-radius: 8px;
+				position: absolute;
+				z-index: 99999;
+				top: 20px;
+				left: 40px;
+			}
+
+			.circle {
+				display: inline-block;
+				width: 8px;
+				height: 8px;
+				background: #AAAAAA;
+				border-radius: 100%;
+				margin: 0 10px;
+			}
+
+			.circle1 {
+				background: #1ABFC2;
+			}
+
+			.amap-logo,
+			.amap-copyright {
+				display: none !important;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="container" tabindex="0"></div>
+		<script type="text/javascript"
+			src="https://webapi.amap.com/maps?v=1.4.15&key=eb40edb4d646bc929f3620ac3b3e84c5&plugin=Map3D,ElasticMarker">
+		</script>
+		<script type="text/javascript" src="//webapi.amap.com/loca?v=1.3.0&key=eb40edb4d646bc929f3620ac3b3e84c5">
+		</script>
+		<!-- uni 的 SDK -->
+		<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.2.js">
+		</script>
+
+		<script type="text/javascript">
+			//console.log("90909090");
+			//console.log("www="+getQuery('data')); //获取 uni-app 传来的值
+
+			//取url中的参数值
+
+			var that = this;
+			var marker = null;
+			var markers = [];
+			var currentId = null;
+			var currentContent = "";
+			var list = [];
+			var pic=null;
+			if (getQuery('data')) {
+				list = JSON.parse(getQuery('data'));
+				pic = getQuery('pic')
+			}
+
+			var imageLayer = new AMap.ImageLayer({
+				url: pic,//"../app/mapbg.jpg",
+				bounds: new AMap.Bounds(
+					[116.300000, 39.939229],
+					[116.382659, 39.996275]
+				),
+				zooms: 14
+			});
+			map = new AMap.Map('container', {
+				resizeEnable: true,
+				center: [116.34719, 39.962384],
+				//center: [108.819293, 34.353352],
+				zoom: 14,
+				features: [],
+				layers: [
+					new AMap.TileLayer(),
+					imageLayer
+				]
+			});
+			map.setFitView();
+			AMap.plugin([
+				'AMap.ToolBar',
+			], function() {
+				// 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+				that.map.addControl(new AMap.ToolBar({
+					// 简易缩放模式，默认为 false
+					liteStyle: true
+				}));
+			});
+			if (list && list.length > 0) {
+				list.forEach(function(e, index) {
+					that.addMarker(e);
+				})
+			}
+
+
+			function addMarker(item) {
+				console.log(item)
+				var that = this;
+				var long = item.latitude ? item.latitude : 116.34719;
+				var lat = item.longitude ? item.longitude : 39.962384;
+
+				marker = new AMap.Marker({
+					icon: "../app/map-kongxian@2X.png",
+					position: [long, lat],
+					offset: new AMap.Pixel(-28, -45),
+				});
+				marker.content = item.content;
+				marker.station_id = item.id;
+				marker.on('click', markerClick);
+				// marker.emit('click', {
+				// 	target: marker
+				// });
+				marker.setMap(map);
+				markers.push(marker);
+
+
+			}
+
+			function markerClick(e) {
+				markers.forEach(function(m, index) {
+					m.setIcon("../app/map-kongxian@2X.png");
+				})
+				var infoWindow = new AMap.InfoWindow({
+					offset: new AMap.Pixel(10, -30)
+				});
+				infoWindow.setContent(e.target.content);
+				infoWindow.open(map, e.target.getPosition());
+				currentId = e.target.station_id;
+				currentContent = e.target.content;
+				e.target.setIcon("../app/map-xianzhong@2X.png");
+				uni.postMessage({
+					data: {
+						id: currentId,
+						content: currentContent
+					}
+				});
+			}
+
+			function getQuery(name) {
+				// 正则：[找寻'&' + 'url参数名字' = '值' + '&']（'&'可以不存在）
+				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				let r = window.location.search.substr(1).match(reg);
+				console.log(r);
+				if (r != null) {
+					// 对参数值进行解码
+					return decodeURIComponent(r[2]);
+				}
+				return null;
+			}
+			document.addEventListener('UniAppJSBridgeReady', function() {
+				//向uniapp传值
+				uni.postMessage({
+					data: {
+						action: currentId
+					}
+				});
+				uni.getEnv(function(res) {
+					console.log('当前环境：' + JSON.stringify(res));
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -338,7 +338,7 @@
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
-									<view class="reserveFirst" style="width: ;">
+									<view class="reserveFirst" >
 										<view class="reserveFirst-left" :class="{'bgcOne':item.src,'bgcTwo':item.src}">
 
 										</view>
@@ -617,6 +617,7 @@
 				timelist: ["8:00", '12:00', '15:00', "19:00"],
 				place: "---",
 				imgArray: ['/static/app/dull.svg', '/static/app/happy.svg', '/static/app/sad.svg', ],
+				width:""
 
 
 			}

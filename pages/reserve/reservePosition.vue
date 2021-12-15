@@ -9,15 +9,15 @@
 					style="font-size:calc(750rpx * 17/ 375) ; color: white;margin-left: calc(-750rpx * 220/ 375);">选择工位</text>
 			</tarbarHeader>
 			<view class="top">
-				<view class="top-item" @click="reChose">
-					<view style="color: rgba(17, 30, 54, 1);">
-						{{date}}
+					<view class="top-item" @click="reChose">
+						<view style="color: rgba(17, 30, 54, 1);">
+							{{date}}
+						</view>
+						<text style="color: rgba(10, 32, 57, 0.3); ">|</text>
+						<view style="color: #007AFF;">
+							{{startTime}}--{{endTime}}
+						</view>
 					</view>
-					<text style="color: rgba(10, 32, 57, 0.3); ">|</text>
-					<view style="color: #007AFF;">
-						{{startTime}}--{{endTime}}
-					</view>
-				</view>
 				<view class="top-item">
 					<view>
 						<view>
@@ -56,7 +56,7 @@
 						<image
 							style="width:calc(750rpx * 13.98/ 375);height:calc(750rpx * 11.65/ 375);margin-right:calc(750rpx * 8.02/ 375)"
 							src="../../static/app/icon-zhishu@2X.png"></image>
-						<text style="margin-right:calc(750rpx * 36/ 375) ;">地图</text>
+						<text style="margin-right:calc(750rpx * 36/ 375) ;">地图90909</text>
 					</view>
 				</view>
 				<view class="center-boxOne" v-show="show">
@@ -82,7 +82,7 @@
 					</view>
 				</view>
 				<view class="center-boxTwo" v-show="!show">
-					<web-view :src="url" @message="getMessage" :style="{width:'100px', height:'100px'}" v-if="!show">
+					<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url">
 					</web-view>
 					<!-- 		<view class="map">
 						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
@@ -101,7 +101,6 @@
 			</view>
 		</view>
 		<view class="reChose" :class="{'show':showIndex,'hidden':!showIndex}">
-			<view>
 				<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
 						@click="cancel">取消</text>
@@ -124,14 +123,14 @@
 						<view class="item" v-for="(item,index) in endHourMin">{{item}}</view>
 					</picker-view-column>
 				</picker-view>
-			</view>
+			
 		</view>
 
 	</view>
 
 
 
-</template>\
+</template>
 <script>
 	import tarbarHeader from '../../components/common/header/header.vue'
 	import tip from '../../components/common/tip/tip.vue'
@@ -164,6 +163,7 @@
 				showIndex: false,
 				middleIndex: [],
 				url: null,
+				currentMapPic:null
 
 			}
 
@@ -183,7 +183,7 @@
 			}
 		},
 		mounted() {
-			this.changeHeight(0)
+			this.changeHeight(1)
 		},
 		onLoad(option) {
 
@@ -196,6 +196,17 @@
 			this.place = option.place;
 			this.floor = option.floor;
 			this.floorId = option.floorId;
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/office/station/map/${that.floorId}`,
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token,
+				},
+				success:(res)=>{
+					that.currentMapPic = `http://${getApp().globalData.http}`+res.data.value;
+					console.log(that.currentMapPic)
+				}
+			})
 
 			let month = this.date.split('-')[1];
 			let day = this.date.split('-')[2];
@@ -271,7 +282,7 @@
 						})
 
 					}
-					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers)
+					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers)+"&pic="+that.currentMapPic
 					console.log(that.url)
 				}
 
@@ -307,24 +318,19 @@
 			},
 			listClick() {
 				this.show = true;
-				this.changeHeight(1)
+				this.changeHeight(1);
 			},
 			changeHeight(height) {
-				if (!this.show) {
-					let currentWebview = this.$scope.$getAppWebview();
-					
-					let wv = currentWebview.children()[0];
-
-					wv.setStyle({
-						top: 300,
-						height: height,
-						left: 25,
-						right: 25
-					})
-				}
-
-
-
+				console.log(this)
+				var currentWebview = this.$scope.$getAppWebview(); //获取当前web-view
+				var wv = currentWebview.children()[0];
+				wv.setStyle({ //设置web-view距离顶部的距离以及自己的高度，单位为px
+					top: 300,
+					height: height,
+					left: 25,
+					right: 25,
+					zindex:-1
+				})
 			},
 			reseverFinshed() {
 
@@ -480,7 +486,6 @@
 			tip,
 
 		},
-	
 
 
 	}
@@ -500,7 +505,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-
+z-index: 99999;
 
 	}
 
