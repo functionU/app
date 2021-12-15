@@ -43,8 +43,8 @@
 				envirChartData: {
 
 
-					categories: ['周一', '周二',
-						'周三', '周四', '周五'
+					categories: ['7:00', '8:00',
+						'9:00', '10:00', '11:00'
 					],
 					series: [{
 						name: '使用量',
@@ -55,9 +55,7 @@
 			}
 		},
 		onLoad() {
-			uni.showLoading({
-				title: '加载中'
-			})
+			
 			new Promise(function(resolve, reject) {
 				uni.request({
 					url: `http://${getApp().globalData.http}/app/data/today/power`,
@@ -93,6 +91,7 @@
 					})
 				})
 			}).then(res => {
+				
 				console.log(res);
 				let x = [];
 				let y = [];
@@ -110,7 +109,7 @@
 						color: '#70CFBA'
 					}, ]
 				};
-            uni.hideLoading();
+           
 			})
 
 		},

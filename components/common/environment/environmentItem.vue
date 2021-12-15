@@ -2,8 +2,8 @@
 	<view class="environment-item" >
 		<text class="text">{{item.name}}</text>
 		<image :src=item.src style="width: calc(750rpx * 22.33/ 375) ; height: calc(100vh * 24.23/812);"></image>
-		<text>{{item.number}} {{item.name=='温度' ? '°C' : '' }}{{item.name=='PM2.5' ? 'μg/mg' : '' }}{{item.name=='PM10' ? '°C' : '' }}{{item.name=='湿度' ? '%' : '' }}</text>
-		<view :class="{item,'good':item.quality=='优','bad':item.quality=='差','none':item.quality=='无'}">
+		<text>{{item.number}} {{item.name=='温度' ? '°C' : '' }}{{item.name=='PM2.5' ? 'μg/mg' : '' }}{{item.name=='二氧化碳' ? 'μg/m3' : '' }}{{item.name=='甲醛' ? 'μg/m3' : '' }}{{item.name=='噪音' ? 'db' : '' }}{{item.name=='湿度' ? '%' : '' }}</text>
+		<view :class="{item,'good':item.quality=='优'||item.quality=='潮湿','bad':item.quality=='差'||item.quality=='干燥','none':item.quality=='无'}">
 			{{item.quality}}
 		</view>
 

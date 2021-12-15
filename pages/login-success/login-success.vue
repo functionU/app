@@ -22,12 +22,41 @@
 								</view>
 							</view>
 							<view class="firstShow-center">
-								<view id="top-box">
-									<view class="item" v-for="item in boxArray"
-										:class="{'colorOne':item==0,'colorTwo':item==1,'colorThree':item==2}">
+								<view
+									style="width: calc(750rpx * 305	/ 375);margin-left: calc(750rpx * 19/ 375);overflow-x: scroll;">
+									<view id="top-box" ref="topBox" style="margin-left: 0;">
+										<view class="item" v-for="item in boxArray"
+											:class="{'colorOne':item==0,'colorTwo':item==1,'colorThree':item==2,'colorFour':item==4}">
+										</view>
+									</view>
+									<view class="center-box" ref='centerBox' style="margin-left: 0;"
+										:style="{'width':width+'rpx'}">
+										<view>
+											<image src="../../static/app/toWork.svg"
+												style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-right: calc(750rpx * 4/ 375) ;">
+											</image>
+											{{timelist[0]}}
+										</view>
+										<view>
+											{{timelist[1]}}
+										</view>
+										<view>
+											{{timelist[2]}}
+										</view>
+										<view>
+											{{timelist[3]}}
+											<image src="../../static/app/toRest.svg"
+												style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-left: calc(750rpx * 4/ 375)">
+											</image>
+										</view>
 									</view>
 								</view>
-								<view class="center-box">
+								<!-- 	<view id="top-box" ref="topBox">
+									<view class="item" v-for="item in boxArray"
+										:class="{'colorOne':item==0,'colorTwo':item==1,'colorThree':item==2,'colorFour':item==4}">
+									</view>
+								</view>
+								<view class="center-box" ref='centerBox'>
 									<view>
 										<image src="../../static/app/toWork.svg"
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-right: calc(750rpx * 4/ 375) ;">
@@ -46,14 +75,16 @@
 											style="width: calc(750rpx * 10/ 375);height: calc(750rpx * 9.8/ 375); margin-left: calc(750rpx * 4/ 375)">
 										</image>
 									</view>
-								</view>
+								</view> -->
 							</view>
+
 							<view class="firstShow-bottom">
 								<text>健康</text>
 								<text>无人</text>
 								<text>久坐</text>
 							</view>
 							<view class="firstShow-bottom-bottom">
+
 								<view class="top-box">
 									<view class="left">
 										<image src="../../static/app/icon-title@2X.png"
@@ -414,6 +445,7 @@
 
 							</view>
 							<view class="firstOffice-tip">
+
 								建议配备智能硬件，更准确的知晓身边的工作环境～
 							</view>
 						</view>
@@ -425,11 +457,12 @@
 									v-for="item in weatherBox">
 									<view>
 										<image style="width: calc(750rpx * 12/ 375);height: calc(100vh * 12/812);"
-											src="../../static/app/map-xianzhong@2X.png"></image>
-										<text style="margin-left:  calc(750rpx * 13/ 375);">{{item.ymd}}</text>
+											:src="getWeatherSrc(item.type)"></image>
+										<text
+											style="margin-left:  calc(750rpx * 13/ 375);">{{item.week}}-{{item.type}}</text>
 									</view>
 									<text
-										style="margin-right:  calc(750rpx * 24/ 375);">{{item.high}}-{{item.low}}</text>
+										style="margin-right:  calc(750rpx * 24/ 375);">{{item.high.split(" ")[1]}}/{{item.low.split(" ")[1]}}</text>
 								</view>
 							</view>
 						</view>
@@ -465,35 +498,37 @@
 				secondShowSafeButtonIndex: 'week',
 
 				resever: false,
-
+				environmentesSrc: ['/static/app/1.svg', '/static/app/2.svg', '/static/app/3.svg', '/static/app/4.svg',
+					'/static/app/5.svg', '/static/app/6.svg'
+				],
 				environmentes: [{
-					name: '适度',
-					src: '../../static/app/icon-zhengque.png',
+					name: '湿度',
+					src: '../../static/app/1.svg',
+					number: '0',
+					quality: '无'
+				}, {
+					name: '温度',
+					src: '../../static/app/2.svg',
 					number: '0',
 					quality: '无'
 				}, {
 					name: 'PM2.5',
-					src: '../../static/app/icon-zhengque.png',
+					src: '../../static/app/3.svg',
 					number: '0',
 					quality: '无'
 				}, {
-					name: 'PM10',
-					src: '../../static/app/icon-zhengque.png',
+					name: '噪音',
+					src: '../../static/app/4.svg',
 					number: '0',
 					quality: '无'
 				}, {
-					name: '温度',
-					src: '../../static/app/icon-zhengque.png',
+					name: '甲醛',
+					src: '../../static/app/5.svg',
 					number: '0',
 					quality: '无'
 				}, {
-					name: '温度',
-					src: '../../static/app/icon-zhengque.png',
-					number: '0',
-					quality: '无'
-				}, {
-					name: '温度',
-					src: '../../static/app/icon-zhengque.png',
+					name: '二氧化碳',
+					src: '../../static/app/6.svg',
 					number: '0',
 					quality: '无'
 				}],
@@ -581,11 +616,17 @@
 				weatherBox: [],
 				timelist: ["8:00", '12:00', '15:00', "19:00"],
 				place: "---",
+				imgArray: ['/static/app/dull.svg', '/static/app/happy.svg', '/static/app/sad.svg', ],
+
 
 			}
 		},
 		onInit() {
 
+		},
+		onBackPress (e){
+			console.log(e);
+			return true;
 		},
 		onLoad(option) {
 			let that = this;
@@ -614,9 +655,10 @@
 								// uni.hideLoading();
 								console.log(res);
 								if (res.data.code != 0) {
-									uni.navigateTo({
-										url: '../login/login'
-									})
+								uni.switchTab({
+									url: '../login-success/login-success',
+									
+								})
 
 								}
 								getApp().globalData.token = res.data.value.token;
@@ -772,7 +814,7 @@
 											})
 										})
 									}).then(res => {
-
+										console.log(res);
 										that.grade = res.health_number;
 										that.workTimeHour = parseInt(res.work_time / 3600);
 										that.workTimeMins = parseInt(res.work_time % 3600 / 60);
@@ -788,7 +830,7 @@
 											sM = s.split(":")[1];
 										}
 
-										if (res.work_time_list.length) {
+										if (res.work_time_list.length > 0) {
 											let lastEndIndex;
 											that.boxArray.fill(0)
 											res.work_time_list.map((item) => {
@@ -827,6 +869,7 @@
 												int = (H * 60 + M) / 30;
 												float = (H * 60 + M) % 30;
 												endIndex = Math.ceil(int);
+												lastEndIndex = Math.ceil(int);
 
 												if (endIndex - startIndex > 3) {
 													number = 2;
@@ -836,14 +879,17 @@
 												}
 												if (endIndex > that.boxArray.length) {
 													that.boxArray.length = endIndex;
-												}
 
+												}
+												console.log(that.boxArray)
+												console.log('s' + startIndex);
+												console.log('e' + endIndex);
 												that.boxArray.fill(number, startIndex,
 													endIndex);
 
 											})
+											that.boxArray.fill(4, lastEndIndex);
 
-											that.boxArray.fill(number, lastEndIndex);
 
 
 											let space;
@@ -918,6 +964,18 @@
 										} else {
 											that.boxArray.fill(4)
 										}
+										// let obj = uni.createSelectorQuery().select('.top-box');
+										//    obj.boundingClientRect(function (data) { 
+										// 				console.log(data.width)
+										// 				that.width=data.width;
+										// 						}).exec()
+										console.log(that.boxArray.length)
+
+
+										that.width = 750 * (that.boxArray.length * 16 + that
+											.boxArray.length - 1) / 375;
+										console.log(that.width)
+
 
 									})
 
@@ -1107,51 +1165,44 @@
 									'Authorization': getApp().globalData.token,
 								},
 								success: (res) => {
-                           
-									that.place=res.data.value.cityInfo.parent+'-'+res.data.value.cityInfo.city;
+									console.log(res);
+									that.place = res.data.value.cityInfo.parent + '-' + res.data
+										.value.cityInfo.city;
 									that.weatherBox = res.data.value.data.forecast;
 									console.log(res.data.value.data.forecast);
 
 									that.environmentes[0].number = res.data.value.data
-										.shidu;
+										.shidu.split("%")[0];
 									res.data.value.data.shidu = res.data.value.data.shidu
 										.split(
 											"%")[0] / 100;
-									if (res.data.value.data.shidu > 0.5 && res.data.value
+									console.log(res.data.value.data.shidu)
+									if (res.data.value.data.shidu > 0.45 && res.data.value
 										.data
-										.shidu < 0.8) {
-										that.environmentes[0].quality = '优'
+										.shidu < 0.65) {
+										that.environmentes[0].quality = '潮湿'
 									} else {
-										that.environmentes[0].quality = '差'
+										that.environmentes[0].quality = '干燥'
 									}
-									environmentes[1].number = res.data.value.data.pm25;
-									if (res.data.value.data.pm25 > 60 && res.data.value
-										.data
-										.pm25 < 100) {
-										that.environmentes[1].quality = '差'
-									} else {
-										that.environmentes[1].quality = '优'
-									}
-									that.environmentes[2].number = res.data.value.data
-										.pm10;
-									if (res.data.value.data.pm10 > 60 && res.data.value
-										.data
-										.pm10 < 100) {
-										that.environmentes[2].quality = '差'
-									} else {
+									console.log(res.data.value.data.pm25)
+									that.environmentes[2].number = res.data.value.data.pm25;
+									if (res.data.value.data.pm25 <75 ) {
 										that.environmentes[2].quality = '优'
-									}
-									that.environmentes[3].number = res.data.value.data
-										.wendu;
-									if (res.data.value.data.wendu > 0 && res.data.value
-										.data
-										.wendu < 20) {
-										that.environmentes[3].quality = '差'
 									} else {
-										that.environmentes[3].quality = '优'
+										that.environmentes[2].quality = '差'
 									}
 
-									console.log(that.environmentes)
+									that.environmentes[1].number = res.data.value.data
+										.wendu;
+									if (res.data.value.data.wendu > 18 && res.data.value
+										.data
+										.wendu < 23) {
+										that.environmentes[1].quality = '优'
+									} else {
+										that.environmentes[1].quality = '差'
+									}
+
+
 								},
 
 							})
@@ -1659,9 +1710,23 @@
 					}
 				})
 
-			}
-		},
-		components: {
+			},
+			getWeatherSrc(type) {
+
+				if (type == '晴') {
+					return this.imgArray[1];
+				} else if (type == '阴') {
+					return this.imgArray[2];
+				}
+
+			
+			return this.imgArray[0]
+
+		}
+
+
+	},
+	components: {
 			tarbar,
 			tarbarHeader,
 			environmentItem,
@@ -1700,7 +1765,9 @@
 				return this.buttonIndex
 			},
 
-		}
+
+		},
+
 	}
 </script>
 
@@ -1729,6 +1796,7 @@
 
 	.head {
 		height: calc(100vh *44/812);
+
 	}
 
 	.content {
@@ -1745,8 +1813,9 @@
 	.content-top {
 		background-image: url(../../static/app/logo@2X.png);
 		background-repeat: no-repeat;
-		background-position: center calc(100vh * 08/812);
-		background-size: calc(750rpx * 48/ 375);
+		background-position: center calc(100vh * 18/812);
+		background-size: calc(750rpx * 48/ 375) calc(100vh * 48/ 812);
+
 
 	}
 
@@ -1785,16 +1854,19 @@
 
 	.content-main .firstShow .firstShow-center #top-box {
 
+		width: calc(750rpx * 305/ 375);
 		display: flex;
-		margin: calc(100vh * 24/812) calc(750rpx * 18/ 375) 0;
-		justify-content: space-between;
+		margin: calc(100vh * 24/812) calc(750rpx * 19/ 375);
+
+
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .item {
-
+		flex-grow: 0;
+		flex-shrink: 0;
 		width: calc(750rpx * 16/ 375);
 		height: calc(100vh * 16/812);
-		margin-right: calc(750rpx *1/ 375);
+		margin-right: calc(750rpx * 1 / 375);
 
 	}
 
@@ -2100,9 +2172,9 @@
 	.content-main .firstOffice .firstOffice-tip::before {
 		content: '';
 		display: inline-block;
-		width: calc(750rpx * 11/ 375);
-		height: calc(100vh* 12/ 812);
-
+		width: calc(750rpx * 13.06/ 375);
+		height: calc(100vh* 13.24/ 812);
+		background-image: url(../../static/app/icon-zhishu@2X.png);
 		margin-right: calc(750rpx * 9.93/ 375);
 		background-size: cover;
 
