@@ -18,6 +18,11 @@
 .header view:nth-child(3) image:nth-child(2) {
 	margin-right: calc(750rpx * 14.67/ 375);
 }
+- .bgi {
+	background-image: url(../../static/img/message.0904a961.svg);
+	font-size: calc(750rpx * 17/ 375);
+	text-align: center;
+}
 .personal {
 	box-sizing: border-box;
 	width: calc(750rpx *128/ 375);

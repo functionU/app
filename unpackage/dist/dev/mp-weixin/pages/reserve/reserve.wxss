@@ -4,12 +4,6 @@
 	height: 100vh;
 	background-color: rgba(241, 242, 246, 1);
 }
-.bgc .viewText {
-	font-weight: bold;
-	padding: calc(100vh * 14/812) calc(750rpx * 16/ 375);
-	border-top-left-radius: 30%;
-	border-top-right-radius: 30%;
-}
 .head {
 	height: calc(100vh *44/812);
 }
@@ -96,10 +90,10 @@
 }
 .bgc .show {
 	height: calc(100vh * 300/812);
-	transition: height 0.5s;
+	transition: height 1.5s;
 }
 .bgc .hidden {
 	height: 0;
-	transition: height 0.5s
+	transition: height 1.5s
 }
 

@@ -119,10 +119,7 @@
 			var currentContent = "";
 			var list = [];
 			var pic=null;
-<<<<<<< HEAD
 		
-=======
->>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 			if (getQuery('data')) {
 				list = JSON.parse(getQuery('data'));
 				pic = getQuery('pic')
@@ -169,7 +166,6 @@
 				var that = this;
 				var long = item.latitude ? item.latitude : 116.34719;
 				var lat = item.longitude ? item.longitude : 39.962384;
-<<<<<<< HEAD
 				let imgSrc=["../app/map-kongxian@2X.png","../app/map-zhanyong@2X.png"]
 			         
 				
@@ -198,17 +194,6 @@
 						marker.on('click', markerClick);
 				}
 			
-=======
-
-				marker = new AMap.Marker({
-					icon: "../app/map-kongxian@2X.png",
-					position: [long, lat],
-					offset: new AMap.Pixel(-28, -45),
-				});
-				marker.content = item.content;
-				marker.station_id = item.id;
-				marker.on('click', markerClick);
->>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 				// marker.emit('click', {
 				// 	target: marker
 				// });

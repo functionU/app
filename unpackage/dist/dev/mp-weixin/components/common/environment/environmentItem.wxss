@@ -19,18 +19,14 @@
 	height: calc(100vh * 22/ 812);
 	line-height: calc(100vh * 22/ 812);
 	border-radius: calc(750rpx * 14/ 375);
-	color: black;
+	color: rgba(255, 255, 255, 1);
 	text-align: center;
 	background-color: rgba(255, 169, 54, 1);
-	border:  1px solid rgba(10,32,57,0.15);
 }
 .good {
 	background-color: rgba(26, 191, 194, 1);
 }
 .bad {
 	background-color: rgba(251, 105, 108, 1);
-}
-.none{
-	background-color: white;
 }
 

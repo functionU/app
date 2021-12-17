@@ -1,10 +1,7 @@
 {
     "pages" : [
         //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-<<<<<<< HEAD
 
-=======
->>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
         {
             "path" : "pages/login-success/login-success"
         },
@@ -25,10 +22,7 @@
         },
         {
             "path" : "pages/reserve/reserve"
-<<<<<<< HEAD
 
-=======
->>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
         },
         {
             "path" : "pages/reserve/reservePosition"
@@ -48,16 +42,10 @@
         {
             "path" : "pages/reserve/codeReserve"
         },
-<<<<<<< HEAD
 		{
 		    "path" : "pages/charts/chart"
 		}
    
-=======
-        {
-            "path" : "pages/charts/chart"
-        }
->>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
      
 		
     ],

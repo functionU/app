@@ -109,7 +109,7 @@
 		<script type="text/javascript">
 			//console.log("90909090");
 			//console.log("www="+getQuery('data')); //获取 uni-app 传来的值
-		
+
 			//取url中的参数值
 
 			var that = this;
@@ -117,9 +117,16 @@
 			var markers = [];
 			var currentId = null;
 			var currentContent = "";
-			var list = getQuery('data');
+			var list = [];
+			var pic=null;
+		
+			if (getQuery('data')) {
+				list = JSON.parse(getQuery('data'));
+				pic = getQuery('pic')
+			}
+
 			var imageLayer = new AMap.ImageLayer({
-				url: "../app/mapbg.jpg",
+				url: pic,//"../app/mapbg.jpg",
 				bounds: new AMap.Bounds(
 					[116.300000, 39.939229],
 					[116.382659, 39.996275]
@@ -147,35 +154,57 @@
 					liteStyle: true
 				}));
 			});
-			JSON.parse(list).forEach(function(e, index) {
-				that.addMarker(e);
-			})
-			
+			if (list && list.length > 0) {
+				list.forEach(function(e, index) {
+					that.addMarker(e);
+				})
+			}
+
+
 			function addMarker(item) {
 				console.log(item)
 				var that = this;
 				var long = item.latitude ? item.latitude : 116.34719;
 				var lat = item.longitude ? item.longitude : 39.962384;
+				let imgSrc=["../app/map-kongxian@2X.png","../app/map-zhanyong@2X.png"]
+			         
+				
+			    
+					marker = new AMap.Marker({
+						icon:item.enabled ? "../app/map-kongxian@2X.png" : "../app/map-zhanyong@2X.png",
+						position: [long, lat],
+						offset: new AMap.Pixel(-28, -45),
+					});
+				
+				
+				// if(!item.enabled){
+				// 	marker = new AMap.Marker({
+				// 		icon:"../app/amap-zhanyong@2X.png",
+				// 		position: [long, lat],
+				// 		offset: new AMap.Pixel(-28, -45),
+				// 	});
+				// }
+		
 
-				marker = new AMap.Marker({
-					icon: "../app/map-kongxian@2X.png",
-					position: [long, lat],
-					offset: new AMap.Pixel(-28, -45),
-				});
+			
 				marker.content = item.content;
 				marker.station_id = item.id;
-				marker.on('click', markerClick);
+				if(item.enabled)
+				{
+						marker.on('click', markerClick);
+				}
+			
 				// marker.emit('click', {
 				// 	target: marker
 				// });
 				marker.setMap(map);
 				markers.push(marker);
-				
+
 
 			}
 
 			function markerClick(e) {
-				markers.forEach(function(m,index){
+				markers.forEach(function(m, index) {
 					m.setIcon("../app/map-kongxian@2X.png");
 				})
 				var infoWindow = new AMap.InfoWindow({
