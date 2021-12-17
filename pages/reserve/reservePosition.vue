@@ -9,15 +9,15 @@
 					style="font-size:calc(750rpx * 17/ 375) ; color: white;margin-left: calc(-750rpx * 220/ 375);">选择工位</text>
 			</tarbarHeader>
 			<view class="top">
-				<view class="top-item" @click="reChose">
-					<view style="color: rgba(17, 30, 54, 1);">
-						{{date}}
+					<view class="top-item" @click="reChose">
+						<view style="color: rgba(17, 30, 54, 1);">
+							{{date}}
+						</view>
+						<text style="color: rgba(10, 32, 57, 0.3); ">|</text>
+						<view style="color: #007AFF;">
+							{{startTime}}--{{endTime}}
+						</view>
 					</view>
-					<text style="color: rgba(10, 32, 57, 0.3); ">|</text>
-					<view style="color: #007AFF;">
-						{{startTime}}--{{endTime}}
-					</view>
-				</view>
 				<view class="top-item">
 					<view>
 						<view>
@@ -56,7 +56,7 @@
 						<image
 							style="width:calc(750rpx * 13.98/ 375);height:calc(750rpx * 11.65/ 375);margin-right:calc(750rpx * 8.02/ 375)"
 							src="../../static/app/icon-zhishu@2X.png"></image>
-						<text style="margin-right:calc(750rpx * 36/ 375) ;">地图</text>
+						<text style="margin-right:calc(750rpx * 36/ 375) ;">地图90909</text>
 					</view>
 				</view>
 				<view class="center-boxOne" v-show="show">
@@ -84,7 +84,11 @@
 					</view>
 				</view>
 				<view class="center-boxTwo" v-show="!show">
+<<<<<<< HEAD
 					<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url" >
+=======
+					<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url">
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 					</web-view>
 					<!-- 		<view class="map">
 						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
@@ -103,6 +107,7 @@
 			</view>
 		</view>
 		<view class="reChose" :class="{'show':showIndex,'hidden':!showIndex}">
+<<<<<<< HEAD
 			<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
 				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
 					@click="cancel">取消</text>
@@ -126,6 +131,31 @@
 				</picker-view-column>
 			</picker-view>
 
+=======
+				<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
+					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+						@click="cancel">取消</text>
+					<text
+						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+						@click="confirm">确定</text>
+				</view>
+				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+					@change="PickerChange" :value="choseIndex">
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in monthDay">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in startHourMin">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in sign">{{item}}</view>
+					</picker-view-column>
+					<picker-view-column>
+						<view class="item" v-for="(item,index) in endHourMin">{{item}}</view>
+					</picker-view-column>
+				</picker-view>
+			
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 		</view>
 
 	</view>
@@ -165,8 +195,12 @@
 				showIndex: false,
 				middleIndex: [],
 				url: null,
+<<<<<<< HEAD
 				currentMapPic: null,
 				vh:0
+=======
+				currentMapPic:null
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 
 			}
 
@@ -189,6 +223,7 @@
 			this.changeHeight(1)
 		},
 		onLoad(option) {
+<<<<<<< HEAD
 			let that=this;
             uni.getSystemInfo({
                 success: function (res) {
@@ -196,6 +231,8 @@
 
                 }
             });
+=======
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 
 			uni.hideLoading();
 
@@ -206,6 +243,7 @@
 			this.floor = option.floor;
 			this.floorId = option.floorId;
 			uni.request({
+<<<<<<< HEAD
 				url: `http://${getApp().globalData.http}/app/office/empty/station/list`,
 				// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
 				method: 'POST',
@@ -251,13 +289,20 @@
 				}
 			})
 			uni.request({
+=======
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 				url: `http://${getApp().globalData.http}/app/office/station/map/${that.floorId}`,
 				header: {
 					'Content-Type': 'application/json',
 					'Authorization': getApp().globalData.token,
 				},
+<<<<<<< HEAD
 				success: (res) => {
 					that.currentMapPic = `http://${getApp().globalData.http}` + res.data.value;
+=======
+				success:(res)=>{
+					that.currentMapPic = `http://${getApp().globalData.http}`+res.data.value;
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 					console.log(that.currentMapPic)
 				}
 			})
@@ -318,8 +363,13 @@
 
 				},
 				success: (res) => {
+<<<<<<< HEAD
 					console.log(res)
 					that.positionMapArray = res.data.value 
+=======
+					console.log(res.data.value)
+					that.positionMapArray = res.data.value
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 					this.fiag = true;
 
 					that.covers = [];
@@ -329,16 +379,24 @@
 								id: e.id,
 								content: e.station_number,
 								latitude: e.x_axis,
+<<<<<<< HEAD
 								longitude: e.y_axis,
 								enabled:e.enabled,
+=======
+								longitude: e.y_axis
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 							}
 
 							that.covers.push(mm);
 						})
 
 					}
+<<<<<<< HEAD
 					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) + "&pic=" +
 						that.currentMapPic
+=======
+					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers)+"&pic="+that.currentMapPic
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 					console.log(that.url)
 				}
 
@@ -381,6 +439,7 @@
 				this.changeHeight(1);
 			},
 			changeHeight(height) {
+<<<<<<< HEAD
 				
 				 let that=this;
 				var currentWebview = this.$scope.$getAppWebview(); //获取当前web-view
@@ -393,6 +452,17 @@
 					right: 25,
 					zindex: -1,
 
+=======
+				console.log(this)
+				var currentWebview = this.$scope.$getAppWebview(); //获取当前web-view
+				var wv = currentWebview.children()[0];
+				wv.setStyle({ //设置web-view距离顶部的距离以及自己的高度，单位为px
+					top: 300,
+					height: height,
+					left: 25,
+					right: 25,
+					zindex:-1
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 				})
 			},
 			reseverFinshed() {
@@ -569,7 +639,11 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
+<<<<<<< HEAD
 		z-index: 99999;
+=======
+z-index: 99999;
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 
 	}
 

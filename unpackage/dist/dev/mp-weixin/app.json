@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/login-success/login-success",
+    "pages/login/login",
     "pages/revisePassword/revisePassword",
     "pages/repair/repair",
     "pages/environmentInformation/environmentInformation",
@@ -28,6 +28,5 @@
       }
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

@@ -133,10 +133,16 @@
                                 })
 							
 
+<<<<<<< HEAD
 							} else  {
 								let message=res.data.message
 								uni.showToast({
 									title: message,
+=======
+							} else if (res.data.code == -100) {
+								uni.showToast({
+									title: '用户名或密码错误',
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 									icon: 'none',
 									duration: 2000
 								});

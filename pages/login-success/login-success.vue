@@ -338,7 +338,11 @@
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
+<<<<<<< HEAD
 									<view class="reserveFirst">
+=======
+									<view class="reserveFirst" >
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 										<view class="reserveFirst-left" :class="{'bgcOne':item.src,'bgcTwo':item.src}">
 
 										</view>
@@ -617,7 +621,11 @@
 				timelist: ["8:00", '12:00', '15:00', "19:00"],
 				place: "---",
 				imgArray: ['/static/app/dull.svg', '/static/app/happy.svg', '/static/app/sad.svg', ],
+<<<<<<< HEAD
 				width: ""
+=======
+				width:""
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 
 
 			}
@@ -625,7 +633,11 @@
 		onInit() {
 
 		},
+<<<<<<< HEAD
 		onBackPress(e) {
+=======
+		onBackPress (e){
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 			console.log(e);
 			return true;
 		},
@@ -656,10 +668,17 @@
 								// uni.hideLoading();
 								console.log(res);
 								if (res.data.code != 0) {
+<<<<<<< HEAD
 									uni.switchTab({
 										url: '../login-success/login-success',
 
 									})
+=======
+								uni.switchTab({
+									url: '../login-success/login-success',
+									
+								})
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 
 								}
 								getApp().globalData.token = res.data.value.token;
@@ -1170,7 +1189,12 @@
 								},
 								success: (res) => {
 									console.log(res);
+<<<<<<< HEAD
 
+=======
+									that.place = res.data.value.cityInfo.parent + '-' + res.data
+										.value.cityInfo.city;
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 									that.weatherBox = res.data.value.data.forecast;
 									console.log(res.data.value.data.forecast);
 
@@ -1189,7 +1213,11 @@
 									}
 									console.log(res.data.value.data.pm25)
 									that.environmentes[2].number = res.data.value.data.pm25;
+<<<<<<< HEAD
 									if (res.data.value.data.pm25 < 75) {
+=======
+									if (res.data.value.data.pm25 <75 ) {
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 										that.environmentes[2].quality = '优'
 									} else {
 										that.environmentes[2].quality = '差'
@@ -1775,6 +1803,7 @@
 					return this.imgArray[2];
 				}
 
+<<<<<<< HEAD
 
 				return this.imgArray[0]
 
@@ -1783,6 +1812,16 @@
 
 		},
 		components: {
+=======
+			
+			return this.imgArray[0]
+
+		}
+
+
+	},
+	components: {
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 			tarbar,
 			tarbarHeader,
 			environmentItem,
@@ -1853,12 +1892,15 @@
 	.head {
 		height: calc(100vh *44/812);
 
+<<<<<<< HEAD
 	}
 
 	#messageTwo {
 
 		background-image: url(../../static/app/messageTwo.svg);
 		background-size: cover;
+=======
+>>>>>>> e5dc8026f234b7489caba3e4978c7107e82a58b4
 	}
 
 	.content {
