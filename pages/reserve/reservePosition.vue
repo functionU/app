@@ -1,7 +1,7 @@
 <template>
 	<view class="bgc">
 		<view class="content">
-			<tarbarHeader class="head">
+			<tarbarHeader class="head" style="z-index: 999;">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47/ 375);"
 					src="../../static/app/back.svg" @click="backClick"></image>
 				<text slot='center'></text>
@@ -31,9 +31,9 @@
 						</view>
 
 					</view>
-					<view style="margin-left: calc(750rpx * 8/ 375);">
-						<view>
-							{{floor}}F
+					<view style="margin-left: calc(750rpx * 8/ 375); ">
+						<view style="margin-left:calc(750rpx * 10/ 375);">
+							{{floor}}
 						</view>
 						<view>
 							<image src="../../static/app/info@2X.png"
@@ -62,8 +62,10 @@
 				<view class="center-boxOne" v-show="show">
 					<view class="center-boxOne-top">
 						<view class="center-boxOne-top-content">
-							<view @click="itemClick(item,index)" :class="{'click':index==itemIndex}"
-								class="center-boxOne-top-content-item" v-for="(item,index) in positionArray">
+							<view @click="itemClick(item,index,item.enabled)"
+								:class="{'click':index==itemIndex,'enabled-false':!item.enabled}"
+								class="center-boxOne-top-content-item" v-for="(item,index) in positionArray"
+								style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 								{{item.station_number}}
 							</view>
 						</view>
@@ -82,7 +84,7 @@
 					</view>
 				</view>
 				<view class="center-boxTwo" v-show="!show">
-					<web-view :src="url" @message="getMessage" :style="{width:'100px', height:'100px'}" v-if="!show">
+					<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url" >
 					</web-view>
 					<!-- 		<view class="map">
 						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
@@ -101,37 +103,36 @@
 			</view>
 		</view>
 		<view class="reChose" :class="{'show':showIndex,'hidden':!showIndex}">
-			<view>
-				<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
-					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
-						@click="cancel">取消</text>
-					<text
-						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
-						@click="confirm">确定</text>
-				</view>
-				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
-					@change="PickerChange" :value="choseIndex">
-					<picker-view-column>
-						<view class="item" v-for="(item,index) in monthDay">{{item}}</view>
-					</picker-view-column>
-					<picker-view-column>
-						<view class="item" v-for="(item,index) in startHourMin">{{item}}</view>
-					</picker-view-column>
-					<picker-view-column>
-						<view class="item" v-for="(item,index) in sign">{{item}}</view>
-					</picker-view-column>
-					<picker-view-column>
-						<view class="item" v-for="(item,index) in endHourMin">{{item}}</view>
-					</picker-view-column>
-				</picker-view>
+			<view style="display:flex;justify-content: space-between;background-color: white;" class="main">
+				<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
+					@click="cancel">取消</text>
+				<text
+					style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
+					@click="confirm">确定</text>
 			</view>
+			<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
+				@change="PickerChange" :value="choseIndex">
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in monthDay">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in startHourMin">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in sign">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view class="item" v-for="(item,index) in endHourMin">{{item}}</view>
+				</picker-view-column>
+			</picker-view>
+
 		</view>
 
 	</view>
 
 
 
-</template>\
+</template>
 <script>
 	import tarbarHeader from '../../components/common/header/header.vue'
 	import tip from '../../components/common/tip/tip.vue'
@@ -164,6 +165,8 @@
 				showIndex: false,
 				middleIndex: [],
 				url: null,
+				currentMapPic: null,
+				vh:0
 
 			}
 
@@ -172,30 +175,92 @@
 			positionArray: {
 				type: Array,
 				default: () => {
-					return getApp().globalData.positionArray;
+					return [];
 				}
 			},
 			UsuallyArray: {
 				type: Array,
 				default: () => {
-					return getApp().globalData.usuallyArray;
+					return [];
 				}
 			}
 		},
 		mounted() {
-			this.changeHeight(0)
+			this.changeHeight(1)
 		},
 		onLoad(option) {
+			let that=this;
+            uni.getSystemInfo({
+                success: function (res) {
+					that.vh=res.windowHeight*0.01;
+
+                }
+            });
 
 			uni.hideLoading();
-			console.log(option);
-			let that = this;
+
 			this.startTime = option.startTime;
 			this.endTime = option.endTime;
 			this.date = option.date;
 			this.place = option.place;
 			this.floor = option.floor;
 			this.floorId = option.floorId;
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/office/empty/station/list`,
+				// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
+				method: 'POST',
+				data: {
+					'end_time': that.endTime+":00",
+					'start_time': that.startTime+":00",
+					'reserve_date': that.date,
+					'floor_id': that.floorId,
+				},
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token
+				},
+				success: (res) => {
+					console.log(getApp().globalData.positionArray);
+					that.positionArray = res.data.value;
+
+					console.log(res.data.value);
+					console.log(getApp().globalData.positionArray);
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/often/empty/station/list`,
+						// url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
+						method: 'POST',
+				data: {
+					'end_time': that.endTime+":00",
+					'start_time': that.startTime+":00",
+					'reserve_date': that.date,
+					'floor_id': that.floorId,
+				},
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token
+						},
+						success: (res) => {
+
+							that.UsuallyArray = res.data.value;
+
+
+
+						}
+					})
+
+				}
+			})
+			uni.request({
+				url: `http://${getApp().globalData.http}/app/office/station/map/${that.floorId}`,
+				header: {
+					'Content-Type': 'application/json',
+					'Authorization': getApp().globalData.token,
+				},
+				success: (res) => {
+					that.currentMapPic = `http://${getApp().globalData.http}` + res.data.value;
+					console.log(that.currentMapPic)
+				}
+			})
 
 			let month = this.date.split('-')[1];
 			let day = this.date.split('-')[2];
@@ -253,8 +318,8 @@
 
 				},
 				success: (res) => {
-					console.log(res.data.value)
-					that.positionMapArray = res.data.value
+					console.log(res)
+					that.positionMapArray = res.data.value 
 					this.fiag = true;
 
 					that.covers = [];
@@ -264,14 +329,16 @@
 								id: e.id,
 								content: e.station_number,
 								latitude: e.x_axis,
-								longitude: e.y_axis
+								longitude: e.y_axis,
+								enabled:e.enabled,
 							}
 
 							that.covers.push(mm);
 						})
 
 					}
-					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers)
+					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) + "&pic=" +
+						that.currentMapPic
 					console.log(that.url)
 				}
 
@@ -285,15 +352,19 @@
 				this.id = e.detail.data[0].id;
 			},
 			backClick() {
-				uni.navigateBack({
+				// this.show=true;
+				// this.changeHeight(1);//地图回挡住pick-view bug 解决方法	
 
-				})
+				uni.navigateBack()
 			},
-			itemClick(item, index) {
-				this.usuallyItemIndex = -1;
-				this.itemName = item.station_number
-				this.itemIndex = index;
-				this.id = item.id;
+			itemClick(item, index, enabled) {
+				if (enabled) {
+					this.usuallyItemIndex = -1;
+					this.itemName = item.station_number
+					this.itemIndex = index;
+					this.id = item.id;
+				}
+
 			},
 			usuallyItemClick(item, index) {
 				this.itemIndex = -1;
@@ -307,24 +378,22 @@
 			},
 			listClick() {
 				this.show = true;
-				this.changeHeight(1)
+				this.changeHeight(1);
 			},
 			changeHeight(height) {
-				if (!this.show) {
-					let currentWebview = this.$scope.$getAppWebview();
-					
-					let wv = currentWebview.children()[0];
+				
+				 let that=this;
+				var currentWebview = this.$scope.$getAppWebview(); //获取当前web-view
+				var wv = currentWebview.children()[0];
+				console.log(that.vh);
+				wv.setStyle({ //设置web-view距离顶部的距离以及自己的高度，单位为px
+					 top:that.vh*34,
+					height: height,
+					left: 25,
+					right: 25,
+					zindex: -1,
 
-					wv.setStyle({
-						top: 300,
-						height: height,
-						left: 25,
-						right: 25
-					})
-				}
-
-
-
+				})
 			},
 			reseverFinshed() {
 
@@ -425,7 +494,8 @@
 
 			},
 			reChose() {
-
+				this.show = true;
+				this.changeHeight(1); //地图回挡住pick-view bug 解决方法	
 				this.showIndex = true;
 
 			},
@@ -480,7 +550,6 @@
 			tip,
 
 		},
-	
 
 
 	}
@@ -500,7 +569,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-
+		z-index: 99999;
 
 	}
 
@@ -785,5 +854,10 @@
 		text-align: center;
 		margin-bottom: ;
 		color: white;
+	}
+
+	.enabled-false {
+		background-color:#dfe6e9;
+		color: #b2bec3;
 	}
 </style>

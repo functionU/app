@@ -40,7 +40,7 @@
 <style>
 	.tarbar {
 		display: flex;
-
+      
 		margin-top: calc(100vh * 42/812);
 	}
 
@@ -51,6 +51,7 @@
 		height: calc(100vh * 44/812);
 		line-height: calc(100vh * 44/812);
 		text-align: center;
+		 position: relative;
 	}
 
 	.click::before {
@@ -58,7 +59,7 @@
 		display: block;
 		width: calc(750rpx * 40/ 375);
 		height: calc(100vh * 3/812);
-		position: relative;
+		position: absolute;
 		left: 30%;
 		background-color: #FFFFFF;
 

@@ -1,6 +1,7 @@
 {
     "pages" : [
         //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+
         {
             "path" : "pages/login-success/login-success"
         },
@@ -21,6 +22,7 @@
         },
         {
             "path" : "pages/reserve/reserve"
+
         },
         {
             "path" : "pages/reserve/reservePosition"
@@ -40,12 +42,10 @@
         {
             "path" : "pages/reserve/codeReserve"
         },
-        {
-            "path" : "pages/charts/chart"
-        },
-        {
-            "path" : "pages/demo/demo1"
-        }
+		{
+		    "path" : "pages/charts/chart"
+		}
+   
      
 		
     ],

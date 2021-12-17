@@ -8,7 +8,7 @@
 					</tarbarHeader>
 					<tarbar :clickIndex="index" @tarbarClick='tarbarListen'></tarbar>
 					<view class="content-main" v-show="index==0">
-						<view class="firstShow">
+						<view class="firstShow" style="padding-bottom: calc(100vh * 12/812);">
 							<view class="firstShow-top">
 								<view class="left">
 									<image src="../../static/app/icon-jiankang@2X.png"
@@ -105,8 +105,8 @@
 											'translateX(-50%)'}" style="width: calc(750rpx * 18/ 375) ;height:calc(750rpx * 18/ 375);background-color: white;padding:calc(750rpx * 4/ 375) ;box-sizing: border-box;">
 											<view
 												style="width: 100%;height: 100%; border-radius: 50%;background-color:white;">
-												<view
-													style="position: absolute;top: -130%;left: -10%;width:calc(750rpx * 36/ 375);height:calc(750rpx * 31/375);background: url(../../static/app/message%20(2).svg) cover;">
+												<view id="messageTwo"
+													style="position: absolute;top: -190%;left: -50%;width:calc(750rpx * 40/ 375);height:calc(750rpx * 40/375);line-height:calc(750rpx * 45	/375);text-align: center;">
 													<image :src="getSrc"
 														style="width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/375);">
 													</image>
@@ -125,7 +125,7 @@
 										</view>
 									</view>
 									<view class="bottom"
-										style="display: flex; justify-content: space-between;font-size:calc(750rpx * 12/ 375) ;">
+										style="display: flex; justify-content: space-between;font-size:calc(750rpx * 12/ 375);">
 										<text>久坐</text>
 										<text>健康</text>
 									</view>
@@ -255,7 +255,7 @@
 												<image src="../../static/app/info@2X.png"
 													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
 												</image>
-												<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+												<text>{{listObj.office_building_name}}-{{listObj.floor_name}}-{{listObj.station_number}}</text>
 											</view>
 											<view style="margin-top: calc(750rpx * 12/ 375);">
 												<image src="../../static/app/info@2X.png"
@@ -317,7 +317,7 @@
 													<image src="../../static/app/info@2X.png"
 														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
 													</image>
-													<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+													<text>{{listObj.office_building_name}}-{{listObj.floor_name}}-{{listObj.station_number}}</text>
 												</view>
 												<view style="margin-top: calc(750rpx * 12/ 375);">
 													<image src="../../static/app/info@2X.png"
@@ -338,7 +338,7 @@
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
-									<view class="reserveFirst" style="width: ;">
+									<view class="reserveFirst">
 										<view class="reserveFirst-left" :class="{'bgcOne':item.src,'bgcTwo':item.src}">
 
 										</view>
@@ -409,7 +409,7 @@
 													<image src="../../static/app/info@2X.png"
 														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
 													</image>
-													<text>{{listObj.office_building_name}} {{listObj.floor_name}}</text>
+													<text>{{listObj.office_building_name}}-{{listObj.floor_name}}-{{listObj.station_number}}</text>
 												</view>
 												<view style="margin-top: calc(750rpx * 12/ 375);">
 													<image src="../../static/app/info@2X.png"
@@ -617,6 +617,7 @@
 				timelist: ["8:00", '12:00', '15:00', "19:00"],
 				place: "---",
 				imgArray: ['/static/app/dull.svg', '/static/app/happy.svg', '/static/app/sad.svg', ],
+				width: ""
 
 
 			}
@@ -624,7 +625,7 @@
 		onInit() {
 
 		},
-		onBackPress (e){
+		onBackPress(e) {
 			console.log(e);
 			return true;
 		},
@@ -655,10 +656,10 @@
 								// uni.hideLoading();
 								console.log(res);
 								if (res.data.code != 0) {
-								uni.switchTab({
-									url: '../login-success/login-success',
-									
-								})
+									uni.switchTab({
+										url: '../login-success/login-success',
+
+									})
 
 								}
 								getApp().globalData.token = res.data.value.token;
@@ -682,7 +683,6 @@
 
 										if (Array.isArray(res.data.value) && res.data.value
 											.length != 0) {
-
 											that.list = res.data.value;
 											that.infoTag = true;
 											let arr = new Array([res.data.value.length]);
@@ -690,6 +690,7 @@
 											that.listArr = arr;
 											console.log(that.listArr)
 											// that.resever = true;
+
 
 										}
 
@@ -1152,11 +1153,14 @@
 
 					})
 				} else if (index == 3) {
+					console.log(3);
 					let that = this;
 					uni.getLocation({
 						type: 'gcj02',
 						geocode: true,
 						success: function(res) {
+							console.log(res);
+							that.place = res.address.city + ' ' + res.address.district;
 							let id = res.address.district;
 							uni.request({
 								url: `http://${getApp().globalData.http}/app/data/city/${id}`,
@@ -1166,8 +1170,7 @@
 								},
 								success: (res) => {
 									console.log(res);
-									that.place = res.data.value.cityInfo.parent + '-' + res.data
-										.value.cityInfo.city;
+
 									that.weatherBox = res.data.value.data.forecast;
 									console.log(res.data.value.data.forecast);
 
@@ -1186,7 +1189,7 @@
 									}
 									console.log(res.data.value.data.pm25)
 									that.environmentes[2].number = res.data.value.data.pm25;
-									if (res.data.value.data.pm25 <75 ) {
+									if (res.data.value.data.pm25 < 75) {
 										that.environmentes[2].quality = '优'
 									} else {
 										that.environmentes[2].quality = '差'
@@ -1210,6 +1213,13 @@
 
 
 
+						},
+						fail:function(){
+							uni.showToast({
+								title:'获取定位失败请确保打开了GPS定位',
+								icon:'none',
+								duration:2000,
+							})
 						}
 
 					});
@@ -1239,6 +1249,51 @@
 								that.fixedObj = res.data.value;
 								that.powerFixedButton = !res.data.value.power_status;
 							}
+						}
+					})
+				} else {
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/reserve/station/list`,
+						// url: 'http://82.157.34.130:9901/app/office/reserve/station/list',
+						header: {
+
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+
+							if (Array.isArray(res.data.value) && res.data.value
+								.length != 0) {
+								that.list = res.data.value;
+								that.infoTag = true;
+								let arr = new Array([res.data.value.length]);
+								arr.fill(true);
+								that.listArr = arr;
+								console.log(that.listArr)
+								// that.resever = true;
+
+
+							}
+
+						}
+					})
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/reserve/station/info`,
+						// url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
+						header: {
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+
+							if (res.data.value) {
+								that.resever = true;
+								that.sign = false;
+								that.infoObj = res.data.value;
+								that.sign = res.data.value.sign_status;
+								that.powerButton = !res.data.value
+									.power_status;
+
+							}
+
 						}
 					})
 				}
@@ -1542,6 +1597,7 @@
 
 			},
 			stopInfo(id, index) {
+
 				let that = this;
 				this.list.splice(index, 1);
 				uni.request({
@@ -1583,10 +1639,10 @@
 								url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
 								// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
 								method: 'DELETE',
-								// header: {
+								header: {
 
-								// 	'Authorization': getApp().globalData.token,
-								// },
+									'Authorization': getApp().globalData.token,
+								},
 								success: (res) => {
 
 
@@ -1719,14 +1775,14 @@
 					return this.imgArray[2];
 				}
 
-			
-			return this.imgArray[0]
 
-		}
+				return this.imgArray[0]
+
+			}
 
 
-	},
-	components: {
+		},
+		components: {
 			tarbar,
 			tarbarHeader,
 			environmentItem,
@@ -1799,6 +1855,12 @@
 
 	}
 
+	#messageTwo {
+
+		background-image: url(../../static/app/messageTwo.svg);
+		background-size: cover;
+	}
+
 	.content {
 		padding-top: calc(100vh * 44/812);
 		height: calc(100vh * 358/812);
@@ -1811,7 +1873,7 @@
 	}
 
 	.content-top {
-		background-image: url(../../static/app/logo@2X.png);
+		background-image: url(../../static/app/logo2.svg);
 		background-repeat: no-repeat;
 		background-position: center calc(100vh * 18/812);
 		background-size: calc(750rpx * 48/ 375) calc(100vh * 48/ 812);
@@ -1981,7 +2043,7 @@
 		height: calc(750rpx * 131/ 375);
 
 		margin-left: calc(750rpx * 24 / 375);
-		;
+
 	}
 
 	.content-main .firstShow .firstShow-bottom-bottom .top-box {

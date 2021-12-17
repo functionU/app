@@ -22,7 +22,7 @@
 							旧密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入旧密码" @input="oldPassListen" />
+							<input placeholder="请输入旧密码" @input="oldPassListen" password/>
 						</view>
 
 					</view>
@@ -31,16 +31,16 @@
 							新密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" @input=" PassLitenOne" />
+							<input placeholder="请输入新密码" @input=" PassLitenOne" password />
 						</view>
 
 					</view>
 					<view class="main-center-item">
 						<view class="main-center-item-left">
-							新密码：
+							新密码：	
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" @input="PassLitenTwo" />
+							<input placeholder="请输入新密码" @input="PassLitenTwo"  password/>
 						</view>
 
 					</view>

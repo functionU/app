@@ -21,7 +21,8 @@
 							故障编号：
 						</view>
 						<view class="main-center-item-right" style="display: flex;">
-							<input type="text" :value="scanValue" disabled style="font-size:calc(750rpx * 15/ 375);color: rgb(0,0,0,0.5);" />
+							<input type="text" :value="scanValue" disabled
+								style="font-size:calc(750rpx * 15/ 375);color: rgb(0,0,0,0.5);" />
 							<image @click="scan" src="../../static/app/scanning.svg"
 								style="background-color: gray;width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/ 375);margin-left: 10%;">
 							</image>
@@ -124,9 +125,11 @@
 
 						if (res.data.code == 0) {
 							uni.navigateBack();
-						} else if (res.data.code == -100) {
+						} else {
+							let message = res.data.message
 							uni.showToast({
-								title: '请求失败',
+								title: message,
+								icon: 'none',
 								duration: 2000
 							});
 						}
@@ -135,10 +138,22 @@
 				})
 			},
 			scan() {
+				let that = this;
 				uni.scanCode({
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);
+						if (res.result.indexOf('device') != -1) {
+							let start = res.result.indexOf('device') + 'device'.length;
+							res.result = res.result.substring(start);
+							that.scanValue = res.result;
+						} else {
+							uni.showToast({
+								title: '二维码无效',
+								icon: 'none',
+								duration: 2000
+							});
+						}
 					}
 				});
 			}

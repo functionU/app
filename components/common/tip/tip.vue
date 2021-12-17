@@ -10,7 +10,7 @@
 		
 				<view class="tip-item-second">
 					<slot name="right">
-					<image src="../../../static/app/info@2X.png" style="width: calc(750rpx * 11/ 375);height: calc(750rpx * 11/ 375);"></image>
+					<image src="../../../static/app/cityPosition.svg" style="width: calc(750rpx * 11/ 375);height: calc(750rpx * 11/ 375);"></image>
 					<slot name="second"> {{item.place}}</slot>
 					</slot>
 				</view>

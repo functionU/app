@@ -114,10 +114,10 @@
 				<view style="display:flex;justify-content: space-between;background-color:white;" @click="dateClick"
 					class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
-						@click="cancel('date')">取消</text>
+						@click.stop="cancel('date')">取消</text>
 					<text
 						style="font-size: calc(750rpx * 14/ 375);color: rgba(19, 194, 194, 1);padding: calc(750rpx * 9/ 375);"
-						@click="confirm('data')">确定</text>
+						@click.stop="confirm('data')">确定</text>
 				</view>
 				<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
 					@change="bindDatePickerChange" :value="valueDate">
@@ -139,10 +139,10 @@
 				<view style="display:flex;justify-content: space-between;background-color: white; "
 					@click="startTimeClick" class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
-						@click="cancel('start')">取消</text>
+						@click.stop="cancel('start')">取消</text>
 					<text
 						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
-						@click="confirm('start')">确定</text>
+						@click.stop="confirm('start')">确定</text>
 				</view>
 				<picker-view style="background-color: white; height: calc(100vh *260/812);text-align: center;"
 					@change="bindStartTimePickerChange" :value="valueStartTime">
@@ -162,10 +162,10 @@
 				<view style="display:flex;justify-content: space-between;background-color: white; "
 					@click="endTimeClick" class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
-						@click="cancel('end')">取消</text>
+						@click.stop="cancel('end')">取消</text>
 					<text
 						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
-						@click="confirm('end')">确定</text>
+						@click.stop="confirm('end')">确定</text>
 				</view>
 				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
 					@change="bindEndTimePickerChange" :value="valueEndTime">
@@ -185,10 +185,10 @@
 				<view style="display:flex;justify-content: space-between;background-color: white; " @click="placeClick"
 					class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
-						@click="cancel('place')">取消</text>
+						@click.stop="cancel('place')">取消</text>
 					<text
 						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
-						@click="confirm('place')">确定</text>
+						@click.stop="confirm('place')">确定</text>
 				</view>
 				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
 					@change="bindPlacePickerChange" :value="valuePlace">
@@ -205,10 +205,10 @@
 				<view style="display:flex;justify-content: space-between;background-color: white; " @click="floorClick"
 					class="viewText">
 					<text style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);"
-						@click="cancel('floor')">取消</text>
+						@click.stop="cancel('floor')">取消</text>
 					<text
 						style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);"
-						@click="confirm('floor')">确定</text>
+						@click.stop="confirm('floor')">确定</text>
 				</view>
 				<picker-view style="background-color: white;height: calc(100vh *260/812);text-align: center;"
 					@change="bindFloorPickerChange" :value="valueFloor">
@@ -405,61 +405,16 @@
 					let startTime = `${this.startHour}:${this.startMin}`;
 					let endTime = `${this.endHour}:${this.endMin}`
 					let that = this;
-					uni.request({
-						url: `http://${getApp().globalData.http}/app/office/empty/station/list`,
-						// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
-						method: 'POST',
-						data: {
-							'end_time': endTime + ":00",
-							'start_time': startTime + ":00",
-							'reserve_date': date,
-							'floor_id': that.floorArray[that.floorIndex].id,
-						},
-						header: {
-							'Content-Type': 'application/json',
-							'Authorization': getApp().globalData.token
-						},
-						success: (res) => {
-							console.log(getApp().globalData.positionArray);
-							getApp().globalData.positionArray = res.data.value;
 
-							console.log(res.data.value);
-							console.log(getApp().globalData.positionArray);
-							uni.request({
-								url: `http://${getApp().globalData.http}/app/office/often/empty/station/list`,
-								// url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
-								method: 'POST',
-								data: {
-									'end_time': endTime + ":00",
-									'start_time': startTime + ":00",
-									'reserve_date': date,
-									'floor_id': that.floorArray[that.floorIndex].id,
-								},
-								header: {
-									'Content-Type': 'application/json',
-									'Authorization': getApp().globalData.token
-								},
-								success: (res) => {
-
-									getApp().globalData.usuallyArray = res.data.value;
-
-									uni.showLoading({
-										title: '加载中'
-									})
-									uni.navigateTo({
-										url: `./reservePosition?date=${date}&startTime=${startTime}&endTime=${endTime}&place=${that.placeArray[that.placeIndex].name}&floor=${that.floorArray[that.floorIndex].name}&floorId=${that.floorArray[that.floorIndex].id}`
-									})
-								}
-							})
-
-						}
+					uni.navigateTo({
+						url: `./reservePosition?date=${date}&startTime=${startTime}&endTime=${endTime}&place=${that.placeArray[that.placeIndex].name}&floor=${that.floorArray[that.floorIndex].name}&floorId=${that.floorArray[that.floorIndex].id}`
 					})
 
 				}
 			},
 
 			dateClick() {
-				this.dateindex = !this.dateindex;
+				this.dateindex = true;
 				if (this.dateindex === true) {
 					this.startindex = false;
 					this.endindex = false;
@@ -469,7 +424,7 @@
 				}
 			},
 			startTimeClick() {
-				this.startindex = !this.startindex;
+				this.startindex = true;
 				if (this.startindex === true) {
 					this.dateindex = false;
 					this.endindex = false;
@@ -479,7 +434,7 @@
 				}
 			},
 			endTimeClick() {
-				this.endindex = !this.endindex;
+				this.endindex = true;
 				if (this.endindex === true) {
 					this.startindex = false;
 					this.dateindex = false;
@@ -489,7 +444,7 @@
 				}
 			},
 			placeClick() {
-				this.placeindex = !this.placeindex;
+				this.placeindex = true;
 				if (this.placeindex === true) {
 					this.startindex = false;
 					this.endindex = false;
@@ -499,7 +454,7 @@
 				}
 			},
 			floorClick() {
-				this.floorindex = !this.floorindex;
+				this.floorindex = true;
 				if (this.floorindex === true) {
 					this.startindex = false;
 					this.endindex = false;
@@ -512,8 +467,8 @@
 			bindPlacePickerChange(e) {
 				let val = e.target.value;
 				this.valuePlace = val;
-				// this.placeIndex = val[0];
-				// this.valuePlace = [val[0]]
+				this.placeIndex = val[0];
+				
 
 				// let id = this.placeArray[this.placeIndex].id;
 				// let that = this;
@@ -539,60 +494,51 @@
 			bindDatePickerChange(e) {
 				let val = e.target.value;
 				this.valueDate = val;
-				// this.year = this.years[val[0]];
-				// this.month = this.months[val[1]];
-				// this.day = this.days[val[2]];
+				this.year = this.years[val[0]];
+				this.month = this.months[val[1]];
+				this.day = this.days[val[2]];
 			},
 			bindStartTimePickerChange(e) {
 				let val = e.target.value;
 				this.valueStartTime = val;
-				// this.startHour = this.hours[val[0]];
-				// this.startMin = this.mins[val[1]];
+				this.startHour = this.hours[val[0]];
+				this.startMin = this.mins[val[1]];
 			},
 			bindEndTimePickerChange(e) {
 				let val = e.target.value;
 				this.valueEndTime = val;
-				// this.endHour = this.hours[val[0]];
-				// this.endMin = this.mins[val[1]];
+				this.endHour = this.hours[val[0]];
+				this.endMin = this.mins[val[1]];
 			},
 			bindFloorPickerChange(e) {
 				let val = e.target.value;
 				this.valueFloor = val;
-				// this.floorIndex = val[0];
-				// this.valueFloor = [val[0]]
+				this.floorIndex = val[0];
+			
 
 			},
 			confirm(name) {
 				let val;
 				if (name == 'start') {
 					val = this.valueStartTime;
-					this.startHour = this.hours[val[0]];
-					this.startMin = this.mins[val[1]];
+
 					this.startMiddel = val;
 				} else if (name == 'end') {
 					val = this.valueEndTime;
-					this.endHour = this.hours[val[0]];
-					this.endMin = this.mins[val[1]];
+
 					this.endMiddel = val;
 
 				} else if (name == 'date') {
 					val = this.valueDate;
-					this.year = this.years[val[0]];
-					this.month = this.months[val[1]];
-					this.day = this.days[val[2]];
 					this.dateMiddel = val;
 
 				} else if (name == 'floor') {
 					val = this.valueFloor;
-					this.floorIndex = val[0];
-					this.valueFloor = [val[0]]
+
 					this.floorMiddel = val;
 				} else if (name == 'place') {
-					val = this.valuePlace;
-					this.placeIndex = val[0];
-					this.valuePlace = [val[0]]
-					this.placeMiddel = val;
-
+                     val=this.valuePlace; 
+					 this.placeMiddel=val; 
 					let id = this.placeArray[this.placeIndex].id;
 					let that = this;
 					uni.request({
@@ -615,21 +561,50 @@
 					})
 
 				}
-
+				this.startindex = false;
+				this.endindex = false;
+				this.dateindex = false;
+				this.floorindex = false;
+				this.placeindex = false;
 			},
 			cancel(name) {
 				console.log(name);
+				let val;
 				if (name == 'start') {
 					this.valueStartTime = this.startMiddel;
+					val = this.startMiddel;
+					this.startHour = this.hours[val[0]];
+					this.startMin = this.mins[val[1]];
 				} else if (name == 'end') {
 					this.valueEndTime = this.endMiddel;
+					val = this.endMiddel;
+					this.endHour = this.hours[val[0]];
+					this.endMin = this.mins[val[1]];
 				} else if (name == 'date') {
 					this.valueDate = this.dateMiddel;
+					val = this.dateMiddel;
+					this.year = this.years[val[0]];
+					this.month = this.months[val[1]];
+					this.day = this.days[val[2]];
+					console.log(this.day);
 				} else if (name == 'floor') {
 					this.valueFloor = this.floorMiddel;
+					val = this.floorMiddel;
+					
+					this.floorIndex = val[0];
+					this.valueFloor = [val[0]]
 				} else if (name == 'place') {
 					this.valuePlace = this.placeMiddel;
+					val = this.placeMiddel;
+					this.placeIndex = val[0];
+					this.valuePlace = [val[0]]
+
 				}
+				this.startindex = false;
+				this.endindex = false;
+				this.dateindex = false;
+				this.floorindex = false;
+				this.placeindex = false;
 			}
 
 		},
