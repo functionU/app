@@ -1,5 +1,7 @@
 <template>
 	<view class="bgc">
+		<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url" >
+		</web-view>
 		<view class="content">
 			<tarbarHeader class="head" style="z-index: 999;">
 				<image slot='left' style="width:calc(750rpx * 26.42/ 375);height:calc(750rpx * 28.47/ 375);"
@@ -83,9 +85,9 @@
 						</view>
 					</view>
 				</view>
+				
 				<view class="center-boxTwo" v-show="!show">
-					<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url" >
-					</web-view>
+					
 					<!-- 		<view class="map">
 						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
 
@@ -494,8 +496,9 @@
 
 			},
 			reChose() {
-				this.show = true;
-				this.changeHeight(1); //地图回挡住pick-view bug 解决方法	
+				// this.show = true;
+				// this.changeHeight(1); //地图回挡住pick-view bug 解决方法
+				this.changeHeight(200);
 				this.showIndex = true;
 
 			},
@@ -508,6 +511,7 @@
 			cancel() {
 				this.choseIndex = this.middleIndex;
 				this.showIndex = false;
+				this.changeHeight(400);
 			},
 			confirm() {
 				let start = this.startHourMin[this.choseIndex[1]];
@@ -793,6 +797,8 @@
 		margin-top: calc(100vh * 24/812);
 		margin-left: calc(750rpx * 8/ 375);
 		position: relative;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item:first-child::before {
