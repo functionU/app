@@ -69,17 +69,21 @@
 		color: black;
 		text-align: center;
 		background-color: rgba(255, 169, 54, 1);
-		border:  1px solid rgba(10,32,57,0.15);
+		
 	}
 
 	.good {
-		background-color: rgba(26, 191, 194, 1);
+		color: white;
+		background-color: #1ABFC2;
 	}
 
 	.bad {
-		background-color: rgba(251, 105, 108, 1);
+		color: white;
+		background-color: #FB696C;
+		
 	}
 	.none{
 		background-color: white;
+		
 	}
 </style>

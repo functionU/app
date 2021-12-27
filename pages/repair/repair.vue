@@ -77,12 +77,16 @@
 				array: ['插座没电', '插做损坏', '插座漏电'],
 				index: 0,
 				description: "",
-				number: '',
+			
 				scanValue: '扫码确认故障设备编号'
 			}
 		},
 		onLoad() {
-
+		if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
 		},
 		methods: {
 			backClick() {
@@ -102,10 +106,12 @@
 			},
 			repairClick() {
 				let description = this.description;
-				let number = this.number;
+				let number = this.scanValue;
 				let reason = this.array[this.index]
 
-				console.log()
+				console.log(description);
+				console.log(number);
+				console.log(reason);
 				uni.request({
 					url: `http://${getApp().globalData.http}/app/user/device/repair`,
 					// url: 'http://82.157.34.130:9901/app/user/device/repair',
@@ -114,8 +120,6 @@
 						device_number: number,
 						description,
 						reason,
-
-
 					},
 					header: {
 						'Content-Type': 'application/json',
@@ -140,6 +144,7 @@
 			scan() {
 				let that = this;
 				uni.scanCode({
+					scanType:['qrCode'],
 					success: function(res) {
 						console.log('条码类型：' + res.scanType);
 						console.log('条码内容：' + res.result);

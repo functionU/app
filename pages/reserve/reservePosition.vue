@@ -1,6 +1,6 @@
 <template>
 	<view class="bgc">
-		<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url" >
+		<web-view @message="getMessage" :style="{width:'100px', height:'100px'}" :src="url">
 		</web-view>
 		<view class="content">
 			<tarbarHeader class="head" style="z-index: 999;">
@@ -16,29 +16,29 @@
 						{{date}}
 					</view>
 					<text style="color: rgba(10, 32, 57, 0.3); ">|</text>
-					<view style="color: #007AFF;">
+					<view style="color: rgba(19, 194, 194, 1)">
 						{{startTime}}--{{endTime}}
 					</view>
 				</view>
 				<view class="top-item">
 					<view>
 						<view>
-							<image src="../../static/app/info@2X.png"
-								style="width: calc(750rpx * 10.64/ 375);height: calc(750rpx * 14/ 375); transform: translateY(10%);">
+							<image src="../../static/app/shangle.svg"
+								style="width: calc(750rpx * 14/ 375);height: calc(750rpx * 14/ 375); transform: translateY(10%);margin-left: calc(750rpx * 14/ 375);">
 							</image>
 						</view>
 						<view
-							style="width: calc(750rpx * 84/ 375);text-overflow: ellipsis; white-space:nowrap;overflow:hidden;">
+							style="width: calc(750rpx * 84/ 375);text-overflow: ellipsis; white-space:nowrap;overflow:hidden;margin-left: 0;">
 							{{place}}
 						</view>
 
 					</view>
 					<view style="margin-left: calc(750rpx * 8/ 375); ">
-						<view style="margin-left:calc(750rpx * 10/ 375);">
+						<view style="margin-left:calc(750rpx * 5/ 375);">
 							{{floor}}
 						</view>
 						<view>
-							<image src="../../static/app/info@2X.png"
+							<image src="../../static/app/xiala.svg"
 								style="width: calc(750rpx * 14/ 375);height: calc(750rpx * 14/ 375); transform: translateY(10%);">
 							</image>
 						</view>
@@ -51,18 +51,19 @@
 					<view class="list" @click="listClick" :class="{'click':show}">
 						<image
 							style="width:calc(750rpx * 13.98/ 375);height:calc(750rpx * 11.65/ 375);margin-right:calc(750rpx * 8.02/ 375) ;margin-left: calc(750rpx * 26/ 375) ;"
-							src="../../static/app/icon-zhishu@2X.png"></image>
+							:src="show==true ? listImg[1] : listImg[0]"></image>
 						<text style="margin-right:calc(750rpx * 36/ 375) ;">列表</text>
 					</view>
 					<view class="map" @click="mapClick" :class="{'click':!show}">
 						<image
 							style="width:calc(750rpx * 13.98/ 375);height:calc(750rpx * 11.65/ 375);margin-right:calc(750rpx * 8.02/ 375)"
-							src="../../static/app/icon-zhishu@2X.png"></image>
+							:src=" show == true ? mapImg[0] : mapImg[1]"></image>
 						<text style="margin-right:calc(750rpx * 36/ 375) ;">地图</text>
 					</view>
 				</view>
 				<view class="center-boxOne" v-show="show">
-					<view class="center-boxOne-top">
+					<view class="center-boxOne-top" style="background-color: #F8FDFD;">
+						<dash></dash>
 						<view class="center-boxOne-top-content">
 							<view @click="itemClick(item,index,item.enabled)"
 								:class="{'click':index==itemIndex,'enabled-false':!item.enabled}"
@@ -81,13 +82,12 @@
 								class="center-boxOne-bottom-centent-item" v-for="(item,index) in UsuallyArray">
 								{{item.station_number}}
 							</view>
-
 						</view>
 					</view>
 				</view>
-				
+
 				<view class="center-boxTwo" v-show="!show">
-					
+
 					<!-- 		<view class="map">
 						<image src="../../static/app/map.jpg" style="width: 1200px;height: 1200px;"></image>
 
@@ -129,7 +129,29 @@
 			</picker-view>
 
 		</view>
-
+		<view
+			style="position: absolute;top: 0;background-color: rgba(0, 0, 0, 0.5);height: 100vh;width: 100%;display: flex;justify-content: center;align-items: center;"
+			v-show="suggestModal">
+			<view
+				style="height: calc(100vh * 168/812);width:calc(750rpx * 311/375);background-color: white;border-radius: 30rpx;display: flex;flex-direction: column;font-size: calc(750rpx * 16/375);;color: #111E36;font-weight: Regular;">
+				<text
+					style="height: calc(100vh * 22/812);text-align: center;line-height: calc(100vh * 22/812);margin-top:calc(100vh * 27/812) ;text-align: center;">您选择的工位（{{itemName}}）已经被预订</text>
+				<text
+					style="height: calc(100vh * 22/812);text-align: center;line-height: calc(100vh * 22/812);text-align: center;">系统推荐您使用空闲工位（{{suggestNumberName}}）</text>
+				<text
+					style="height: calc(100vh * 22/812);text-align: center;line-height: calc(100vh * 22/812);text-align: center;">是否同意？</text>
+				<view style="height: calc(100vh * 48/812) ;display: flex;margin-top:calc(100vh * 27/812) ;">
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;line-height:calc(100vh * 48/812) ;border-top: 1px solid #dfe6e9;"
+						@click="suggestModalCancel">
+						我自己选择
+					</view>
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;line-height:calc(100vh * 48/812) ;border-left: 1px solid #dfe6e9;border-top: 1px solid #dfe6e9;color: #1ABFC2;"
+						@click="suggestModalConfirm">预定 </view>
+				</view>
+			</view>
+		</view>
 	</view>
 
 
@@ -138,6 +160,7 @@
 <script>
 	import tarbarHeader from '../../components/common/header/header.vue'
 	import tip from '../../components/common/tip/tip.vue'
+	import dash from '../../components/common/dash/dash.vue'
 
 
 	export default {
@@ -168,7 +191,17 @@
 				middleIndex: [],
 				url: null,
 				currentMapPic: null,
-				vh:0
+				vh: 0,
+				height: 0,
+				suggestModal: false,
+				suggest: "您确定要提前结束吗？",
+				suggestId: -1,
+				suggestNumberName: "",
+				listImg: ['../../static/app/listOne.svg', '../../static/app/listTwo.svg'],
+				mapImg: ['../../static/app/mapOne.svg', '../../static/app/mapTwo.svg'],
+
+
+
 
 			}
 
@@ -191,13 +224,19 @@
 			this.changeHeight(1)
 		},
 		onLoad(option) {
-			let that=this;
-            uni.getSystemInfo({
-                success: function (res) {
-					that.vh=res.windowHeight*0.01;
 
-                }
-            });
+			if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
+			let that = this;
+			uni.getSystemInfo({
+				success: function(res) {
+					that.vh = res.windowHeight * 0.01;
+
+				}
+			});
 
 			uni.hideLoading();
 
@@ -212,8 +251,8 @@
 				// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
 				method: 'POST',
 				data: {
-					'end_time': that.endTime+":00",
-					'start_time': that.startTime+":00",
+					'end_time': that.endTime + ":00",
+					'start_time': that.startTime + ":00",
 					'reserve_date': that.date,
 					'floor_id': that.floorId,
 				},
@@ -231,12 +270,12 @@
 						url: `http://${getApp().globalData.http}/app/office/often/empty/station/list`,
 						// url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
 						method: 'POST',
-				data: {
-					'end_time': that.endTime+":00",
-					'start_time': that.startTime+":00",
-					'reserve_date': that.date,
-					'floor_id': that.floorId,
-				},
+						data: {
+							'end_time': that.endTime + ":00",
+							'start_time': that.startTime + ":00",
+							'reserve_date': that.date,
+							'floor_id': that.floorId,
+						},
 						header: {
 							'Content-Type': 'application/json',
 							'Authorization': getApp().globalData.token
@@ -321,7 +360,7 @@
 				},
 				success: (res) => {
 					console.log(res)
-					that.positionMapArray = res.data.value 
+					that.positionMapArray = res.data.value
 					this.fiag = true;
 
 					that.covers = [];
@@ -332,7 +371,7 @@
 								content: e.station_number,
 								latitude: e.x_axis,
 								longitude: e.y_axis,
-								enabled:e.enabled,
+								enabled: e.enabled,
 							}
 
 							that.covers.push(mm);
@@ -350,6 +389,7 @@
 
 		methods: {
 			getMessage(e) {
+				console.log("getMessage触发了");
 				this.itemName = e.detail.data[0].content;
 				this.id = e.detail.data[0].id;
 			},
@@ -360,12 +400,15 @@
 				uni.navigateBack()
 			},
 			itemClick(item, index, enabled) {
+
 				if (enabled) {
 					this.usuallyItemIndex = -1;
 					this.itemName = item.station_number
 					this.itemIndex = index;
 					this.id = item.id;
 				}
+
+
 
 			},
 			usuallyItemClick(item, index) {
@@ -376,20 +419,25 @@
 			},
 			mapClick() {
 				this.show = false;
-				this.changeHeight(400);
+				this.changeHeight(395);
+				this.height = 395;
 			},
 			listClick() {
+
 				this.show = true;
 				this.changeHeight(1);
+				this.height = 1;
+
+				uni.hideLoading();
 			},
 			changeHeight(height) {
-				
-				 let that=this;
+
+				let that = this;
 				var currentWebview = this.$scope.$getAppWebview(); //获取当前web-view
 				var wv = currentWebview.children()[0];
 				console.log(that.vh);
 				wv.setStyle({ //设置web-view距离顶部的距离以及自己的高度，单位为px
-					 top:that.vh*34,
+					top: that.vh * 35,
 					height: height,
 					left: 25,
 					right: 25,
@@ -398,8 +446,8 @@
 				})
 			},
 			reseverFinshed() {
-
-				if (!this.itemName) {
+				let that = this;
+				if (this.itemIndex == -1 && this.usuallyItemIndex == -1) {
 					uni.showModal({
 						title: '提示',
 						content: '请选择工位',
@@ -471,19 +519,35 @@
 						},
 						success: (res) => {
 							console.log(res);
-							if (res.data.code == -300) {
-								uni.showModal({
-									title: '提示',
-									content: '您在该时段区间内已预约了其他工位',
-									showCancel: false,
-								});
-							} else if (res.data.code == 0) {
-
+							console.log("111")
+							if (res.data.code == 0) {
 								uni.navigateTo({
 									// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
 									url: `../login-success/login-success?index=1&buttonIndex=1`
 								});
 
+							} else if (res.data.code == -301) {
+								if (res.data.value != null) {
+									that.suggestId = res.data.value.id;
+									that.suggestNumberName = res.data.value.station_number;
+									that.suggestModal = true;
+								} else {
+									uni.showToast({
+										title: '该楼层已无空闲工位请选择其他楼层',
+										icon: 'none',
+										duration: 2000
+									})
+
+								}
+
+
+							} else {
+
+								uni.showToast({
+									title: res.data.message,
+									icon: 'none',
+									duration: 2000
+								})
 							}
 
 
@@ -498,7 +562,10 @@
 			reChose() {
 				// this.show = true;
 				// this.changeHeight(1); //地图回挡住pick-view bug 解决方法
-				this.changeHeight(200);
+				if (this.height > 1) {
+					this.changeHeight(200);
+				}
+
 				this.showIndex = true;
 
 			},
@@ -511,7 +578,11 @@
 			cancel() {
 				this.choseIndex = this.middleIndex;
 				this.showIndex = false;
-				this.changeHeight(400);
+				if (this.height > 1) {
+					this.changeHeight(400);
+				}
+
+
 			},
 			confirm() {
 				let start = this.startHourMin[this.choseIndex[1]];
@@ -540,18 +611,135 @@
 					this.date = this.date.split('-')[0] + "-" + month + '-' + day;
 					this.showIndex = false;
 					let that = this;
+
 					uni.showLoading({
 						title: '加载中'
 					})
-					uni.navigateTo({
-						url: `./reservePosition?date=${that.date}&startTime=${that.startTime}&endTime=${that.endTime}&place=${that.place}&floor=${that.floor}&floorId=${that.floorId}`
+					// uni.navigateTo({
+					// 	url: `./reservePosition?date=${that.date}&startTime=${that.startTime}&endTime=${that.endTime}&place=${that.place}&floor=${that.floor}&floorId=${that.floorId}`
+					// })
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/empty/station/list`,
+						// url: `http://82.157.34.130:9901/app/office/empty/station/list`,
+						method: 'POST',
+						data: {
+							'end_time': that.endTime + ":00",
+							'start_time': that.startTime + ":00",
+							'reserve_date': that.date,
+							'floor_id': that.floorId,
+						},
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token
+						},
+						success: (res) => {
+							console.log(getApp().globalData.positionArray);
+							that.positionArray = res.data.value;
+
+							console.log(res.data.value);
+							console.log(getApp().globalData.positionArray);
+							uni.request({
+								url: `http://${getApp().globalData.http}/app/office/often/empty/station/list`,
+								// url: `http://82.157.34.130:9901/app/office/often/empty/station/list`,
+								method: 'POST',
+								data: {
+									'end_time': that.endTime + ":00",
+									'start_time': that.startTime + ":00",
+									'reserve_date': that.date,
+									'floor_id': that.floorId,
+								},
+								header: {
+									'Content-Type': 'application/json',
+									'Authorization': getApp().globalData.token
+								},
+								success: (res) => {
+
+									that.UsuallyArray = res.data.value;
+
+
+
+								}
+							})
+
+						}
 					})
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/station/map/${that.floorId}`,
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+							that.currentMapPic = `http://${getApp().globalData.http}` + res.data.value;
+							console.log(that.currentMapPic)
+						}
+					})
+
+
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/map/empty/station/list`,
+						method: 'POST',
+						header: {
+							'Content-Type': 'application/json',
+							'Authorization': getApp().globalData.token,
+						},
+
+						data: {
+							'start_time': that.startTime + ":00",
+							'end_time': that.endTime + ":00",
+							'floor_id': parseInt(that.floorId),
+							'reserve_date': that.date,
+
+
+						},
+						success: (res) => {
+
+							console.log(res)
+							that.positionMapArray = res.data.value
+							this.fiag = true;
+
+							that.covers = [];
+							if (that.positionMapArray && that.positionMapArray.length > 0) {
+								that.positionMapArray.forEach(function(e, index) {
+									var mm = {
+										id: e.id,
+										content: e.station_number,
+										latitude: e.x_axis,
+										longitude: e.y_axis,
+										enabled: e.enabled,
+									}
+
+									that.covers.push(mm);
+								})
+
+							}
+							that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) +
+								"&pic=" +
+								that.currentMapPic
+							console.log(that.url)
+						}
+
+					})
+					if (this.height > 1) {
+						this.changeHeight(395);
+					}
+					setTimeout(function() {
+						uni.hideLoading();
+					}, 1500)
 				}
 			},
+			suggestModalCancel() {
+				this.suggestModal = false;
+			},
+			suggestModalConfirm() {
+				this.id = this.suggestId;
+				this.reseverFinshed();
+			}
 		},
 		components: {
 			tarbarHeader,
 			tip,
+			dash
 
 		},
 
@@ -565,6 +753,7 @@
 		position: relative;
 		height: 100vh;
 		background-color: rgba(241, 242, 246, 1);
+
 
 	}
 
@@ -744,7 +933,7 @@
 		width: calc(750rpx * 295/ 375);
 		height: calc(100vh * 312/812);
 		margin-left: calc(750rpx * 26/ 375);
-		border-top: dashed calc(100vh * 1/812) gray;
+
 		display: flex;
 		flex-wrap: wrap;
 		align-content: flex-start;
@@ -766,7 +955,7 @@
 
 	.content .center .center-boxOne .center-boxOne-top .center-boxOne-top-content .center-boxOne-top-content-item.click {
 		border-color: rgba(251, 178, 88, 1);
-
+		background-color: rgba(255, 234, 167, 0.5);
 		color: rgba(251, 178, 88, 1);
 	}
 
@@ -799,6 +988,7 @@
 		position: relative;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		background-color: white;
 	}
 
 	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item:first-child::before {
@@ -815,6 +1005,7 @@
 
 	.content .center .center-boxOne .center-boxOne-bottom .center-boxOne-bottom-centent .center-boxOne-bottom-centent-item.click {
 		border-color: rgba(251, 178, 88, 1);
+		background-color: rgba(255, 234, 167, 0.5);
 		color: rgba(251, 178, 88, 1);
 	}
 
@@ -863,7 +1054,7 @@
 	}
 
 	.enabled-false {
-		background-color:#dfe6e9;
+		background-color: #dfe6e9;
 		color: #b2bec3;
 	}
 </style>

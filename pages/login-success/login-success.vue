@@ -3,12 +3,13 @@
 		<view class="bgc">
 			<view class="content">
 				<view class="content-top">
-					<tarbarHeader class="head" @newsClick="newsClickListen" :showObj="showMessage" v-if="headerShow">
+					<tarbarHeader class="head" @newsClick="newsClickListen" :showObj="showMessage" v-if="headerShow"
+						@scanClick="scanClickListen">
 						<text slot="center"></text>
 					</tarbarHeader>
 					<tarbar :clickIndex="index" @tarbarClick='tarbarListen'></tarbar>
 					<view class="content-main" v-show="index==0">
-						<view class="firstShow" style="padding-bottom: calc(100vh * 12/812);">
+						<view class="firstShow">
 							<view class="firstShow-top">
 								<view class="left">
 									<image src="../../static/app/icon-jiankang@2X.png"
@@ -18,7 +19,7 @@
 									<text
 										style="font-size: calc(750rpx * 16/ 375);font-weight: bold;">您已连续工作{{continueWorkTimeHour}}小时{{continueWorkTimeMins}}分钟！</text>
 									<text
-										style="font-size: calc(750rpx * 12/ 375); color: #666D7F;">在工位上的时间：{{ workTimeHour}}小时{{workTimeMins}}分钟</text>
+										style="font-size: calc(750rpx * 12/ 375); color: #666D7F;margin-top:calc(100vh * 6/812) ;">在工位上的时间：{{ workTimeHour}}小时{{workTimeMins}}分钟</text>
 								</view>
 							</view>
 							<view class="firstShow-center">
@@ -78,7 +79,7 @@
 								</view> -->
 							</view>
 
-							<view class="firstShow-bottom">
+							<view class="firstShow-bottom" style="font-size: calc(750rpx * 12/ 375);">
 								<text>健康</text>
 								<text>无人</text>
 								<text>久坐</text>
@@ -106,7 +107,7 @@
 											<view
 												style="width: 100%;height: 100%; border-radius: 50%;background-color:white;">
 												<view id="messageTwo"
-													style="position: absolute;top: -190%;left: -50%;width:calc(750rpx * 40/ 375);height:calc(750rpx * 40/375);line-height:calc(750rpx * 45	/375);text-align: center;">
+													style="position: absolute;top: -190%;left: -50%;width:calc(750rpx * 40/ 375);height:calc(750rpx * 35/375);line-height:calc(750rpx * 40	/375);text-align: center;">
 													<image :src="getSrc"
 														style="width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/375);">
 													</image>
@@ -125,7 +126,7 @@
 										</view>
 									</view>
 									<view class="bottom"
-										style="display: flex; justify-content: space-between;font-size:calc(750rpx * 12/ 375);">
+										style="display: flex; justify-content: space-between;font-size:calc(750rpx * 12/ 375);margin-top:calc(750rpx * 6/375;color: rgba(10, 32, 57, 0.7);">
 										<text>久坐</text>
 										<text>健康</text>
 									</view>
@@ -140,7 +141,8 @@
 										:class="{'click':secondShowButtonIndex=='month'}">按月</text>
 								</view>
 							</tip>
-							<view class="secondShow-box">
+							<view class="secondShow-box"
+								style="margin-top:calc(100vh * 10/812);margin-left:calc(750rpx * -5/ 375);">
 								<qiun-data-charts type="line" :chartData="chartData" :errorShow="false"
 									background="none" :reshow="index==0" />
 							</view>
@@ -152,7 +154,7 @@
 							<tip :item="{name:'今日用电（w）'}">
 								<text slot="right"></text>
 							</tip>
-							<view class="safeFirstShow-box">
+							<view class="safeFirstShow-box" style="margin-top:calc(100vh * 10/812);">
 								<qiun-data-charts type="line" :chartData="SafeTodayChartData" :errorShow="false"
 									background="none" :reshow="index==2" />
 							</view>
@@ -166,7 +168,7 @@
 										:class="{'click':secondShowSafeButtonIndex=='month'}">按月</text>
 								</view>
 							</tip>
-							<view class="safeSecondShow-box">
+							<view class="safeSecondShow-box" style="margin-top:calc(100vh * 10/812);">
 								<qiun-data-charts type="line" :chartData="SafeChartData" :errorShow="false"
 									background="none" :reshow="index==2" />
 							</view>
@@ -180,7 +182,7 @@
 								{{fixedObj.station_number}}
 							</view>
 							<view class="reserveFirst" v-show="fixedTag">
-								<view class="reserveFirst-left" :class="{'bgcOne':item.src,'bgcTwo':item.src}">
+								<view class="reserveFirst-left bgcOne">
 
 								</view>
 								<view class="reserveFirst-center">
@@ -212,8 +214,8 @@
 										</image>
 									</view>
 								</tip>
-								<view class="reserveSecond-box">
-
+								<view
+									style="height: calc(100vh * 194/812);width: 100%;margin-top:calc(100vh * 20/812);;">
 									<qiun-data-charts type="column" :chartData="reserveChartData" background="none"
 										:reshow="index==1&&buttonIndex==0" />
 
@@ -226,50 +228,69 @@
 								<view class="reserveFirst">
 
 									<view class="left">
-										<text>快速预约</text>
+										<text
+											style="font-weight: Semibold;font-size: calc(750rpx * 21/ 375);">快速预约</text>
 										<text>选择工位和时间进行使用～</text>
 									</view>
 									<view class="right" @click="reserveClick">
 										<image src="../../static/app/reserve.svg"></image>
 									</view>
 								</view>
-								<view class="reserveSecond" style="height:calc(100vh * 450/812);">
+								<view
+									style="height: calc(100vh * 467/812);overflow-y:scroll;margin-top:  calc(100vh * 20/812);border-radius: calc(750rpx * 30/ 375);">
 
-									<tip :item="{name:'我的预约'}">
-										<text slot='right'
-											style="font-size:calc(750rpx * 24/ 375);font-weight: bold;color: black;"></text>
-									</tip>
-									<view class="reserveSecond-img"
-										style="height:calc(100vh * 380/812);overflow-y:auto;">
-
-										<view style="display: flex;flex-direction:column;align-items: center;"
-											v-show="!infoTag">
-											<image src="../../static/app/nodata@2X.png"
-												style="width: calc(750rpx * 120/ 375);height: calc(100vh * 120/812); border:calc(750rpx * 1/ 375)  dashed rgba(230, 231, 232, 1);">
-												<text style="color: rgba(10, 32, 57, 0.5);">还没有预订工位～</text>
-
-										</view>
-										<view v-for="(listObj,index) in list"
-											style="display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;border-top: 1px dashed #808080;padding-top: calc(100vh * 15/812);padding-bottom:calc(100vh * 15/812);">
+									<view style="overflow-x: scroll;">
+										<view v-show="infoTag" v-for="(listObj,index) in list"
+											style="height: calc(100vh * 169/812);background-color: white;margin-left:calc(750rpx * 16/ 375);margin-right: calc(750rpx * 16/ 375);overflow: hidden; margin-top:calc(100vh * 20/812);border-radius:calc(750rpx * 30 / 375);">
 											<view>
-												<image src="../../static/app/info@2X.png"
-													style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
-												</image>
-												<text>{{listObj.office_building_name}}-{{listObj.floor_name}}-{{listObj.station_number}}</text>
+												<tip :item="{name:'我的预约',}">
+													<text slot='right'
+														style="font-size:calc(750rpx * 24/ 375) ;color: black;margin-top: calc(100vh * 23/812);margin-bottom: calc(100vh * 21/812);">{{listObj.station_number}}</text>
+												</tip>
+												<dash style="margin-top: calc(750rpx * 10/ 375);"></dash>
+												<view
+													style="margin-top: calc(750rpx * 11/ 375);margin-left:calc(750rpx * 29/ 375);">
+													<image src="../../static/app/usePosition.svg"
+														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+													</image>
+													<text>{{listObj.office_building_name}}-{{listObj.floor_name}}</text>
+												</view>
+
 											</view>
-											<view style="margin-top: calc(750rpx * 12/ 375);">
-												<image src="../../static/app/info@2X.png"
+											<view
+												style="margin-top: calc(750rpx * 12/ 375);margin-left:calc(750rpx * 29/ 375);">
+												<image src="../../static/app/useTime.svg"
 													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 												</image>
 												<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
 											</view>
-											<view @click="stopInfo(listObj.id,index)"
-												style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+											<view @click="stopInfo(listObj.id,index) "
+												style="font-size: 14rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
 												取消预约
 											</view>
 										</view>
-										<text style="color: rgba(26, 191, 194, 1);" @click="reserveClick">点击预定</text>
+										<view
+											style="display: flex;flex-direction: column;background-color: white;height: calc(100vh * 315	/812);margin-left:calc(750rpx * 16/ 375);margin-right: calc(750rpx * 16/ 375);border-radius: 30rpx;"
+											v-if="!infoTag">
+											<tip :item="{name:'我的预约'}" style="margin-bottom:  calc(100vh * 21/812);">
+												<text slot='right'
+													style="font-size:calc(750rpx * 24/ 375) ;color: black;"></text>
+											</tip>
+											<dash></dash>
+											<image src="../../static/app/nodata.svg"
+												style="width: calc(750rpx * 120/ 375);height: calc(100vh * 120/812);margin-left: calc(750rpx * 112 / 375);margin-top:  calc(100vh * 15/812);">
+												<text
+													style="color: rgba(10, 32, 57, 0.5);margin-top:  calc(100vh * 17/812);margin-left: calc(750rpx * 108 / 375);"
+													v-if="!infoTag">还没有预订工位～</text>
+												<text
+													style="color: rgba(26, 191, 194, 1);margin-left: 40%;margin-top: calc(100vh * 6/812);"
+													@click="reserveClick">点击预定</text>
+										</view>
+
+
+
 									</view>
+
 
 								</view>
 							</view>
@@ -303,43 +324,68 @@
 										</view>
 
 									</view>
-									<view class="reserveSecond" style="height: calc(100vh * 267/812);">
-										<tip :item="{name:'我的预约'}">
-											<text slot='right'
-												style="font-size:calc(750rpx * 24/ 375) ;color: black;"></text>
-										</tip>
-										<view class="reserveSecond-box"
-											style="overflow-y: scroll;display: flex;flex-direction: column;position: relative;">
+									<view
+										style="height: calc(100vh * 287/812);overflow-y:scroll;margin-top:  calc(100vh * 0/812);border-radius: calc(750rpx * 30/ 375);">
 
+										<view style="overflow-x: scroll;">
 											<view v-show="infoTag" v-for="(listObj,index) in list"
-												style="margin-left: calc(750rpx *24/ 375);margin-right: calc(750rpx * 24/ 375);display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;border-top: 1px dashed #808080;padding-top: calc(100vh * 15/812);padding-bottom:calc(100vh * 15/812);">
+												style="height: calc(100vh * 169/812);background-color: white;margin-left:calc(750rpx * 16/ 375);margin-right: calc(750rpx * 16/ 375);overflow: hidden; margin-top:calc(100vh * 20/812);border-radius:calc(750rpx * 30 / 375);">
 												<view>
-													<image src="../../static/app/info@2X.png"
-														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
-													</image>
-													<text>{{listObj.office_building_name}}-{{listObj.floor_name}}-{{listObj.station_number}}</text>
+													<tip :item="{name:'我的预约',}">
+														<text slot='right'
+															style="font-size:calc(750rpx * 24/ 375) ;color: black;margin-top: calc(100vh * 23/812);margin-bottom: calc(100vh * 21/812);">{{listObj.station_number}}</text>
+													</tip>
+													<dash style="margin-top: calc(750rpx * 10/ 375);"></dash>
+													<view
+														style="margin-top: calc(750rpx * 11/ 375);margin-left:calc(750rpx * 29/ 375);">
+														<image src="../../static/app/usePosition.svg"
+															style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+														</image>
+														<text>{{listObj.office_building_name}}-{{listObj.floor_name}}</text>
+													</view>
+
 												</view>
-												<view style="margin-top: calc(750rpx * 12/ 375);">
-													<image src="../../static/app/info@2X.png"
+												<view
+													style="margin-top: calc(750rpx * 12/ 375);margin-left:calc(750rpx * 29/ 375);">
+													<image src="../../static/app/useTime.svg"
 														style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 													</image>
 													<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
 												</view>
-												<view @click="stopInfo(listObj.id,index)"
-													style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+												<view @click="stopInfo(listObj.id,index) "
+													style="font-size: 14rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
 													取消预约
 												</view>
 											</view>
-											<text style="color: rgba(26, 191, 194, 1);margin-left: 40%;"
-												@click="reserveClick">点击预定</text>
+											<view
+												style="display: flex;flex-direction: column;background-color: white;height: calc(100vh * 267/812);margin-left:calc(750rpx * 16/ 375);margin-right: calc(750rpx * 16/ 375);border-radius: 30rpx;margin-top: calc(100vh * 20/812);"
+												v-if="!infoTag">
+												<tip :item="{name:'我的预约'}"
+													style="margin-bottom:  calc(100vh * 21/812);">
+													<text slot='right'
+														style="font-size:calc(750rpx * 24/ 375) ;color: black;"></text>
+												</tip>
+												<dash></dash>
+												<image src="../../static/app/nodata.svg"
+													style="width: calc(750rpx * 120/ 375);height: calc(100vh * 120/812); margin-left: calc(750rpx * 112 / 375);	">
+													<text
+														style="color: rgba(10, 32, 57, 0.5);margin-top:  calc(100vh * 17/812);margin-left: calc(750rpx * 108 / 375);"
+														v-if="!infoTag">还没有预订工位～</text>
+													<text
+														style="color: rgba(26, 191, 194, 1);margin-left: 40%;margin-top: calc(100vh * 6/812);"
+														@click="reserveClick">点击预定</text>
+											</view>
+
+
+
 										</view>
 
 
 									</view>
 								</view>
 								<view class="afterSign" v-show="sign">
-									<view class="reserveFirst">
-										<view class="reserveFirst-left" :class="{'bgcOne':item.src,'bgcTwo':item.src}">
+									<view class="reserveFirst" style="background-color: white;">
+										<view class="reserveFirst-left bgcOne">
 
 										</view>
 										<view class="reserveFirst-center ">
@@ -374,15 +420,16 @@
 											<text>结束使用 </text>
 										</view>
 
-										<view class="picker" v-show="addUse"
+										<view class="picker" v-if="addUse"
 											style="position: fixed;bottom: 0;left: 0;right: 0;">
 											<view
-												style="display:flex;justify-content: space-between;background-color: white; ">
+												style="display:flex;justify-content: space-between;background-color: white;border-top-left-radius:30rpx ;border-top-right-radius:30rpx;">
 												<text @click="addCancal"
-													style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);">取消</text>
-												<text>延长使用</text>
+													style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9/ 375);margin-top: calc(100vh * 10/812);font-weight: bold;margin-left:calc(750rpx * 4/ 375);">取消</text>
+												<text
+													style="font-weight: bold;margin-top: calc(100vh * 16/812);">延长使用</text>
 												<text @click="addSubmit"
-													style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);">确定</text>
+													style="font-size: calc(750rpx * 14/ 375);padding: calc(750rpx * 9 /375) ;color: rgba(19, 194, 194, 1);margin-top: calc(100vh * 10/812);font-weight: bold;margin-right: calc(750rpx * 4/ 375);">确定</text>
 											</view>
 											<picker-view
 												style="width: calc(750rpx * 375/ 375);height: calc(100vh * 270/812);"
@@ -395,36 +442,60 @@
 
 										</view>
 									</view>
-									<view class="reserveSecond" style="height: calc(100vh * 166/812);">
-										<tip :item="{name:'我的预约'}">
-											<text slot='right' style="font-size:calc(750rpx * 24/ 375) ;color: black;">
-												<!-- {{listObj.position}} -->
-											</text>
-										</tip>
-										<view class="reserveSecond-box"
-											style="height:calc(100vh * 100/812) ;overflow: scroll;position: relative;">
+
+									<view
+										style="height: calc(100vh * 267/812);overflow-y:scroll;border-radius: calc(750rpx * 30/ 375);">
+
+										<view style="overflow-x: scroll;">
 											<view v-show="infoTag" v-for="(listObj,index) in list"
-												style="margin-left: calc(750rpx *24/ 375);margin-right: calc(750rpx * 24/ 375);display: flex;flex-direction: column;align-items: flex-start;font-size: calc(750rpx * 14/ 375);color:gray;text-align: center;border-top: 1px dashed #808080;padding-top: calc(100vh * 15/812);padding-bottom:calc(100vh * 15/812);">
+												style="height: calc(100vh * 169/812);background-color: white;margin-left:calc(750rpx * 16/ 375);margin-right: calc(750rpx * 16/ 375);overflow: hidden; margin-top:calc(100vh * 20/812);border-radius:calc(750rpx * 30 / 375);">
 												<view>
-													<image src="../../static/app/info@2X.png"
-														style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
-													</image>
-													<text>{{listObj.office_building_name}}-{{listObj.floor_name}}-{{listObj.station_number}}</text>
+													<tip :item="{name:'我的预约',}">
+														<text slot='right'
+															style="font-size:calc(750rpx * 24/ 375) ;color: black;margin-top: calc(100vh * 23/812);margin-bottom: calc(100vh * 21/812);">{{listObj.station_number}}</text>
+													</tip>
+													<dash style="margin-top: calc(750rpx * 10/ 375);"></dash>
+													<view
+														style="margin-top: calc(750rpx * 11/ 375);margin-left:calc(750rpx * 29/ 375);">
+														<image src="../../static/app/usePosition.svg"
+															style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375);margin-right:calc(750rpx * 8/ 375);">
+														</image>
+														<text>{{listObj.office_building_name}}-{{listObj.floor_name}}</text>
+													</view>
+
 												</view>
-												<view style="margin-top: calc(750rpx * 12/ 375);">
-													<image src="../../static/app/info@2X.png"
+												<view
+													style="margin-top: calc(750rpx * 12/ 375);margin-left:calc(750rpx * 29/ 375);">
+													<image src="../../static/app/useTime.svg"
 														style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 													</image>
 													<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
 												</view>
-												<view @click="stopInfo(listObj.id,index)"
-													style="border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 108/ 375);height: calc(100vh * 32/812);margin-left: 30%;margin-top: %;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 32/812);color: #1ABFC2;">
+												<view @click="stopInfo(listObj.id,index) "
+													style="font-size: 14rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
 													取消预约
 												</view>
 											</view>
+											<view
+												style="display: flex;flex-direction: column;background-color: white;height: calc(100vh * 180/812);margin-left:calc(750rpx * 16/ 375);margin-right: calc(750rpx * 16/ 375); overflow: hidden;margin-top:calc(100vh * 18/812);border-radius: 30rpx;"
+												v-if="!infoTag">
+												<tip :item="{name:'我的预约'}"
+													style="margin-bottom:  calc(100vh * 21/812);">
+													<text slot='right'
+														style="font-size:calc(750rpx * 24/ 375) ;color: black;"></text>
+												</tip>
+												<image src="../../static/app/nodata.svg"
+													style="width: calc(750rpx * 100/ 375);height: calc(100vh * 100/812);margin-left: calc(750rpx * 125 / 375);">
+													<text
+														style="color: rgba(10, 32, 57, 0.5);margin-top:  calc(100vh * 17/812);margin-left: calc(750rpx * 108 / 375);"
+														v-if="!infoTag">还没有预订工位～</text>
+													<text
+														style="color: rgba(26, 191, 194, 1);margin-left: 40%;margin-top: calc(100vh * 6/812);"
+														@click="reserveClick">点击预定</text>
+											</view>
 
-											<text style="color: rgba(26, 191, 194, 1);margin-left: 40%;"
-												@click="reserveClick">点击预定</text>
+
+
 										</view>
 
 
@@ -437,7 +508,7 @@
 					</view>
 					<view class="content-main" v-show="index==3">
 						<view class="firstOffice">
-							<tip :item="{name:'环境指数',place:place}"></tip>
+							<tip :item="{name:'环境指数',place:'室内传感器'}"></tip>
 							<view class="environment">
 								<environmentItem v-for="(item,index) in environmentes" :item='item'
 									class="environment-item">
@@ -451,7 +522,7 @@
 						</view>
 						<view class="secondOffice">
 							<tip :item="{name:'天气预报',place:place}"></tip>
-							<dash style="margin-bottom: 0;"></dash>
+							<dash style="margin-top: calc(750rpx * 10/ 375);"></dash>
 							<view class="box">
 								<view class="secondOffice-item" style="margin-left:  calc(750rpx * 24/ 375);"
 									v-for="item in weatherBox">
@@ -473,6 +544,40 @@
 		</view>
 		<warn class="warnning" @confirmClick="confirmListen" :class="{'warn-hidden':!warnShow,'warn-show':warnShow}">
 		</warn>
+		<view
+			style="position: absolute;top: 0;background-color: rgba(0, 0, 0, 0.5);height: 100vh;width: 100%;display: flex;justify-content: center;align-items: center;"
+			v-show="reserveModal">
+			<view
+				style="height: calc(100vh * 118/812);width:calc(750rpx * 311/375);background-color: white;border-radius: 30rpx;display: flex;flex-direction: column;">
+				<text
+					style="height: calc(100vh * 70/812);text-align: center;line-height: calc(100vh * 70/812);">确定要取消预定的工位么？</text>
+				<view style="height: calc(100vh * 48/812) ;display: flex;">
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812);"
+						@click="reserveStopCancal">再想想</view>
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;border-left: 1px solid #dfe6e9;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812) ;color: #1ABFC2;"
+						@click="reserveStopConfirm">确定取消</view>
+				</view>
+			</view>
+		</view>
+		<view
+			style="position: absolute;top: 0;background-color: rgba(0, 0, 0, 0.5);height: 100vh;width: 100%;display: flex;justify-content: center;align-items: center;"
+			v-show="useStopModal">
+			<view
+				style="height: calc(100vh * 118/812);width:calc(750rpx * 311/375);background-color: white;border-radius: 30rpx;display: flex;flex-direction: column;font-weight: Regular;font-size: calc(750rpx * 16/375);">
+				<text
+					style="height: calc(100vh * 70/812);text-align: center;line-height: calc(100vh * 70/812);">您确定要提前结束吗？</text>
+				<view style="height: calc(100vh * 48/812) ;display: flex;">
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812) ;"
+						@click="useStopCancel">再想想</view>
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;border-left: 1px solid #dfe6e9;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812) ;color: #1ABFC2;"
+						@click="useStopConfirm">确定取消</view>
+				</view>
+			</view>
+		</view>
 	</view>
 
 
@@ -488,6 +593,7 @@
 	import doubleButton from '../../components/common/doubleButton/doubleButton.vue'
 	import divView from '../../components/common/divView/divView.vue'
 	import warn from '../../components/common/warn/warn.vue'
+
 	export default {
 		data() {
 			return {
@@ -538,8 +644,8 @@
 					],
 					series: [{
 						name: '分钟',
-						data: [1, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52,
-							33, 27, 21, 24, 8, 14, 52, 33, 27, 21, 24, 8, 14, 52
+						data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+							0, 0, 0, 0, 0, 0,
 						],
 						color: '#13C2C2',
 					}]
@@ -550,8 +656,8 @@
 					],
 					series: [{
 						name: '分钟',
-						data: [1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1, 1, 4, 5, 6, 7, 8, 1,
-							1, 4, 5, 6, 7, 8,
+						data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+							0, 0, 0, 0, 0, 0,
 						],
 						color: '#13C2C2',
 					}]
@@ -577,7 +683,7 @@
 						color: '#FFF',
 					}]
 				},
-				boxArray: [0, 1, 2, 0, 2, 1, 0, 2, 2, 1, 1, 0, 0, 1, 1, 2, 2, 2],
+				boxArray: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 				color: '#007AFF',
 				reserve: false,
@@ -591,14 +697,15 @@
 				infoTag: false,
 				signTag: false,
 				item: {
-					english: 'On',
-					chinese: '电源开启',
+					english: '--',
+					chinese: '----',
 					src: '../../static/app/chazuo@2X.png'
 				},
 				fixedItem: {
-					english: 'On',
-					chinese: '电源开启',
-					src: '../../static/app/chazuo@2X.png'
+					english: '--',
+					chinese: '----',
+					src: '../../static/app/chazuo@2X.png',
+
 				},
 				listArr: [],
 				fixedTag: true,
@@ -617,7 +724,22 @@
 				timelist: ["8:00", '12:00', '15:00', "19:00"],
 				place: "---",
 				imgArray: ['/static/app/dull.svg', '/static/app/happy.svg', '/static/app/sad.svg', ],
-				width: ""
+				weatherArray: [],
+				width: "",
+				reserveModal: false,
+				reserveModalId: -1,
+				useStopModal: false,
+				useStopModalId: -1,
+				weatherImgArray: ['/static/app/qingtian.svg', '/static/app/qingtian.svg', '/static/app/duoyun.svg',
+					'/static/app/yintian.svg', '/static/app/zhenyu.svg', '/static/app/baoyu.svg',
+					'/static/app/dabaoyu.svg', '/static/app/leizhenyujibanyoubingbao.svg', '/static/app/tedabaoyu.svg',
+					'/static/app/xiaoyu.svg', '/static/app/dayu.svg', '/static/app/leizhenyu.svg',
+					'/static/app/yujiaxue.svg', '/static/app/zhongyu.svg', '/static/app/daxue.svg',
+					'/static/app/xiaoxue.svg', '/static/app/zhongxue.svg', '/static/app/zhenxue.svg',
+					'/static/app/baoxue.svg', '/static/app/qiangshachenbao.svg', '/static/app/fuchen.svg',
+					'/static/app/wu.svg', '/static/app/shachenbao.svg', '/static/app/dongyu.svg',
+					'/static/app/yangsha.svg', '/static/app/mai.svg'
+				]
 
 
 			}
@@ -626,8 +748,14 @@
 
 		},
 		onBackPress(e) {
-			console.log(e);
-			return true;
+			if (e.from == 'backbutton') {
+				plus.runtime.quit();
+			} else {
+
+				return true;
+
+			}
+
 		},
 		onLoad(option) {
 			let that = this;
@@ -711,6 +839,13 @@
 											that.sign = res.data.value.sign_status;
 											that.powerButton = !res.data.value
 												.power_status;
+											if (that.powerButton == false) {
+												that.item.chinese = '电源开启'
+												that.item.english = 'On'
+											} else {
+												that.item.chinese = '电源关闭'
+												that.item.english = 'Off'
+											}
 
 										}
 
@@ -733,6 +868,13 @@
 											that.fixedObj = res.data.value;
 											that.powerFixedButton = !res.data.value
 												.power_status;
+											if (that.powerFixedButton == false) {
+												that.fixedItem.chinese = '电源开启'
+												that.fixedItem.english = 'On'
+											} else {
+												that.fixedItem.chinese = '电源关闭'
+												that.fixedItem.english = 'Off'
+											}
 										}
 									}
 								})
@@ -762,11 +904,15 @@
 												'Authorization': getApp().globalData.token,
 											},
 											success: (res) => {
-												if (res.data.code == 0) {
+												if (res.data.code == 0 && res.data
+													.value.length != 0) {
 													resolve(res.data.value);
-												} else if (res.data.code == -100) {
+												} else {
+													reject();
 													uni.showToast({
-														title: '请求失败',
+														title: res.data
+															.message,
+														icon: 'none',
 														duration: 2000
 													});
 												}
@@ -798,13 +944,16 @@
 														.globalData.token,
 												},
 												success: (res) => {
+													console.log(res);
+
 													if (res.data.code == 0) {
 														resolve(res.data
 															.value);
-													} else if (res.data.code ==
-														-100) {
+													} else {
 														uni.showToast({
-															title: '请求失败',
+															title: res
+																.data
+																.message,
 															icon: 'none',
 															duration: 2000
 														});
@@ -825,70 +974,158 @@
 											':')[1];
 										let s, sH, sM, number;
 										let e;
+										let startChange, startChangeH, startChangeM;
+										let startIndex = 0;
+										let eeendTime;
 										if (res.work_time_list.length) {
 											s = res.work_time_list[0].start_time;
 											sH = s.split(":")[0];
 											sM = s.split(":")[1];
 										}
-
+										startChange = s;
+										startChangeH = sH;
+										startChangeM = sM;
 										if (res.work_time_list.length > 0) {
 											let lastEndIndex;
 											that.boxArray.fill(0)
-											res.work_time_list.map((item) => {
+											res.work_time_list.map((item, index) => {
+												console.log(startChangeH + "-" +
+													startChangeM)
+												// let start = item.start_time;
+												// let startH = start.split(":")[0];
+												// let startM = start.split(":")[1];
+												// let end = item.end_time;
+												// let endH = end.split(":")[0];
+												// let endM = end.split(":")[1];
+												// let H = startH - sH;
+												// let M = startM - sM;
+												// let int = 0;
+												// let float = 0;
+												// let q, w;
+												// let startIndex, endIndex;
+												// let indexOne, indexTwo;
+												// let xx, xxx;
+
+												// if (M < 0) {
+												// 	M = M + 60;
+												// 	H = H - 1;
+												// }
+
+
+												// int = (H * 60 + M) / 30;
+												// float = (H * 60 + M) % 30;
+												// startIndex = Math.ceil(int);
+
+
+												// H = endH - sH;
+												// M = endM - sM;
+												// if (M < 0) {
+												// 	M = M + 60;
+												// 	H = H - 1;
+												// }
+												// int = (H * 60 + M) / 30;
+												// float = (H * 60 + M) % 30;
+												// endIndex = Math.ceil(int);
+												// lastEndIndex = Math.ceil(int);
+
+												// if (endIndex - startIndex > 3) {
+												// 	number = 2;
+												// } else {
+												// 	number = 1;
+
+												// }
+												// if (endIndex > that.boxArray.length) {
+												// 	that.boxArray.length = endIndex;
+
+												// }
+												// console.log(that.boxArray)
+												// console.log('s' + startIndex);
+												// console.log('e' + endIndex);
+												// that.boxArray.fill(number, startIndex,
+												// 	endIndex);
+
 												let start = item.start_time;
 												let startH = start.split(":")[0];
 												let startM = start.split(":")[1];
 												let end = item.end_time;
 												let endH = end.split(":")[0];
 												let endM = end.split(":")[1];
-												let H = startH - sH;
-												let M = startM - sM;
-												let int = 0;
-												let float = 0;
-												let q, w;
-												let startIndex, endIndex;
-												let indexOne, indexTwo;
-												let xx, xxx;
+
+												let int, color;
+												let endIndex;
+												let H;
+												let M;
+
+												if (index == 0) {
+													startIndex = 0;
+												} else {
+													H = startH - startChangeH;
+													M = startM - startChangeM;
+
+													if (M < 0) {
+														M = M + 60;
+														H = H - 1;
+													}
+													int = (H * 60 + M) / 30;
+													endIndex = Math.ceil(int);
+
+
+
+													if ((startIndex + endIndex) > that
+														.boxArray.length) {
+														that.boxArray.length = (
+															startIndex + endIndex);
+
+													}
+
+													that.boxArray.fill(0, startIndex,
+														(startIndex + endIndex));
+													console.log(startIndex + "-----" + (
+														startIndex + endIndex));
+													startIndex = (startIndex + endIndex);
+													startChangeH = startH;
+													startChangeM = startM;
+
+												}
+												console.log(startChangeH + "" +
+													startChangeM)
+
+												H = endH - startChangeH;
+												M = endM - startChangeM;
 
 												if (M < 0) {
 													M = M + 60;
 													H = H - 1;
 												}
-
-
 												int = (H * 60 + M) / 30;
-												float = (H * 60 + M) % 30;
-												startIndex = Math.ceil(int);
-
-
-												H = endH - sH;
-												M = endM - sM;
-												if (M < 0) {
-													M = M + 60;
-													H = H - 1;
-												}
-												int = (H * 60 + M) / 30;
-												float = (H * 60 + M) % 30;
 												endIndex = Math.ceil(int);
-												lastEndIndex = Math.ceil(int);
-
-												if (endIndex - startIndex > 3) {
+												console.log(startIndex + "----" + (
+													startIndex + endIndex));
+												if ((
+														startIndex + endIndex) -
+													startIndex > 3) {
 													number = 2;
 												} else {
 													number = 1;
 
 												}
-												if (endIndex > that.boxArray.length) {
-													that.boxArray.length = endIndex;
-
+												if ((startIndex + endIndex) > that.boxArray
+													.length) {
+													that.boxArray.length = (startIndex +
+														endIndex);
 												}
-												console.log(that.boxArray)
-												console.log('s' + startIndex);
-												console.log('e' + endIndex);
+												lastEndIndex = (startIndex + endIndex)
 												that.boxArray.fill(number, startIndex,
-													endIndex);
+													(startIndex + endIndex));
 
+												startIndex = (startIndex + endIndex);
+												startChangeH = endH;
+												startChangeM = endM;
+
+
+												eeendTime = item.end_time;
 											})
+											console.log("------------" + lastEndIndex)
 											that.boxArray.fill(4, lastEndIndex);
 
 
@@ -904,25 +1141,20 @@
 													that.timelist[index] = s;
 												} else {
 													let x = (space * item).toFixed(1);
-													console.log(x);
-													if (parseInt(x.split('.')[1] * 6) +
-														parseInt(sM) >= 60) {
-														that.timelist[index] = parseInt((
-																parseInt(x.split('.')[
-																	0]) + parseInt(sH)
-															) + 1) + ':' +
-															parseInt(parseInt(x.split('.')[
-																1] * 6) + parseInt(
-																sM) - 60);
+													let h = (parseInt(x.split('.')[0]) +
+														parseInt(sH));
+													let m = parseInt(x.split('.')[1] * 6) +
+														parseInt(sM)
+													if (m >= 60) {
+														h += 1;
+														m -= 60;
 
-													} else {
-														that.timelist[index] = parseInt((
-															parseInt(x.split('.')[
-																0]) + parseInt(sH)
-														)) + ':' + parseInt(
-															parseInt(x.split('.')[1] *
-																6) + parseInt(sM));
 													}
+													if (h >= 24) {
+														h -= 24;
+													}
+													that.timelist[index] = h + ":" + m;
+
 													console.log(that.timelist[index])
 
 
@@ -931,6 +1163,11 @@
 
 
 											})
+											if (that.boxArray.length > 18) {
+												that.timelist[3] = eeendTime;
+
+											}
+
 											console.log(that.timelist)
 											that.timelist.map((item, index) => {
 
@@ -1002,9 +1239,18 @@
 		},
 		methods: {
 			reserveClick() {
-				uni.navigateTo({
-					url: '../reserve/reserve'
-				})
+				if (this.list.length >= 2) {
+					uni.showToast({
+						title: '最多预约两个工位',
+						icon: 'none',
+						duration: 2000
+					})
+				} else {
+					uni.navigateTo({
+						url: '../reserve/reserve'
+					})
+				}
+
 			},
 			tarbarListen(index) {
 				this.index = index;
@@ -1019,12 +1265,12 @@
 								'Authorization': getApp().globalData.token,
 							},
 							success: (res) => {
-								if (res.data.code == 0) {
+								if (res.data.code == 0 && res.data.value.length != 0) {
 									resolve(res.data.value);
-								} else if (res.data.code == -100) {
+								} else if (res.data.code != 0) {
 									reject();
 									uni.showToast({
-										title: '请求失败',
+										title: res.data.message,
 										icon: 'none',
 										duration: 2000
 									});
@@ -1037,7 +1283,7 @@
 						let y = [];
 						res.map((item, index) => {
 
-							if (index % 2 != 0) {
+							if (parseInt((index + 1) % 4) == 0 || index == 0) {
 								x.push(item.x_value);
 							} else {
 								x.push(" ");
@@ -1046,7 +1292,8 @@
 
 							y.push(item.y_value);
 						})
-
+						console.log("???")
+						console.log(x)
 						this.reserveChartData = {
 							categories: [...x],
 							series: [{
@@ -1056,6 +1303,7 @@
 							}]
 						};
 					})
+
 				} else if (index == 2) {
 					new Promise(function(resolve, reject) {
 
@@ -1066,12 +1314,12 @@
 								'Authorization': getApp().globalData.token,
 							},
 							success: (res) => {
-								console.log(res);
-								if (res.data.code == 0) {
+								if (res.data.code == 0 && res.data.value.length != 0) {
 									resolve(res.data.value);
-								} else if (res.data.code == -100) {
+								} else if (res.data.code != 0) {
+									reject();
 									uni.showToast({
-										title: '请求失败',
+										title: res.data.message,
 										icon: 'none',
 										duration: 2000
 									});
@@ -1169,6 +1417,7 @@
 									'Authorization': getApp().globalData.token,
 								},
 								success: (res) => {
+									console.log('1111111')
 									console.log(res);
 
 									that.weatherBox = res.data.value.data.forecast;
@@ -1214,11 +1463,11 @@
 
 
 						},
-						fail:function(){
+						fail: function() {
 							uni.showToast({
-								title:'获取定位失败请确保打开了GPS定位',
-								icon:'none',
-								duration:2000,
+								title: '获取定位失败请确保打开了GPS定位',
+								icon: 'none',
+								duration: 2000,
 							})
 						}
 
@@ -1248,6 +1497,13 @@
 
 								that.fixedObj = res.data.value;
 								that.powerFixedButton = !res.data.value.power_status;
+								if (that.powerFixedButton == false) {
+									that.fixedItem.chinese = '电源开启'
+									that.fixedItem.english = 'On'
+								} else {
+									that.fixedItem.chinese = '电源关闭'
+									that.fixedItem.english = 'Off'
+								}
 							}
 						}
 					})
@@ -1292,6 +1548,7 @@
 								that.powerButton = !res.data.value
 									.power_status;
 
+
 							}
 
 						}
@@ -1333,7 +1590,7 @@
 				let that = this;
 				this.powerFixedButton = !this.powerFixedButton;
 				uni.request({
-					url: `http://1${getApp().globalData.http}/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
+					url: `http://${getApp().globalData.http}/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
 					// url: `http://82.157.34.130:9901/app/office/config/power/status?device_id=${id}&power_status=${!that.powerFixedButton}`,
 
 					header: {
@@ -1393,7 +1650,7 @@
 
 							if (res.data.code == 0) {
 								resolve(res.data.value);
-							} else if (res.data.code == -100) {
+							} else {
 								uni.showToast({
 									title: '请求失败',
 									icon: 'none',
@@ -1627,52 +1884,54 @@
 
 			},
 			reserveStop(id) {
-				let that = this;
+				this.reserveModal = true;
+				this.reserveModalId = id;
 
-				uni.showModal({
-					title: '提示',
-					content: '您确定要取消预约吗？',
-					success: (res) => {
-						if (res.confirm) {
-							this.resever = !this.resever;
-							uni.request({
-								url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
-								// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
-								method: 'DELETE',
-								header: {
-
-									'Authorization': getApp().globalData.token,
-								},
-								success: (res) => {
-
-
-
-									if (res.data.code == 0) {
-										that.infoObj = {};
-									} else if (res.data.code == -100) {
-										uni.showToast({
-											title: '请求失败',
-											icon: 'none',
-											duration: 2000
-										});
-									}
-
-
-								}
-							})
-						}
-
-					},
-				});
 
 
 			},
+			reserveStopCancal() {
+				this.reserveModal = false;
+			},
+			reserveStopConfirm() {
+				let that = this;
+
+				uni.request({
+					url: `http://${getApp().globalData.http}/app/office/delete/reserve/${that.reserveModalId}`,
+					// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
+					method: 'DELETE',
+					header: {
+
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+
+
+
+						if (res.data.code == 0) {
+							this.resever = !this.resever;
+							that.infoObj = {};
+						} else {
+							uni.showToast({
+								title: res.data.message,
+								icon: 'none',
+								duration: 2000
+							});
+						}
+
+
+					}
+				})
+				this.reserveModal = false;
+			},
 			signIn(id) {
 				uni.scanCode({
+					scanType: ['qrCode'],
 					success: function(res) {
 						if (res.result.indexOf('device') != -1) {
-							let start = res.result.indexOf('device');
+							let start = res.result.indexOf('device') + 'device'.length;
 							res.result = res.result.substring(start);
+
 							console.log(res.result)
 							uni.request({
 								url: `http://${getApp().globalData.http}/app/office/sign/reserve?id=${id}&deviceNumber=${res.result}`,
@@ -1684,19 +1943,16 @@
 									console.log(res.data.code);
 									if (res.data.code == 0) {
 										this.sign = true;
-										uni.showLoading({
-											title: '加载中'
-										})
-										setTimeout(function() {
-											uni.hideLoading();
-											uni.navigateTo({
-												// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
-												url: `../login-success/login-success?index=1&buttonIndex=1`
-											});
-										}, 2000);
-									} else if (res.data.code == -100) {
+									
+
+										uni.navigateTo({
+											// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
+											url: `../login-success/login-success?index=1&buttonIndex=1`
+										});
+
+									} else {
 										uni.showToast({
-											title: '请求失败',
+											title: res.data.message,
 											icon: 'none',
 											duration: 2000
 										});
@@ -1715,39 +1971,77 @@
 					}
 				});
 
-
 			},
 			addUseTime() {
 				this.addUse = true;
 
 			},
 			useStop(id) {
-				uni.showModal({
-					title: '提示',
-					content: '您确定要提前结束吗？',
-					success: (res) => {
+				this.useStopModalId = id;
+				this.useStopModal = true;
 
-						this.sign = !this.sign;
-						this.resever = !this.resever;
-						uni.request({
-							url: `http://${getApp().globalData.http}/app/office/advance/end/${id}`,
-							// url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
-							header: {
-								'Authorization': getApp().globalData.token,
-							},
-							success: (res) => {
-
-							}
-						})
+			},
+			useStopCancel() {
+				this.useStopModal = false;
+			},
+			useStopConfirm() {
+				let that = this;
+				this.sign = !this.sign;
+				this.resever = !this.resever;
+				uni.request({
+					url: `http://${getApp().globalData.http}/app/office/advance/end/${that.useStopModalId}`,
+					// url: `http://82.157.34.130:9901/app/office/advance/end/${id}`,
+					header: {
+						'Authorization': getApp().globalData.token,
 					},
-				});
+					success: (res) => {
+						if (res.data.code === 0) {
+							uni.request({
+								url: `http://${getApp().globalData.http}/app/message/not/read/count`,
+								// url: 'http://82.157.34.130:9901/app/message/not/read/count',
+								header: {
+									'Authorization': getApp().globalData.token,
+								},
+								success: (res) => {
+
+									if (res.data.code === 0) {
+
+										that.showMessage.showMessage = res.data
+											.value;
+										that.showMessage.show = true;
+
+										that.count = res.data.value;
+										that.headerShow = true;
+										that.infoObj={};
+									} else {
+										uni.showToast({
+											title: res.data.message,
+											icon: 'none',
+											duration: 2000
+										});
+									}
+								}
+							})
+						} else {
+							uni.showToast({
+								title: res.data.message,
+								icon: 'none',
+								duration: 2000
+							});
+						}
+
+
+					}
+				})
+
+				this.useStopModal = false;
 			},
 			addCancal() {
 				this.addUse = false;
 
 			},
 			addUseTimeChose(e) {
-				this.e = e.target.value;
+				this.e = e.detail.value;
 			},
 
 			addSubmit() {
@@ -1755,6 +2049,7 @@
 				this.addUse = false;
 				let minute = this.timeArray[this.addIndex];
 				let id = this.infoObj.id;
+				let that = this;
 				uni.request({
 					url: `http://${getApp().globalData.http}/app/office/extend/use?id=${id}&minute=${minute}`,
 					// url: `http://82.157.34.130:9901/app/office/extend/use?id=${id}&minute=${minute}`,
@@ -1762,17 +2057,161 @@
 						'Authorization': getApp().globalData.token,
 					},
 					success: (res) => {
+						if (res.data.code == 0) {
+							uni.request({
+								url: `http://${getApp().globalData.http}/app/office/reserve/station/info`,
+								// url: 'http://82.157.34.130:9901/app/office/reserve/station/info',
+								header: {
+									'Authorization': getApp().globalData.token,
+								},
+								success: (res) => {
+									console.log("延长使用")
+									console.log(res);
+									if (res.data.code == 0) {
+										if (res.data.value != null) {
+											that.infoObj = res.data.value;
+											that.sign = res.data.value.sign_status;
+											that.powerButton = !res.data.value.power_status;
+
+										} else {
+											uni.showToast({
+												title: '不支持延长时间',
+												icon: 'none',
+												duration: 2000
+											});
+										}
+
+									} else {
+										uni.showToast({
+											title: res.data.message,
+											icon: 'none',
+											duration: 2000
+										});
+									}
+
+								}
+							})
+						} else {
+							uni.showToast({
+								title: res.data.message,
+								icon: 'none',
+								duration: 2000
+							});
+						}
+
 
 					}
 				})
 
 			},
+			scanClickListen() {
+				console.log(this.infoObj)
+				if (this.list.length >= 2 || (JSON.stringify(this.infoObj) != "{}" && this.list.length == 1)) {
+					uni.showToast({
+						title: '最多预约两个工位',
+						icon: 'none',
+						duration: 2000
+					});
+				} else {
+
+					uni.scanCode({
+						scanType: ['qrCode'],
+						success: function(res) {
+							console.log('条码类型：' + res.scanType);
+							console.log('条码内容：' + res.result);
+							console.log(res.result);
+							if (res.result.indexOf('device') != -1) {
+								let start = res.result.indexOf('device') + 'device'.length;
+								res.result = res.result.substring(start);
+
+
+								uni.request({
+									url: `http://${getApp().globalData.http}/app/office/station/info/${res.result}`,
+									// url: `http://82.157.34.130:9901/app/office/station/info/${res.result}`,
+									header: {
+										'Authorization': getApp().globalData.token,
+									},
+									success: (res) => {
+										if (res.data.code == 0) {
+											uni.navigateTo({
+												url: `../../pages/reserve/codeReserve?id=${res.data.value.id}&station_number=${res.data.value.station_number}`
+											})
+										} else {
+											uni.showToast({
+												title: res.data.message,
+												icon: 'none',
+												duration: 2000,
+											})
+										}
+
+
+
+									}
+								})
+							} else {
+								uni.showToast({
+									title: '二维码无效',
+									icon: 'none',
+									duration: 2000
+								});
+							}
+
+						}
+					});
+				}
+			},
 			getWeatherSrc(type) {
 
 				if (type == '晴') {
-					return this.imgArray[1];
+					return this.weatherImgArray[1];
+				} else if (type == '多云') {
+					return this.weatherImgArray[2];
 				} else if (type == '阴') {
-					return this.imgArray[2];
+					return this.weatherImgArray[3];
+				} else if (type == '阵雨') {
+					return this.weatherImgArray[4];
+				} else if (type == '暴雨' || type == '大到暴雨') {
+					return this.weatherImgArray[5];
+				} else if (type == '大暴雨' || type == '暴雨到大暴雨') {
+					return this.weatherImgArray[6];
+				} else if (type == '雷阵雨及伴有冰雹') {
+					return this.weatherImgArray[7];
+				} else if (type == '特大暴雨' || type == '大暴雨到特大暴雨') {
+					return this.weatherImgArray[8];
+				} else if (type == '小雨' || type == '小到中雨') {
+					return this.weatherImgArray[9];
+				} else if (type == '大雨') {
+					return this.weatherImgArray[10];
+				} else if (type == '雷阵雨') {
+					return this.weatherImgArray[11];
+				} else if (type == '雨夹雪') {
+					return this.weatherImgArray[12];
+				} else if (type == '中雨' || type == '中到大雨') {
+					return this.weatherImgArray[13];
+				} else if (type == '大雪') {
+					return this.weatherImgArray[14];
+				} else if (type == '小雪' || type == '小到中雪') {
+					return this.weatherImgArray[15];
+				} else if (type == '中雪' || type == '中到大雪') {
+					return this.weatherImgArray[16];
+				} else if (type == '阵雪') {
+					return this.weatherImgArray[17];
+				} else if (type == '暴雪' || type == '大到暴雪') {
+					return this.weatherImgArray[18];
+				} else if (type == '强沙尘暴') {
+					return this.weatherImgArray[19];
+				} else if (type == '浮尘') {
+					return this.weatherImgArray[20];
+				} else if (type == '雾') {
+					return this.weatherImgArray[21];
+				} else if (type == '沙尘暴') {
+					return this.weatherImgArray[22];
+				} else if (type == '冻雨') {
+					return this.weatherImgArray[23];
+				} else if (type == '扬沙') {
+					return this.weatherImgArray[24];
+				} else if (type == '霾') {
+					return this.weatherImgArray[25];
 				}
 
 
@@ -1791,6 +2230,7 @@
 			doubleButton,
 			divView,
 			warn,
+
 		},
 		computed: {
 			getColor() {
@@ -1873,7 +2313,7 @@
 	}
 
 	.content-top {
-		background-image: url(../../static/app/logo2.svg);
+		background-image: url(../../static/app/logo.svg);
 		background-repeat: no-repeat;
 		background-position: center calc(100vh * 18/812);
 		background-size: calc(750rpx * 48/ 375) calc(100vh * 48/ 812);
@@ -1914,16 +2354,29 @@
 
 	}
 
+	.content-main .firstShow .firstShow-center {
+
+		/* 	height: calc(100vh * 74/812); */
+
+
+	}
+
 	.content-main .firstShow .firstShow-center #top-box {
 
 		width: calc(750rpx * 305/ 375);
 		display: flex;
-		margin: calc(100vh * 24/812) calc(750rpx * 19/ 375);
+		/* margin: calc(100vh * 24/812)  calc(750rpx * 19/ 375); */
+		margin-top: calc(100vh * 24/812);
+		margin-bottom: calc(100vh * 8/812);
+		margin-left: calc(750rpx * 19/ 375);
+		margin-right: calc(750rpx * 19/ 375);
+
 
 
 	}
 
 	.content-main .firstShow .firstShow-center #top-box .item {
+
 		flex-grow: 0;
 		flex-shrink: 0;
 		width: calc(750rpx * 16/ 375);
@@ -1955,6 +2408,8 @@
 
 
 	.content-main .firstShow .firstShow-center .center-box {
+
+		width: 100%;
 		margin-top: calc(100vh * 8/812);
 		padding-top: calc(100vh * 8/812);
 		color: rgba(10, 32, 57, 0.5);
@@ -1988,8 +2443,8 @@
 	.content-main .firstShow .firstShow-bottom text:nth-child(1)::before {
 		content: '';
 		display: block;
-		width: calc(750rpx * 8/ 375);
-		height: calc(750rpx * 8/ 375);
+		width: calc(750rpx * 6/ 375);
+		height: calc(750rpx * 6/ 375);
 		border-radius: 50%;
 		background-color: rgba(19, 194, 194, 1);
 		position: absolute;
@@ -2009,8 +2464,8 @@
 	.content-main .firstShow .firstShow-bottom text:nth-child(2)::before {
 		content: '';
 		display: block;
-		width: calc(750rpx * 8/ 375);
-		height: calc(750rpx * 8/ 375);
+		width: calc(750rpx * 6/ 375);
+		height: calc(750rpx * 6/ 375);
 		border-radius: 50%;
 		background-color: rgba(19, 194, 194, 0.4);
 		position: absolute;
@@ -2027,8 +2482,8 @@
 	.content-main .firstShow .firstShow-bottom text:nth-child(3)::before {
 		content: '';
 		display: block;
-		width: calc(750rpx * 8/ 375);
-		height: calc(750rpx * 8/ 375);
+		width: calc(750rpx * 6/ 375);
+		height: calc(750rpx * 6/ 375);
 		border-radius: 50%;
 		background-color: rgba(251, 105, 108, 1);
 		position: absolute;
@@ -2069,13 +2524,13 @@
 
 		border-top-left-radius: calc(750rpx * 100/ 375);
 		border-bottom-left-radius: calc(750rpx * 100/ 375);
-		background-image: linear-gradient(270deg, #FBD66A 0%, #FEB97A 20%, rgba(251, 105, 108, 0.80) 100%);
-		;
+		background: linear-gradient(270deg, #FBD66A 0%, #FEB97A 20%, rgba(251, 105, 108, 0.80) 100%);
+
 	}
 
 	.content-main .firstShow .firstShow-bottom-bottom .top .long:nth-child(3) {
 		margin-left: calc(750rpx * 1/ 375);
-		background-image: linear-gradient(90deg, #B4EE6B 0%, #FFE862 100%);
+		background: linear-gradient(90deg, #FFE862 0%, #B4EE6B 100%);
 		;
 	}
 
@@ -2083,13 +2538,13 @@
 		border-top-right-radius: calc(750rpx * 100/ 375);
 		border-bottom-right-radius: calc(750rpx * 100/ 375);
 		margin-left: calc(750rpx * 1/ 375);
-		background-image: linear-gradient(90deg, rgba(17, 174, 174, 0.80) 3%, #A8EF69 100%);
+		background: linear-gradient(90deg, #A8EF69 3%, rgba(17, 174, 174, 0.80) 100%);
 	}
 
 	.content-main .secondShow {
 		overflow: hidden;
 		width: calc(750rpx * 343/ 375);
-		height: calc(100vh * 246/812);
+		height: calc(100vh * 259/812);
 		border-radius: calc(750rpx * 30/ 375);
 		margin-left: calc(750rpx * 16/ 375);
 		margin-right: calc(750rpx * 16/ 375);
@@ -2473,10 +2928,6 @@
 	}
 
 	.bgcOne {
-		background-image: url(../../static/app/chazuo@2X.png);
-	}
-
-	.bgcTwo {
 		background-image: url(../../static/app/chazuo@2X.png);
 	}
 </style>

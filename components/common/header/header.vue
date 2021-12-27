@@ -1,10 +1,19 @@
 <template>
 	<view class="header">
 		<view class="left" @click="personalClick">
-			<view src v-show="showObj.show"
-				style="color: white;position: absolute;width:calc(750rpx * 20/ 375);height:calc(750rpx * 20	/ 375); text-align: center;font-size:calc(750rpx * 10/ 375) ;line-height:calc(750rpx * 20	/ 375) ;">
-				<image src="../../../static/app/message.svg" style="width:calc(750rpx * 20/ 375);height:calc(750rpx * 20/ 375);position: relative;"></image>
-				<text style="position: absolute;margin-left: -70%;margin-top: -5%;">{{showObj.showMessage}} </text>
+			<view v-show="showObj.show"
+				style="	color: white;position: absolute;width:calc(750rpx * 20/ 375);height:calc(750rpx * 20	/ 375); text-align: center;font-size:calc(750rpx * 10/ 375) ;line-height:calc(750rpx * 20	/ 375);">
+				<view
+					style="width: 100%;height: 100%;margin-top:calc(100vh * -5/812);margin-left:calc(750rpx *  1/ 375);font-size: 16rpx;">
+
+					<image src="../../../static/app/message.svg" style="width: 100%;height: 100%;"></image>
+					<view
+						style="width: 100%;height: 100%;position: absolute;top:-25%;font-size: 16rpx;text-align: center;	">
+						{{showObj.showMessage}}
+					</view>
+				</view>
+
+
 			</view>
 			<slot name='left'>
 				<image src="../../../static/app/mine_nol.svg"
@@ -74,10 +83,10 @@
 			},
 			leaveClick() {
 				uni.removeStorage({
-				    key: 'login',
-				    success: function (res) {
-				        console.log('success');
-				    }
+					key: 'login',
+					success: function(res) {
+						console.log('success');
+					}
 				});
 
 				uni.navigateTo({
@@ -92,47 +101,14 @@
 			},
 			scanClick() {
 
-				uni.scanCode({
-					success: function(res) {
-						console.log('条码类型：' + res.scanType);
-						console.log('条码内容：' + res.result);
-						if (res.result.indexOf('device') != -1) {
-                             let start=res.result.indexOf('device')+'device'.length;
-							 res.result=res.result.substring(start);
-							 console.log(res.result)
-
-							uni.request({
-								url: `http://${getApp().globalData.http}/app/office/station/info/${res.result}`,
-								// url: `http://82.157.34.130:9901/app/office/station/info/${res.result}`,
-								header: {
-									'Authorization': getApp().globalData.token,
-								},
-								success: (res) => {
-									console.log(res)
-									uni.navigateTo({
-										url: `../../pages/reserve/codeReserve?id=${res.data.value.id}&station_number=${res.data.value.station_number}`
-									})
-
-								}
-							})
-						} else {
-							uni.showToast({
-								title: '二维码无效',
-								icon:'none',
-								duration: 2000
-							});
-						}
-
-					}
-				});
+				this.$emit('scanClick')
 
 
 
 			},
 			newsClick() {
-				if(this.showObj.show)
-				{
-					this.showObj.show=!this.showObj.show
+				if (this.showObj.show) {
+					this.showObj.show = !this.showObj.show
 				}
 				this.$emit('newsClick')
 			}
@@ -173,7 +149,7 @@
 
 	}
 
-	
+
 
 	.personal {
 		box-sizing: border-box;

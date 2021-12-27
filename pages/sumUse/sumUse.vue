@@ -10,15 +10,22 @@
 			</tarbarHeader>
 			<view class="top">
 				<view class="left" @click="reserveClick">
-					<image src="../../static/app/yuyue@2X.png" mode=""></image>
+					<image src="../../static/app/position.svg" mode=""></image>
 				</view>
 				<view class="right">
-					<text>今天总共用了<b style="font-size:calc(750rpx * 20/ 375) ;">{{item.text}}</b>kw·h 电量</text>
-					<text>注意节约用电哦～</text>
+					<text style="height: (100vh * 24/812)">今天总共用了 <b
+							style="font-size:calc(750rpx * 20/ 375) ;">{{item.text}}</b>kw·h 电量</text>
+					<text style="height: (100vh * 24/812)">注意节约用电哦～</text>
 				</view>
 			</view>
 			<view class="bottom">
-				<qiun-data-charts type="bar" :chartData="envirChartData" background="none" />
+				<tip :item="{name:'用电统计'}" >
+					<text slot="right" style="margin-left:calc(-750rpx * 200/ 375);"></text>
+				</tip>
+				<view style="height:calc(100vh * 453/812);width: 100%;">
+					<qiun-data-charts type="bar" :chartData="envirChartData" background="none" />
+				</view>
+
 			</view>
 		</view>
 
@@ -55,7 +62,11 @@
 			}
 		},
 		onLoad() {
-			
+			if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
 			new Promise(function(resolve, reject) {
 				uni.request({
 					url: `http://${getApp().globalData.http}/app/data/today/power`,
@@ -81,9 +92,10 @@
 						},
 						success: (res) => {
 
-							console.log(res)
-							// uni.hideLoading();
-							resolve(res.data.value);
+							if (res.data.code === 0 && re.data.value.length != 0) {
+								resolve(res.data.value);
+							}
+
 
 
 
@@ -91,7 +103,7 @@
 					})
 				})
 			}).then(res => {
-				
+
 				console.log(res);
 				let x = [];
 				let y = [];
@@ -109,7 +121,7 @@
 						color: '#70CFBA'
 					}, ]
 				};
-           
+
 			})
 
 		},

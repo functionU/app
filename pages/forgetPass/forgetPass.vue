@@ -1,18 +1,18 @@
 <template>
 	<view class="content">
 		<view class="tarbar">
-			<text @click="back" >取消</text>
+			<text @click="back">取消</text>
 		</view>
-		<view class="top">
+		<view class="top" >
 			<view class="text">
 				<text>通过邮箱找回密码</text>
 			</view>
 		</view>
-		<view class="center">
+		<view class="center" >
 			<form class='login'>
 				<view class="userName" :class="{'show-true':show,'show-false':!show}">
 					<text class="account">邮箱：</text>
-					<input @input="inputListen" placeholder="请输入注册时填写的邮箱"/>
+					<input @input="inputListen" placeholder="请输入注册时填写的邮箱" />
 					<image :src=showNameImg
 						style="width:calc(750rpx * 14/ 375);height:calc(750rpx * 14/ 375); margin-bottom: calc(750rpx * 17/ 375);">
 					</image>
@@ -32,7 +32,7 @@
 				show: true,
 				reg: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
 				showNameImg: "",
-                email:"",
+				email: "",
 			}
 		},
 
@@ -40,46 +40,47 @@
 			inputListen(e) {
 
 				this.show = this.reg.test(e.target.value)
-                this.email=e.target.value;
+				this.email = e.target.value;
 				if (this.show) {
 					this.showNameImg = '../../static/app/icon-zhengque.png'
 				} else
 					this.showNameImg = '../../static/app/icon-cuowu@2X.png'
 
 			},
-			next(){
-				let email=this.email;
-			
+			next() {
+				let email = this.email;
+
 				uni.request({
 					url: `http://${getApp().globalData.http}/app/user/forget/password`,
 					// url: 'http://82.157.34.130:9901/app/user/forget/password',
 					method: 'POST',
 					data: {
-					email:email
+						email: email
 					},
 					header: {
 						'Content-Type': 'application/json'
 					},
 					success: (res) => {
-						
+
 						if (res.data.code == 0) {
-					   uni.navigateTo({
-							url: '../forgetPass/next'
-						})
-						} else if (res.data.code == -100) {
+							uni.navigateTo({
+								url: '../forgetPass/next'
+							})
+						} else {
 							uni.showToast({
-								title: '请求失败',
+								title: res.data.message,
+								icon: 'none',
 								duration: 2000
 							});
 						}
-						
+
 					}
 				})
-			
+
 			},
-			back(){
+			back() {
 				uni.navigateBack({
-					
+
 				})
 			}
 
@@ -94,24 +95,30 @@
 		height: 100vh;
 		overflow: hidden;
 		font-size: calc(750rpx * 15 / 375);
+		background-image: url(../../static/app/bg-left.svg);
+		background-repeat: no-repeat;
+		background-position: top right;
 	}
-    .tarbar{
+
+	.tarbar {
 		margin-top: calc(100vh * 44/812);
 		width: calc(750rpx * 375 / 375);
 		height: calc(100vh * 44/812);
 	}
-	.tarbar text{
+
+	.tarbar text {
 		margin-left: calc(750rpx * 32/ 375);
-			font-size: calc(750rpx * 14/ 375);
+		font-size: calc(750rpx * 14/ 375);
 		color: rgba(10, 32, 57, 0.7);
 	}
+
 	.top {
-		margin-top: calc(100vh * 114 /812);
+		margin-top: calc(100vh * 94 /812);
 		margin-left: calc(750rpx * 24/ 375);
 
 	}
 
-	
+
 	.top .text {
 		font-size: calc(750rpx * 24 / 375);
 		font-weight: bold;

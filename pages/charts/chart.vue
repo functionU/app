@@ -1,19 +1,19 @@
 <template>
-	<view style="background-color: #007AFF;">
-
-		<image src="../../static/app/logo2.svg"></image>
+	<view>
+		<showmodal></showmodal>
 	</view>
 
 </template>
 
 <script>
+	import showmodal from '../../components/common/showModal/showModal.vue'
 	export default {
 
 		data() {
 
 
 			return {
-				
+
 			}
 		},
 		onLoad() {
@@ -23,7 +23,7 @@
 
 		},
 		components: {
-
+			showmodal,
 
 		},
 		computed: {

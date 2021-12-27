@@ -8,7 +8,7 @@
 					style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">修改密码</text>
 				<text slot='right'></text>
 			</tarbarHeader>
-			<view class="main">
+			<view class="main" style="background-color: #F8FDFD;">
 
 				<view class="main-top">
 					<tip :item="{name:'修改密码'}">
@@ -22,7 +22,8 @@
 							旧密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入旧密码" @input="oldPassListen" password/>
+							<input placeholder="请输入旧密码" @input="oldPassListen" password
+								style="color: rgba(17,30,54,0.30);" />
 						</view>
 
 					</view>
@@ -31,16 +32,18 @@
 							新密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" @input=" PassLitenOne" password />
+							<input placeholder="请输入新密码" @input=" PassLitenOne" password
+								style="color: rgba(17, 30, 54, 0.3); " />
 						</view>
 
 					</view>
 					<view class="main-center-item">
 						<view class="main-center-item-left">
-							新密码：	
+							新密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" @input="PassLitenTwo"  password/>
+							<input placeholder="请输入新密码" @input="PassLitenTwo" password
+								style="color: rgba(17, 30, 54, 0.3); " />
 						</view>
 
 					</view>
@@ -70,7 +73,11 @@
 			}
 		},
 		onLoad() {
-
+			if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
 		},
 		methods: {
 			backClick() {
@@ -112,9 +119,10 @@
 						success: (res) => {
 							if (res.data.code == 0) {
 								uni.navigateBack();
-							} else if (res.data.code == -100) {
+							} else {
 								uni.showToast({
-									title: '请求失败',
+									title: res.data.message,
+									icon: 'none',
 									duration: 2000
 								});
 							}
@@ -177,8 +185,8 @@
 
 	.content .main .main-center {
 
-		margin: 0 calc(750rpx * 16/ 375);
-		width: calc(750rpx * 311/ 375);
+
+		width: calc(750rpx * 375/ 375);
 		height: calc(100vh *150/812);
 
 	}
@@ -186,7 +194,10 @@
 
 
 	.content .main .main-center .main-center-item {
-
+		width: calc(750rpx * 311/ 375);
+		margin-left: calc(750rpx * 16/ 375);
+		margin-right: calc(750rpx * 16/ 375);
+		background-color: white;
 		height: calc(100vh * 50/812);
 		display: flex;
 		align-items: center;

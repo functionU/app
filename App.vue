@@ -5,6 +5,11 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+			if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
 		},
 		onHide: function() {
 			console.log('App Hide')
@@ -19,6 +24,7 @@
 		}
 	}
 </script>
+
 
 <style>
 	/*每个页面公共css */

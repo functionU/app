@@ -204,8 +204,24 @@
 			}
 
 			function markerClick(e) {
-				markers.forEach(function(m, index) {
-					m.setIcon("../app/map-kongxian@2X.png");
+				markers.map(function(m, index) {
+					console.log(m);
+				
+					// if(m.enabled===true)
+					// {
+					// 		m.setIcon("../app/map-kongxian@2X.png");
+					// }
+					// else if(m.enabled===false)
+					// {
+					// 		m.setIcon("../app/map-zhanyong@2X.png");
+					// }
+					if(m.enabled=='chose')
+					{
+						m.setIcon("../app/map-kongxian@2X.png");
+					}
+					
+				
+				
 				})
 				var infoWindow = new AMap.InfoWindow({
 					offset: new AMap.Pixel(10, -30)
@@ -215,6 +231,7 @@
 				currentId = e.target.station_id;
 				currentContent = e.target.content;
 				e.target.setIcon("../app/map-xianzhong@2X.png");
+				e.target.enabled='chose';
 				uni.postMessage({
 					data: {
 						id: currentId,

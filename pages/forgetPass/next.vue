@@ -63,6 +63,9 @@
 		height: 100vh;
 		overflow: hidden;
 		font-size: calc(750rpx * 15 / 375);
+		background-image: url(../../static/app/bg-left.svg);
+		background-repeat: no-repeat;
+		background-position: top right;
 		
 	}
 

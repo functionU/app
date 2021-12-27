@@ -94,6 +94,7 @@
 
 			return {
 				startTime: hour + ":" + mins,
+
 				endTime: hour + ":" + mins,
 				itemIndex: -1,
 				show: true,
@@ -115,6 +116,11 @@
 
 		},
 		onLoad(option) {
+			if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
 			if (option) {
 				this.position = option.station_number;
 				this.id = option.id;
@@ -133,27 +139,47 @@
 			},
 			itemClick(item, index) {
 				this.itemIndex = index;
-				let timeString = this.startTime.split(":");
-				let hour = parseInt(timeString[0]);
-				let min = parseInt(timeString[1]);
+				let date = new Date();
+				let hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+				let min = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+
+				this.startTime = hour + ':' + min;
+
 				if (item < 30) {
 					hour += item;
-					if (hour >= 24) {
-						hour -= 24;
-						this.tag = true;
 
-					}
+
 				} else {
-					min = min + 30;
+					min = min - 0 + 30;
 					if (min >= 60) {
 						hour += 1;
 						min = min - 60;
-
 					}
 				}
-				hour = hour < 10 ? '0' + hour : hour;
-				min = min < 10 ? '0' + min : min;
-				this.endTime = `${hour}:${min}`
+
+				if (hour >= 24) {
+					if (hour >= 24) {
+						hour -= 24;
+					}
+					uni.showToast({
+						title: '结束时间段不支持预约请重新选择',
+						icon: 'none',
+						duration: 2000
+					})
+					this.itemIndex = -1;
+				} else {
+					console.log((hour + "").length);
+					console.log((min + "").length);
+					if ((hour + "").length == 1 && hour < 10) {
+						hour = hour < 10 ? '0' + hour : hour;
+					}
+					if ((min + "").length == 1 && min < 10) {
+						min = min < 10 ? '0' + min : min;
+					}
+
+					this.endTime = `${hour}:${min}`
+				}
+
 
 			},
 			reseverFinshed() {
@@ -181,11 +207,7 @@
 					let item = this.positionArray[this.itemIndex]
 					if (item < 30) {
 						eHour += item;
-						if (eHour >= 24) {
-							eHour -= 24;
 
-
-						}
 					} else {
 						eMin = eMin + 30;
 						if (eMin >= 60) {
@@ -194,6 +216,7 @@
 
 						}
 					}
+
 					eHour = eHour < 10 ? '0' + eHour : eHour;
 					eMin = eMin < 10 ? '0' + eMin : eMin;
 					let endTime = `${eHour}:${eMin}:00`
@@ -216,17 +239,17 @@
 							'reserve_date': now,
 						},
 						success: (res) => {
-
+							console.log(res);
 
 							if (res.data.code == 0) {
-								setTimeout(() => {
-									uni.navigateTo({
-										url: `../login-success/login-success?index=1&buttonIndex=1`
-									})
-								}, 500)
-							} else if (res.data.code == -100) {
+
+								uni.navigateTo({
+									url: `../login-success/login-success?index=1&buttonIndex=1`
+								})
+							} else {
 								uni.showToast({
-									title: '请求失败',
+									title: res.data.message,
+									icon: 'none',
 									duration: 2000
 								});
 							}

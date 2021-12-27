@@ -2,11 +2,13 @@
 	<view class="content">
 		<view class="top">
 			<view class="icon">
-				<image src="../../static/app/login-logo@2X.png"></image>
+				<image src="../../static/app/logo.svg" style="	width: calc(750rpx * 53/ 375);
+		height: calc(100vh * 48/812);"></image>
+				<image src="../../static/app/Hello.svg"
+					style="	width: calc(750rpx * 83/ 375);height: calc(100vh * 42/812);margin-left:calc(750rpx * 10/ 375);">
+				</image>
 			</view>
-			<view class="Hello">
-				<text>Hello</text>
-			</view>
+
 			<view class="text">
 				<text>欢迎登录智能办公管家IoT物联平台～</text>
 			</view>
@@ -61,8 +63,14 @@
 
 
 		},
-		onBackPress (){
-			return true;
+		onBackPress(e) {
+			if (e.from == 'backbutton') {
+				plus.runtime.quit();
+			} else {
+
+				return true;
+
+			}
 		},
 		onShow() {
 
@@ -90,11 +98,11 @@
 			},
 			login() {
 				if (this.user == "" || this.pass == "") {
-                       uni.showModal({
-                       	title: '提示',
-                       	content: '用户名或密码不能为空',
-                       	showCancel: false,
-                       });
+					uni.showModal({
+						title: '提示',
+						content: '用户名或密码不能为空',
+						showCancel: false,
+					});
 
 				} else {
 					let name = this.user;
@@ -128,13 +136,13 @@
 
 									}
 								})
-                                uni.redirectTo({
-                                	url: '../login-success/login-success'
-                                })
-							
+								uni.redirectTo({
+									url: '../login-success/login-success'
+								})
 
-							} else  {
-								let message=res.data.message
+
+							} else {
+								let message = res.data.message
 								uni.showToast({
 									title: message,
 									icon: 'none',
@@ -164,20 +172,20 @@
 		height: 100vh;
 		overflow: hidden;
 		font-size: calc(750rpx * 15 / 375);
+		background-image: url(../../static/app/bg-left.svg);
+		background-repeat: no-repeat;
+		background-position: top right;
 	}
 
 	.top {
-		margin-top: calc(100vh * 114 /812);
+		margin-top: calc(100vh * 154 /812);
 		margin-left: calc(750rpx * 32/ 375);
 
 	}
 
-	.top .icon image {
-		width: calc(750rpx * 32/ 375);
-		height: calc(100vh * 32/812);
-	}
+	.top .icon {}
 
-	.top .Hello {
+	/* 	.top .Hello {
 		display: inline-block;
 		font-size: calc(750rpx * 30/ 375);
 		font-weight: bold;
@@ -187,7 +195,7 @@
 		color: transparent;
 		background-image: linear-gradient(to right, rgba(112, 207, 186, 1), rgba(25, 189, 192, 1));
 
-	}
+	} */
 
 	.top .text {
 		line-height: calc(100vh * 21/812);
@@ -197,7 +205,8 @@
 	}
 
 	.center {
-		margin-top: calc(100vh * 72/812);
+		/* 	margin-top: calc(100vh * 72/812); */
+		margin-top: calc(100vh * 62/812);
 	}
 
 	.login {

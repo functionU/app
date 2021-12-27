@@ -5,7 +5,7 @@
 		height: calc(100vh * 36/812);" @click="back"></image>
 			<text>消息提醒</text>
 		</view>
-		<view class="content">
+		<scroll-view class="content" scroll-y='true' @scrolltolower='litenLower'>
 			<view class="content-item" v-for="item in warnArray">
 				<view class="top-box">
 					<text>{{item.reserve_station.reserve_date.split("-")[1]}}月{{item.reserve_station.reserve_date.split("-")[2]}}日{{item.reserve_station.start_time.split(":")[0] <12 ? '上午':'下午'}}{{item.reserve_station.start_time.split(":")[0]}}:{{item.reserve_station.start_time.split(":")[1]}}</text>
@@ -29,7 +29,7 @@
 				</view>
 			</view>
 
-		</view>
+		</scroll-view>
 
 
 	</view>
@@ -39,7 +39,9 @@
 	export default {
 		data() {
 			return {
-				warnArray: []
+				warnArray: [],
+				number: 0,
+				size: 10
 			}
 		},
 		methods: {
@@ -47,14 +49,41 @@
 				uni.navigateBack({
 
 				})
+			},
+			litenLower() {
+				let that = this;
+				console.log(111);
+				this.number++;
+				uni.request({
+					url: `http://${getApp().globalData.http}/app/message/list?number=${that.number}&size=${that.size}`,
+					// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
+					header: {
+						'Authorization': getApp().globalData.token,
+					},
+					success: (res) => {
+
+						if (res.data.code == 0) {
+							that.warnArray = that.warnArray.concat(res.data.value)
+						} else if (res.data.code == -100) {
+							uni.showToast({
+								title: '请求失败',
+								duration: 2000
+							});
+						}
+
+					}
+				})
 			}
+
 		},
+
 		onLoad(option) {
 			let that = this;
 			// if(option.count>0)
 			// {
+			this.number++;
 			uni.request({
-				url: `http://${getApp().globalData.http}/app/message/list?number=1&size=10`,
+				url: `http://${getApp().globalData.http}/app/message/list?number=${that.number}&size=${that.size}`,
 				// url: `http://82.157.34.130:9901/app/message/list?number=1&size=10`,
 				header: {
 					'Authorization': getApp().globalData.token,
@@ -63,9 +92,10 @@
 
 					if (res.data.code == 0) {
 						that.warnArray = res.data.value
-					} else if (res.data.code == -100) {
+					} else {
 						uni.showToast({
-							title: '请求失败',
+							title: res.data.message,
+							icon: 'none',
 							duration: 2000
 						});
 					}
@@ -76,6 +106,7 @@
 
 
 		},
+
 	}
 </script>
 
@@ -110,7 +141,6 @@
 		overflow-y: scroll;
 		width: calc(750rpx * 375/ 375);
 		height: calc(100vh * 724/812);
-
 		background-color: rgba(241, 242, 246, 1);
 	}
 
@@ -130,6 +160,8 @@
 	.bgc .content .content-item .top-box {
 		width: calc(750rpx * 116/ 375);
 		height: calc(100vh * 21/812);
+		line-height: calc(100vh * 21/812);
+		text-align: center;
 		background-color: white;
 		border-radius: calc(750rpx * 4/ 375);
 		font-size: calc(750rpx * 11/ 375);

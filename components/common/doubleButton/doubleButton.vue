@@ -69,7 +69,7 @@
 		width: calc(750rpx * 14/ 375);
 		height: calc(750rpx * 14/ 375);
 
-		background-image: url(../../../static/app/icon-title@2X.png);
+		background-image: url(../../../static/app/fixed.svg);
 		background-size: contain;
 		margin-right: calc(750rpx * 12/ 375);
 
@@ -95,7 +95,7 @@
 		display: inline-block;
 		width: calc(750rpx * 14/ 375);
 		height: calc(750rpx * 14/ 375);
-		background-image: url(../../../static/app/icon-title@2X.png);
+		background-image: url(../../../static/app/handReverse.svg);
 		background-size: contain;
 		margin-right: calc(750rpx * 12/ 375);
 

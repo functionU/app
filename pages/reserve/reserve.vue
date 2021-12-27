@@ -8,13 +8,13 @@
 					style="display: block;text-align: center;font-size:calc(750rpx * 17/ 375);color: #FFFFFF;">筛选</text>
 				<text slot='right'></text>
 			</tarbarHeader>
-			<view class="main">
+			<view class="main" >
 				<view class="main-top">
-					<tip :item="{name:'选择时间'}">
+					<tip :item="{name:'选择时间'}" >
 						<text slot="right"></text>
 					</tip>
 				</view>
-				<view class="main-center">
+				<view class="main-center" 	>
 
 
 					<view class="main-center-item" @click="dateClick">
@@ -64,7 +64,7 @@
 					</view>
 				</view>
 				<view class="main-top">
-					<tip :item="{name:'选择位置'}">
+					<tip :item="{name:'选择位置'}" >
 						<text slot="right"></text>
 					</tip>
 				</view>
@@ -77,7 +77,7 @@
 						</view>
 						<view class="main-center-item-right">
 
-							<view style="display: inline;" v-if="placeArray[placeIndex].name">
+							<view style="display: inline;">
 								{{placeArray[placeIndex].name}}
 							</view>
 
@@ -92,7 +92,7 @@
 						</view>
 						<view class="main-center-item-right">
 
-							<view style="display: inline;" v-if="floorArray[floorIndex].name">
+							<view style="display: inline;" v-show="floorArray[floorIndex].name">
 								{{floorArray[floorIndex].name}}
 							</view>
 
@@ -103,7 +103,7 @@
 					</view>
 
 				</view>
-				<view class="main-bottom">
+				<view class="main-bottom" style="margin-top:calc(100vh * 30/812);">
 					<button type="default" @click="reservePosition">下一步（选择工位）</button>
 				</view>
 
@@ -321,6 +321,12 @@
 		},
 		onLoad() {
 
+			if (!getApp().globalData.token) {
+				uni.navigateTo({
+					url: "../login/login"
+				})
+			}
+
 			let that = this;
 			uni.request({
 				url: `http://${getApp().globalData.http}/app/office/building/list`,
@@ -352,21 +358,23 @@
 							success: (res) => {
 
 
-								if (res.data.code == 0) {
+								if (res.data.code == 0 && res.data.value.length > 0) {
 									let newArray = [];
-									if (Array.isArray(res.data.value)) {
-										res.data.value.map((item) => {
+									res.data.value.map((item) => {
+										newArray.push(item);
+									})
+									that.floorArray = res.data.value;
+									that.valueFloor = [0];
 
-											newArray.push(item);
-										})
-										that.floorArray = res.data.value;
-									}
-								} else if (res.data.code == -100) {
+								} else {
 									uni.showToast({
-										title: '请求失败',
+										title: '当前楼宇无楼层信息',
+										icon: 'none',
 										duration: 2000
-									});
+									})
+
 								}
+
 
 
 
@@ -414,52 +422,72 @@
 			},
 
 			dateClick() {
-				this.dateindex = true;
-				if (this.dateindex === true) {
+
+
+
+
+
+
+				if (this.startindex == false && this.placeindex == false && this.floorindex == false && this.dateindex ==
+					false && this.endindex == false) {
+					this.dateindex = true;
 					this.startindex = false;
 					this.endindex = false;
 					this.placeindex = false;
 					this.floorindex = false;
 
+
 				}
+
 			},
 			startTimeClick() {
-				this.startindex = true;
-				if (this.startindex === true) {
+
+				if (this.startindex == false && this.placeindex == false && this.floorindex == false && this.dateindex ==
+					false && this.endindex == false) {
 					this.dateindex = false;
+					this.startindex = true;
 					this.endindex = false;
 					this.placeindex = false;
 					this.floorindex = false;
+
 
 				}
 			},
 			endTimeClick() {
-				this.endindex = true;
-				if (this.endindex === true) {
-					this.startindex = false;
+
+				if (this.startindex == false && this.placeindex == false && this.floorindex == false && this.dateindex ==
+					false && this.endindex == false) {
 					this.dateindex = false;
+					this.startindex = false;
+					this.endindex = true;
 					this.placeindex = false;
 					this.floorindex = false;
+
 
 				}
 			},
 			placeClick() {
-				this.placeindex = true;
-				if (this.placeindex === true) {
+
+				if (this.startindex == false && this.placeindex == false && this.floorindex == false && this.dateindex ==
+					false && this.endindex == false) {
+					this.dateindex = false;
 					this.startindex = false;
 					this.endindex = false;
-					this.dateindex = false;
+					this.placeindex = true;
 					this.floorindex = false;
+
 
 				}
 			},
 			floorClick() {
-				this.floorindex = true;
-				if (this.floorindex === true) {
+				if (this.startindex == false && this.placeindex == false && this.floorindex == false && this.dateindex ==
+					false && this.endindex == false) {
+					this.dateindex = false;
 					this.startindex = false;
 					this.endindex = false;
 					this.placeindex = false;
-					this.dateindex = false;
+					this.floorindex = true;
+
 
 				}
 			},
@@ -468,7 +496,7 @@
 				let val = e.target.value;
 				this.valuePlace = val;
 				this.placeIndex = val[0];
-				
+
 
 				// let id = this.placeArray[this.placeIndex].id;
 				// let that = this;
@@ -514,7 +542,7 @@
 				let val = e.target.value;
 				this.valueFloor = val;
 				this.floorIndex = val[0];
-			
+
 
 			},
 			confirm(name) {
@@ -537,8 +565,7 @@
 
 					this.floorMiddel = val;
 				} else if (name == 'place') {
-                     val=this.valuePlace; 
-					 this.placeMiddel=val; 
+
 					let id = this.placeArray[this.placeIndex].id;
 					let that = this;
 					uni.request({
@@ -551,12 +578,32 @@
 						},
 						success: (res) => {
 
-							let newArray = [];
-							res.data.value.map((item) => {
 
-								newArray.push(item);
-							})
-							that.floorArray = res.data.value;
+							if (res.data.code == 0 && res.data.value.length > 0) {
+								let newArray = [];
+								res.data.value.map((item) => {
+									newArray.push(item);
+								})
+								that.floorArray = res.data.value;
+								that.valueFloor = [0];
+
+								val = that.valuePlace;
+								that.placeMiddel = val;
+
+							} else {
+								uni.showToast({
+									title: '当前楼宇无楼层信息',
+									icon: 'none',
+									duration: 2000
+								})
+								that.valuePlace = that.placeMiddel;
+								val = that.placeMiddel;
+								that.placeIndex = val[0];
+								that.valuePlace = [val[0]]
+
+							}
+
+
 						}
 					})
 
@@ -590,7 +637,7 @@
 				} else if (name == 'floor') {
 					this.valueFloor = this.floorMiddel;
 					val = this.floorMiddel;
-					
+
 					this.floorIndex = val[0];
 					this.valueFloor = [val[0]]
 				} else if (name == 'place') {
@@ -598,7 +645,6 @@
 					val = this.placeMiddel;
 					this.placeIndex = val[0];
 					this.valuePlace = [val[0]]
-
 				}
 				this.startindex = false;
 				this.endindex = false;
@@ -638,7 +684,7 @@
 	}
 
 	.content {
-
+          background-color: ;
 		padding-top: calc(100vh * 44/812);
 		height: calc(100vh * 358/812);
 		background-image: url(../../static/app/bg@2X.png);
@@ -662,6 +708,7 @@
 		margin-top: calc(100vh *32/812);
 		background-color: rgba(255, 255, 255, 1);
 		font-size: calc(750rpx * 15/ 375);
+		background-color: #F8FDFD;
 	}
 
 	.content .main .main-top {
@@ -671,10 +718,10 @@
 	}
 
 	.content .main .main-center {
-
-		margin: 0 calc(750rpx * 16/ 375);
+        margin: 0;
+		padding: 0 calc(750rpx * 16/ 375);
 		width: calc(750rpx * 311/ 375);
-
+        background-color: white;
 
 	}
 
@@ -685,6 +732,7 @@
 		height: calc(100vh * 50/812);
 		display: flex;
 		align-items: center;
+		
 
 	}
 
@@ -709,6 +757,10 @@
 		display: flex;
 		justify-content: space-between;
 
+	}
+
+	.content .main .main-center .main-center-item .main-center-item-right {
+		color: rgba(17, 30, 54, 0.7);
 	}
 
 	.content .main .main-center .main-center-item .main-center-item-right image {
