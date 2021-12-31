@@ -382,8 +382,8 @@
 						})
 
 					}
-					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) + "&pic=" +
-						JSON.stringify(that.currentMapPic)
+					that.url = '../../static/map/demo.html?pic=' + JSON.stringify(that.currentMapPic) + "&data=" +
+						JSON.stringify(that.covers)
 					console.log(that.url)
 				}
 
@@ -725,8 +725,8 @@
 								})
 
 							}
-							that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) +
-								"&pic=" +JSON.stringify(that.currentMapPic)
+							that.url = '../../static/map/demo.html?pic=' + JSON.stringify(that.currentMapPic) + "&data=" +
+								JSON.stringify(that.covers)
 								
 							console.log(that.url)
 						}

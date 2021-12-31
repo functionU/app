@@ -132,6 +132,7 @@
 			if (pic) {
 				multiplier = (pic.width / pic.height).toFixed(4) * 1.33
 				myUrl = pic.map_url;
+				
 				newLat = (39.939229 + 0.0842 / multiplier).toFixed(5)
 			}
 			var imageLayer = new AMap.ImageLayer({
