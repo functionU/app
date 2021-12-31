@@ -389,9 +389,13 @@
 
 		methods: {
 			getMessage(e) {
+
 				console.log("getMessage触发了");
-				this.itemName = e.detail.data[0].content;
-				this.id = e.detail.data[0].id;
+
+				if (JSON.stringify(e.target) != '{}') {
+					this.itemName = e.detail.data[0].content;
+					this.id = e.detail.data[0].id;
+				}
 			},
 			backClick() {
 				// this.show=true;
