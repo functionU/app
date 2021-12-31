@@ -118,18 +118,27 @@
 			var currentId = null;
 			var currentContent = "";
 			var list = [];
-			var pic=null;
-		
+			var pic = null;
+
 			if (getQuery('data')) {
 				list = JSON.parse(getQuery('data'));
-				pic = getQuery('pic')
+				pic = JSON.parse(getQuery('pic'));
 			}
 
+			var myUrl = null;
+			var newLong = 116.382659;
+			var newLat = 39.996275;
+			var multiplier = 1;
+			if (pic) {
+				multiplier = (pic.width / pic.height).toFixed(4) * 1.33
+				myUrl = pic.map_url;
+				newLat = (39.939229 + 0.0842 / multiplier).toFixed(5)
+			}
 			var imageLayer = new AMap.ImageLayer({
-				url: pic,//"../app/mapbg.jpg",
+				url: myUrl, //"../app/mapbg.jpg",
 				bounds: new AMap.Bounds(
-					[116.300000, 39.939229],
-					[116.382659, 39.996275]
+				  [116.300000, 39.939229],
+				  [newLong, newLat]
 				),
 				zooms: 14
 			});
@@ -166,17 +175,17 @@
 				var that = this;
 				var long = item.latitude ? item.latitude : 116.34719;
 				var lat = item.longitude ? item.longitude : 39.962384;
-				let imgSrc=["../app/map-kongxian@2X.png","../app/map-zhanyong@2X.png"]
-			         
-				
-			    
-					marker = new AMap.Marker({
-						icon:item.enabled ? "../app/map-kongxian@2X.png" : "../app/map-zhanyong@2X.png",
-						position: [long, lat],
-						offset: new AMap.Pixel(-28, -45),
-					});
-				
-				
+				let imgSrc = ["../app/map-kongxian@2X.png", "../app/map-zhanyong@2X.png"]
+
+
+
+				marker = new AMap.Marker({
+					icon: item.enabled ? "../app/map-kongxian@2X.png" : "../app/map-zhanyong@2X.png",
+					position: [long, lat],
+					offset: new AMap.Pixel(-28, -45),
+				});
+
+
 				// if(!item.enabled){
 				// 	marker = new AMap.Marker({
 				// 		icon:"../app/amap-zhanyong@2X.png",
@@ -184,16 +193,15 @@
 				// 		offset: new AMap.Pixel(-28, -45),
 				// 	});
 				// }
-		
 
-			
+
+
 				marker.content = item.content;
 				marker.station_id = item.id;
-				if(item.enabled)
-				{
-						marker.on('click', markerClick);
+				if (item.enabled) {
+					marker.on('click', markerClick);
 				}
-			
+
 				// marker.emit('click', {
 				// 	target: marker
 				// });
@@ -206,7 +214,7 @@
 			function markerClick(e) {
 				markers.map(function(m, index) {
 					console.log(m);
-				
+
 					// if(m.enabled===true)
 					// {
 					// 		m.setIcon("../app/map-kongxian@2X.png");
@@ -215,13 +223,12 @@
 					// {
 					// 		m.setIcon("../app/map-zhanyong@2X.png");
 					// }
-					if(m.enabled=='chose')
-					{
+					if (m.enabled == 'chose') {
 						m.setIcon("../app/map-kongxian@2X.png");
 					}
-					
-				
-				
+
+
+
 				})
 				var infoWindow = new AMap.InfoWindow({
 					offset: new AMap.Pixel(10, -30)
@@ -231,7 +238,7 @@
 				currentId = e.target.station_id;
 				currentContent = e.target.content;
 				e.target.setIcon("../app/map-xianzhong@2X.png");
-				e.target.enabled='chose';
+				e.target.enabled = 'chose';
 				uni.postMessage({
 					data: {
 						id: currentId,

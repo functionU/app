@@ -292,13 +292,17 @@
 				}
 			})
 			uni.request({
-				url: `http://${getApp().globalData.http}/app/office/station/map/${that.floorId}`,
+				url: `http://${getApp().globalData.http}/app/office/station/map/v2/${that.floorId}`,
 				header: {
 					'Content-Type': 'application/json',
 					'Authorization': getApp().globalData.token,
 				},
 				success: (res) => {
-					that.currentMapPic = `http://${getApp().globalData.http}` + res.data.value;
+					var mm = res.data.value;
+					if(mm){
+						mm.map_url = `http://${getApp().globalData.http}` + res.data.value.map_url;
+					}
+					that.currentMapPic = mm;
 					console.log(that.currentMapPic)
 				}
 			})
@@ -379,7 +383,7 @@
 
 					}
 					that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) + "&pic=" +
-						that.currentMapPic
+						JSON.stringify(that.currentMapPic)
 					console.log(that.url)
 				}
 
@@ -668,13 +672,17 @@
 						}
 					})
 					uni.request({
-						url: `http://${getApp().globalData.http}/app/office/station/map/${that.floorId}`,
+						url: `http://${getApp().globalData.http}/app/office/station/map/v2/${that.floorId}`,
 						header: {
 							'Content-Type': 'application/json',
 							'Authorization': getApp().globalData.token,
 						},
 						success: (res) => {
-							that.currentMapPic = `http://${getApp().globalData.http}` + res.data.value;
+							var mm = res.data.value;
+							if(mm){
+								mm.map_url = `http://${getApp().globalData.http}` + res.data.value.map_url;
+							}
+							that.currentMapPic = mm;
 							console.log(that.currentMapPic)
 						}
 					})
@@ -718,8 +726,8 @@
 
 							}
 							that.url = '../../static/map/demo.html?data=' + JSON.stringify(that.covers) +
-								"&pic=" +
-								that.currentMapPic
+								"&pic=" +JSON.stringify(that.currentMapPic)
+								
 							console.log(that.url)
 						}
 
