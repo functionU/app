@@ -382,9 +382,13 @@
 						})
 
 					}
-					that.url = '../../static/map/demo.html?pic=' + JSON.stringify(that.currentMapPic) + "&data=" +
-						JSON.stringify(that.covers)
-					console.log(that.url)
+					setTimeout(function(){
+						that.url = '../../static/map/demo.html?pic=' + JSON.stringify(that.currentMapPic) + "&data=" +
+							JSON.stringify(that.covers)
+							console.log(that.url)
+					},300)
+					
+					
 				}
 
 			})
@@ -392,15 +396,23 @@
 		},
 
 		methods: {
+			// getMessage(e) {
+
+			// 	console.log("getMessage触发了");
+
+			// 	//if (JSON.stringify(e.target) != '{}') {
+					
+			// 		this.itemName = e.detail.data[0].content;
+			// 		this.id = e.detail.data[0].id;
+			// 	//}
+			// },
 			getMessage(e) {
-
-				console.log("getMessage触发了");
-
-				if (JSON.stringify(e.target) != '{}') {
-					this.itemName = e.detail.data[0].content;
-					this.id = e.detail.data[0].id;
-				}
-			},
+			    console.log("getMessage触发了");
+			    if(e && e.detail && e.detail.data[0] && e.detail.data[0].id){
+			     this.itemName = e.detail.data[0].content;
+			     this.id = e.detail.data[0].id;
+			    }   
+			   },
 			backClick() {
 				// this.show=true;
 				// this.changeHeight(1);//地图回挡住pick-view bug 解决方法	
@@ -725,10 +737,13 @@
 								})
 
 							}
-							that.url = '../../static/map/demo.html?pic=' + JSON.stringify(that.currentMapPic) + "&data=" +
-								JSON.stringify(that.covers)
+							setTimeout(function(){
+								that.url = '../../static/map/demo.html?pic=' + JSON.stringify(that.currentMapPic) + "&data=" +
+									JSON.stringify(that.covers)
+									console.log(that.url)
+							},300)
 								
-							console.log(that.url)
+							
 						}
 
 					})
