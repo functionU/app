@@ -204,7 +204,8 @@
 					let timeString = startTime.split(":");
 					let eHour = parseInt(timeString[0]);
 					let eMin = parseInt(timeString[1]);
-					let item = this.positionArray[this.itemIndex]
+					let item = this.positionArray[this.itemIndex];
+					this.startTime=`${hour}:${mins}`;
 					if (item < 30) {
 						eHour += item;
 
@@ -216,50 +217,56 @@
 
 						}
 					}
+					if (eHour >= 24) {
+						uni.showToast({
+							title: '结束时间段不支持预约请重新选择',
+							icon: 'none',
+							duration: 2000
+						})
 
-					eHour = eHour < 10 ? '0' + eHour : eHour;
-					eMin = eMin < 10 ? '0' + eMin : eMin;
-					let endTime = `${eHour}:${eMin}:00`
+					} else {
+						eHour = eHour < 10 ? '0' + eHour : eHour;
+						eMin = eMin < 10 ? '0' + eMin : eMin;
+						let endTime = `${eHour}:${eMin}:00`
+						uni.request({
+							url: `http://${getApp().globalData.http}/app/office/now/use`,
+							// url: 'http://82.157.34.130:9901/app/office/now/use',
+							method: 'POST',
+							header: {
+								'Content-Type': 'application/json',
+								'Authorization': getApp().globalData.token
+							},
+							data: {
+								'end_time': endTime,
+								'start_time': startTime,
+								'station_id': parseInt(that.id),
+								'floor_id': 1,
+								'reserve_date': now,
+							},
+							success: (res) => {
+								console.log(res);
 
-					console.log(startTime);
-					console.log(endTime);
-					uni.request({
-						url: `http://${getApp().globalData.http}/app/office/now/use`,
-						// url: 'http://82.157.34.130:9901/app/office/now/use',
-						method: 'POST',
-						header: {
-							'Content-Type': 'application/json',
-							'Authorization': getApp().globalData.token
-						},
-						data: {
-							'end_time': endTime,
-							'start_time': startTime,
-							'station_id': parseInt(that.id),
-							'floor_id': 1,
-							'reserve_date': now,
-						},
-						success: (res) => {
-							console.log(res);
+								if (res.data.code == 0) {
 
-							if (res.data.code == 0) {
+									uni.navigateTo({
+										url: `../login-success/login-success?index=1&buttonIndex=1`
+									})
+								} else {
+									uni.showToast({
+										title: res.data.message,
+										icon: 'none',
+										duration: 2000
+									});
+								}
 
-								uni.navigateTo({
-									url: `../login-success/login-success?index=1&buttonIndex=1`
-								})
-							} else {
-								uni.showToast({
-									title: res.data.message,
-									icon: 'none',
-									duration: 2000
-								});
+
+
+
+
 							}
+						})
+					}
 
-
-
-
-
-						}
-					})
 				}
 			}
 

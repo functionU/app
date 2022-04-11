@@ -262,10 +262,11 @@
 												<image src="../../static/app/useTime.svg"
 													style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 												</image>
-												<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
+												<text>{{listObj.reserve_date}} {{listObj.start_time.split(":")[0]}}:{{listObj.start_time.split(":")[1]}}~{{listObj.end_time.split(":")[0]}}:{{listObj.end_time.split(":")[1]}}</text>
+												
 											</view>
 											<view @click="stopInfo(listObj.id,index) "
-												style="font-size: 14rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
+												style="font-size: 25rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
 												取消预约
 											</view>
 										</view>
@@ -284,7 +285,7 @@
 													v-if="!infoTag">还没有预订工位～</text>
 												<text
 													style="color: rgba(26, 191, 194, 1);margin-left: 40%;margin-top: calc(100vh * 6/812);"
-													@click="reserveClick">点击预定</text>
+													@click="reserveClick">点击预订</text>
 										</view>
 
 
@@ -302,6 +303,8 @@
 									<view class="left">
 										<text>{{infoObj.station_number}}</text>
 										<text>{{infoObj.start_time}}～{{infoObj.end_time}}</text>
+										
+										
 									</view>
 
 								</view>
@@ -350,10 +353,10 @@
 													<image src="../../static/app/useTime.svg"
 														style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 													</image>
-													<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
+													<text>{{listObj.reserve_date}} {{listObj.start_time.split(":")[0]}}:{{listObj.start_time.split(":")[1]}}~{{listObj.end_time.split(":")[0]}}:{{listObj.end_time.split(":")[1]}}</text>
 												</view>
 												<view @click="stopInfo(listObj.id,index) "
-													style="font-size: 14rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
+													style="font-size: 25rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
 													取消预约
 												</view>
 											</view>
@@ -373,7 +376,7 @@
 														v-if="!infoTag">还没有预订工位～</text>
 													<text
 														style="color: rgba(26, 191, 194, 1);margin-left: 40%;margin-top: calc(100vh * 6/812);"
-														@click="reserveClick">点击预定</text>
+														@click="reserveClick">点击预订</text>
 											</view>
 
 
@@ -434,7 +437,7 @@
 											<picker-view
 												style="width: calc(750rpx * 375/ 375);height: calc(100vh * 270/812);"
 												class="picker-item" @change="addUseTimeChose" :value="addIndex">
-												<picker-view-column>
+												<picker-view-column> 
 													<view class="item" v-for="(item,index) in timeArray">{{item}}分钟
 													</view>
 												</picker-view-column>
@@ -469,10 +472,10 @@
 													<image src="../../static/app/useTime.svg"
 														style="width:calc(750rpx * 14/ 375);height:calc(750rpx *14/ 375);margin-right:calc(750rpx * 8/ 375);">
 													</image>
-													<text>{{listObj.reserve_date}}-{{listObj.start_time}}-{{listObj.end_time}}</text>
-												</view>
+													<text>{{listObj.reserve_date}} {{listObj.start_time.split(":")[0]}}:{{listObj.start_time.split(":")[1]}}~{{listObj.end_time.split(":")[0]}}:{{listObj.end_time.split(":")[1]}}</text>
+												</view> 
 												<view @click="stopInfo(listObj.id,index) "
-													style="font-size: 14rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
+													style="font-size: 25rpx;text-align: center;margin-top:  calc(100vh * 8/812);border-radius:calc(750rpx * 30/ 375);width: calc(750rpx * 88/ 375);height: calc(100vh * 25/812);margin-left: 35%;border:calc(750rpx * 1/ 375)  solid  #1ABFC2;line-height:  calc(100vh * 25/812);color: #1ABFC2;">
 													取消预约
 												</view>
 											</view>
@@ -491,7 +494,7 @@
 														v-if="!infoTag">还没有预订工位～</text>
 													<text
 														style="color: rgba(26, 191, 194, 1);margin-left: 40%;margin-top: calc(100vh * 6/812);"
-														@click="reserveClick">点击预定</text>
+														@click="reserveClick">点击预订</text>
 											</view>
 
 
@@ -550,7 +553,7 @@
 			<view
 				style="height: calc(100vh * 118/812);width:calc(750rpx * 311/375);background-color: white;border-radius: 30rpx;display: flex;flex-direction: column;">
 				<text
-					style="height: calc(100vh * 70/812);text-align: center;line-height: calc(100vh * 70/812);">确定要取消预定的工位么？</text>
+					style="height: calc(100vh * 70/812);text-align: center;line-height: calc(100vh * 70/812);">确定要取消预订的工位么？</text>
 				<view style="height: calc(100vh * 48/812) ;display: flex;">
 					<view
 						style="width: calc(750rpx * 156/375);text-align: center;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812);"
@@ -578,7 +581,25 @@
 				</view>
 			</view>
 		</view>
+		<view
+			style="position: absolute;top: 0;background-color: rgba(0, 0, 0, 0.5);height: 100vh;width: 100%;display: flex;justify-content: center;align-items: center;"
+			v-show="stopInfoShow">
+			<view
+				style="height: calc(100vh * 118/812);width:calc(750rpx * 311/375);background-color: white;border-radius: 30rpx;display: flex;flex-direction: column;font-weight: Regular;font-size: calc(750rpx * 16/375);">
+				<text
+					style="height: calc(100vh * 70/812);text-align: center;line-height: calc(100vh * 70/812);">您确定要提前结束吗？</text>
+				<view style="height: calc(100vh * 48/812) ;display: flex;">
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812) ;"
+						@click="stopInfocancel">再想想</view>
+					<view
+						style="width: calc(750rpx * 156/375);text-align: center;border-left: 1px solid #dfe6e9;border-top: 1px solid #dfe6e9;line-height:calc(100vh * 48/812) ;color: #1ABFC2;"
+						@click="stopInfoConfrim">确定取消</view>
+				</view>
+			</view>
+		</view>
 	</view>
+
 
 
 
@@ -739,7 +760,11 @@
 					'/static/app/baoxue.svg', '/static/app/qiangshachenbao.svg', '/static/app/fuchen.svg',
 					'/static/app/wu.svg', '/static/app/shachenbao.svg', '/static/app/dongyu.svg',
 					'/static/app/yangsha.svg', '/static/app/mai.svg'
-				]
+				],
+				stopInfoShow: false,
+				stopInfoIndex: -1,
+				stopInfoId: -1,
+
 
 
 			}
@@ -835,7 +860,12 @@
 										if (res.data.value) {
 											that.resever = true;
 											that.sign = false;
+											res.data.value.start_time=res.data.value.start_time.split(":")[0]+":"+res.data.value.start_time.split(":")[1];
+											res.data.value.end_time=res.data.value.end_time.split(":")[0]+":"+res.data.value.end_time.split(":")[1];
+											console.log("+++++++")
+											console.log(res.data.value.start_time);
 											that.infoObj = res.data.value;
+											
 											that.sign = res.data.value.sign_status;
 											that.powerButton = !res.data.value
 												.power_status;
@@ -964,14 +994,15 @@
 											})
 										})
 									}).then(res => {
+										console.log("工作时间")
 										console.log(res);
 										that.grade = res.health_number;
 										that.workTimeHour = parseInt(res.work_time / 3600);
 										that.workTimeMins = parseInt(res.work_time % 3600 / 60);
 										that.continueWorkTimeHour = res.continuous_work_time.split(
-											':')[0];
+											':')[0]-0;
 										that.continueWorkTimeMins = res.continuous_work_time.split(
-											':')[1];
+											':')[1]-0;
 										let s, sH, sM, number;
 										let e;
 										let startChange, startChangeH, startChangeM;
@@ -1543,6 +1574,10 @@
 							if (res.data.value) {
 								that.resever = true;
 								that.sign = false;
+								res.data.value.start_time=res.data.value.start_time.split(":")[0]+":"+res.data.value.start_time.split(":")[1]
+								res.data.value.end_time=res.data.value.end_time.split(":")[0]+":"+res.data.value.end_time.split(":")[1]
+								console.log("+++++++")
+								console.log(res.data.value.start_time);
 								that.infoObj = res.data.value;
 								that.sign = res.data.value.sign_status;
 								that.powerButton = !res.data.value
@@ -1854,34 +1889,54 @@
 
 			},
 			stopInfo(id, index) {
+				this.stopInfoId = id;
+				this.stopInfoIndex = index;
+				this.stopInfoShow = true;
 
-				let that = this;
-				this.list.splice(index, 1);
-				uni.request({
-					url: `http://${getApp().globalData.http}/app/office/delete/reserve/${id}`,
-					// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
-					method: 'DELETE',
-					header: {
-						'Authorization': getApp().globalData.token,
-					},
-					success: (res) => {
 
-						if (res.data.code == 0) {
 
-						} else if (res.data.code == -100) {
-							uni.showToast({
-								title: '请求失败',
-								icon: 'none',
-								duration: 2000
-							});
+			},
+			stopInfoConfrim() {
+				if (this.stopInfoId == -1 && this.stopInfoIndex == -1) {
+                   uni.showToast({
+                   	title:'取消失败',
+					icon:'none'
+                   })
+				} else {
+					let that = this;
+					this.list.splice(this.stopInfoIndex, 1);
+					that.stopInfoShow = false;
+					uni.request({
+						url: `http://${getApp().globalData.http}/app/office/delete/reserve/${that.stopInfoId}`,
+						// url: `http://82.157.34.130:9901/app/office/delete/reserve/${id}`,
+						method: 'DELETE',
+						header: {
+							'Authorization': getApp().globalData.token,
+						},
+						success: (res) => {
+
+							if (res.data.code == 0) {
+								
+							} else if (res.data.code == -100) {
+								uni.showToast({
+									title: '请求失败',
+									icon: 'none',
+									duration: 2000
+								});
+							}
+
 						}
-
+				 });
+					if (this.list.length == 0) {
+						this.infoTag = false;
 					}
-				});
-				if (this.list.length == 0) {
-					this.infoTag = false;
 				}
 
+			},
+			stopInfocancel() {
+				this.stopInfoId = -1;
+				this.stopInfoIndex = -1;
+				this.stopInfoShow = false;
 			},
 			reserveStop(id) {
 				this.reserveModal = true;
@@ -1943,7 +1998,7 @@
 									console.log(res.data.code);
 									if (res.data.code == 0) {
 										this.sign = true;
-									
+
 
 										uni.navigateTo({
 											// url: `../login-success/login-success?resever=true&index=1&buttonIndex=1&startTime=${obj.startTime}&endTime=${obj.endTime}&position=${obj.position}`
@@ -2012,7 +2067,7 @@
 
 										that.count = res.data.value;
 										that.headerShow = true;
-										that.infoObj={};
+										that.infoObj = {};
 									} else {
 										uni.showToast({
 											title: res.data.message,
@@ -2069,6 +2124,10 @@
 									console.log(res);
 									if (res.data.code == 0) {
 										if (res.data.value != null) {
+											res.data.value.start_time=res.data.value.start_time.split(":")[0]+":"+res.data.value.start_time.split(":")[1]
+											res.data.value.end_time=res.data.value.end_time.split(":")[0]+":"+res.data.value.end_time.split(":")[1]
+											console.log("+++++++")
+											console.log(res.data.value.start_time);
 											that.infoObj = res.data.value;
 											that.sign = res.data.value.sign_status;
 											that.powerButton = !res.data.value.power_status;

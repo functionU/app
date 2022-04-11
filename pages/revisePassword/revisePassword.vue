@@ -42,7 +42,7 @@
 							新密码：
 						</view>
 						<view class="main-center-item-right">
-							<input placeholder="请输入新密码" @input="PassLitenTwo" password
+							<input placeholder="请再次输入新密码" @input="PassLitenTwo" password
 								style="color: rgba(17, 30, 54, 0.3); " />
 						</view>
 
